@@ -1,0 +1,89 @@
+{
+	"name": "JG-JPush",
+	"id": "JG-JPush",
+	"version": "1.0.0",
+	"description": "极光推送Hbuilder插件",
+	"_dp_type":"nativeplugin",
+	"_dp_nativeplugin":{
+		"ios": {
+			"plugins": [{
+				"type": "module", 
+				"name": "JG-JPush",
+				"class": "JPushModule"
+			}],
+			"hooksClass": "JPushProxy",
+			"integrateType": "framework",
+			"deploymentTarget": "8.0",
+			"frameworks": [
+                "CFNetwork.framework",
+                "CoreFoundation.framework",
+                "CoreTelephony.framework",
+                "SystemConfiguration.framework",
+                "CoreGraphics.framework",
+                "Foundation.framework",
+                "UIKit.framework",
+                "Security.framework",
+                "libz.tbd",
+                "AdSupport.framework",
+                "UserNotifications.framework",
+                "libresolv.tbd",
+                "WebKit.framework",
+                "AppTrackingTransparency.framework",
+                "StoreKit.framework"
+			],
+			"resources": [
+				
+			],
+			"parameters": {  
+                "JPUSH_APPKEY_IOS": {  
+                    "des": "[iOS]极光 portal 配置应用信息时分配的 AppKey",  
+                    "key": "JPush:APP_KEY"
+				},
+				"JPUSH_CHANNEL_IOS": {  
+                    "des": "[iOS]用于统计分发渠道，不需要可填默认值 developer-default",  
+                    "key": "JPush:CHANNEL"
+				}
+            }
+		},
+		"android": {
+			"plugins": [
+				{
+					"type": "module",
+					"name": "JG-JPush",
+					"class": "cn.jiguang.uniplugin_jverification.JVerificationWXModule"
+				}
+			],
+			"integrateType": "aar",
+			"minSdkVersion": "16",
+			"permissions": [
+				"android.permission.INTERNET",
+				"android.permission.READ_PHONE_STATE",
+				"android.permission.WRITE_EXTERNAL_STORAGE",
+				"android.permission.ACCESS_NETWORK_STATE",
+				"android.permission.ACCESS_WIFI_STATE",
+				"android.permission.CHANGE_NETWORK_STATE",
+				"android.permission.WRITE_SETTINGS",
+				"android.permission.SYSTEM_ALERT_WINDOW",
+				"android.permission.CHANGE_WIFI_STATE",
+				"android.permission.GET_TASKS",
+				"android.permission.VIBRATE",
+				"android.permission.WAKE_LOCK"
+			],
+			"abis": [  
+				"armeabi-v7a",  
+				"arm64-v8a",
+				"x86"  
+			],
+			"parameters": {  
+                "JPUSH_APPKEY_ANDROID": {  
+                    "des": "[Android]极光 portal 配置应用信息时分配的 AppKey",  
+                    "key": "JPUSH_APPKEY"  
+				},
+				"JPUSH_CHANNEL_ANDROID":{
+					"des": "[Android]用于统计分发渠道，不需要可填默认值 developer-default",  
+                    "key": "JPUSH_CHANNEL"
+				}
+            }
+		}
+	}
+}
