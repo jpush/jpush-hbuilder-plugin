@@ -8,9 +8,11 @@
 #import <Foundation/Foundation.h>
 #import "UniPluginProtocol.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JPushProxy : NSObject <UniPluginProtocol>
+
 
 @end
 

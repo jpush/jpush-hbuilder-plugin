@@ -6,14 +6,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DCUniModule.h"
+#import "JPUSHService.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JPushStore : NSObject
+@interface JPushStore : NSObject <JPUSHRegisterDelegate, JPUSHGeofenceDelegate>
 
 + (instancetype)shared;
 
-@property (nonatomic, strong) NSDictionary *options;
+//@property (nonatomic, strong) NSDictionary *launchOptions;
+
+@property (nonatomic, copy) UniModuleKeepAliveCallback receivePushNotiCallback;
+@property (nonatomic, copy) UniModuleKeepAliveCallback openPushNotiCallback;
+@property (nonatomic, copy) UniModuleKeepAliveCallback receiveCustomNotiCallback;
+
+@property (nonatomic, copy) UniModuleKeepAliveCallback didEnterRegionCallback;
+@property (nonatomic, copy) UniModuleKeepAliveCallback didExitRegionCallback;
 
 @end
 

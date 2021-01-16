@@ -53,8 +53,8 @@
         },
         "nativePlugins" : {
             "JG-JPush" : {
-                "JPUSH_APPKEY_IOS" : "",
-                "JPUSH_CHANNEL_IOS" : "",
+                "JPUSH_APPKEY_IOS" : "02c7f79c9248ecadf25140f7",
+                "JPUSH_CHANNEL_IOS" : "test",
                 "__plugin_info__" : {
                     "name" : "JG-JPush",
                     "description" : "极光推送Hbuilder插件",

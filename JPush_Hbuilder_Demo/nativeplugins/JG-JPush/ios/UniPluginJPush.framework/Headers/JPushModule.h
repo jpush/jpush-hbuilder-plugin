@@ -6,11 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WXModuleProtocol.h"
+#import "DCUniModule.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JPushModule : NSObject <WXModuleProtocol>
+@interface JPushModule : DCUniModule
 
 @end
 
