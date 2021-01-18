@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) UniModuleKeepAliveCallback didEnterRegionCallback;
 @property (nonatomic, copy) UniModuleKeepAliveCallback didExitRegionCallback;
 
+
 @end
 
 NS_ASSUME_NONNULL_END

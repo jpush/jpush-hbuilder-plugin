@@ -231,9 +231,165 @@ var render = function() {
             }
           }
         },
-        [_vm._v("addTags")]
+        [_vm._v("检测通知授权状态")]
       ),
-      _c("br", { attrs: { _i: 2 } })
+      _c("br", { attrs: { _i: 2 } }),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 3 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("打开通知设置界面")]
+      ),
+      _c("br", { attrs: { _i: 4 } }),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 5 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("打开日志")]
+      ),
+      _c("br", { attrs: { _i: 6 } }),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 7 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("关闭日志")]
+      ),
+      _c("br", { attrs: { _i: 8 } }),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 9 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("addTags fat old")]
+      ),
+      _c("br", { attrs: { _i: 10 } }),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 11 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("updateTags fat thin young")]
+      ),
+      _c("br", { attrs: { _i: 12 } }),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 13 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("deleteTag fat")]
+      ),
+      _c("br", { attrs: { _i: 14 } }),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 15 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("deleteTags")]
+      ),
+      _c("br", { attrs: { _i: 16 } }),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 17 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("queryTags")]
+      ),
+      _c("br", { attrs: { _i: 18 } }),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 19 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("queryTag thin")]
+      ),
+      _c("br", { attrs: { _i: 20 } }),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 21 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("setAlias jgcoder")]
+      ),
+      _c("br", { attrs: { _i: 22 } }),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 23 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("deleteAlias")]
+      ),
+      _c("br", { attrs: { _i: 24 } }),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 25 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("queryAlias")]
+      ),
+      _c("br", { attrs: { _i: 26 } })
     ],
     1
   )
@@ -454,7 +610,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 11);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*每个页面公共css */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*每个页面公共css */\n", ""]);
 // Exports
 module.exports = exports;
 

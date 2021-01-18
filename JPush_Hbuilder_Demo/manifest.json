@@ -15,7 +15,9 @@
             "autoclose" : true,
             "delay" : 0
         },
-        "modules" : {},
+        "modules" : {
+            "Push" : {}
+        },
         /* 模块配置 */
         "distribute" : {
             /* 应用发布信息 */
@@ -44,21 +46,28 @@
                     "NSLocationAlwaysAndWhenInUseUsageDescription" : "This app requires location services to work",
                     "NSLocationAlwaysUsageDescription" : "This app requires location services to work",
                     "NSLocationWhenInUseUsageDescription" : "This app requires location services to work"
-                }
+                },
+                "UIBackgroundModes" : "remote-notification",
+                "idfa" : false
             },
             /* ios打包配置 */
             "sdkConfigs" : {
-                "ad" : {}
+                "ad" : {},
+                "push" : {}
             }
         },
         "nativePlugins" : {
             "JG-JPush" : {
                 "JPUSH_APPKEY_IOS" : "02c7f79c9248ecadf25140f7",
                 "JPUSH_CHANNEL_IOS" : "test",
+                "JPUSH_ADVERTISINGID_IOS" : "",
+                "JPUSH_APPKEY_ANDROID" : "",
+                "JPUSH_CHANNEL_ANDROID" : "",
+                "JPUSH_ISPRODUCTION_IOS" : "",
                 "__plugin_info__" : {
                     "name" : "JG-JPush",
                     "description" : "极光推送Hbuilder插件",
-                    "platforms" : "iOS",
+                    "platforms" : "Android,iOS",
                     "url" : "",
                     "android_package_name" : "",
                     "ios_bundle_id" : "",
@@ -74,6 +83,26 @@
                         "JPUSH_CHANNEL_IOS" : {
                             "des" : "[iOS]用于统计分发渠道，不需要可填默认值 developer-default",
                             "key" : "JPush:CHANNEL",
+                            "value" : ""
+                        },
+                        "JPUSH_ADVERTISINGID_IOS" : {
+                            "des" : "[iOS]广告标识符（IDFA） 如果不需要使用IDFA，可不填",
+                            "key" : "JPush:ADVERTISINGID",
+                            "value" : ""
+                        },
+                        "JPUSH_APPKEY_ANDROID" : {
+                            "des" : "[Android]极光 portal 配置应用信息时分配的 AppKey",
+                            "key" : "JPUSH_APPKEY",
+                            "value" : ""
+                        },
+                        "JPUSH_CHANNEL_ANDROID" : {
+                            "des" : "[Android]用于统计分发渠道，不需要可填默认值 developer-default",
+                            "key" : "JPUSH_CHANNEL",
+                            "value" : ""
+                        },
+                        "JPUSH_ISPRODUCTION_IOS" : {
+                            "des" : "[iOS]是否是生产环境，是填true,不是填false或者不填,",
+                            "key" : "JPush:ISPRODUCTION",
                             "value" : ""
                         }
                     }

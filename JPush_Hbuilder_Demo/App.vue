@@ -11,20 +11,19 @@
 				})
 			})
 			
-			testModule.addPushNotificationOpenListener(result=>{
+			jpushModule.addPushNotificationOpenListener(result=>{
 				uni.showToast({
 					icon: 'none',
 					title: JSON.stringify(result)
 				})
 			})
 			
-			testModule.addCustomNotificationReceiveListener(result=>{
+			jpushModule.addCustomNotificationReceiveListener(result=>{
 				uni.showToast({
 					icon: 'none',
 					title: JSON.stringify(result)
 				})
 			})
-			
 			
 		},
 		onShow: function() {

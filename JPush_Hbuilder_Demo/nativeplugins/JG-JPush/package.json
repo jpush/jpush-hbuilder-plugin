@@ -42,6 +42,14 @@
 				"JPUSH_CHANNEL_IOS": {  
                     "des": "[iOS]用于统计分发渠道，不需要可填默认值 developer-default",  
                     "key": "JPush:CHANNEL"
+				},
+				"JPUSH_ISPRODUCTION_IOS": {
+				    "des": "[iOS]是否是生产环境，是填true,不是填false或者不填,",  
+				    "key": "JPush:ISPRODUCTION"
+				},
+				"JPUSH_ADVERTISINGID_IOS": {  
+				    "des": "[iOS]广告标识符（IDFA） 如果不需要使用IDFA，可不填",  
+				    "key": "JPush:ADVERTISINGID"
 				}
             }
 		},

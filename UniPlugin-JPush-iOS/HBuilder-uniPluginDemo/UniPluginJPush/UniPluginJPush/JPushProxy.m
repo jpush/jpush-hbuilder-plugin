@@ -22,12 +22,14 @@ NSString *const infoConfig_JPush_CHANNEL     = @"CHANNEL";
 - (BOOL)application:(UIApplication *_Nullable)application didFinishLaunchingWithOptions:(NSDictionary *_Nullable)launchOptions {
     NSLog(@"UniPluginProtocol Func: %@,%s",self,__func__);
     
-    // 初始化
+    // jpush初始化
     [self registerForRemoteNotificationConfig:nil];
     [self setupWithOption:launchOptions];
-    [JPUSHService registerLbsGeofenceDelegate:[JPushStore shared] withLaunchOptions:launchOptions];
+    // 监听透传消息
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
+    
+    [JPUSHService registerLbsGeofenceDelegate:[JPushStore shared] withLaunchOptions:launchOptions];
     
     return YES;
 }

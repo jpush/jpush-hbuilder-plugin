@@ -36,7 +36,6 @@
             [JPushStore shared].receivePushNotiCallback(userInfo, YES);
         }
     }
-    
     completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert);
 }
 
@@ -63,13 +62,23 @@
 #endif
 
 
-#pragma mark -
+#pragma mark - JPUSHGeofenceDelegate
 - (void)jpushGeofenceIdentifer:(NSString *)geofenceId didEnterRegion:(NSDictionary *)userInfo error:(NSError *)error {
-    
+    NSDictionary *result = @{
+        @"geofenceId":geofenceId,
+        @"userInfo":userInfo,
+        @"error":error
+    };
+    [JPushStore shared].didEnterRegionCallback(result, YES);
 }
 
 - (void)jpushGeofenceIdentifer:(NSString *)geofenceId didExitRegion:(NSDictionary *)userInfo error:(NSError *)error {
-    
+    NSDictionary *result = @{
+        @"geofenceId":geofenceId,
+        @"userInfo":userInfo,
+        @"error":error
+    };
+    [JPushStore shared].didExitRegionCallback(result, YES);
 }
 
 @end
