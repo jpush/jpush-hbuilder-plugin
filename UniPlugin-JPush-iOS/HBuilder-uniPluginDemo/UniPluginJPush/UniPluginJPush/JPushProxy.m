@@ -9,9 +9,11 @@
 #import "JPushStore.h"
 #import "JPUSHService.h"
 
-NSString *const infoConfig_JPush             = @"JPush";
-NSString *const infoConfig_JPush_APP_KEY     = @"APP_KEY";
-NSString *const infoConfig_JPush_CHANNEL     = @"CHANNEL";
+NSString *const infoConfig_JPush               = @"JPush";
+NSString *const infoConfig_JPush_APP_KEY       = @"APP_KEY";
+NSString *const infoConfig_JPush_CHANNEL       = @"CHANNEL";
+NSString *const infoConfig_JPush_ISPRODUCTION  = @"ISPRODUCTION";
+NSString *const infoConfig_JPush_ADVERTISINGID = @"ADVERTISINGID";
 
 @implementation JPushProxy
 
@@ -86,13 +88,21 @@ NSString *const infoConfig_JPush_CHANNEL     = @"CHANNEL";
     NSDictionary *launchingOption = launchOptions;
 //    BOOL isProduction = [params[@"isProduction"] boolValue];
 //    NSString *advertisingId = params[@"advertisingId"];
-    BOOL isProduction = YES;
-    NSString *advertisingId = @"";
+    
 
     NSString *path = [[NSBundle mainBundle]pathForResource:@"Info" ofType:@"plist"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
     NSString *appkey = dict[infoConfig_JPush][infoConfig_JPush_APP_KEY];
     NSString *channel = dict[infoConfig_JPush][infoConfig_JPush_CHANNEL];
+    BOOL isProduction = NO;
+    NSString *isProductionStr = dict[infoConfig_JPush][infoConfig_JPush_ISPRODUCTION];
+    if (isProductionStr == nil || isProductionStr.length == 0 || [isProductionStr isEqualToString:@"false"]) {
+        isProduction = NO;
+    }else if ([isProductionStr isEqualToString:@"true"]) {
+        isProduction = YES;
+    }
+    NSString *advertisingId = dict[infoConfig_JPush][infoConfig_JPush_ADVERTISINGID];
+    
     if (channel == nil ||channel.length == 0) {
         channel = @"developer-default";
     }

@@ -274,122 +274,155 @@ var render = function() {
       ),
       _c("br", { attrs: { _i: 8 } }),
       _c(
-        "v-uni-button",
-        {
-          attrs: { type: "primary", _i: 9 },
-          on: {
-            click: function($event) {
-              return _vm.$handleViewEvent($event)
+        "v-uni-view",
+        { attrs: { _i: 9 } },
+        [
+          _c("v-uni-input", {
+            attrs: { placeholder: "请使用tags,作为分隔符", _i: 10 },
+            model: {
+              value: _vm._$g(10, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(10, $$v)
+              },
+              expression: "inputTags"
             }
-          }
-        },
-        [_vm._v("addTags fat old")]
-      ),
-      _c("br", { attrs: { _i: 10 } }),
-      _c(
-        "v-uni-button",
-        {
-          attrs: { type: "primary", _i: 11 },
-          on: {
-            click: function($event) {
-              return _vm.$handleViewEvent($event)
+          }),
+          _c("br", { attrs: { _i: 11 } }),
+          _c("v-uni-input", {
+            attrs: { placeholder: "请输入alias", _i: 12 },
+            model: {
+              value: _vm._$g(12, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(12, $$v)
+              },
+              expression: "inputAlias"
             }
-          }
-        },
-        [_vm._v("updateTags fat thin young")]
-      ),
-      _c("br", { attrs: { _i: 12 } }),
-      _c(
-        "v-uni-button",
-        {
-          attrs: { type: "primary", _i: 13 },
-          on: {
-            click: function($event) {
-              return _vm.$handleViewEvent($event)
-            }
-          }
-        },
-        [_vm._v("deleteTag fat")]
-      ),
-      _c("br", { attrs: { _i: 14 } }),
-      _c(
-        "v-uni-button",
-        {
-          attrs: { type: "primary", _i: 15 },
-          on: {
-            click: function($event) {
-              return _vm.$handleViewEvent($event)
-            }
-          }
-        },
-        [_vm._v("deleteTags")]
-      ),
-      _c("br", { attrs: { _i: 16 } }),
-      _c(
-        "v-uni-button",
-        {
-          attrs: { type: "primary", _i: 17 },
-          on: {
-            click: function($event) {
-              return _vm.$handleViewEvent($event)
-            }
-          }
-        },
-        [_vm._v("queryTags")]
-      ),
-      _c("br", { attrs: { _i: 18 } }),
-      _c(
-        "v-uni-button",
-        {
-          attrs: { type: "primary", _i: 19 },
-          on: {
-            click: function($event) {
-              return _vm.$handleViewEvent($event)
-            }
-          }
-        },
-        [_vm._v("queryTag thin")]
-      ),
-      _c("br", { attrs: { _i: 20 } }),
-      _c(
-        "v-uni-button",
-        {
-          attrs: { type: "primary", _i: 21 },
-          on: {
-            click: function($event) {
-              return _vm.$handleViewEvent($event)
-            }
-          }
-        },
-        [_vm._v("setAlias jgcoder")]
-      ),
-      _c("br", { attrs: { _i: 22 } }),
-      _c(
-        "v-uni-button",
-        {
-          attrs: { type: "primary", _i: 23 },
-          on: {
-            click: function($event) {
-              return _vm.$handleViewEvent($event)
-            }
-          }
-        },
-        [_vm._v("deleteAlias")]
-      ),
-      _c("br", { attrs: { _i: 24 } }),
-      _c(
-        "v-uni-button",
-        {
-          attrs: { type: "primary", _i: 25 },
-          on: {
-            click: function($event) {
-              return _vm.$handleViewEvent($event)
-            }
-          }
-        },
-        [_vm._v("queryAlias")]
-      ),
-      _c("br", { attrs: { _i: 26 } })
+          }),
+          _c("br", { attrs: { _i: 13 } }),
+          _c(
+            "v-uni-label",
+            {
+              staticStyle: { "margin-right": "50rpx" },
+              attrs: { type: "primary", _i: 14 },
+              on: {
+                click: function($event) {
+                  return _vm.$handleViewEvent($event)
+                }
+              }
+            },
+            [_vm._v("增加tags")]
+          ),
+          _c(
+            "v-uni-label",
+            {
+              staticStyle: { "margin-right": "50rpx" },
+              attrs: { type: "primary", _i: 15 },
+              on: {
+                click: function($event) {
+                  return _vm.$handleViewEvent($event)
+                }
+              }
+            },
+            [_vm._v("覆盖tags")]
+          ),
+          _c(
+            "v-uni-label",
+            {
+              staticStyle: { "margin-right": "50rpx" },
+              attrs: { type: "primary", _i: 16 },
+              on: {
+                click: function($event) {
+                  return _vm.$handleViewEvent($event)
+                }
+              }
+            },
+            [_vm._v("查询Tags")]
+          ),
+          _c("br", { attrs: { _i: 17 } }),
+          _c("br", { attrs: { _i: 18 } }),
+          _c(
+            "v-uni-label",
+            {
+              staticStyle: { "margin-right": "30rpx" },
+              attrs: { type: "primary", _i: 19 },
+              on: {
+                click: function($event) {
+                  return _vm.$handleViewEvent($event)
+                }
+              }
+            },
+            [_vm._v("删除tags")]
+          ),
+          _c(
+            "v-uni-label",
+            {
+              staticStyle: { "margin-right": "30rpx" },
+              attrs: { type: "primary", _i: 20 },
+              on: {
+                click: function($event) {
+                  return _vm.$handleViewEvent($event)
+                }
+              }
+            },
+            [_vm._v("清空tags")]
+          ),
+          _c(
+            "v-uni-label",
+            {
+              staticStyle: { "margin-right": "30rpx" },
+              attrs: { type: "primary", _i: 21 },
+              on: {
+                click: function($event) {
+                  return _vm.$handleViewEvent($event)
+                }
+              }
+            },
+            [_vm._v("验证tag")]
+          ),
+          _c("br", { attrs: { _i: 22 } }),
+          _c("br", { attrs: { _i: 23 } }),
+          _c(
+            "v-uni-label",
+            {
+              staticStyle: { "margin-right": "30rpx" },
+              attrs: { type: "primary", _i: 24 },
+              on: {
+                click: function($event) {
+                  return _vm.$handleViewEvent($event)
+                }
+              }
+            },
+            [_vm._v("设置 Alias")]
+          ),
+          _c(
+            "v-uni-label",
+            {
+              staticStyle: { "margin-right": "30rpx" },
+              attrs: { type: "primary", _i: 25 },
+              on: {
+                click: function($event) {
+                  return _vm.$handleViewEvent($event)
+                }
+              }
+            },
+            [_vm._v("删除Alias")]
+          ),
+          _c(
+            "v-uni-label",
+            {
+              staticStyle: { "margin-right": "30rpx" },
+              attrs: { type: "primary", _i: 26 },
+              on: {
+                click: function($event) {
+                  return _vm.$handleViewEvent($event)
+                }
+              }
+            },
+            [_vm._v("查询Alias")]
+          )
+        ],
+        1
+      )
     ],
     1
   )

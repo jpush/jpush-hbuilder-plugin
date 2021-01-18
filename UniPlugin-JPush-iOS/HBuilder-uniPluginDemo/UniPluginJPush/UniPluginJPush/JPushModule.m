@@ -8,7 +8,8 @@
 #import "JPushModule.h"
 #import "JPUSHService.h"
 #import "JPushStore.h"
-#import <UserNotifications/UserNotifications.h>
+// 如果需要使用 idfa 功能所需要引入的头文件（可选）
+#import <AdSupport/AdSupport.h>
 
 #define weakObj(obj) __weak typeof(obj) weak##obj = obj;
 
@@ -129,132 +130,146 @@ UNI_EXPORT_METHOD(@selector(setAlias:callback:))
 UNI_EXPORT_METHOD(@selector(deleteAlias:callback:))
 UNI_EXPORT_METHOD(@selector(queryAlias:callback:))
 
+#define Param_Tags       @"tags"
+#define Param_Tag        @"tag"
+#define Param_Sequence   @"sequence"
+#define Param_Alias      @"alias"
+#define Param_TagEnable  @"tagEnable"
+
 
 #pragma - tags/alias
+// 新增tags
 - (void)addTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
     [self logger:@"addTags with params:" log:params];
-    NSSet *tags = [NSSet setWithArray:params[@"tags"]];
-    NSInteger seq = [params[@"sequence"] intValue];
+    NSSet *tags = [NSSet setWithArray:params[Param_Tags]];
+    NSInteger seq = [params[Param_Sequence] intValue];
     [JPUSHService addTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
         NSArray *tempTags = (iTags.allObjects.count > 0 ? iTags.allObjects : @[]);
         NSDictionary *content = @{
-            @"iTags":tempTags,
-            @"seq":@(seq)
+            Param_Tags:tempTags,
+            Param_Sequence:@(seq)
         };
         NSDictionary *result = [self convertResultWithCode:iResCode content:content];
         callback(result, NO);
     } seq:seq];
 }
 
+// 更新tags
 - (void)updateTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
     [self logger:@"updateTags with params:" log:params];
-    NSSet *tags = [NSSet setWithArray:params[@"tags"]];
-    NSInteger seq = [params[@"sequence"] intValue];
+    NSSet *tags = [NSSet setWithArray:params[Param_Tags]];
+    NSInteger seq = [params[Param_Sequence] intValue];
     [JPUSHService setTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
         NSArray *tempTags = (iTags.allObjects.count > 0 ? iTags.allObjects : @[]);
         NSDictionary *content = @{
-            @"iTags":tempTags,
-            @"seq":@(seq)
+            Param_Tags:tempTags,
+            Param_Sequence:@(seq)
         };
         NSDictionary *result = [self convertResultWithCode:iResCode content:content];
         callback(result, NO);
     } seq:seq];
 }
 
+// 删除所有tags
 - (void)deleteTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
     [self logger:@"deleteTags with params:" log:params];
-    NSInteger seq = [params[@"sequence"] intValue];
+    NSInteger seq = [params[Param_Sequence] intValue];
     [JPUSHService cleanTags:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
         NSArray *tempTags = (iTags.allObjects.count > 0 ? iTags.allObjects : @[]);
         NSDictionary *content = @{
-            @"iTags":tempTags,
-            @"seq":@(seq)
+            Param_Tags:tempTags,
+            Param_Sequence:@(seq)
         };
         NSDictionary *result = [self convertResultWithCode:iResCode content:content];
         callback(result, NO);
     } seq:seq];
 }
 
+// 删除指定的tags
 - (void)deleteTag:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
     [self logger:@"deleteTag with params:" log:params];
-    NSSet *tags = [NSSet setWithArray:params[@"tags"]];
-    NSInteger seq = [params[@"sequence"] intValue];
+    NSSet *tags = [NSSet setWithArray:params[Param_Tags]];
+    NSInteger seq = [params[Param_Sequence] intValue];
     [JPUSHService deleteTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
         NSArray *tempTags = (iTags.allObjects.count > 0 ? iTags.allObjects : @[]);
         NSDictionary *content = @{
-            @"iTags":tempTags,
-            @"seq":@(seq)
+            Param_Tags:tempTags,
+            Param_Sequence:@(seq)
         };
         NSDictionary *result = [self convertResultWithCode:iResCode content:content];
         callback(result, NO);
     } seq:seq];
 }
 
-
+// 查询tags
 - (void)queryTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
     [self logger:@"queryTags with params:" log:params];
-    NSInteger seq = [params[@"sequence"] intValue];
+    NSInteger seq = [params[Param_Sequence] intValue];
     [JPUSHService getAllTags:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
         NSArray *tempTags = (iTags.allObjects.count > 0 ? iTags.allObjects : @[]);
         NSDictionary *content = @{
-            @"iTags":tempTags,
-            @"seq":@(seq)
+            Param_Tags:tempTags,
+            Param_Sequence:@(seq)
         };
         NSDictionary *result = [self convertResultWithCode:iResCode content:content];
         callback(result, NO);
     } seq:seq];
 }
 
+// 查询某一个tag
 - (void)queryTag:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
     [self logger:@"queryTag with params:" log:params];
-    NSString *tag = params[@"tag"];
-    NSInteger seq = [params[@"sequence"] intValue];
+    NSString *tag = params[Param_Tag];
+    NSInteger seq = [params[Param_Sequence] intValue];
     [JPUSHService validTag:tag completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq, BOOL isBind) {
         NSArray *tempTags = (iTags.allObjects.count > 0 ? iTags.allObjects : @[]);
         NSDictionary *content = @{
-            @"iTags":tempTags,
-            @"seq":@(seq),
-            @"isBind":@(isBind),
+            Param_Tags:tempTags,
+            Param_Sequence:@(seq),
+            Param_TagEnable:@(isBind),
         };
         NSDictionary *result = [self convertResultWithCode:iResCode content:content];
         callback(result, NO);
     } seq:seq];
 }
 
+// 设置别名
 - (void)setAlias:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
     [self logger:@"setAlias with params:" log:params];
-    NSString *alias = params[@"alias"];
-    NSInteger seq = [params[@"sequence"] intValue];
+    NSString *alias = params[Param_Alias];
+    NSInteger seq = [params[Param_Sequence] intValue];
     [JPUSHService setAlias:alias completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
         NSDictionary *content = @{
-            @"iAlias":iAlias? iAlias : @"",
-            @"seq":@(seq)
+            Param_Alias:iAlias? iAlias : @"",
+            Param_Sequence:@(seq)
         };
         NSDictionary *result = [self convertResultWithCode:iResCode content:content];
         callback(result, NO);
     } seq:seq];
 }
 
+// 删除别名
 - (void)deleteAlias:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
     [self logger:@"deleteAlias with params:" log:params];
-    NSInteger seq = [params[@"sequence"] intValue];
+    NSInteger seq = [params[Param_Sequence] intValue];
     [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
         NSDictionary *content = @{
-            @"iAlias":iAlias? iAlias : @"",
-            @"seq":@(seq)
+            Param_Alias:iAlias? iAlias : @"",
+            Param_Sequence:@(seq)
         };
         NSDictionary *result = [self convertResultWithCode:iResCode content:content];
         callback(result, NO);
     } seq:seq];
 }
 
+// 查询别名
 - (void)queryAlias:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
     [self logger:@"queryAlias with params:" log:params];
-    NSInteger seq = [params[@"sequence"] intValue];
+    NSInteger seq = [params[Param_Sequence] intValue];
     [JPUSHService getAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
         NSDictionary *content = @{
-            @"iAlias":iAlias? iAlias : @"",
-            @"seq":@(seq)
+            Param_Alias:iAlias? iAlias : @"",
+            Param_Sequence:@(seq)
         };
         NSDictionary *result = [self convertResultWithCode:iResCode content:content];
         callback(result, NO);
