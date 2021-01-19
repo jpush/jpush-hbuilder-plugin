@@ -64,20 +64,33 @@ NSString *const infoConfig_JPush_ADVERTISINGID = @"ADVERTISINGID";
 // ios8 - ios10 应用前台收到apns消息
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [JPUSHService handleRemoteNotification:userInfo];
-    if ([JPushStore shared].receivePushNotiCallback) {
-        [JPushStore shared].receivePushNotiCallback(userInfo, YES);
+    NSDictionary *result = @{
+//        @"messageID":notification.request.identifier?:@"",
+//        @"title":notification.request.content.title?:@"",
+//        @"content":notification.request.content.body?:@"",
+        @"extras":userInfo?:@{},
+        @"notificationEventType":@"notificationArrived",
+    };
+    if ([JPushStore shared].pushNotiCallback) {
+        [JPushStore shared].pushNotiCallback(result, YES);
     }
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-  
+    NSDictionary *content = notification.userInfo;
+    NSLog(@"%@",content);
 }
 
 // 收到透传消息
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
     NSDictionary * userInfo = [notification userInfo];
+    NSDictionary *result = @{
+        @"messageID":userInfo[@"_j_msgid"]?:@"",
+        @"content":userInfo[@"content"]?:@"",
+        @"extras":userInfo[@"extras"]?:@{},
+    };
     if ([JPushStore shared].receiveCustomNotiCallback) {
-        [JPushStore shared].receiveCustomNotiCallback(userInfo, YES);
+        [JPushStore shared].receiveCustomNotiCallback(result, YES);
     }
 }
 

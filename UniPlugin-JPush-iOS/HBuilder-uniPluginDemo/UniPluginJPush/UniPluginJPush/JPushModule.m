@@ -14,6 +14,15 @@
 #define weakObj(obj) __weak typeof(obj) weak##obj = obj;
 
 
+#define Param_RegisterID   @"registerID"
+#define Param_Tags       @"tags"
+#define Param_Tag        @"tag"
+#define Param_Sequence   @"sequence"
+#define Param_Alias      @"alias"
+#define Param_TagEnable  @"tagEnable"
+#define CODE             @"code"
+
+
 NSString *const infoConfig_JPush             = @"JPush";
 NSString *const infoConfig_JPush_APP_KEY     = @"APP_KEY";
 NSString *const infoConfig_JPush_CHANNEL     = @"CHANNEL";
@@ -27,17 +36,28 @@ NSString *const infoConfig_JPush_CHANNEL     = @"CHANNEL";
 
 BOOL debugMode = NO;
 
-
+UNI_EXPORT_METHOD(@selector(setBadge:))
 UNI_EXPORT_METHOD(@selector(setMobileNumber:callback:))
 UNI_EXPORT_METHOD(@selector(initCrashHandler))
 UNI_EXPORT_METHOD(@selector(setLoggerEnable:))
 UNI_EXPORT_METHOD(@selector(getRegistrationID:))
 
 #pragma -
+
+// 设置角标
+- (void)setBadge:(NSDictionary *)params {
+    [self logger:@"setBadge with params" log:params];
+    NSInteger badge = [params[@"badge"] intValue];
+    NSInteger appBadge = [params[@"appBadge"] intValue];
+    [JPUSHService setBadge:badge];
+    if (appBadge >= 0) {
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:appBadge];
+    }
+}
+
 // 设置手机号
-- (void)setMobileNumber:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
-    [self logger:@"setMobileNumber with mobileNumber:" log:params];
-    NSString *mobileNumber = params[@"mobileNumber"];
+- (void)setMobileNumber:(NSString *)mobileNumber callback:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"setMobileNumber with mobileNumber:" log:mobileNumber];
     weakObj(self)
     [JPUSHService setMobileNumber:mobileNumber completion:^(NSError *error) {
         NSDictionary *result = [weakself convertResultWithCode:(error?1:0) content:nil];
@@ -67,7 +87,7 @@ UNI_EXPORT_METHOD(@selector(getRegistrationID:))
     [self logger:@"getRegistrationID" log:nil];
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
         NSDictionary *content = @{
-            @"registrationID": registrationID ? registrationID : @"",
+            Param_RegisterID: registrationID ? registrationID : @"",
         };
         NSDictionary *result = [self convertResultWithCode:resCode content:content];
         callback(result, NO);
@@ -96,25 +116,18 @@ UNI_EXPORT_METHOD(@selector(openSettingsForNotification:))
     }];
 }
 
-UNI_EXPORT_METHOD(@selector(addPushNotificationReceiveListener:))
-UNI_EXPORT_METHOD(@selector(addPushNotificationOpenListener:))
-UNI_EXPORT_METHOD(@selector(addCustomNotificationReceiveListener:))
+UNI_EXPORT_METHOD(@selector(addNotificationListener:))
+UNI_EXPORT_METHOD(@selector(addCustomMessageListener:))
 
-#pragma - 接收通知
-// 监听接收到远程推送/应用处于前台
-- (void)addPushNotificationReceiveListener:(UniModuleKeepAliveCallback)callback {
+#pragma - 通知回调
+// 远程通知事件 notificationEventType：分为notificationArrived和notificationOpened两种
+- (void)addNotificationListener:(UniModuleKeepAliveCallback)callback {
     [self logger:@"addPushNotificationReceiveListener" log:nil];
-    [JPushStore shared].receivePushNotiCallback = callback;
-}
-
-// 监听点击通知栏消息事件
-- (void)addPushNotificationOpenListener:(UniModuleKeepAliveCallback)callback {
-    [self logger:@"addPushNotificationOpenListener" log:nil];
-    [JPushStore shared].openPushNotiCallback = callback;
+    [JPushStore shared].pushNotiCallback = callback;
 }
 
 // 监听自定义消息/应用处于前台
-- (void)addCustomNotificationReceiveListener:(UniModuleKeepAliveCallback)callback {
+- (void)addCustomMessageListener:(UniModuleKeepAliveCallback)callback {
     [self logger:@"addCustomNotificationReceiveListener" log:nil];
     [JPushStore shared].receiveCustomNotiCallback = callback;
 }
@@ -129,12 +142,6 @@ UNI_EXPORT_METHOD(@selector(queryTags:callback:))
 UNI_EXPORT_METHOD(@selector(setAlias:callback:))
 UNI_EXPORT_METHOD(@selector(deleteAlias:callback:))
 UNI_EXPORT_METHOD(@selector(queryAlias:callback:))
-
-#define Param_Tags       @"tags"
-#define Param_Tag        @"tag"
-#define Param_Sequence   @"sequence"
-#define Param_Alias      @"alias"
-#define Param_TagEnable  @"tagEnable"
 
 
 #pragma - tags/alias
@@ -305,16 +312,71 @@ UNI_EXPORT_METHOD(@selector(addDidExitRegionListener:))
 }
 
 
+UNI_EXPORT_METHOD(@selector(addLocalNotification:))
+
 #pragma - 本地通知
+- (void)addLocalNotification:(NSDictionary *)params {
+    
+    NSString *requestIdentifier = params[@"messageID"];
+    NSString *title = params[@"title"];
+    NSString *content = params[@"content"];
+    NSDictionary *extras = params[@"extras"];
+    
+    JPushNotificationContent *notiContent = [[JPushNotificationContent alloc] init];
+    notiContent.title = title;
+    notiContent.body = content;
+    notiContent.badge = @([extras[@"badge"] intValue]);
+    if ([extras[@"sound"] isKindOfClass:[NSString class]] && [extras[@"sound"] length] > 0) {
+        notiContent.sound = extras[@"sound"];
+    }
+   
+    JPushNotificationTrigger *notiTrigger = [[JPushNotificationTrigger alloc] init];
+    NSTimeInterval delay = 0;
+    if (extras != nil && extras[@"delay"]) {
+        delay = [extras[@"delay"] intValue];
+    }
+    if (@available(iOS 10.0, *)) {
+        notiTrigger.timeInterval = delay;
+    } else {
+        notiTrigger.fireDate = [NSDate dateWithTimeIntervalSinceNow:delay];
+    }
+    
+    JPushNotificationRequest *request = [[JPushNotificationRequest alloc] init];
+    request.requestIdentifier = requestIdentifier;
+    request.content = notiContent;
+    request.trigger = notiTrigger;
+    [JPUSHService addNotification:request];
+    
+}
+
+// 移除指定的本地通知
+- (void)removeLocalNotification:(NSDictionary *)params {
+    [self logger:@"removeLocalNotification with params" log:params];
+    NSArray *messageIDs = params[@"identifiers"];
+    JPushNotificationIdentifier *identifier = [[JPushNotificationIdentifier alloc] init];
+    identifier.identifiers = messageIDs;
+    if (@available(iOS 10.0, *)) {
+        BOOL delivered = [params[@"delivered"] boolValue];
+        identifier.delivered = delivered;
+    }
+    [JPUSHService removeNotification:identifier];
+}
+
+// 移除所有的本地通知
+- (void)clearLocalNotifications {
+    [self logger:@"clearLocalNotifications" log:nil];
+    [JPUSHService removeNotification:nil];
+}
+
 
 
 #pragma - tools
 - (NSDictionary *)convertResultWithCode:(NSInteger)code content:(NSDictionary *)dicInfo {
     
     NSMutableDictionary *result = [NSMutableDictionary dictionary];
-    result[@"code"] = @(code);
+    result[CODE] = @(code);
     [dicInfo enumerateKeysAndObjectsUsingBlock:^(NSString *  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        if(![key isEqualToString:@"code"]) {
+        if(![key isEqualToString:CODE]) {
             [result setObject:obj forKey:key];
         }
     }];

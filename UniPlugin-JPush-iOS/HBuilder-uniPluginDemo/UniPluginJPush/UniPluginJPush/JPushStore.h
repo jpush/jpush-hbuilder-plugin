@@ -17,9 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 //@property (nonatomic, strong) NSDictionary *launchOptions;
 
-@property (nonatomic, copy) UniModuleKeepAliveCallback receivePushNotiCallback;
-@property (nonatomic, copy) UniModuleKeepAliveCallback openPushNotiCallback;
+@property (nonatomic, copy) UniModuleKeepAliveCallback pushNotiCallback;
+//@property (nonatomic, copy) UniModuleKeepAliveCallback openPushNotiCallback;
 @property (nonatomic, copy) UniModuleKeepAliveCallback receiveCustomNotiCallback;
+
+//@property (nonatomic, copy) UniModuleKeepAliveCallback receiveLocalNotiCallback;
+//@property (nonatomic, copy) UniModuleKeepAliveCallback openLocalNotiCallback;
 
 @property (nonatomic, copy) UniModuleKeepAliveCallback didEnterRegionCallback;
 @property (nonatomic, copy) UniModuleKeepAliveCallback didExitRegionCallback;

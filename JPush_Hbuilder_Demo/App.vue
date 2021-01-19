@@ -4,21 +4,14 @@
 		onLaunch: function() {
 			console.log('App Launch')
 			
-			jpushModule.addPushNotificationReceiveListener(result=>{
+			jpushModule.addNotificationListener(result=>{
 				uni.showToast({
 					icon: 'none',
 					title: JSON.stringify(result)
 				})
 			})
 			
-			jpushModule.addPushNotificationOpenListener(result=>{
-				uni.showToast({
-					icon: 'none',
-					title: JSON.stringify(result)
-				})
-			})
-			
-			jpushModule.addCustomNotificationReceiveListener(result=>{
+			jpushModule.addCustomMessageListener(result=>{
 				uni.showToast({
 					icon: 'none',
 					title: JSON.stringify(result)

@@ -9,6 +9,10 @@
 		</br>
 		<button type="primary" @click="setLoggerUnEnable">关闭日志</button>
 		</br>
+		<button type="primary" @click="getRegistrationID">获取注册id</button>
+		</br>
+		<button type="primary" @click="addLocalNotification">创建一个本地通知</button>
+		</br>
 		
 		<view>
 			<input placeholder="请使用tags,作为分隔符" v-model="inputTags"/>
@@ -31,6 +35,25 @@
 		
 		</view>
 		
+		</br>
+		</br>
+		
+		<view>
+			<input placeholder="请输入badge"/>
+			</br>
+			<label @click='setBadge' v-model="inputBadge">设置角标</label>
+			</br>
+			</br>
+			<input placeholder="请输入电话号码" v-model="inputPhoneNumber"/>
+			</br>
+			<label @click='setMobileNumber'>设置电话号码</label>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+		</view>
+		
 		
     </div>
 </template>
@@ -44,7 +67,10 @@
 		data() {
 			return {
 				inputTags: '',
-				inputAlias: ''
+				inputAlias: '',
+				inputPhoneNumber: '',
+				inputBadge: '',
+				inputPhoneNumber: ''
 			}
 		},
 		
@@ -78,6 +104,23 @@
 				jpushModule.setLoggerEnable(false)
 			},
 			
+			getRegistrationID() {
+				jpushModule.getRegistrationID(result=>{
+					this.showToast(result)
+				})	
+			},
+			
+			addLocalNotification() {
+				jpushModule.addLocalNotification({
+					messageID:'123',
+					title:'title',
+					content:'content',
+					extras:{
+						delay: 10,
+						badge: 8,
+					}
+				})
+			},
 			
 			addTags() {
 				var tags = this.inputTags.split(',')
@@ -158,6 +201,20 @@
 					'sequence': seq++
 				},result=>{
 					this.showToast(result)
+				})
+			},
+			
+			setMobileNumber() {
+				let mobileNumber = this.inputPhoneNumber
+				jpushModule.setMobileNumber(mobileNumber,result=>{
+					this.showToast(result)
+				})
+			},
+			
+			setBadge(){
+				jpushModule.setBadge({
+					badge: 10,
+					appBadge: 11,
 				})
 			},
 			

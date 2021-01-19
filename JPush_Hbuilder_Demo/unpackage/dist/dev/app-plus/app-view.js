@@ -274,36 +274,62 @@ var render = function() {
       ),
       _c("br", { attrs: { _i: 8 } }),
       _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 9 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("获取注册id")]
+      ),
+      _c("br", { attrs: { _i: 10 } }),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { type: "primary", _i: 11 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("创建一个本地通知")]
+      ),
+      _c("br", { attrs: { _i: 12 } }),
+      _c(
         "v-uni-view",
-        { attrs: { _i: 9 } },
+        { attrs: { _i: 13 } },
         [
           _c("v-uni-input", {
-            attrs: { placeholder: "请使用tags,作为分隔符", _i: 10 },
+            attrs: { placeholder: "请使用tags,作为分隔符", _i: 14 },
             model: {
-              value: _vm._$g(10, "v-model"),
+              value: _vm._$g(14, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(10, $$v)
+                _vm.$handleVModelEvent(14, $$v)
               },
               expression: "inputTags"
             }
           }),
-          _c("br", { attrs: { _i: 11 } }),
+          _c("br", { attrs: { _i: 15 } }),
           _c("v-uni-input", {
-            attrs: { placeholder: "请输入alias", _i: 12 },
+            attrs: { placeholder: "请输入alias", _i: 16 },
             model: {
-              value: _vm._$g(12, "v-model"),
+              value: _vm._$g(16, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(12, $$v)
+                _vm.$handleVModelEvent(16, $$v)
               },
               expression: "inputAlias"
             }
           }),
-          _c("br", { attrs: { _i: 13 } }),
+          _c("br", { attrs: { _i: 17 } }),
           _c(
             "v-uni-label",
             {
               staticStyle: { "margin-right": "50rpx" },
-              attrs: { type: "primary", _i: 14 },
+              attrs: { type: "primary", _i: 18 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -316,7 +342,7 @@ var render = function() {
             "v-uni-label",
             {
               staticStyle: { "margin-right": "50rpx" },
-              attrs: { type: "primary", _i: 15 },
+              attrs: { type: "primary", _i: 19 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -329,7 +355,7 @@ var render = function() {
             "v-uni-label",
             {
               staticStyle: { "margin-right": "50rpx" },
-              attrs: { type: "primary", _i: 16 },
+              attrs: { type: "primary", _i: 20 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -338,13 +364,13 @@ var render = function() {
             },
             [_vm._v("查询Tags")]
           ),
-          _c("br", { attrs: { _i: 17 } }),
-          _c("br", { attrs: { _i: 18 } }),
+          _c("br", { attrs: { _i: 21 } }),
+          _c("br", { attrs: { _i: 22 } }),
           _c(
             "v-uni-label",
             {
               staticStyle: { "margin-right": "30rpx" },
-              attrs: { type: "primary", _i: 19 },
+              attrs: { type: "primary", _i: 23 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -357,7 +383,7 @@ var render = function() {
             "v-uni-label",
             {
               staticStyle: { "margin-right": "30rpx" },
-              attrs: { type: "primary", _i: 20 },
+              attrs: { type: "primary", _i: 24 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -370,7 +396,7 @@ var render = function() {
             "v-uni-label",
             {
               staticStyle: { "margin-right": "30rpx" },
-              attrs: { type: "primary", _i: 21 },
+              attrs: { type: "primary", _i: 25 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -379,13 +405,13 @@ var render = function() {
             },
             [_vm._v("验证tag")]
           ),
-          _c("br", { attrs: { _i: 22 } }),
-          _c("br", { attrs: { _i: 23 } }),
+          _c("br", { attrs: { _i: 26 } }),
+          _c("br", { attrs: { _i: 27 } }),
           _c(
             "v-uni-label",
             {
               staticStyle: { "margin-right": "30rpx" },
-              attrs: { type: "primary", _i: 24 },
+              attrs: { type: "primary", _i: 28 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -398,7 +424,7 @@ var render = function() {
             "v-uni-label",
             {
               staticStyle: { "margin-right": "30rpx" },
-              attrs: { type: "primary", _i: 25 },
+              attrs: { type: "primary", _i: 29 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -411,7 +437,7 @@ var render = function() {
             "v-uni-label",
             {
               staticStyle: { "margin-right": "30rpx" },
-              attrs: { type: "primary", _i: 26 },
+              attrs: { type: "primary", _i: 30 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -420,6 +446,64 @@ var render = function() {
             },
             [_vm._v("查询Alias")]
           )
+        ],
+        1
+      ),
+      _c("br", { attrs: { _i: 31 } }),
+      _c("br", { attrs: { _i: 32 } }),
+      _c(
+        "v-uni-view",
+        { attrs: { _i: 33 } },
+        [
+          _c("v-uni-input", { attrs: { placeholder: "请输入badge", _i: 34 } }),
+          _c("br", { attrs: { _i: 35 } }),
+          _c(
+            "v-uni-label",
+            {
+              attrs: { _i: 36 },
+              on: {
+                click: function($event) {
+                  return _vm.$handleViewEvent($event)
+                }
+              },
+              model: {
+                value: _vm._$g(36, "v-model"),
+                callback: function() {},
+                expression: "inputBadge"
+              }
+            },
+            [_vm._v("设置角标")]
+          ),
+          _c("br", { attrs: { _i: 37 } }),
+          _c("br", { attrs: { _i: 38 } }),
+          _c("v-uni-input", {
+            attrs: { placeholder: "请输入电话号码", _i: 39 },
+            model: {
+              value: _vm._$g(39, "v-model"),
+              callback: function($$v) {
+                _vm.$handleVModelEvent(39, $$v)
+              },
+              expression: "inputPhoneNumber"
+            }
+          }),
+          _c("br", { attrs: { _i: 40 } }),
+          _c(
+            "v-uni-label",
+            {
+              attrs: { _i: 41 },
+              on: {
+                click: function($event) {
+                  return _vm.$handleViewEvent($event)
+                }
+              }
+            },
+            [_vm._v("设置电话号码")]
+          ),
+          _c("br", { attrs: { _i: 42 } }),
+          _c("br", { attrs: { _i: 43 } }),
+          _c("br", { attrs: { _i: 44 } }),
+          _c("br", { attrs: { _i: 45 } }),
+          _c("br", { attrs: { _i: 46 } })
         ],
         1
       )
