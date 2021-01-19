@@ -98,8 +98,10 @@ UNI_EXPORT_METHOD(@selector(getRegistrationID:))
 UNI_EXPORT_METHOD(@selector(setLocation:))
 
 #pragma - 地理位置上报
-- (void)setLatitude:(double)latitude longitude:(double)longitude {
-    [self logger:@"setLatitude with latitude and longitude" log:[NSString stringWithFormat:@"%f -- %f", latitude, longitude]];
+- (void)setLocation:(NSDictionary *)params {
+    [self logger:@"setLatitude with params" log:params];
+    double latitude = [params[@"latitude"] doubleValue];
+    double longitude = [params[@"longitude"] doubleValue];
     [JPUSHService setLatitude:latitude longitude:longitude];
 }
 
@@ -122,7 +124,8 @@ UNI_EXPORT_METHOD(@selector(openSettingsForNotification:))
 - (void)requestNotificationAuthorization:(UniModuleKeepAliveCallback)callback {
     [self logger:@"requestNotificationAuthorization" log:nil];
     [JPUSHService requestNotificationAuthorization:^(JPAuthorizationStatus status) {
-        NSDictionary *result = [self convertResultWithCode:0 content:@{@"status":@(status)}];
+        NSDictionary *result = @{@"status":@(status)};
+//        [self convertResultWithCode:0 content:@{@"status":@(status)}];
         callback(result, NO);
     }];
 }

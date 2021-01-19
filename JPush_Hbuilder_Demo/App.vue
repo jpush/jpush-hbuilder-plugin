@@ -1,8 +1,23 @@
+
+
+
 <script>
 	var jpushModule = uni.requireNativePlugin("JG-JPush")
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
+			
+			jpushModule.requestNotificationAuthorization((result)=>{
+				let status = result.status
+				if (status < 2) {
+					uni.showToast({
+						icon: 'none',
+						title: '您还没有打开通知权限',
+						duration: 3000
+					})
+				}
+			})
+			
 			
 			jpushModule.addNotificationListener(result=>{
 				uni.showToast({
