@@ -7,16 +7,27 @@
 			jpushModule.addNotificationListener(result=>{
 				uni.showToast({
 					icon: 'none',
-					title: JSON.stringify(result)
+					title: JSON.stringify(result),
+					duration: 3000
 				})
 			})
 			
 			jpushModule.addCustomMessageListener(result=>{
 				uni.showToast({
 					icon: 'none',
-					title: JSON.stringify(result)
+					title: JSON.stringify(result),
+					duration: 3000
 				})
 			})
+			
+			jpushModule.addInMessageListener(result=>{
+				uni.showToast({
+					icon: 'none',
+					title: JSON.stringify(result),
+					duration: 3000
+				})
+			})
+			
 			
 		},
 		onShow: function() {

@@ -78,21 +78,15 @@
 			
 			openSettingsForNotification() {
 				jpushModule.openSettingsForNotification((result)=>{
-					uni.showToast({
-						icon:'none',
-						title: JSON.stringify(result),
-						duration: 3000
-					})
+					this.showToast(result)
 				})
 			},
 			
 			requestNotificationAuthorization() {
 				jpushModule.requestNotificationAuthorization((result)=>{
-					uni.showToast({
-						icon:'none',
-						title: JSON.stringify(result),
-						duration: 3000
-					})
+					let code = result.code
+					let status = result.status
+					this.showToast(result)
 				})
 			},
 			

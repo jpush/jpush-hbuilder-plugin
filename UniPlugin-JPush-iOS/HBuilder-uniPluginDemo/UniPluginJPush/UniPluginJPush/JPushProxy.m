@@ -30,8 +30,10 @@ NSString *const infoConfig_JPush_ADVERTISINGID = @"ADVERTISINGID";
     // 监听透传消息
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
-    
+    // 地理围栏功能
     [JPUSHService registerLbsGeofenceDelegate:[JPushStore shared] withLaunchOptions:launchOptions];
+    //应用内消息代理
+    [JPUSHService setInMessageDelegate:[JPushStore shared]];
     
     return YES;
 }

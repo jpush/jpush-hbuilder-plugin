@@ -94,6 +94,26 @@ UNI_EXPORT_METHOD(@selector(getRegistrationID:))
     }];
 }
 
+
+UNI_EXPORT_METHOD(@selector(setLocation:))
+
+#pragma - 地理位置上报
+- (void)setLatitude:(double)latitude longitude:(double)longitude {
+    [self logger:@"setLatitude with latitude and longitude" log:[NSString stringWithFormat:@"%f -- %f", latitude, longitude]];
+    [JPUSHService setLatitude:latitude longitude:longitude];
+}
+
+/*!
+ * @abstract 设置SDK地理位置权限开关
+ *
+ * @discussion 关闭地理位置之后，SDK地理围栏的相关功能将受到影响，默认是开启。
+ *
+ */
+- (void)setLocationEanable:(BOOL)isEanble {
+    [self logger:@"setLocationEanable" log:isEanble?@"true":@"false"];
+    [JPUSHService setLocationEanable:isEanble];
+}
+
 UNI_EXPORT_METHOD(@selector(requestNotificationAuthorization:))
 UNI_EXPORT_METHOD(@selector(openSettingsForNotification:))
 
@@ -130,6 +150,28 @@ UNI_EXPORT_METHOD(@selector(addCustomMessageListener:))
 - (void)addCustomMessageListener:(UniModuleKeepAliveCallback)callback {
     [self logger:@"addCustomNotificationReceiveListener" log:nil];
     [JPushStore shared].receiveCustomNotiCallback = callback;
+}
+
+
+UNI_EXPORT_METHOD(@selector(setIsAllowedInMessagePop:))
+UNI_EXPORT_METHOD(@selector(addInMessageListener:))
+
+#pragma - 应用内消息
+/**
+ * 是否允许应用内消息弹出,默认为允许
+ */
+- (void)setIsAllowedInMessagePop:(BOOL)enable {
+    [self logger:@"jPushInMessageIsAllowedInMessagePop" log:enable?@"true":@"false"];
+    [JPushStore shared].allowedInMessagePop = enable;
+    if ([[JPushStore shared] respondsToSelector:@selector(jPushInMessageIsAllowedInMessagePop)]) {
+        [[JPushStore shared] jPushInMessageIsAllowedInMessagePop];
+    }
+}
+
+// 监听应用内消息
+- (void)addInMessageListener:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"setInMessageListener" log:nil];
+    [JPushStore shared].inMessageCallback = callback;
 }
 
 
@@ -301,6 +343,7 @@ UNI_EXPORT_METHOD(@selector(addDidExitRegionListener:))
     [JPUSHService removeGeofenceWithIdentifier:geofenceID];
 }
 
+#pragma - 地理围栏监听
 - (void)addDidEnterRegionListener:(UniModuleKeepAliveCallback)callback {
     [self logger:@"addDidEnterRegionListener" log:nil];
     [JPushStore shared].didEnterRegionCallback = callback;
