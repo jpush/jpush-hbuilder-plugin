@@ -30,13 +30,7 @@
 // 应用在前台 推送消息过来 会触发 需要回调completionHandler才能显示
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
     NSDictionary * userInfo = notification.request.content.userInfo;
-    NSDictionary *result = @{
-        @"messageID":notification.request.identifier?:@"",
-        @"title":notification.request.content.title?:@"",
-        @"content":notification.request.content.body?:@"",
-        @"extras":notification.request.content.userInfo?:@{},
-        @"notificationEventType":@"notificationArrived",
-    };
+    NSDictionary *result = [self convertApnsMessage:notification type:@"notificationArrived"];
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         //远程推送
         [JPUSHService handleRemoteNotification:userInfo];
@@ -56,13 +50,7 @@
 // 点击通知会触发
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
     NSDictionary * userInfo = response.notification.request.content.userInfo;
-    NSDictionary *result = @{
-        @"messageID":response.notification.request.identifier?:@"",
-        @"title":response.notification.request.content.title?:@"",
-        @"content":response.notification.request.content.body?:@"",
-        @"extras":response.notification.request.content.userInfo?:@{},
-        @"notificationEventType":@"notificationOpened",
-    };
+    NSDictionary *result = [self convertApnsMessage:response.notification type:@"notificationOpened"];
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
         if ([JPushStore shared].pushNotiCallback) {
@@ -75,6 +63,27 @@
 //        }
 //    }
     completionHandler();
+}
+
+- (NSDictionary *)convertApnsMessage:(UNNotification *)notification type:(NSString *)type{
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    NSMutableDictionary *extras = [NSMutableDictionary dictionary];
+    for (NSString *key in userInfo.allKeys) {
+        if ([key isEqualToString:@"_j_business"] || [key isEqualToString:@"_j_msgid"] || [key isEqualToString:@"_j_uid"] || [key isEqualToString:@"aps"]) {
+            continue;
+        }
+        [extras setValue:userInfo[key] forKey:key];
+    }
+    NSDictionary *result = @{
+        @"messageID":userInfo[@"_j_msgid"]?:@"",
+        @"title":userInfo[@"aps"][@"alert"][@"title"]?:@"",
+        @"content":userInfo[@"aps"][@"alert"][@"body"]?:@"",
+        @"badge":userInfo[@"aps"][@"badge"]?[NSString stringWithFormat:@"%@",userInfo[@"aps"][@"badge"]]:@"1",
+        @"ring":userInfo[@"aps"][@"sound"],
+        @"extras":[extras copy]?:@{},
+        @"notificationEventType":type,
+    };
+    return result;
 }
 
 
@@ -212,21 +221,31 @@
 
 #pragma mark - PKPushRegistryDelegate
 //系统返回VOIP token,提交到极光服务器
-- (void)JPushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)pushCredentials forType:(PKPushType)type{
-  [JPUSHService registerVoipToken:pushCredentials.token];
+- (void)pushRegistry:(nonnull PKPushRegistry *)registry didUpdatePushCredentials:(nonnull PKPushCredentials *)pushCredentials forType:(nonnull PKPushType)type {
+    [JPUSHService registerVoipToken:pushCredentials.token];
 }
 
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type{
-  [JPUSHService handleVoipNotification:payload.dictionaryPayload];
-    
+    [JPUSHService handleVoipNotification:payload.dictionaryPayload];
+    NSDictionary *result = @{
+        @"payload" : payload.dictionaryPayload ?:@{},
+    };
+    if (self.pushNotiCallback) {
+        self.pushNotiCallback(result, YES);
+    }
 }
 
 /**
  * 接收到Voip推送信息，并向极光服务器上报（iOS 11.0 以后）
  */
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type withCompletionHandler:(void(^)(void))completion{
-  [JPUSHService handleVoipNotification:payload.dictionaryPayload];
-  
+    [JPUSHService handleVoipNotification:payload.dictionaryPayload];
+    NSDictionary *result = @{
+        @"payload" : payload.dictionaryPayload ?:@{},
+    };
+    if (self.pushNotiCallback) {
+        self.pushNotiCallback(result, YES);
+    }
 }
 
 

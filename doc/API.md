@@ -493,6 +493,34 @@ jpushModule.setMaxGeofenceNumber(15)
 jpushModule.deleteGeofence('beijing')
 ```
 
+## 注册voip服务
+
+### API - initVoipService()
+
+#### 示例
+```javascript
+jpushModule.initVoipService()
+```
+
+## voip消息回调
+
+### API - addVoipPushIncomingListener(CALLBACK)
+
+#### 参数说明
+
+- CALLBACK
+
+|参数名称|参数类型|参数说明|
+|:-----:|:----:|:-----:|
+|payload|dictionary|收到的voip消息|
+
+#### 示例
+```javascript
+jpushModule.openSettingsForNotification((result)=>{
+		let payload = result.payload
+})
+```
+
 
 ## 设置 Badge (iOS Only)
 

@@ -47,7 +47,7 @@
                     "NSLocationAlwaysUsageDescription" : "This app requires location services to work",
                     "NSLocationWhenInUseUsageDescription" : "This app requires location services to work"
                 },
-                "UIBackgroundModes" : "remote-notification",
+                "UIBackgroundModes" : "remote-notification,voip,fetch",
                 "idfa" : false
             },
             /* ios打包配置 */

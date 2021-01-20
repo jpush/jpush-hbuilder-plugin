@@ -73,13 +73,24 @@ NSString *const infoConfig_JPush_ADVERTISINGID = @"ADVERTISINGID";
 // ios8 - ios10 应用前台收到apns消息
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [JPUSHService handleRemoteNotification:userInfo];
+
+    NSMutableDictionary *extras = [NSMutableDictionary dictionary];
+    for (NSString *key in userInfo.allKeys) {
+        if ([key isEqualToString:@"_j_business"] || [key isEqualToString:@"_j_msgid"] || [key isEqualToString:@"_j_uid"] || [key isEqualToString:@"aps"]) {
+            continue;
+        }
+        [extras setValue:userInfo[key] forKey:key];
+    }
     NSDictionary *result = @{
-//        @"messageID":notification.request.identifier?:@"",
-//        @"title":notification.request.content.title?:@"",
-//        @"content":notification.request.content.body?:@"",
-        @"extras":userInfo?:@{},
+        @"messageID":userInfo[@"_j_msgid"]?:@"",
+        @"title":userInfo[@"aps"][@"alert"][@"title"]?:@"",
+        @"content":userInfo[@"aps"][@"alert"][@"body"]?:@"",
+        @"badge":userInfo[@"aps"][@"badge"]?[NSString stringWithFormat:@"%@",userInfo[@"aps"][@"badge"]]:@"1",
+        @"ring":userInfo[@"aps"][@"sound"],
+        @"extras":[extras copy]?:@{},
         @"notificationEventType":@"notificationArrived",
     };
+    
     if ([JPushStore shared].pushNotiCallback) {
         [JPushStore shared].pushNotiCallback(result, YES);
     }

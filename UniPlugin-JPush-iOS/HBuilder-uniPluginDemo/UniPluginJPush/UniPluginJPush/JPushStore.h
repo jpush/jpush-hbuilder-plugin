@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) UniModuleKeepAliveCallback geofenceCallback;
 
+@property (nonatomic, copy) UniModuleKeepAliveCallback voipCallback;
+
 - (void)initVoipService;
 
 @end

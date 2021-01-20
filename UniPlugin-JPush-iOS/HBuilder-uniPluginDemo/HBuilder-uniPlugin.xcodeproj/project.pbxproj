@@ -85,6 +85,7 @@
 		2A21734625ADE4F70084EBAE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21734525ADE4F70084EBAE /* StoreKit.framework */; };
 		2A21736125AEA06B0084EBAE /* jcore-ios-2.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21736025AEA06B0084EBAE /* jcore-ios-2.4.0.a */; };
 		2A21736325AEA0800084EBAE /* jpush-ios-3.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21736225AEA0800084EBAE /* jpush-ios-3.4.0.a */; };
+		2AC5D66525B822E800EA873C /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC5D66425B822E800EA873C /* PushKit.framework */; };
 		2F0BA3F9215B48A700F67004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA3F8215B48A700F67004 /* Images.xcassets */; };
 		2F0BA410215B784100F67004 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA40F215B784000F67004 /* Contacts.framework */; };
 		2F0BA412215B814100F67004 /* liblibVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA411215B814000F67004 /* liblibVideo.a */; };
@@ -314,6 +315,7 @@
 		2A21736025AEA06B0084EBAE /* jcore-ios-2.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jcore-ios-2.4.0.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JPush/ios/jcore-ios-2.4.0.a"; sourceTree = "<group>"; };
 		2A21736225AEA0800084EBAE /* jpush-ios-3.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jpush-ios-3.4.0.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JPush/ios/jpush-ios-3.4.0.a"; sourceTree = "<group>"; };
 		2AC5D66225B6807700EA873C /* UniPluginDemo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = UniPluginDemo.entitlements; sourceTree = "<group>"; };
+		2AC5D66425B822E800EA873C /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		2F0BA3F8215B48A700F67004 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../HBuilder/Images.xcassets; sourceTree = "<group>"; };
 		2F0BA3FB215B4A4100F67004 /* DCADManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCADManager.h; sourceTree = "<group>"; };
 		2F0BA3FD215B4A4100F67004 /* PDRCommonString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRCommonString.h; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AC5D66525B822E800EA873C /* PushKit.framework in Frameworks */,
 				2A21736325AEA0800084EBAE /* jpush-ios-3.4.0.a in Frameworks */,
 				2A21736125AEA06B0084EBAE /* jcore-ios-2.4.0.a in Frameworks */,
 				2A21732D25ADE1D10084EBAE /* UniPluginJPush.framework in Frameworks */,
@@ -1128,6 +1131,7 @@
 		8EED629A198A1D13000A4449 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2AC5D66425B822E800EA873C /* PushKit.framework */,
 				2A21736225AEA0800084EBAE /* jpush-ios-3.4.0.a */,
 				2A21736025AEA06B0084EBAE /* jcore-ios-2.4.0.a */,
 				2A21734525ADE4F70084EBAE /* StoreKit.framework */,

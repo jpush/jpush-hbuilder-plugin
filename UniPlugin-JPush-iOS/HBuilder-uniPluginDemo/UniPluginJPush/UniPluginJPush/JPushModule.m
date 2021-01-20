@@ -424,6 +424,7 @@ UNI_EXPORT_METHOD(@selector(addLocalNotification:))
 
 
 UNI_EXPORT_METHOD(@selector(initVoipService))
+UNI_EXPORT_METHOD(@selector(addVoipPushIncomingListener:))
 
 #pragma - voip
 // 注册voip服务
@@ -432,6 +433,10 @@ UNI_EXPORT_METHOD(@selector(initVoipService))
     [[JPushStore shared] initVoipService];
 }
 
+- (void)addVoipPushIncomingListener:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"addVoipPushIncomingListener" log:nil];
+    [JPushStore shared].voipCallback = callback;
+}
 
 #pragma - tools
 - (NSDictionary *)convertResultWithCode:(NSInteger)code content:(NSDictionary *)dicInfo {
