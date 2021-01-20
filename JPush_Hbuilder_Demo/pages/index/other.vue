@@ -45,6 +45,7 @@
 			setMobileNumber() {
 				let mobileNumber = this.inputPhoneNumber
 				jpushModule.setMobileNumber(mobileNumber,result=>{
+					let code = result.code
 					this.showToast(result)
 				})
 			},

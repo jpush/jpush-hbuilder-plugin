@@ -94,16 +94,18 @@
     if (error) {
         result = @{
             @"code": @(error.code),
-            @"msg": error.description
+            @"msg": error.description,
+            @"type": @"enter"
         };
     }else {
         result = @{
             @"code": @(0),
             @"geofenceId":geofenceId,
             @"userInfo":userInfo,
+            @"type": @"enter"
         };
     }
-    [JPushStore shared].didEnterRegionCallback(result, YES);
+    [JPushStore shared].geofenceCallback(result, YES);
 }
 
 - (void)jpushGeofenceIdentifer:(NSString *)geofenceId didExitRegion:(NSDictionary *)userInfo error:(NSError *)error {
@@ -111,16 +113,18 @@
     if (error) {
         result = @{
             @"code": @(error.code),
-            @"msg": error.description
+            @"msg": error.description,
+            @"type": @"exit"
         };
     }else {
         result = @{
             @"code": @(0),
             @"geofenceId":geofenceId,
             @"userInfo":userInfo,
+            @"type": @"exit"
         };
     }
-    [JPushStore shared].didExitRegionCallback(result, YES);
+    [JPushStore shared].geofenceCallback(result, YES);
 }
 
 
@@ -197,6 +201,33 @@
     return result;
 }
 
+
+- (void)initVoipService{
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    PKPushRegistry *voipRegistry = [[PKPushRegistry alloc] initWithQueue:mainQueue];
+    voipRegistry.delegate = self;
+    // Set the push type to VoIP
+    voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+}
+
+#pragma mark - PKPushRegistryDelegate
+//系统返回VOIP token,提交到极光服务器
+- (void)JPushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)pushCredentials forType:(PKPushType)type{
+  [JPUSHService registerVoipToken:pushCredentials.token];
+}
+
+- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type{
+  [JPUSHService handleVoipNotification:payload.dictionaryPayload];
+    
+}
+
+/**
+ * 接收到Voip推送信息，并向极光服务器上报（iOS 11.0 以后）
+ */
+- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type withCompletionHandler:(void(^)(void))completion{
+  [JPUSHService handleVoipNotification:payload.dictionaryPayload];
+  
+}
 
 
 @end

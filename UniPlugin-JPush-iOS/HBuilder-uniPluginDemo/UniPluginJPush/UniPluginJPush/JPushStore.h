@@ -8,13 +8,15 @@
 #import <Foundation/Foundation.h>
 #import "DCUniModule.h"
 #import "JPUSHService.h"
+#import <PushKit/PushKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JPushStore : NSObject <JPUSHRegisterDelegate, JPUSHGeofenceDelegate,JPushInMessageDelegate>
+@interface JPushStore : NSObject <JPUSHRegisterDelegate, JPUSHGeofenceDelegate,JPushInMessageDelegate,PKPushRegistryDelegate>
 
 + (instancetype)shared;
 
+@property (nonatomic, copy) UniModuleKeepAliveCallback connectEventCallback; // 连接状态
 
 @property (nonatomic, copy) UniModuleKeepAliveCallback pushNotiCallback; // apns推送消息
 @property (nonatomic, copy) UniModuleKeepAliveCallback receiveCustomNotiCallback; //自定义消息
@@ -25,9 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (nonatomic, copy) UniModuleKeepAliveCallback receiveLocalNotiCallback;
 //@property (nonatomic, copy) UniModuleKeepAliveCallback openLocalNotiCallback;
 
-@property (nonatomic, copy) UniModuleKeepAliveCallback didEnterRegionCallback;
-@property (nonatomic, copy) UniModuleKeepAliveCallback didExitRegionCallback;
+@property (nonatomic, copy) UniModuleKeepAliveCallback geofenceCallback;
 
+- (void)initVoipService;
 
 @end
 

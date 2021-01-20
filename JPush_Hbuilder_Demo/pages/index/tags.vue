@@ -42,6 +42,9 @@
 					'tags':tags,
 					'sequence': seq++
 				},result=>{
+					let code = result.code
+					let sequence = result.sequence
+					let tags = result.tags
 					this.showToast(result)
 				})
 			},
@@ -58,7 +61,7 @@
 			
 			deleteTag() {
 				var tags = this.inputTags.split(',')
-				jpushModule.deleteTag({
+				jpushModule.deleteTags({
 					'tags':tags,
 					'sequence': seq++
 				},result=>{
@@ -67,7 +70,7 @@
 			},
 			
 			deleteTags() {
-				jpushModule.deleteTags({
+				jpushModule.cleanTags({
 					'sequence': seq++
 				},result=>{
 					this.showToast(result)
@@ -85,7 +88,7 @@
 			},
 			
 			queryTags() {
-				jpushModule.queryTags({
+				jpushModule.getAllTags({
 					'sequence': seq++
 				},result=>{
 					this.showToast(result)

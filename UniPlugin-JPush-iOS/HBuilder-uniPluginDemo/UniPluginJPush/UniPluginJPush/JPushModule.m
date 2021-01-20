@@ -8,8 +8,10 @@
 #import "JPushModule.h"
 #import "JPUSHService.h"
 #import "JPushStore.h"
+#import <PushKit/PushKit.h>
 // 如果需要使用 idfa 功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
+
 
 #define weakObj(obj) __weak typeof(obj) weak##obj = obj;
 
@@ -60,7 +62,8 @@ UNI_EXPORT_METHOD(@selector(getRegistrationID:))
     [self logger:@"setMobileNumber with mobileNumber:" log:mobileNumber];
     weakObj(self)
     [JPUSHService setMobileNumber:mobileNumber completion:^(NSError *error) {
-        NSDictionary *result = [weakself convertResultWithCode:(error?1:0) content:nil];
+        
+        NSDictionary *result = [weakself convertResultWithCode:(error?error.code:0) content:nil];
         callback(result, NO);
     }];
 }
@@ -89,13 +92,13 @@ UNI_EXPORT_METHOD(@selector(getRegistrationID:))
         NSDictionary *content = @{
             Param_RegisterID: registrationID ? registrationID : @"",
         };
-        NSDictionary *result = [self convertResultWithCode:resCode content:content];
-        callback(result, NO);
+        callback(content, NO);
     }];
 }
 
 
 UNI_EXPORT_METHOD(@selector(setLocation:))
+UNI_EXPORT_METHOD(@selector(setLocationEanable:))
 
 #pragma - 地理位置上报
 - (void)setLocation:(NSDictionary *)params {
@@ -125,7 +128,6 @@ UNI_EXPORT_METHOD(@selector(openSettingsForNotification:))
     [self logger:@"requestNotificationAuthorization" log:nil];
     [JPUSHService requestNotificationAuthorization:^(JPAuthorizationStatus status) {
         NSDictionary *result = @{@"status":@(status)};
-//        [self convertResultWithCode:0 content:@{@"status":@(status)}];
         callback(result, NO);
     }];
 }
@@ -138,6 +140,17 @@ UNI_EXPORT_METHOD(@selector(openSettingsForNotification:))
         callback(result, NO);
     }];
 }
+
+
+UNI_EXPORT_METHOD(@selector(addConnectEventListener:))
+
+#pragma - 连接状态监听
+- (void)addConnectEventListener:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"addConnectEventListener" log:nil];
+    [JPushStore shared].connectEventCallback = callback;
+}
+
+
 
 UNI_EXPORT_METHOD(@selector(addNotificationListener:))
 UNI_EXPORT_METHOD(@selector(addCustomMessageListener:))
@@ -180,10 +193,10 @@ UNI_EXPORT_METHOD(@selector(addInMessageListener:))
 
 UNI_EXPORT_METHOD(@selector(addTags:callback:))
 UNI_EXPORT_METHOD(@selector(updateTags:callback:))
-UNI_EXPORT_METHOD(@selector(deleteTag:callback:))
 UNI_EXPORT_METHOD(@selector(deleteTags:callback:))
+UNI_EXPORT_METHOD(@selector(cleanTags:callback:))
 UNI_EXPORT_METHOD(@selector(queryTag:callback:))
-UNI_EXPORT_METHOD(@selector(queryTags:callback:))
+UNI_EXPORT_METHOD(@selector(getAllTags:callback:))
 UNI_EXPORT_METHOD(@selector(setAlias:callback:))
 UNI_EXPORT_METHOD(@selector(deleteAlias:callback:))
 UNI_EXPORT_METHOD(@selector(queryAlias:callback:))
@@ -223,7 +236,7 @@ UNI_EXPORT_METHOD(@selector(queryAlias:callback:))
 }
 
 // 删除所有tags
-- (void)deleteTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
+- (void)cleanTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
     [self logger:@"deleteTags with params:" log:params];
     NSInteger seq = [params[Param_Sequence] intValue];
     [JPUSHService cleanTags:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
@@ -238,7 +251,7 @@ UNI_EXPORT_METHOD(@selector(queryAlias:callback:))
 }
 
 // 删除指定的tags
-- (void)deleteTag:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
+- (void)deleteTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
     [self logger:@"deleteTag with params:" log:params];
     NSSet *tags = [NSSet setWithArray:params[Param_Tags]];
     NSInteger seq = [params[Param_Sequence] intValue];
@@ -254,7 +267,7 @@ UNI_EXPORT_METHOD(@selector(queryAlias:callback:))
 }
 
 // 查询tags
-- (void)queryTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
+- (void)getAllTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
     [self logger:@"queryTags with params:" log:params];
     NSInteger seq = [params[Param_Sequence] intValue];
     [JPUSHService getAllTags:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
@@ -331,8 +344,7 @@ UNI_EXPORT_METHOD(@selector(queryAlias:callback:))
 
 UNI_EXPORT_METHOD(@selector(setMaxGeofenceNumber:))
 UNI_EXPORT_METHOD(@selector(deleteGeofence:))
-UNI_EXPORT_METHOD(@selector(addDidEnterRegionListener:))
-UNI_EXPORT_METHOD(@selector(addDidExitRegionListener:))
+UNI_EXPORT_METHOD(@selector(addGeofenceListener:))
 
 
 #pragma - 地理围栏
@@ -347,15 +359,11 @@ UNI_EXPORT_METHOD(@selector(addDidExitRegionListener:))
 }
 
 #pragma - 地理围栏监听
-- (void)addDidEnterRegionListener:(UniModuleKeepAliveCallback)callback {
+- (void)addGeofenceListener:(UniModuleKeepAliveCallback)callback {
     [self logger:@"addDidEnterRegionListener" log:nil];
-    [JPushStore shared].didEnterRegionCallback = callback;
+    [JPushStore shared].geofenceCallback = callback;
 }
 
-- (void)addDidExitRegionListener:(UniModuleKeepAliveCallback)callback {
-    [self logger:@"addDidExitRegionListener" log:nil];
-    [JPushStore shared].didExitRegionCallback = callback;
-}
 
 
 UNI_EXPORT_METHOD(@selector(addLocalNotification:))
@@ -414,6 +422,15 @@ UNI_EXPORT_METHOD(@selector(addLocalNotification:))
     [JPUSHService removeNotification:nil];
 }
 
+
+UNI_EXPORT_METHOD(@selector(initVoipService))
+
+#pragma - voip
+// 注册voip服务
+- (void)initVoipService {
+    [self logger:@"initVoipService" log:nil];
+    [[JPushStore shared] initVoipService];
+}
 
 
 #pragma - tools

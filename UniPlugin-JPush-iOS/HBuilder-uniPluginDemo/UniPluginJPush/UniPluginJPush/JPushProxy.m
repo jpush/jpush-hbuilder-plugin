@@ -9,7 +9,7 @@
 #import "JPushStore.h"
 #import "JPUSHService.h"
 
-NSString *const infoConfig_JPush               = @"JPush";
+NSString *const infoConfig_JPush               = @"JVerification";
 NSString *const infoConfig_JPush_APP_KEY       = @"APP_KEY";
 NSString *const infoConfig_JPush_CHANNEL       = @"CHANNEL";
 NSString *const infoConfig_JPush_ISPRODUCTION  = @"ISPRODUCTION";
@@ -29,7 +29,14 @@ NSString *const infoConfig_JPush_ADVERTISINGID = @"ADVERTISINGID";
     [self setupWithOption:launchOptions];
     // 监听透传消息
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidReceiveMessage:)
+                          name:kJPFNetworkDidReceiveMessageNotification
+                        object:nil];
+    
+    // 监听连接状态
+    [self addConnectEventObserver];
+    
     // 地理围栏功能
     [JPUSHService registerLbsGeofenceDelegate:[JPushStore shared] withLaunchOptions:launchOptions];
     //应用内消息代理
@@ -126,7 +133,6 @@ NSString *const infoConfig_JPush_ADVERTISINGID = @"ADVERTISINGID";
 
 }
 
-
 - (void)registerForRemoteNotificationConfig:(NSDictionary *)params {
     
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -140,6 +146,71 @@ NSString *const infoConfig_JPush_ADVERTISINGID = @"ADVERTISINGID";
     }
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:[JPushStore shared]];
     
+}
+
+
+- (void)addConnectEventObserver {
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkIsConnecting:)
+                          name:kJPFNetworkIsConnectingNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidSetup:)
+                          name:kJPFNetworkDidSetupNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidClose:)
+                          name:kJPFNetworkDidCloseNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidRegister:)
+                          name:kJPFNetworkDidRegisterNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidRegisterFailed:)
+                          name:kJPFNetworkFailedRegisterNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidLogin:)
+                          name:kJPFNetworkDidLoginNotification
+                        object:nil];
+}
+
+- (void)networkIsConnecting:(NSNotification *)notification {
+    if ([JPushStore shared].connectEventCallback) {
+        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(0)}, YES);
+    }
+}
+
+- (void)networkDidSetup:(NSNotification *)notification {
+    if ([JPushStore shared].connectEventCallback) {
+        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(1)}, YES);
+    }
+}
+
+- (void)networkDidClose:(NSNotification *)notification {
+    if ([JPushStore shared].connectEventCallback) {
+        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(2)}, YES);
+    }
+}
+
+- (void)networkDidRegister:(NSNotification *)notification {
+    if ([JPushStore shared].connectEventCallback) {
+        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(3)}, YES);
+    }
+}
+
+- (void)networkDidRegisterFailed:(NSNotification *)notification {
+    if ([JPushStore shared].connectEventCallback) {
+        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(4)}, YES);
+    }
+}
+
+- (void)networkDidLogin:(NSNotification *)notification {
+    if ([JPushStore shared].connectEventCallback) {
+        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(5)}, YES);
+    }
 }
 
 

@@ -64,12 +64,9 @@
 			
 			getRegistrationID() {
 				jpushModule.getRegistrationID(result=>{
-					console.log(this.registrationID)
-					let code = result.code
-					let registerid = result.registerID
-					console.log(registerid)
-					console.log(code)
-					this.registrationID = registerid
+					let registerID = result.registerID
+					console.log(registerID)
+					this.registrationID = registerID
 				})	
 			},
 			
