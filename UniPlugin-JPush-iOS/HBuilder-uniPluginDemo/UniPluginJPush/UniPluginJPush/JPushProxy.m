@@ -18,9 +18,15 @@
 - (BOOL)application:(UIApplication *_Nullable)application didFinishLaunchingWithOptions:(NSDictionary *_Nullable)launchOptions {
     NSLog(@"UniPluginProtocol Func: %@,%s",self,__func__);
     
-    // 初始化
-    [[JPushStore shared] initJPushService:launchOptions];
+    [JPushStore shared].launchOptions = launchOptions;
     
+    // 初始化
+    NSString *path = [[NSBundle mainBundle]pathForResource:@"Info" ofType:@"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSString *defaultInitJpush = dict[infoConfig_JPush][infoConfig_JPush_DEFAULTINITJPUSH];
+    if ([defaultInitJpush isEqualToString:@"true"]) {
+        [[JPushStore shared] initJPushService:launchOptions];
+    }
     return YES;
 }
 

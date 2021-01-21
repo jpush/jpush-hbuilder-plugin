@@ -10,6 +10,12 @@
 #import "JPUSHService.h"
 #import <PushKit/PushKit.h>
 
+NSString *const infoConfig_JPush               = @"JVerification";
+NSString *const infoConfig_JPush_APP_KEY       = @"APP_KEY";
+NSString *const infoConfig_JPush_CHANNEL       = @"CHANNEL";
+NSString *const infoConfig_JPush_ISPRODUCTION  = @"ISPRODUCTION";
+NSString *const infoConfig_JPush_ADVERTISINGID = @"ADVERTISINGID";
+NSString *const infoConfig_JPush_DEFAULTINITJPUSH = @"DEFAULTINITJPUSH";
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,10 +35,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) UniModuleKeepAliveCallback voipCallback;
 
 
+@property (nonatomic, strong) NSDictionary *launchOptions;
+
 + (instancetype)shared;
 
 // 初始化jpush
 - (void)initJPushService:(NSDictionary *)launchOptions;
+
+- (void)addConnectEventObserver;
 
 - (void)initVoipService;
 

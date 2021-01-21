@@ -5,10 +5,15 @@
 		onLaunch: function() {
 			console.log('App Launch')
 			
-			
+			jpushModule.initJPushService()
 			jpushModule.addConnectEventListener(result=>{
 				let connectEvent = result.connectEvent
 				console.log(connectEvent)
+				// uni.showToast({
+				// 	icon: 'none',
+				// 	title: JSON.stringify(result),
+				// 	duration: 3000
+				// })
 			})
 			
 			jpushModule.requestNotificationAuthorization((result)=>{

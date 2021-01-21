@@ -116,13 +116,6 @@ UNI_EXPORT_METHOD(@selector(setLocationEanable:))
 }
 
 
-#pragma mark - 初始化
-- (void)initJPushService {
-    [[JPushStore shared] initJPushService:[JPushStore shared]]
-}
-
-
-
 UNI_EXPORT_METHOD(@selector(requestNotificationAuthorization:))
 UNI_EXPORT_METHOD(@selector(openSettingsForNotification:))
 
@@ -146,11 +139,20 @@ UNI_EXPORT_METHOD(@selector(openSettingsForNotification:))
 }
 
 
+
+UNI_EXPORT_METHOD(@selector(initJPushService))
 UNI_EXPORT_METHOD(@selector(addConnectEventListener:))
+
+#pragma  初始化
+- (void)initJPushService {
+    [[JPushStore shared] initJPushService:[JPushStore shared].launchOptions];
+}
 
 #pragma - 连接状态监听
 - (void)addConnectEventListener:(UniModuleKeepAliveCallback)callback {
     [self logger:@"addConnectEventListener" log:nil];
+    // 监听连接状态
+    [[JPushStore shared] addConnectEventObserver];
     [JPushStore shared].connectEventCallback = callback;
 }
 

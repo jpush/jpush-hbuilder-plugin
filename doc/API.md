@@ -31,6 +31,17 @@ jpushModule.getRegistrationID(result=>{
 				})	
 ```
 
+## 初始化函数
+
+### API - initJPushService()
+如果在mainfest.json里 将JPUSH_DEFAULTINITJPUSH_IOS值配置为"true"，就不需要调用该初始化方法。
+
+#### 示例
+```javascript
+jpushModule.initJPushService()
+```
+
+
 ## 连接状态回调
 
 ### API - addConnectEventListener(CALLBACK)

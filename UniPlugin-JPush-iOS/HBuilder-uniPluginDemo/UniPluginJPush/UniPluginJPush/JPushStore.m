@@ -8,12 +8,6 @@
 #import "JPushStore.h"
 #import <UserNotifications/UserNotifications.h>
 
-NSString *const infoConfig_JPush               = @"JVerification";
-NSString *const infoConfig_JPush_APP_KEY       = @"APP_KEY";
-NSString *const infoConfig_JPush_CHANNEL       = @"CHANNEL";
-NSString *const infoConfig_JPush_ISPRODUCTION  = @"ISPRODUCTION";
-NSString *const infoConfig_JPush_ADVERTISINGID = @"ADVERTISINGID";
-
 @implementation JPushStore
 
 + (instancetype)shared {
@@ -32,8 +26,6 @@ NSString *const infoConfig_JPush_ADVERTISINGID = @"ADVERTISINGID";
     [self setupWithOption:launchOptions];
     // 监听透传消息
     [self addCustomMessageObserver];
-    // 监听连接状态
-    [self addConnectEventObserver];
     // 地理围栏功能
     [JPUSHService registerLbsGeofenceDelegate:[JPushStore shared] withLaunchOptions:launchOptions];
     //应用内消息代理
