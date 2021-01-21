@@ -25,10 +25,6 @@
 #define CODE             @"code"
 
 
-NSString *const infoConfig_JPush             = @"JPush";
-NSString *const infoConfig_JPush_APP_KEY     = @"APP_KEY";
-NSString *const infoConfig_JPush_CHANNEL     = @"CHANNEL";
-
 @interface JPushModule () 
 
 @end
@@ -118,6 +114,14 @@ UNI_EXPORT_METHOD(@selector(setLocationEanable:))
     [self logger:@"setLocationEanable" log:isEanble?@"true":@"false"];
     [JPUSHService setLocationEanable:isEanble];
 }
+
+
+#pragma mark - 初始化
+- (void)initJPushService {
+    [[JPushStore shared] initJPushService:[JPushStore shared]]
+}
+
+
 
 UNI_EXPORT_METHOD(@selector(requestNotificationAuthorization:))
 UNI_EXPORT_METHOD(@selector(openSettingsForNotification:))

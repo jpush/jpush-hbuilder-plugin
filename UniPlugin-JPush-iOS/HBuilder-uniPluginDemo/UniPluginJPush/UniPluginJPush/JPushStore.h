@@ -10,14 +10,12 @@
 #import "JPUSHService.h"
 #import <PushKit/PushKit.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JPushStore : NSObject <JPUSHRegisterDelegate, JPUSHGeofenceDelegate,JPushInMessageDelegate,PKPushRegistryDelegate>
 
-+ (instancetype)shared;
-
 @property (nonatomic, copy) UniModuleKeepAliveCallback connectEventCallback; // 连接状态
-
 @property (nonatomic, copy) UniModuleKeepAliveCallback pushNotiCallback; // apns推送消息
 @property (nonatomic, copy) UniModuleKeepAliveCallback receiveCustomNotiCallback; //自定义消息
 
@@ -28,10 +26,17 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (nonatomic, copy) UniModuleKeepAliveCallback openLocalNotiCallback;
 
 @property (nonatomic, copy) UniModuleKeepAliveCallback geofenceCallback;
-
 @property (nonatomic, copy) UniModuleKeepAliveCallback voipCallback;
 
+
++ (instancetype)shared;
+
+// 初始化jpush
+- (void)initJPushService:(NSDictionary *)launchOptions;
+
 - (void)initVoipService;
+
+- (void)handeleApnsCallback:(NSDictionary *)userInfo type:(NSString *)type;
 
 @end
 
