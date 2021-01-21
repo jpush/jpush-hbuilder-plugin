@@ -4,29 +4,13 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Headers/JPushModule.h</key>
-		<data>
-		hAItQbWWuw4mOOySo6FeWH3MYsA=
-		</data>
 		<key>Info.plist</key>
 		<data>
-		tTtwKhfLV4SQFQ7U9I1XZkFn4Uc=
+		iiDaCXrgXjUTZL/huUAmNMSpcog=
 		</data>
 	</dict>
 	<key>files2</key>
-	<dict>
-		<key>Headers/JPushModule.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			hAItQbWWuw4mOOySo6FeWH3MYsA=
-			</data>
-			<key>hash2</key>
-			<data>
-			LHaZ7SfsmEBYhVCf3bEBp8fHG5II1obOplOf4kj6EZQ=
-			</data>
-		</dict>
-	</dict>
+	<dict/>
 	<key>rules</key>
 	<dict>
 		<key>^.*</key>

@@ -107,6 +107,20 @@
                         }
                     }
                 }
+            },
+            "JG-JCore" : {
+                "__plugin_info__" : {
+                    "name" : "JG-JCore",
+                    "description" : "极光推送JCore插件",
+                    "platforms" : "Android,iOS",
+                    "url" : "",
+                    "android_package_name" : "",
+                    "ios_bundle_id" : "",
+                    "isCloud" : false,
+                    "bought" : -1,
+                    "pid" : "",
+                    "parameters" : {}
+                }
             }
         }
     },

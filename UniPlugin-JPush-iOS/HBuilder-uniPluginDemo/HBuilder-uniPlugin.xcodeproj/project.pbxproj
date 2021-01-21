@@ -83,9 +83,10 @@
 		2A21734225ADE4E10084EBAE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2447371A1D0830BB00D0F08F /* WebKit.framework */; };
 		2A21734425ADE4ED0084EBAE /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21734325ADE4ED0084EBAE /* AppTrackingTransparency.framework */; };
 		2A21734625ADE4F70084EBAE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21734525ADE4F70084EBAE /* StoreKit.framework */; };
-		2A21736125AEA06B0084EBAE /* jcore-ios-2.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21736025AEA06B0084EBAE /* jcore-ios-2.4.0.a */; };
 		2A21736325AEA0800084EBAE /* jpush-ios-3.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21736225AEA0800084EBAE /* jpush-ios-3.4.0.a */; };
 		2AC5D66525B822E800EA873C /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC5D66425B822E800EA873C /* PushKit.framework */; };
+		2AC5D67E25B90B3A00EA873C /* jcore-ios-2.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC5D67D25B90B3A00EA873C /* jcore-ios-2.4.0.a */; };
+		2AC5D68825B90F5900EA873C /* UniPluginJCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC5D68425B90EE300EA873C /* UniPluginJCore.framework */; };
 		2F0BA3F9215B48A700F67004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA3F8215B48A700F67004 /* Images.xcassets */; };
 		2F0BA410215B784100F67004 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA40F215B784000F67004 /* Contacts.framework */; };
 		2F0BA412215B814100F67004 /* liblibVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA411215B814000F67004 /* liblibVideo.a */; };
@@ -228,6 +229,20 @@
 			remoteGlobalIDString = 2A21731625ADE1380084EBAE;
 			remoteInfo = UniPluginJPush;
 		};
+		2AC5D68325B90EE300EA873C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2AC5D67F25B90EE300EA873C /* UniPluginJCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2AC5D67025B83B9A00EA873C;
+			remoteInfo = UniPluginJCore;
+		};
+		2AC5D68625B90F3D00EA873C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2AC5D67F25B90EE300EA873C /* UniPluginJCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2AC5D66F25B83B9A00EA873C;
+			remoteInfo = UniPluginJCore;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -316,6 +331,8 @@
 		2A21736225AEA0800084EBAE /* jpush-ios-3.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jpush-ios-3.4.0.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JPush/ios/jpush-ios-3.4.0.a"; sourceTree = "<group>"; };
 		2AC5D66225B6807700EA873C /* UniPluginDemo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = UniPluginDemo.entitlements; sourceTree = "<group>"; };
 		2AC5D66425B822E800EA873C /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
+		2AC5D67D25B90B3A00EA873C /* jcore-ios-2.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jcore-ios-2.4.0.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JCore/ios/jcore-ios-2.4.0.a"; sourceTree = "<group>"; };
+		2AC5D67F25B90EE300EA873C /* UniPluginJCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniPluginJCore.xcodeproj; path = UniPluginJCore/UniPluginJCore.xcodeproj; sourceTree = "<group>"; };
 		2F0BA3F8215B48A700F67004 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../HBuilder/Images.xcassets; sourceTree = "<group>"; };
 		2F0BA3FB215B4A4100F67004 /* DCADManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCADManager.h; sourceTree = "<group>"; };
 		2F0BA3FD215B4A4100F67004 /* PDRCommonString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRCommonString.h; sourceTree = "<group>"; };
@@ -669,9 +686,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AC5D68825B90F5900EA873C /* UniPluginJCore.framework in Frameworks */,
+				2AC5D67E25B90B3A00EA873C /* jcore-ios-2.4.0.a in Frameworks */,
 				2AC5D66525B822E800EA873C /* PushKit.framework in Frameworks */,
 				2A21736325AEA0800084EBAE /* jpush-ios-3.4.0.a in Frameworks */,
-				2A21736125AEA06B0084EBAE /* jcore-ios-2.4.0.a in Frameworks */,
 				2A21732D25ADE1D10084EBAE /* UniPluginJPush.framework in Frameworks */,
 				4FE3666A254FE5FC00DCD173 /* libuchardet.a in Frameworks */,
 				67A9340323A8BAF6004A4DF4 /* libSDWebImage.a in Frameworks */,
@@ -826,6 +844,14 @@
 			isa = PBXGroup;
 			children = (
 				2A21732925ADE1A50084EBAE /* UniPluginJPush.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2AC5D68025B90EE300EA873C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2AC5D68425B90EE300EA873C /* UniPluginJCore.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1113,6 +1139,7 @@
 			isa = PBXGroup;
 			children = (
 				2AC5D66225B6807700EA873C /* UniPluginDemo.entitlements */,
+				2AC5D67F25B90EE300EA873C /* UniPluginJCore.xcodeproj */,
 				2A21732425ADE1A50084EBAE /* UniPluginJPush.xcodeproj */,
 				8EED62A1198A1D13000A4449 /* HBuilder-Hello */,
 				8EED629A198A1D13000A4449 /* Frameworks */,
@@ -1131,6 +1158,7 @@
 		8EED629A198A1D13000A4449 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2AC5D67D25B90B3A00EA873C /* jcore-ios-2.4.0.a */,
 				2AC5D66425B822E800EA873C /* PushKit.framework */,
 				2A21736225AEA0800084EBAE /* jpush-ios-3.4.0.a */,
 				2A21736025AEA06B0084EBAE /* jcore-ios-2.4.0.a */,
@@ -1445,6 +1473,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				2AC5D68725B90F3D00EA873C /* PBXTargetDependency */,
 				2A21732C25ADE1BC0084EBAE /* PBXTargetDependency */,
 			);
 			name = HBuilder;
@@ -1482,6 +1511,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 2AC5D68025B90EE300EA873C /* Products */;
+					ProjectRef = 2AC5D67F25B90EE300EA873C /* UniPluginJCore.xcodeproj */;
+				},
+				{
 					ProductGroup = 2A21732525ADE1A50084EBAE /* Products */;
 					ProjectRef = 2A21732425ADE1A50084EBAE /* UniPluginJPush.xcodeproj */;
 				},
@@ -1499,6 +1532,13 @@
 			fileType = wrapper.framework;
 			path = UniPluginJPush.framework;
 			remoteRef = 2A21732825ADE1A50084EBAE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2AC5D68425B90EE300EA873C /* UniPluginJCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = UniPluginJCore.framework;
+			remoteRef = 2AC5D68325B90EE300EA873C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1585,6 +1625,11 @@
 			isa = PBXTargetDependency;
 			name = UniPluginJPush;
 			targetProxy = 2A21732B25ADE1BC0084EBAE /* PBXContainerItemProxy */;
+		};
+		2AC5D68725B90F3D00EA873C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UniPluginJCore;
+			targetProxy = 2AC5D68625B90F3D00EA873C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

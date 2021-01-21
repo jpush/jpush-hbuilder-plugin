@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2A21731625ADE1380084EBAE"
-               BuildableName = "UniPluginJPush.framework"
-               BlueprintName = "UniPluginJPush"
-               ReferencedContainer = "container:UniPluginJPush.xcodeproj">
+               BlueprintIdentifier = "2AC5D66F25B83B9A00EA873C"
+               BuildableName = "UniPluginJCore.framework"
+               BlueprintName = "UniPluginJCore"
+               ReferencedContainer = "container:UniPluginJCore.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -50,10 +50,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2A21731625ADE1380084EBAE"
-            BuildableName = "UniPluginJPush.framework"
-            BlueprintName = "UniPluginJPush"
-            ReferencedContainer = "container:UniPluginJPush.xcodeproj">
+            BlueprintIdentifier = "2AC5D66F25B83B9A00EA873C"
+            BuildableName = "UniPluginJCore.framework"
+            BlueprintName = "UniPluginJCore"
+            ReferencedContainer = "container:UniPluginJCore.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
