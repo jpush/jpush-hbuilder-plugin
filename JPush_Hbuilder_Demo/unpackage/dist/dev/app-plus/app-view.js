@@ -231,18 +231,7 @@ var render = function() {
         { staticStyle: { "margin-right": "50rpx" }, attrs: { _i: 3 } },
         [_vm._v("网络状态:")]
       ),
-      _c(
-        "v-uni-label",
-        {
-          attrs: { _i: 4 },
-          model: {
-            value: _vm._$g(4, "v-model"),
-            callback: function() {},
-            expression: "connectStatus"
-          }
-        },
-        [_vm._v("未链接")]
-      ),
+      _c("v-uni-label", { attrs: { _i: 4 } }, [_vm._v(_vm._$g(4, "t0-0"))]),
       _c("br", { attrs: { _i: 5 } }),
       _c(
         "v-uni-label",
@@ -1215,7 +1204,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 26);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*每个页面公共css */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*每个页面公共css */\n", ""]);
 // Exports
 module.exports = exports;
 

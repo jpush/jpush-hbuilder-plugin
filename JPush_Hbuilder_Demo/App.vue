@@ -5,16 +5,16 @@
 		onLaunch: function() {
 			console.log('App Launch')
 			
-			jpushModule.initJPushService()
-			jpushModule.addConnectEventListener(result=>{
-				let connectEvent = result.connectEvent
-				console.log(connectEvent)
-				// uni.showToast({
-				// 	icon: 'none',
-				// 	title: JSON.stringify(result),
-				// 	duration: 3000
-				// })
-			})
+			// 请求定位权限
+			let locationServicesEnabled = jpushModule.locationServicesEnabled()
+			let locationAuthorizationStatus = jpushModule.getLocationAuthorizationStatus()
+			console.log('locationAuthorizationStatus',locationAuthorizationStatus)	
+			if (locationServicesEnabled == true && locationAuthorizationStatus < 3) {
+				jpushModule.requestLocationAuthorization((result)=>{
+					console.log('定位权限',result.status)
+				})
+			}
+			
 			
 			jpushModule.requestNotificationAuthorization((result)=>{
 				let status = result.status
@@ -27,8 +27,11 @@
 				}
 			})
 			
+			
+			jpushModule.initJPushService()
 			jpushModule.addConnectEventListener(result=>{
 				let connectEvent = result.connectEvent
+				uni.$emit('connectStatusChange',connectEvent)
 			})
 			
 			jpushModule.addNotificationListener(result=>{
@@ -45,7 +48,6 @@
 				})
 			})
 			
-			jpushModule.setIsAllowedInMessagePop(true)
 			jpushModule.addCustomMessageListener(result=>{
 				let type = result.type
 				let messageType = result.messageType
@@ -69,7 +71,18 @@
 				})
 			})
 			
+			jpushModule.setIsAllowedInMessagePop(true)
+			jpushModule.pullInMessage(result=>{
+				let code = result.code
+				console.log(code)
+			})
+			
 			jpushModule.addInMessageListener(result=>{
+				let eventType = result.eventType
+				let messageType = result.messageType
+				let content = result.content
+				console.log('inMessageListener',eventType,messageType,content)
+				
 				uni.showToast({
 					icon: 'none',
 					title: JSON.stringify(result),

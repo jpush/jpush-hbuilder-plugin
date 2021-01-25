@@ -7,6 +7,13 @@
 
 #import "JPushStore.h"
 #import <UserNotifications/UserNotifications.h>
+#import <CoreLocation/CoreLocation.h>
+
+@interface JPushStore () <CLLocationManagerDelegate>
+
+@property (nonatomic, strong) CLLocationManager *currentManager;
+
+@end
 
 @implementation JPushStore
 
@@ -15,6 +22,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         store = [[JPushStore alloc] init];
+        store.allowedInMessagePop = YES;
     });
     return store;
 }
@@ -22,7 +30,7 @@
 // jpush初始化
 - (void)initJPushService:(NSDictionary *)launchOptions {
     
-    [self registerForRemoteNotificationConfig:nil];
+    [self registerForRemoteNotificationConfig];
     [self setupWithOption:launchOptions];
     // 监听透传消息
     [self addCustomMessageObserver];
@@ -40,9 +48,9 @@
     NSString *path = [[NSBundle mainBundle]pathForResource:@"Info" ofType:@"plist"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
     // appkey
-    NSString *appkey = dict[infoConfig_JPush][infoConfig_JPush_APP_KEY];
+    NSString *appkey = dict[infoConfig_JCore][infoConfig_JCore_APP_KEY];
     // channel
-    NSString *channel = dict[infoConfig_JPush][infoConfig_JPush_CHANNEL];
+    NSString *channel = dict[infoConfig_JCore][infoConfig_JCore_CHANNEL];
     if (channel == nil ||channel.length == 0) {
         channel = @"developer-default";
     }
@@ -64,7 +72,7 @@
 
 }
 
-- (void)registerForRemoteNotificationConfig:(NSDictionary *)params {
+- (void)registerForRemoteNotificationConfig {
     
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
     if (@available(iOS 12.0, *)) {
@@ -81,6 +89,12 @@
 
 #pragma mark - 连接状态
 - (void)addConnectEventObserver {
+    
+    if ([JPushStore shared].connectEventCallback) {
+        // 已经观察过
+        return;
+    }
+    
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self
                       selector:@selector(networkIsConnecting:)
@@ -109,41 +123,34 @@
 }
 
 - (void)networkIsConnecting:(NSNotification *)notification {
-    if ([JPushStore shared].connectEventCallback) {
-        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(0)}, YES);
-    }
+    [self connectEventCallbackHandle:0];
 }
 
 - (void)networkDidSetup:(NSNotification *)notification {
-    if ([JPushStore shared].connectEventCallback) {
-        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(1)}, YES);
-    }
+    [self connectEventCallbackHandle:1];
 }
 
 - (void)networkDidClose:(NSNotification *)notification {
-    if ([JPushStore shared].connectEventCallback) {
-        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(2)}, YES);
-    }
+    [self connectEventCallbackHandle:2];
 }
 
 - (void)networkDidRegister:(NSNotification *)notification {
-    if ([JPushStore shared].connectEventCallback) {
-        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(3)}, YES);
-    }
+    [self connectEventCallbackHandle:3];
 }
 
 - (void)networkDidRegisterFailed:(NSNotification *)notification {
-    if ([JPushStore shared].connectEventCallback) {
-        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(4)}, YES);
-    }
+    [self connectEventCallbackHandle:4];
 }
 
 - (void)networkDidLogin:(NSNotification *)notification {
-    if ([JPushStore shared].connectEventCallback) {
-        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(5)}, YES);
-    }
+    [self connectEventCallbackHandle:5];
 }
 
+- (void)connectEventCallbackHandle:(int)connectEvent {
+    if ([JPushStore shared].connectEventCallback) {
+        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(connectEvent)}, YES);
+    }
+}
 
 #pragma mark - 透传消息
 - (void)addCustomMessageObserver {
@@ -181,12 +188,13 @@
         //远程推送
         [self handeleApnsCallback:userInfo type:@"notificationArrived"];
     }
-//    else {
-//        //本地通知
+    else {
+        //本地通知
 //        if ([JPushStore shared].receiveLocalNotiCallback) {
 //            [JPushStore shared].receiveLocalNotiCallback(result, YES);
 //        }
-//    }
+        NSLog(@"本地通知 %@",userInfo);
+    }
     completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert);
 }
 
@@ -196,11 +204,12 @@
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [self handeleApnsCallback:userInfo type:@"notificationOpened"];
     }
-//    else {
+    else {
 //        if ([JPushStore shared].openLocalNotiCallback) {
 //            [JPushStore shared].openLocalNotiCallback(result, YES);
 //        }
-//    }
+        NSLog(@"本地通知 %@",userInfo);
+    }
     completionHandler();
 }
 
@@ -233,7 +242,9 @@
             @"type": @"enter"
         };
     }
-    [JPushStore shared].geofenceCallback(result, YES);
+    if ([JPushStore shared].geofenceCallback) {
+        [JPushStore shared].geofenceCallback(result, YES);
+    }
 }
 
 - (void)jpushGeofenceIdentifer:(NSString *)geofenceId didExitRegion:(NSDictionary *)userInfo error:(NSError *)error {
@@ -252,7 +263,9 @@
             @"type": @"exit"
         };
     }
-    [JPushStore shared].geofenceCallback(result, YES);
+    if ([JPushStore shared].geofenceCallback) {
+        [JPushStore shared].geofenceCallback(result, YES);
+    }
 }
 
 
@@ -269,9 +282,7 @@
  *应用内消息已消失
 */
 - (void)jPushInMessageAlreadyDisappear {
-    NSDictionary *result = @{
-        @"type":@"disappear",
-    };
+    NSDictionary *result = [self convertInMessageResult:nil Content:nil type:@"disappear"];
     if (self.inMessageCallback) {
         self.inMessageCallback(result, YES);
     }
@@ -309,6 +320,14 @@
 }
 
 - (NSDictionary *)convertInMessageResult:(JPushInMessageContentType)messageType Content:(NSDictionary *)content type:(NSString *)type{
+    
+    if ([type isEqualToString:@"disappear"]) {
+        NSDictionary *result = @{
+            @"eventType":type,
+        };
+        return result;
+    }
+    
     NSString *inMeassageType = @"";
     switch (messageType) {
         case JPushAdContentType:
@@ -323,7 +342,7 @@
     
     NSDictionary *result = @{
         @"messageType":inMeassageType,
-        @"type":type?:@"",
+        @"eventType":type?:@"",
         @"content":content?:@{},
     };
     return result;
@@ -350,8 +369,8 @@
     NSDictionary *result = @{
         @"payload" : payload.dictionaryPayload ?:@{},
     };
-    if (self.pushNotiCallback) {
-        self.pushNotiCallback(result, YES);
+    if (self.voipCallback) {
+        self.voipCallback(result, YES);
     }
 }
 
@@ -363,8 +382,8 @@
     NSDictionary *result = @{
         @"payload" : payload.dictionaryPayload ?:@{},
     };
-    if (self.pushNotiCallback) {
-        self.pushNotiCallback(result, YES);
+    if (self.voipCallback) {
+        self.voipCallback(result, YES);
     }
 }
 
@@ -382,21 +401,65 @@
 - (NSDictionary *)convertApnsMessage:(NSDictionary *)userInfo type:(NSString *)type{
     NSMutableDictionary *extras = [NSMutableDictionary dictionary];
     for (NSString *key in userInfo.allKeys) {
-        if ([key isEqualToString:@"_j_business"] || [key isEqualToString:@"_j_msgid"] || [key isEqualToString:@"_j_uid"] || [key isEqualToString:@"aps"]) {
+        if ([key isEqualToString:@"_j_business"] || [key isEqualToString:@"_j_msgid"] || [key isEqualToString:@"_j_uid"] || [key isEqualToString:@"aps"] || [key isEqualToString:@"_j_geofence"] || [key isEqualToString:@"_j_extras"]) {
             continue;
         }
         [extras setValue:userInfo[key] forKey:key];
     }
+    
+    NSString *title = userInfo[@"aps"][@"alert"][@"title"];
+    NSString *content = userInfo[@"aps"][@"alert"][@"body"];
+    NSString *badge = userInfo[@"aps"][@"badge"];
+    NSString *sound = userInfo[@"aps"][@"sound"];
+    if (userInfo[@"_j_extras"]) {
+        title = userInfo[@"_j_extras"][@"alert"][@"title"];
+        content = userInfo[@"_j_extras"][@"alert"][@"body"];
+        badge = userInfo[@"_j_extras"][@"badge"];
+        sound = userInfo[@"_j_extras"][@"sound"];
+    }
+    
     NSDictionary *result = @{
         @"messageID":userInfo[@"_j_msgid"]?:@"",
-        @"title":userInfo[@"aps"][@"alert"][@"title"]?:@"",
-        @"content":userInfo[@"aps"][@"alert"][@"body"]?:@"",
-        @"badge":userInfo[@"aps"][@"badge"]?[NSString stringWithFormat:@"%@",userInfo[@"aps"][@"badge"]]:@"1",
-        @"ring":userInfo[@"aps"][@"sound"],
+        @"title":title?:@"",
+        @"content":content?:@"",
+        @"badge":badge?:@"1",
+        @"ring":sound?:@"default",
         @"extras":[extras copy]?:@{},
         @"notificationEventType":type,
     };
     return result;
+}
+
+
+// 请求定位权限
+- (void)requestLocationAuthorization {
+    if (!_currentManager) {
+        _currentManager = [[CLLocationManager alloc] init];
+    }
+    _currentManager.delegate = self;
+    [_currentManager requestAlwaysAuthorization];
+    [_currentManager requestWhenInUseAuthorization];
+    
+}
+
+- (int)getLocationAuthorizationStatus {
+    int status = [CLLocationManager authorizationStatus];
+    return status;
+}
+
+- (BOOL)locationServicesEnabled {
+    // yes -- "您的设备的［设置］－［隐私］－［定位］已开启"
+    return [CLLocationManager locationServicesEnabled];
+}
+
+#pragma - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if ([JPushStore shared].locationAuthorizationCallBack) {
+        NSDictionary *result = @{
+            @"status": @(status)
+        };
+        [JPushStore shared].locationAuthorizationCallBack(result, YES);
+    }
 }
 
 #pragma mark -

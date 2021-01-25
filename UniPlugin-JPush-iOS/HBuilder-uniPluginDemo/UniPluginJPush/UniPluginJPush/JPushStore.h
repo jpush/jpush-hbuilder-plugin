@@ -10,12 +10,17 @@
 #import "JPUSHService.h"
 #import <PushKit/PushKit.h>
 
-NSString *const infoConfig_JPush               = @"JVerification";
-NSString *const infoConfig_JPush_APP_KEY       = @"APP_KEY";
-NSString *const infoConfig_JPush_CHANNEL       = @"CHANNEL";
-NSString *const infoConfig_JPush_ISPRODUCTION  = @"ISPRODUCTION";
-NSString *const infoConfig_JPush_ADVERTISINGID = @"ADVERTISINGID";
-NSString *const infoConfig_JPush_DEFAULTINITJPUSH = @"DEFAULTINITJPUSH";
+
+ 
+#define infoConfig_JCore                   @"JCore"
+#define infoConfig_JCore_APP_KEY           @"APP_KEY"
+#define infoConfig_JCore_CHANNEL           @"CHANNEL"
+
+#define infoConfig_JPush                   @"JPush"
+#define infoConfig_JPush_ISPRODUCTION      @"ISPRODUCTION"
+#define infoConfig_JPush_ADVERTISINGID     @"ADVERTISINGID"
+#define infoConfig_JPush_DEFAULTINITJPUSH  @"DEFAULTINITJPUSH"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -34,6 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) UniModuleKeepAliveCallback geofenceCallback;
 @property (nonatomic, copy) UniModuleKeepAliveCallback voipCallback;
 
+@property (nonatomic, copy) UniModuleKeepAliveCallback locationAuthorizationCallBack;
 
 @property (nonatomic, strong) NSDictionary *launchOptions;
 
@@ -47,6 +53,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)initVoipService;
 
 - (void)handeleApnsCallback:(NSDictionary *)userInfo type:(NSString *)type;
+
+//
+- (void)requestLocationAuthorization;
+
+- (int)getLocationAuthorizationStatus;
+
+- (BOOL)locationServicesEnabled;
 
 @end
 

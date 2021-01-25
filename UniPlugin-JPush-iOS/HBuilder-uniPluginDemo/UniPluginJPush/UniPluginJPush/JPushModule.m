@@ -29,7 +29,6 @@
 
 @end
 
-
 @implementation JPushModule
 
 BOOL debugMode = NO;
@@ -88,7 +87,8 @@ UNI_EXPORT_METHOD(@selector(getRegistrationID:))
         NSDictionary *content = @{
             Param_RegisterID: registrationID ? registrationID : @"",
         };
-        callback(content, NO);
+        NSDictionary *result = [self convertResultWithCode:resCode content:content];
+        callback(result, NO);
     }];
 }
 
@@ -139,12 +139,36 @@ UNI_EXPORT_METHOD(@selector(openSettingsForNotification:))
 }
 
 
+UNI_EXPORT_METHOD_SYNC(@selector(locationServicesEnabled))
+UNI_EXPORT_METHOD_SYNC(@selector(getLocationAuthorizationStatus))
+UNI_EXPORT_METHOD(@selector(requestLocationAuthorization:))
+
+// 请求位置权限
+- (BOOL)locationServicesEnabled {
+    [self logger:@"locationServicesEnabled" log:nil];
+    BOOL ret = [[JPushStore shared] locationServicesEnabled];
+    return ret;
+}
+
+- (void)requestLocationAuthorization:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"requestLocationAuthorization" log:nil];
+    [JPushStore shared].locationAuthorizationCallBack = callback;
+    [[JPushStore shared] requestLocationAuthorization];
+}
+
+- (int)getLocationAuthorizationStatus {
+    [self logger:@"getLocationAuthorizationStatus" log:nil];
+    int ret = [[JPushStore shared] getLocationAuthorizationStatus];
+    return ret;
+}
+
 
 UNI_EXPORT_METHOD(@selector(initJPushService))
 UNI_EXPORT_METHOD(@selector(addConnectEventListener:))
 
 #pragma  初始化
 - (void)initJPushService {
+    [self logger:@"initJPushService" log:nil];
     [[JPushStore shared] initJPushService:[JPushStore shared].launchOptions];
 }
 
@@ -176,6 +200,7 @@ UNI_EXPORT_METHOD(@selector(addCustomMessageListener:))
 
 
 UNI_EXPORT_METHOD(@selector(setIsAllowedInMessagePop:))
+UNI_EXPORT_METHOD(@selector(pullInMessage:))
 UNI_EXPORT_METHOD(@selector(addInMessageListener:))
 
 #pragma - 应用内消息
@@ -185,9 +210,16 @@ UNI_EXPORT_METHOD(@selector(addInMessageListener:))
 - (void)setIsAllowedInMessagePop:(BOOL)enable {
     [self logger:@"jPushInMessageIsAllowedInMessagePop" log:enable?@"true":@"false"];
     [JPushStore shared].allowedInMessagePop = enable;
-    if ([[JPushStore shared] respondsToSelector:@selector(jPushInMessageIsAllowedInMessagePop)]) {
-        [[JPushStore shared] jPushInMessageIsAllowedInMessagePop];
-    }
+}
+
+// 主动拉取应用内消息的接口
+- (void)pullInMessage:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"pullInMessage" log:nil];
+    weakObj(self)
+    [JPUSHService pullInMessageCompletion:^(NSInteger iResCode) {
+        NSDictionary *dic = [weakself convertResultWithCode:iResCode content:nil];
+        callback(dic, NO);
+    }];
 }
 
 // 监听应用内消息

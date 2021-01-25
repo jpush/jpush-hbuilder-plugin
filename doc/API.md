@@ -24,6 +24,15 @@ jpushModule.setLoggerEnable(true);
 调用此 API 来取得应用程序对应的 RegistrationID。
 只有当应用程序成功注册到 JPush 的服务器时才返回对应的值，否则返回空字符串
 
+#### 参数说明
+- CALLBACK
+
+|参数名称|参数类型|参数说明|
+|:-----:|:----:|:-----:|
+|code|number|状态码 0 - 成功， 1011 - iOS模拟器调用会报此错误|
+|registerID|string|返回的 registrationID|
+
+
 #### 示例
 ```javascript
 jpushModule.getRegistrationID(result=>{
@@ -140,9 +149,9 @@ jpushModule.setIsAllowedInMessagePop(true)
 
 |参数名称|参数类型|参数说明|
 |:-----:|:----:|:-----:|
-|type|string|show - 应用内消息展示 disappear - 应用内消息已消失 click - 应用内消息点击|
-|messageType|string|消息类型, type 不为 disappear时返回, inMessageAd - 广告类型的inMessage inMessageNoti - 通知类型的inMessage|
-|content|dictionary|应用内消息内容, type 不为 disappear 时返回|
+|eventType|string|show - 应用内消息展示 disappear - 应用内消息已消失 click - 应用内消息点击|
+|messageType|string|消息类型, eventType 不为 disappear时返回, inMessageAd - 广告类型的inMessage inMessageNoti - 通知类型的inMessage|
+|content|dictionary|应用内消息内容, eventType 不为 disappear 时返回|
 
 #### 示例
 ```javascript
@@ -481,6 +490,52 @@ jpushModule.requestNotificationAuthorization((result)=>{
 jpushModule.openSettingsForNotification((result)=>{
 		let code = result.code
 })
+```
+
+## 获取系统定位服务是否开启（iOS only）
+
+对应iOS设备的［设置］－［隐私］－［定位］按钮是否开启
+
+### API - locationServicesEnabled()
+返回值 boolean类型 true - 开启 false - 关闭
+
+#### 示例
+
+```javascript
+let enable = jpushModule.locationServicesEnabled()
+```
+
+## 获取用户定位权限状态（iOS only）
+
+### API - getLocationAuthorizationStatus()
+
+#### 返回值
+int类型 
+参考 requestLocationAuthorization(CALLBACK) 方法返回值status字段
+
+#### 示例
+
+```javascript
+let authorizationStatus = jpushModule.getLocationAuthorizationStatus()
+```
+
+## 请求定位权限 （iOS only）
+
+### API - requestLocationAuthorization(CALLBACK)
+
+#### 参数说明
+- CALLBACK
+
+|参数名称|参数类型|参数说明|
+|:-----:|:----:|:-----:|
+|status|number|0 - kCLAuthorizationStatusNotDetermined <br>1 - kCLAuthorizationStatusRestricted <br>2 - kCLAuthorizationStatusDenied <br>3 - kCLAuthorizationStatusAuthorizedAlways <br>4 - kCLAuthorizationStatusAuthorizedWhenInUse <br>5 - kCLAuthorizationStatusAuthorized|
+
+#### 示例
+
+```javascript
+jpushModule.requestLocationAuthorization((result)=>{
+					let status = result.status
+				})
 ```
 
 

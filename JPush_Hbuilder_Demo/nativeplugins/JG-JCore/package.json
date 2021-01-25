@@ -14,38 +14,44 @@
 				}
 			],
 			"integrateType": "framework",
-			"deploymentTarget": "8.0"
+			"parameters": {
+				"JPUSH_APPKEY_IOS": {
+				    "des": "[iOS]极光 portal 配置应用信息时分配的 AppKey",  
+				    "key": "JCore:APP_KEY"  
+				},
+				"JPUSH_CHANNEL_IOS": {  
+				    "des": "[iOS]用于统计分发渠道，不需要可填默认值 developer-default",  
+				    "key": "JCore:CHANNEL"  
+				}
+			}
 		},
 		"android": {
 			"plugins": [
 				{
 					"type": "module",
 					"name": "JG-JCore",
-					"class": "cn.jiguang.uniplugin_jverification.JVerificationWXModule"
+					"class": "cn.jiguang.uniplugin_jcore.JCoreModule"
 				}
 			],
 			"integrateType": "aar",
 			"minSdkVersion": "16",
 			"permissions": [
-				"android.permission.INTERNET",
-				"android.permission.READ_PHONE_STATE",
-				"android.permission.WRITE_EXTERNAL_STORAGE",
-				"android.permission.ACCESS_NETWORK_STATE",
-				"android.permission.ACCESS_WIFI_STATE",
-				"android.permission.CHANGE_NETWORK_STATE",
-				"android.permission.WRITE_SETTINGS",
-				"android.permission.SYSTEM_ALERT_WINDOW",
-				"android.permission.CHANGE_WIFI_STATE",
-				"android.permission.GET_TASKS",
-				"android.permission.VIBRATE",
-				"android.permission.WAKE_LOCK"
 			],
 			"abis": [  
 				"armeabi-v7a",  
 				"arm64-v8a",
 				"x86"  
-			]
-			
+			],
+			"parameters": {
+				"JPUSH_APPKEY_ANDROID": {
+					"des": "[Android]极光 portal 配置应用信息时分配的 AppKey",
+					"key": "JPUSH_APPKEY"
+				},
+				"JPUSH_CHANNEL_ANDROID":{
+					"des": "[Android]用于统计分发渠道，不需要可填默认值 developer-default",
+					"key": "JPUSH_CHANNEL"
+				}
+			}
 		}
 	}
 }

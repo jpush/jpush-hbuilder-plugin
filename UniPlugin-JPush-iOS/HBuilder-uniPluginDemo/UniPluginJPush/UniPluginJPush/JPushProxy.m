@@ -9,6 +9,7 @@
 #import "JPushStore.h"
 #import "JPUSHService.h"
 
+
 @implementation JPushProxy
 
 - (void)onCreateUniPlugin {

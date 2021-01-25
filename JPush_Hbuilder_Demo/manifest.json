@@ -15,29 +15,26 @@
             "autoclose" : true,
             "delay" : 0
         },
-        "modules" : {
-            "Push" : {}
-        },
+        "modules" : {},
         /* 模块配置 */
         "distribute" : {
             /* 应用发布信息 */
             "android" : {
                 /* android打包配置 */
                 "permissions" : [
-                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
-                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
-                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
-                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera\"/>",
                     "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.CAMERA\"/>",
-                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
-                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
                     "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
-                    "<uses-feature android:name=\"android.hardware.camera\"/>",
+                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
                 ]
             },
@@ -47,17 +44,23 @@
                     "NSLocationAlwaysUsageDescription" : "This app requires location services to work",
                     "NSLocationWhenInUseUsageDescription" : "This app requires location services to work"
                 },
-                "UIBackgroundModes" : "remote-notification,voip,fetch",
-                "idfa" : false
+                "UIBackgroundModes" : "remote-notification,voip,fetch,location",
+                "idfa" : true
             },
             /* ios打包配置 */
             "sdkConfigs" : {
                 "ad" : {},
-                "push" : {}
+                "push" : {},
+                "geolocation" : {},
+                "maps" : {}
             }
         },
         "nativePlugins" : {
             "JG-JCore" : {
+                "JPUSH_APPKEY_IOS" : "02c7f79c9248ecadf25140f7",
+                "JPUSH_APPKEY_ANDROID" : "",
+                "JPUSH_CHANNEL_ANDROID" : "",
+                "JPUSH_CHANNEL_IOS" : "test",
                 "__plugin_info__" : {
                     "name" : "JG-JCore",
                     "description" : "极光推送JCore插件",
@@ -68,17 +71,36 @@
                     "isCloud" : false,
                     "bought" : -1,
                     "pid" : "",
-                    "parameters" : {}
+                    "parameters" : {
+                        "JPUSH_APPKEY_IOS" : {
+                            "des" : "[iOS]极光 portal 配置应用信息时分配的 AppKey",
+                            "key" : "JCore:APP_KEY",
+                            "value" : ""
+                        },
+                        "JPUSH_APPKEY_ANDROID" : {
+                            "des" : "[Android]极光 portal 配置应用信息时分配的 AppKey",
+                            "key" : "JPUSH_APPKEY",
+                            "value" : ""
+                        },
+                        "JPUSH_CHANNEL_ANDROID" : {
+                            "des" : "[Android]用于统计分发渠道，不需要可填默认值 developer-default",
+                            "key" : "JPUSH_CHANNEL",
+                            "value" : ""
+                        },
+                        "JPUSH_CHANNEL_IOS" : {
+                            "des" : "[iOS]用于统计分发渠道，不需要可填默认值 developer-default",
+                            "key" : "JCore:CHANNEL",
+                            "value" : ""
+                        }
+                    }
                 }
             },
             "JG-JPush" : {
-                "JPUSH_APPKEY_ANDROID" : "",
-                "JPUSH_CHANNEL_IOS" : "test",
-                "JPUSH_ADVERTISINGID_IOS" : "",
-                "JPUSH_CHANNEL_ANDROID" : "",
                 "JPUSH_DEFAULTINITJPUSH_IOS" : "false",
-                "JPUSH_ISPRODUCTION_IOS" : "",
-                "JPUSH_APPKEY_IOS" : "02c7f79c9248ecadf25140f7",
+                "JPUSH_ISPRODUCTION_IOS" : "false",
+                "JPUSH_ADVERTISINGID_IOS" : "",
+                "JPUSH_APPKEY_ANDROID" : "",
+                "JPUSH_CHANNEL_ANDROID" : "",
                 "__plugin_info__" : {
                     "name" : "JG-JPush",
                     "description" : "极光推送Hbuilder插件",
@@ -90,39 +112,29 @@
                     "bought" : -1,
                     "pid" : "",
                     "parameters" : {
+                        "JPUSH_DEFAULTINITJPUSH_IOS" : {
+                            "des" : "[iOS]是否默认初始化，是填true，不是填false或者不填",
+                            "key" : "JPush:DEFAULTINITJPUSH",
+                            "value" : ""
+                        },
+                        "JPUSH_ISPRODUCTION_IOS" : {
+                            "des" : "[iOS]是否是生产环境，是填true,不是填false或者不填",
+                            "key" : "JPush:ISPRODUCTION",
+                            "value" : ""
+                        },
+                        "JPUSH_ADVERTISINGID_IOS" : {
+                            "des" : "[iOS]广告标识符（IDFA） 如果不需要使用IDFA，可不填",
+                            "key" : "JPush:ADVERTISINGID",
+                            "value" : ""
+                        },
                         "JPUSH_APPKEY_ANDROID" : {
                             "des" : "[Android]极光 portal 配置应用信息时分配的 AppKey",
                             "key" : "JPUSH_APPKEY",
                             "value" : ""
                         },
-                        "JPUSH_CHANNEL_IOS" : {
-                            "des" : "[iOS]用于统计分发渠道，不需要可填默认值 developer-default",
-                            "key" : "JVerification:CHANNEL",
-                            "value" : ""
-                        },
-                        "JPUSH_ADVERTISINGID_IOS" : {
-                            "des" : "[iOS]广告标识符（IDFA） 如果不需要使用IDFA，可不填",
-                            "key" : "JVerification:ADVERTISINGID",
-                            "value" : ""
-                        },
                         "JPUSH_CHANNEL_ANDROID" : {
                             "des" : "[Android]用于统计分发渠道，不需要可填默认值 developer-default",
                             "key" : "JPUSH_CHANNEL",
-                            "value" : ""
-                        },
-                        "JPUSH_DEFAULTINITJPUSH_IOS" : {
-                            "des" : "[iOS]是否默认初始化，是填true，不是填false或者不填",
-                            "key" : "JVerification:ADVERTISINGID",
-                            "value" : ""
-                        },
-                        "JPUSH_ISPRODUCTION_IOS" : {
-                            "des" : "[iOS]是否是生产环境，是填true,不是填false或者不填",
-                            "key" : "JVerification:ISPRODUCTION",
-                            "value" : ""
-                        },
-                        "JPUSH_APPKEY_IOS" : {
-                            "des" : "[iOS]极光 portal 配置应用信息时分配的 AppKey",
-                            "key" : "JVerification:APP_KEY",
                             "value" : ""
                         }
                     }

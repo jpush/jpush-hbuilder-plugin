@@ -3,7 +3,7 @@
 		</br>
 		</br>
 		<label style="margin-right: 50rpx;">网络状态:</label>
-		<label v-model="connectStatus">未链接</label>
+		<label>{{connectStatus}}</label>
 		</br>
 		<label style="margin-right: 50rpx;">DeviceToken:</label>
 		<label v-model="deviceToken">未获得</label>
@@ -27,7 +27,6 @@
 		</br>
 		<button type="primary" @click="getRegistrationID">获取注册id</button>
 		
-		
     </div>
 </template>
 
@@ -38,12 +37,40 @@
 		
 		data() {
 			return {
-				connectStatus: '',
+				connectStatus: '未链接',
 				deviceToken: '',
 				udid: '',
 				registrationID: '未获得',
 				appkey: '',
 			}
+		},
+		
+		onLoad() {
+			console.log('开始监听连接状态')
+			uni.$on('connectStatusChange',(connectStatus)=>{  
+				   var connectStr = ''
+				   if (connectStatus == 1) {
+					   connectStr = '已连接'
+				   }else if (connectStatus == 2) {
+					   connectStr = '未连接'
+					   
+				   }else if (connectStatus == 3) {
+					   connectStr = '已注册'
+				   }else if (connectStatus == 5) {
+					   connectStr = '已登录'
+					   this.getRegistrationID()
+				   } else {
+					   connectStr = '未连接'
+				   }
+				   console.log('监听到了事件 --- ', connectStr) 
+				   this.connectStatus = connectStr
+			    })  
+			console.log('index页面加载了...')
+		},
+		
+		onUnload() {  
+			// 移除监听事件  
+		    uni.$off('connectStatusChange')
 		},
 		
         methods: {
@@ -81,6 +108,7 @@
 					}
 				})
 			},
+			
 			
 			showToast(result){
 				uni.showToast({
