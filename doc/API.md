@@ -64,8 +64,9 @@ jpushModule.openSettingsForNotification((result)=>{
 ## 初始化函数
 
 ### API - initJPushService()
-初始化JPush接口。
-iOS端如果在mainfest.json里 将JPUSH_DEFAULTINITJPUSH_IOS值配置为"true"，插件内部将默认初始化JPush，用户则不需要调用该初始化方法。
+
+初始化SDK
+iOS 说明:如果在mainfest.json里 将JPUSH_DEFAULTINITJPUSH_IOS值配置为"true"，插件内部将默认初始化JPush，用户则不需要调用该初始化方法。
 
 #### 示例
 ```javascript
@@ -112,6 +113,7 @@ jpushModule.addConnectEventListener(result=>{
 |ring|string|推送通知界面上的可选设置里面的“sound”字段 (ios only)|
 |extras|dictionary|对应 Portal 推送消息界面上的“可选设置”里的附加字段|
 |iOS|dictionary|对应原生返回的通知内容，如需要更多字段请查看该字段内容|
+|android|dictionary|对应原生返回的通知内容，如需要更多字段请查看该字段内容|
 |notificationEventType|string|分为notificationArrived和notificationOpened两种|
 
 #### 示例
@@ -149,19 +151,6 @@ jpushModule.addCustomMessageListener(result=>{
 			})
 ```
 
-
-## 设置是否允许应用内消息弹出
-
-### API - setIsAllowedInMessagePop(Boolean)
-设置是否允许应用内消息弹出,默认为允许
-
-#### 参数说明
-- true - 允许，false - 不允许
-
-#### 示例
-```javascript
-jpushModule.setIsAllowedInMessagePop(true)
-```
 
 ## 应用内消息回调
 
@@ -563,7 +552,7 @@ jpushModule.setMaxGeofenceNumber(15)
 
 ## 删除指定id的地理围栏
 
-### API - setMaxGeofenceNumber(string)
+### API - deleteGeofence(string)
  删除指定id的地理围栏
 
 #### 示例
@@ -572,20 +561,44 @@ jpushModule.deleteGeofence('beijing')
 ```
 
 
-## 设置 Badge (iOS Only)
+## 设置 Badge
 
 ### API - setBadge(number)
 
 本接口用于配合 JPush 提供的服务器端角标功能.
-该功能解决的问题是, 服务器端推送 APNs 时, 并不知道客户端原来已经存在的角标是多少, 指定一个固定的数字不太合理.
+iOS:该功能解决的问题是, 服务器端推送 APNs 时, 并不知道客户端原来已经存在的角标是多少, 指定一个固定的数字不太合理.
 
  - 通过本 API 把当前客户端(当前这个用户的) 的实际 badge 设置到服务器端保存起来;
  - 调用服务器端 API 发 APNs 时(通常这个调用是批量针对大量用户),
    使用 "+1" 的语义, 来表达需要基于目标用户实际的 badge 值(保存的) +1 来下发通知时带上新的 badge 值;
 
+Android:仅支持华为
+
 #### 示例
 ```javascript
 jpushModule.setBadge(10)
+```
+
+## 设置手机号码
+
+### API - setMobileNumber(Object)
+设置手机号码后，可实现“推送不到短信到”的通知方式，提高推送达到率。
+
+#### 参数说明
+
+- Object
+
+|参数名称|参数类型|参数说明|
+|:-----:|:----:|:-----:|
+|mobileNumber|string|手机号码 会与用户信息一一对应。可为空，为空则清除号码。|
+|sequence|number|请求时传入的序列号,会在回调时原样返回|
+
+
+#### 示例
+```javascript
+jpushModule.setMobileNumber({
+					mobileNumber: '15889230000'
+				})
 ```
 
 ## 设置手机号码回调
@@ -599,33 +612,13 @@ jpushModule.setBadge(10)
 |参数名称|参数类型|参数说明|
 |:-----:|:----:|:-----:|
 |code|number|状态码 0 - 成功|
+|sequence|number|请求时传入的序列号,会在回调时原样返回|
 
 #### 示例
 ```javascript
 jpushModule.addMobileNumberListener(result=>{
 		let code = result.code
 	})
-```
-
-## 设置手机号码
-
-### API - setMobileNumber(Object,CALLBACK)
-设置手机号码后，可实现“推送不到短信到”的通知方式，提高推送达到率。
-
-#### 参数说明
-
-- Object
-
-|参数名称|参数类型|参数说明|
-|:-----:|:----:|:-----:|
-|mobileNumber|string|手机号码 会与用户信息一一对应。可为空，为空则清除号码。|
-
-
-#### 示例
-```javascript
-jpushModule.setMobileNumber({
-					mobileNumber: '15889230000'
-				})
 ```
 
 

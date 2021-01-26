@@ -1,0 +1,14 @@
+{
+  "nativePlugins": [
+    {
+      "hooksClass": "",
+      "plugins": [
+        {
+          "type": "module",
+          "name": "JG-JPush",
+          "class": "cn.jiguang.uniplugin_jpush.JPushModule"
+        }
+      ]
+    }
+  ]
+}

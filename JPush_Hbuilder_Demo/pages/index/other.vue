@@ -65,10 +65,13 @@
 			},
 			
 			setLatLng(){
-				jpushModule.setLocation({
-					latitude: parseFloat(this.latitude),
-					longitude: parseFloat(this.longitude),
-				})
+				if(uni.getSystemInfoSync().platform == "ios"){
+					jpushModule.setLocation({
+						latitude: parseFloat(this.latitude),
+						longitude: parseFloat(this.longitude),
+					})
+				}
+				
 			},
 			
 			showToast(result){

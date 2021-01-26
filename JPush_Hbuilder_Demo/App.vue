@@ -4,35 +4,36 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
-			
-			// 请求定位权限
-			let locationServicesEnabled = jpushModule.locationServicesEnabled()
-			let locationAuthorizationStatus = jpushModule.getLocationAuthorizationStatus()
-			console.log('locationAuthorizationStatus',locationAuthorizationStatus)	
-			if (locationServicesEnabled == true && locationAuthorizationStatus < 3) {
-				jpushModule.requestLocationAuthorization((result)=>{
-					console.log('定位权限',result.status)
+			if(uni.getSystemInfoSync().platform == "ios"){
+				// 请求定位权限
+				let locationServicesEnabled = jpushModule.locationServicesEnabled()
+				let locationAuthorizationStatus = jpushModule.getLocationAuthorizationStatus()
+				console.log('locationAuthorizationStatus',locationAuthorizationStatus)	
+				if (locationServicesEnabled == true && locationAuthorizationStatus < 3) {
+					jpushModule.requestLocationAuthorization((result)=>{
+						console.log('定位权限',result.status)
+					})
+				}
+				
+				
+				jpushModule.requestNotificationAuthorization((result)=>{
+					let status = result.status
+					if (status < 2) {
+						uni.showToast({
+							icon: 'none',
+							title: '您还没有打开通知权限',
+							duration: 3000
+						})
+					}
 				})
 			}
 			
-			
-			jpushModule.requestNotificationAuthorization((result)=>{
-				let status = result.status
-				if (status < 2) {
-					uni.showToast({
-						icon: 'none',
-						title: '您还没有打开通知权限',
-						duration: 3000
-					})
-				}
-			})
-			
-			
-			jpushModule.initJPushService()
+			jpushModule.initJPushService();
+			jpushModule.setLoggerEnable(true);
 			jpushModule.addConnectEventListener(result=>{
 				let connectEnable = result.connectEnable
 				uni.$emit('connectStatusChange',connectEnable)
-			})
+			});
 			
 			jpushModule.addNotificationListener(result=>{
 				let notificationEventType = result.notificationEventType
@@ -46,7 +47,7 @@
 					title: JSON.stringify(result),
 					duration: 3000
 				})
-			})
+			});
 			
 			jpushModule.addCustomMessageListener(result=>{
 				let type = result.type
