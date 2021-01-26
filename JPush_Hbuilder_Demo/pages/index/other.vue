@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<view>
-			<input placeholder="请输入badge"/>
+			<input v-model="inputBadge" placeholder="请输入badge"/>
 			</br>
-			<label @click='setBadge' v-model="inputBadge">设置角标</label>
+			<label @click='setBadge'>设置角标</label>
 			</br>
 			</br>
 			<input placeholder="请输入电话号码" v-model="inputPhoneNumber"/>
@@ -29,6 +29,16 @@
 <script>
     // 首先需要通过 uni.requireNativePlugin("ModuleName") 获取 module 
     var jpushModule = uni.requireNativePlugin("JG-JPush")
+	
+	jpushModule.addMobileNumberListener(result=>{
+		let code = result.code
+		uni.showToast({
+			icon:'none',
+			title: JSON.stringify(result),
+			duration: 3000
+		})
+	})
+	
     export default {
 		
 		data() {
@@ -44,23 +54,20 @@
 			
 			setMobileNumber() {
 				let mobileNumber = this.inputPhoneNumber
-				jpushModule.setMobileNumber(mobileNumber,result=>{
-					let code = result.code
-					this.showToast(result)
+				jpushModule.setMobileNumber({
+					mobileNumber: mobileNumber
 				})
 			},
 			
 			setBadge(){
-				jpushModule.setBadge({
-					badge: 10,
-					appBadge: 11,
-				})
+				let badge = parseInt(this.inputBadge)
+				jpushModule.setBadge(badge)
 			},
 			
 			setLatLng(){
 				jpushModule.setLocation({
-					latitude: this.latitude,
-					longitude: this.longitude,
+					latitude: parseFloat(this.latitude),
+					longitude: parseFloat(this.longitude),
 				})
 			},
 			

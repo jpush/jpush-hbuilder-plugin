@@ -60,12 +60,12 @@
 // ios8 - ios10 应用前台收到apns消息
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-    [[JPushStore shared] handeleApnsCallback:userInfo type:@"notificationArrived"];
+    [[JPushStore shared] handeleApnsCallback:userInfo type:NOTIFICATION_ARRIVED];
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    NSDictionary *content = notification.userInfo;
-    NSLog(@"%@",content);
+    NSDictionary *userInfo = notification.userInfo;
+    [[JPushStore shared] handlerLocalNotiCallback:userInfo type:NOTIFICATION_ARRIVED];
 }
 
 

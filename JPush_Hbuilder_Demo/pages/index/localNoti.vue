@@ -1,7 +1,11 @@
 <template>
 	<div>
 		</br>
-		<button type="primary" @click="addLocalNotification">创建一个本地通知</button>
+		<button type="primary" @click="addLocalNotification">创建一个本地通知 id 123</button>
+		</br>
+		<button type="primary" @click="removeLocalNotification">删除本地通知 id 123</button>
+		</br>
+		<button type="primary" @click="clearLocalNotifications">移除所有的本地通知</button>
 		</br>
 	</div>
 </template>
@@ -25,10 +29,20 @@
 					title:'title',
 					content:'content',
 					extras:{
-						delay: 10,
-						badge: 8,
+						name: 'Cindy',
+						age: '16'
 					}
 				})
+			},
+			
+			removeLocalNotification() {
+				jpushModule.removeLocalNotification({
+					messageID:'123'
+				})
+			},
+			
+			clearLocalNotifications() {
+				jpushModule.clearLocalNotifications()
 			},
 			
 			showToast(result){

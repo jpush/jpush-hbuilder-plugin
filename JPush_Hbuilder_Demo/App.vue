@@ -30,8 +30,8 @@
 			
 			jpushModule.initJPushService()
 			jpushModule.addConnectEventListener(result=>{
-				let connectEvent = result.connectEvent
-				uni.$emit('connectStatusChange',connectEvent)
+				let connectEnable = result.connectEnable
+				uni.$emit('connectStatusChange',connectEnable)
 			})
 			
 			jpushModule.addNotificationListener(result=>{
@@ -52,6 +52,18 @@
 				let type = result.type
 				let messageType = result.messageType
 				let content = result.content
+				uni.showToast({
+					icon: 'none',
+					title: JSON.stringify(result),
+					duration: 3000
+				})
+			})
+			
+			jpushModule.addLocalNotificationListener(result=>{
+				let messageID = result.messageID
+				let title = result.title
+				let content = result.content
+				let extras = result.extras
 				uni.showToast({
 					icon: 'none',
 					title: JSON.stringify(result),

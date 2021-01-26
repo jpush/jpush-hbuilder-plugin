@@ -49,23 +49,15 @@
 			console.log('开始监听连接状态')
 			uni.$on('connectStatusChange',(connectStatus)=>{  
 				   var connectStr = ''
-				   if (connectStatus == 1) {
+				   if (connectStatus == true) {
 					   connectStr = '已连接'
-				   }else if (connectStatus == 2) {
-					   connectStr = '未连接'
-					   
-				   }else if (connectStatus == 3) {
-					   connectStr = '已注册'
-				   }else if (connectStatus == 5) {
-					   connectStr = '已登录'
 					   this.getRegistrationID()
-				   } else {
+				   }else {
 					   connectStr = '未连接'
 				   }
-				   console.log('监听到了事件 --- ', connectStr) 
+				   console.log('监听到了连接状态变化 --- ', connectStr) 
 				   this.connectStatus = connectStr
 			    })  
-			console.log('index页面加载了...')
 		},
 		
 		onUnload() {  

@@ -28,6 +28,13 @@
 	// 首先需要通过 uni.requireNativePlugin("ModuleName") 获取 module
 	var jpushModule = uni.requireNativePlugin("JG-JPush")
 	var seq = 1
+	jpushModule.addTagAliasListener(result=>{
+		uni.showToast({
+			icon:'none',
+			title: JSON.stringify(result),
+			duration: 3000
+		})
+	})
 	export default{
 		data() {
 			return {
@@ -41,11 +48,6 @@
 				jpushModule.addTags({
 					'tags':tags,
 					'sequence': seq++
-				},result=>{
-					let code = result.code
-					let sequence = result.sequence
-					let tags = result.tags
-					this.showToast(result)
 				})
 			},
 			
@@ -54,8 +56,6 @@
 				jpushModule.updateTags({
 					'tags':tags,
 					'sequence': seq++
-				},result=>{
-					this.showToast(result)
 				})
 			},
 			
@@ -64,16 +64,12 @@
 				jpushModule.deleteTags({
 					'tags':tags,
 					'sequence': seq++
-				},result=>{
-					this.showToast(result)
 				})
 			},
 			
 			deleteTags() {
 				jpushModule.cleanTags({
 					'sequence': seq++
-				},result=>{
-					this.showToast(result)
 				})
 			},
 			
@@ -82,16 +78,12 @@
 				jpushModule.queryTag({
 					'tag':tag,
 					'sequence': seq++
-				},result=>{
-					this.showToast(result)
 				})
 			},
 			
 			queryTags() {
 				jpushModule.getAllTags({
 					'sequence': seq++
-				},result=>{
-					this.showToast(result)
 				})
 			},
 			
@@ -100,24 +92,18 @@
 				jpushModule.setAlias({
 					'alias':alias,
 					'sequence': seq++
-				},result=>{
-					this.showToast(result)
 				})
 			},
 			
 			deleteAlias() {
 				jpushModule.deleteAlias({
 					'sequence': seq++
-				},result=>{
-					this.showToast(result)
 				})
 			},
 			
 			queryAlias() {
 				jpushModule.queryAlias({
 					'sequence': seq++
-				},result=>{
-					this.showToast(result)
 				})
 			},
 			

@@ -9,6 +9,8 @@
 #import <UserNotifications/UserNotifications.h>
 #import <CoreLocation/CoreLocation.h>
 
+
+
 @interface JPushStore () <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) CLLocationManager *currentManager;
@@ -97,20 +99,8 @@
     
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self
-                      selector:@selector(networkIsConnecting:)
-                          name:kJPFNetworkIsConnectingNotification
-                        object:nil];
-    [defaultCenter addObserver:self
-                      selector:@selector(networkDidSetup:)
-                          name:kJPFNetworkDidSetupNotification
-                        object:nil];
-    [defaultCenter addObserver:self
                       selector:@selector(networkDidClose:)
                           name:kJPFNetworkDidCloseNotification
-                        object:nil];
-    [defaultCenter addObserver:self
-                      selector:@selector(networkDidRegister:)
-                          name:kJPFNetworkDidRegisterNotification
                         object:nil];
     [defaultCenter addObserver:self
                       selector:@selector(networkDidRegisterFailed:)
@@ -122,33 +112,29 @@
                         object:nil];
 }
 
-- (void)networkIsConnecting:(NSNotification *)notification {
-    [self connectEventCallbackHandle:0];
-}
-
-- (void)networkDidSetup:(NSNotification *)notification {
-    [self connectEventCallbackHandle:1];
-}
 
 - (void)networkDidClose:(NSNotification *)notification {
-    [self connectEventCallbackHandle:2];
-}
-
-- (void)networkDidRegister:(NSNotification *)notification {
-    [self connectEventCallbackHandle:3];
+    [self connectEventCallbackHandle:notification];
 }
 
 - (void)networkDidRegisterFailed:(NSNotification *)notification {
-    [self connectEventCallbackHandle:4];
+    [self connectEventCallbackHandle:notification];
 }
 
 - (void)networkDidLogin:(NSNotification *)notification {
-    [self connectEventCallbackHandle:5];
+    [self connectEventCallbackHandle:notification];
 }
 
-- (void)connectEventCallbackHandle:(int)connectEvent {
+- (void)connectEventCallbackHandle:(NSNotification *)notification {
+    
+    BOOL isConnect = false;
+    NSNotificationName notificationName = notification.name;
+    if([notificationName isEqualToString:kJPFNetworkDidLoginNotification]){
+        isConnect = true;
+    }
+    NSDictionary *responseData = @{CONNECT_ENABLE:@(isConnect)};
     if ([JPushStore shared].connectEventCallback) {
-        [JPushStore shared].connectEventCallback(@{@"connectEvent":@(connectEvent)}, YES);
+        [JPushStore shared].connectEventCallback(responseData, YES);
     }
 }
 
@@ -186,14 +172,11 @@
     NSDictionary * userInfo = notification.request.content.userInfo;
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         //远程推送
-        [self handeleApnsCallback:userInfo type:@"notificationArrived"];
+        [self handeleApnsCallback:userInfo type:NOTIFICATION_ARRIVED];
     }
     else {
         //本地通知
-//        if ([JPushStore shared].receiveLocalNotiCallback) {
-//            [JPushStore shared].receiveLocalNotiCallback(result, YES);
-//        }
-        NSLog(@"本地通知 %@",userInfo);
+        [self handlerLocalNotiCallback:userInfo type:NOTIFICATION_ARRIVED];
     }
     completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert);
 }
@@ -202,13 +185,10 @@
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [self handeleApnsCallback:userInfo type:@"notificationOpened"];
+        [self handeleApnsCallback:userInfo type:NOTIFICATION_OPENED];
     }
     else {
-//        if ([JPushStore shared].openLocalNotiCallback) {
-//            [JPushStore shared].openLocalNotiCallback(result, YES);
-//        }
-        NSLog(@"本地通知 %@",userInfo);
+        [self handlerLocalNotiCallback:userInfo type:NOTIFICATION_OPENED];
     }
     completionHandler();
 }
@@ -252,14 +232,14 @@
     if (error) {
         result = @{
             @"code": @(error.code),
-            @"msg": error.description,
+            @"msg": error.description?:@"",
             @"type": @"exit"
         };
     }else {
         result = @{
             @"code": @(0),
-            @"geofenceId":geofenceId,
-            @"userInfo":userInfo,
+            @"geofenceId":geofenceId?:@"",
+            @"userInfo":userInfo?:@{},
             @"type": @"exit"
         };
     }
@@ -401,12 +381,12 @@
 - (NSDictionary *)convertApnsMessage:(NSDictionary *)userInfo type:(NSString *)type{
     NSMutableDictionary *extras = [NSMutableDictionary dictionary];
     for (NSString *key in userInfo.allKeys) {
-        if ([key isEqualToString:@"_j_business"] || [key isEqualToString:@"_j_msgid"] || [key isEqualToString:@"_j_uid"] || [key isEqualToString:@"aps"] || [key isEqualToString:@"_j_geofence"] || [key isEqualToString:@"_j_extras"]) {
+        if ([key isEqualToString:@"_j_business"] || [key isEqualToString:@"_j_msgid"] || [key isEqualToString:@"_j_uid"] || [key isEqualToString:@"aps"] || [key isEqualToString:@"_j_geofence"] || [key isEqualToString:@"_j_extras"] || [key isEqualToString:@"_j_ad_content"]) {
             continue;
         }
         [extras setValue:userInfo[key] forKey:key];
     }
-    
+
     NSString *title = userInfo[@"aps"][@"alert"][@"title"];
     NSString *content = userInfo[@"aps"][@"alert"][@"body"];
     NSString *badge = userInfo[@"aps"][@"badge"];
@@ -417,17 +397,31 @@
         badge = userInfo[@"_j_extras"][@"badge"];
         sound = userInfo[@"_j_extras"][@"sound"];
     }
-    
-    NSDictionary *result = @{
+
+    NSMutableDictionary *temResult = [NSMutableDictionary dictionaryWithDictionary:@{
         @"messageID":userInfo[@"_j_msgid"]?:@"",
         @"title":title?:@"",
         @"content":content?:@"",
-        @"badge":badge?:@"1",
-        @"ring":sound?:@"default",
+        @"badge":badge?:@"",
+        @"ring":sound?:@"",
         @"extras":[extras copy]?:@{},
-        @"notificationEventType":type,
-    };
+        @"iOS":userInfo?:@{},
+        NOTIFICATION_EVENTTYPE:type,
+    }];
+
+    NSDictionary *result = [temResult copy];
+    
     return result;
+}
+
+// 处理本地通知回调
+- (void)handlerLocalNotiCallback:(NSDictionary *)userInfo type:(NSString *)type {
+   
+    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithDictionary:userInfo];
+    [result setValue:type forKey:NOTIFICATION_EVENTTYPE];
+    if ([JPushStore shared].localNotiCallback) {
+        [JPushStore shared].localNotiCallback(result, YES);
+    }
 }
 
 

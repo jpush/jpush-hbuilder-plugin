@@ -22,6 +22,12 @@
 #define infoConfig_JPush_DEFAULTINITJPUSH  @"DEFAULTINITJPUSH"
 
 
+#define CONNECT_ENABLE          @"connectEnable"
+#define NOTIFICATION_EVENTTYPE  @"notificationEventType"
+#define NOTIFICATION_ARRIVED    @"notificationArrived"
+#define NOTIFICATION_OPENED     @"notificationOpened"
+
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JPushStore : NSObject <JPUSHRegisterDelegate, JPUSHGeofenceDelegate,JPushInMessageDelegate,PKPushRegistryDelegate>
@@ -33,13 +39,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL allowedInMessagePop;// 是否允许应用内消息弹出
 @property (nonatomic, copy) UniModuleKeepAliveCallback inMessageCallback; // 应用内消息(ad and 应用内通知)
 
-//@property (nonatomic, copy) UniModuleKeepAliveCallback receiveLocalNotiCallback;
-//@property (nonatomic, copy) UniModuleKeepAliveCallback openLocalNotiCallback;
+@property (nonatomic, copy) UniModuleKeepAliveCallback localNotiCallback; // 本地通知
 
 @property (nonatomic, copy) UniModuleKeepAliveCallback geofenceCallback;
 @property (nonatomic, copy) UniModuleKeepAliveCallback voipCallback;
 
 @property (nonatomic, copy) UniModuleKeepAliveCallback locationAuthorizationCallBack;
+
+@property (nonatomic, copy) UniModuleKeepAliveCallback tagAliasCallBack;
+
+@property (nonatomic, copy) UniModuleKeepAliveCallback addMobileNumberCallBack;
 
 @property (nonatomic, strong) NSDictionary *launchOptions;
 
@@ -53,6 +62,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)initVoipService;
 
 - (void)handeleApnsCallback:(NSDictionary *)userInfo type:(NSString *)type;
+
+- (void)handlerLocalNotiCallback:(NSDictionary *)userInfo type:(NSString *)type;
 
 //
 - (void)requestLocationAuthorization;

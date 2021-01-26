@@ -11,18 +11,29 @@
 #import <PushKit/PushKit.h>
 // 如果需要使用 idfa 功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
+#import <UserNotifications/UserNotifications.h>
+#import <CoreLocation/CoreLocation.h>
 
 
 #define weakObj(obj) __weak typeof(obj) weak##obj = obj;
 
 
-#define Param_RegisterID   @"registerID"
-#define Param_Tags       @"tags"
-#define Param_Tag        @"tag"
-#define Param_Sequence   @"sequence"
-#define Param_Alias      @"alias"
-#define Param_TagEnable  @"tagEnable"
+#define MOBILENUMBER      @"mobileNumber"
+#define REGISTER_ID       @"registerID"
+#define LATITUDE          @"latitude"
+#define LONGITUDE         @"longitude"
+
+#define TAGS             @"tags"
+#define TAG              @"tag"
+#define SEQUENCE         @"sequence"
+#define ALIAS            @"alias"
+#define TAG_ENABLE       @"tagEnable"
 #define CODE             @"code"
+#define MESSAGE_ID       @"messageID"
+#define TITLE            @"title"
+#define CONTENT          @"content"
+#define EXTRAS           @"extras"
+
 
 
 @interface JPushModule () 
@@ -34,7 +45,8 @@
 BOOL debugMode = NO;
 
 UNI_EXPORT_METHOD(@selector(setBadge:))
-UNI_EXPORT_METHOD(@selector(setMobileNumber:callback:))
+UNI_EXPORT_METHOD(@selector(addMobileNumberListener:))
+UNI_EXPORT_METHOD(@selector(setMobileNumber:))
 UNI_EXPORT_METHOD(@selector(initCrashHandler))
 UNI_EXPORT_METHOD(@selector(setLoggerEnable:))
 UNI_EXPORT_METHOD(@selector(getRegistrationID:))
@@ -42,24 +54,27 @@ UNI_EXPORT_METHOD(@selector(getRegistrationID:))
 #pragma -
 
 // 设置角标
-- (void)setBadge:(NSDictionary *)params {
-    [self logger:@"setBadge with params" log:params];
-    NSInteger badge = [params[@"badge"] intValue];
-    NSInteger appBadge = [params[@"appBadge"] intValue];
+- (void)setBadge:(NSInteger)badge {
+    [self logger:@"setBadge with params" log:@(badge)];
     [JPUSHService setBadge:badge];
-    if (appBadge >= 0) {
-        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:appBadge];
-    }
+}
+
+- (void)addMobileNumberListener:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"addMobileNumberListener" log:nil];
+    [JPushStore shared].addMobileNumberCallBack = callback;
 }
 
 // 设置手机号
-- (void)setMobileNumber:(NSString *)mobileNumber callback:(UniModuleKeepAliveCallback)callback {
-    [self logger:@"setMobileNumber with mobileNumber:" log:mobileNumber];
+- (void)setMobileNumber:(NSDictionary *)params {
+    [self logger:@"setMobileNumber with params:" log:params];
     weakObj(self)
+    NSString *mobileNumber = params[MOBILENUMBER];
     [JPUSHService setMobileNumber:mobileNumber completion:^(NSError *error) {
         
         NSDictionary *result = [weakself convertResultWithCode:(error?error.code:0) content:nil];
-        callback(result, NO);
+        if ([JPushStore shared].addMobileNumberCallBack) {
+            [JPushStore shared].addMobileNumberCallBack(result, YES);
+        }
     }];
 }
 
@@ -85,7 +100,7 @@ UNI_EXPORT_METHOD(@selector(getRegistrationID:))
     [self logger:@"getRegistrationID" log:nil];
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
         NSDictionary *content = @{
-            Param_RegisterID: registrationID ? registrationID : @"",
+            REGISTER_ID: registrationID ? registrationID : @"",
         };
         NSDictionary *result = [self convertResultWithCode:resCode content:content];
         callback(result, NO);
@@ -99,8 +114,8 @@ UNI_EXPORT_METHOD(@selector(setLocationEanable:))
 #pragma - 地理位置上报
 - (void)setLocation:(NSDictionary *)params {
     [self logger:@"setLatitude with params" log:params];
-    double latitude = [params[@"latitude"] doubleValue];
-    double longitude = [params[@"longitude"] doubleValue];
+    double latitude = [params[LATITUDE] doubleValue];
+    double longitude = [params[LONGITUDE] doubleValue];
     [JPUSHService setLatitude:latitude longitude:longitude];
 }
 
@@ -229,153 +244,188 @@ UNI_EXPORT_METHOD(@selector(addInMessageListener:))
 }
 
 
-UNI_EXPORT_METHOD(@selector(addTags:callback:))
-UNI_EXPORT_METHOD(@selector(updateTags:callback:))
-UNI_EXPORT_METHOD(@selector(deleteTags:callback:))
-UNI_EXPORT_METHOD(@selector(cleanTags:callback:))
-UNI_EXPORT_METHOD(@selector(queryTag:callback:))
-UNI_EXPORT_METHOD(@selector(getAllTags:callback:))
-UNI_EXPORT_METHOD(@selector(setAlias:callback:))
-UNI_EXPORT_METHOD(@selector(deleteAlias:callback:))
-UNI_EXPORT_METHOD(@selector(queryAlias:callback:))
+UNI_EXPORT_METHOD(@selector(addTagAliasListener:))
+UNI_EXPORT_METHOD(@selector(addTags:))
+UNI_EXPORT_METHOD(@selector(updateTags:))
+UNI_EXPORT_METHOD(@selector(deleteTags:))
+UNI_EXPORT_METHOD(@selector(cleanTags:))
+UNI_EXPORT_METHOD(@selector(queryTag:))
+UNI_EXPORT_METHOD(@selector(getAllTags:))
+UNI_EXPORT_METHOD(@selector(setAlias:))
+UNI_EXPORT_METHOD(@selector(deleteAlias:))
+UNI_EXPORT_METHOD(@selector(queryAlias:))
 
 
-#pragma - tags/alias
+#pragma mark - tags/alias
+
+- (void)addTagAliasListener:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"addTagAliasListener" log:nil];
+    [JPushStore shared].tagAliasCallBack = callback;
+}
+
+
 // 新增tags
-- (void)addTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
+- (void)addTags:(NSDictionary *)params {
     [self logger:@"addTags with params:" log:params];
-    NSSet *tags = [NSSet setWithArray:params[Param_Tags]];
-    NSInteger seq = [params[Param_Sequence] intValue];
+    NSSet *tags = [NSSet setWithArray:params[TAGS]];
+    NSInteger seq = params[SEQUENCE]?[params[SEQUENCE] integerValue]:-1;
+    weakObj(self)
     [JPUSHService addTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
         NSArray *tempTags = (iTags.allObjects.count > 0 ? iTags.allObjects : @[]);
         NSDictionary *content = @{
-            Param_Tags:tempTags,
-            Param_Sequence:@(seq)
+            TAGS:tempTags,
+            SEQUENCE:@(seq)
         };
-        NSDictionary *result = [self convertResultWithCode:iResCode content:content];
-        callback(result, NO);
+        NSDictionary *result = [weakself convertResultWithCode:iResCode content:content];
+        if ([JPushStore shared].tagAliasCallBack) {
+            [JPushStore shared].tagAliasCallBack(result, YES);
+        }
     } seq:seq];
 }
 
 // 更新tags
-- (void)updateTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
+- (void)updateTags:(NSDictionary *)params {
     [self logger:@"updateTags with params:" log:params];
-    NSSet *tags = [NSSet setWithArray:params[Param_Tags]];
-    NSInteger seq = [params[Param_Sequence] intValue];
+    NSSet *tags = [NSSet setWithArray:params[TAGS]];
+    NSInteger seq = params[SEQUENCE]?[params[SEQUENCE] integerValue]:-1;
+    weakObj(self)
     [JPUSHService setTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
         NSArray *tempTags = (iTags.allObjects.count > 0 ? iTags.allObjects : @[]);
         NSDictionary *content = @{
-            Param_Tags:tempTags,
-            Param_Sequence:@(seq)
+            TAGS:tempTags,
+            SEQUENCE:@(seq)
         };
-        NSDictionary *result = [self convertResultWithCode:iResCode content:content];
-        callback(result, NO);
+        NSDictionary *result = [weakself convertResultWithCode:iResCode content:content];
+        if ([JPushStore shared].tagAliasCallBack) {
+            [JPushStore shared].tagAliasCallBack(result, YES);
+        }
     } seq:seq];
 }
 
 // 删除所有tags
-- (void)cleanTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
+- (void)cleanTags:(NSDictionary *)params {
     [self logger:@"deleteTags with params:" log:params];
-    NSInteger seq = [params[Param_Sequence] intValue];
+    NSInteger seq = params[SEQUENCE]?[params[SEQUENCE] integerValue]:-1;
+    weakObj(self)
     [JPUSHService cleanTags:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
         NSArray *tempTags = (iTags.allObjects.count > 0 ? iTags.allObjects : @[]);
         NSDictionary *content = @{
-            Param_Tags:tempTags,
-            Param_Sequence:@(seq)
+            TAGS:tempTags,
+            SEQUENCE:@(seq)
         };
-        NSDictionary *result = [self convertResultWithCode:iResCode content:content];
-        callback(result, NO);
+        NSDictionary *result = [weakself convertResultWithCode:iResCode content:content];
+        if ([JPushStore shared].tagAliasCallBack) {
+            [JPushStore shared].tagAliasCallBack(result, YES);
+        }
     } seq:seq];
 }
 
 // 删除指定的tags
-- (void)deleteTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
+- (void)deleteTags:(NSDictionary *)params {
     [self logger:@"deleteTag with params:" log:params];
-    NSSet *tags = [NSSet setWithArray:params[Param_Tags]];
-    NSInteger seq = [params[Param_Sequence] intValue];
+    NSSet *tags = [NSSet setWithArray:params[TAGS]];
+    NSInteger seq = params[SEQUENCE]?[params[SEQUENCE] integerValue]:-1;
+    weakObj(self)
     [JPUSHService deleteTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
         NSArray *tempTags = (iTags.allObjects.count > 0 ? iTags.allObjects : @[]);
         NSDictionary *content = @{
-            Param_Tags:tempTags,
-            Param_Sequence:@(seq)
+            TAGS:tempTags,
+            SEQUENCE:@(seq)
         };
-        NSDictionary *result = [self convertResultWithCode:iResCode content:content];
-        callback(result, NO);
+        NSDictionary *result = [weakself convertResultWithCode:iResCode content:content];
+        if ([JPushStore shared].tagAliasCallBack) {
+            [JPushStore shared].tagAliasCallBack(result, YES);
+        }
     } seq:seq];
 }
 
 // 查询tags
-- (void)getAllTags:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
+- (void)getAllTags:(NSDictionary *)params {
     [self logger:@"queryTags with params:" log:params];
-    NSInteger seq = [params[Param_Sequence] intValue];
+    NSInteger seq = params[SEQUENCE]?[params[SEQUENCE] integerValue]:-1;
+    weakObj(self)
     [JPUSHService getAllTags:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
         NSArray *tempTags = (iTags.allObjects.count > 0 ? iTags.allObjects : @[]);
         NSDictionary *content = @{
-            Param_Tags:tempTags,
-            Param_Sequence:@(seq)
+            TAGS:tempTags,
+            SEQUENCE:@(seq)
         };
-        NSDictionary *result = [self convertResultWithCode:iResCode content:content];
-        callback(result, NO);
+        NSDictionary *result = [weakself convertResultWithCode:iResCode content:content];
+        if ([JPushStore shared].tagAliasCallBack) {
+            [JPushStore shared].tagAliasCallBack(result, YES);
+        }
     } seq:seq];
 }
 
 // 查询某一个tag
-- (void)queryTag:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
+- (void)queryTag:(NSDictionary *)params {
     [self logger:@"queryTag with params:" log:params];
-    NSString *tag = params[Param_Tag];
-    NSInteger seq = [params[Param_Sequence] intValue];
+    NSString *tag = params[TAG];
+    NSInteger seq = params[SEQUENCE]?[params[SEQUENCE] integerValue]:-1;
+    weakObj(self)
     [JPUSHService validTag:tag completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq, BOOL isBind) {
         NSArray *tempTags = (iTags.allObjects.count > 0 ? iTags.allObjects : @[]);
         NSDictionary *content = @{
-            Param_Tags:tempTags,
-            Param_Sequence:@(seq),
-            Param_TagEnable:@(isBind),
+            TAGS:tempTags,
+            SEQUENCE:@(seq),
+            TAG_ENABLE:@(isBind),
         };
-        NSDictionary *result = [self convertResultWithCode:iResCode content:content];
-        callback(result, NO);
+        NSDictionary *result = [weakself convertResultWithCode:iResCode content:content];
+        if ([JPushStore shared].tagAliasCallBack) {
+            [JPushStore shared].tagAliasCallBack(result, YES);
+        }
     } seq:seq];
 }
 
 // 设置别名
-- (void)setAlias:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
+- (void)setAlias:(NSDictionary *)params {
     [self logger:@"setAlias with params:" log:params];
-    NSString *alias = params[Param_Alias];
-    NSInteger seq = [params[Param_Sequence] intValue];
+    NSString *alias = params[ALIAS];
+    NSInteger seq = params[SEQUENCE]?[params[SEQUENCE] integerValue]:-1;
+    weakObj(self)
     [JPUSHService setAlias:alias completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
         NSDictionary *content = @{
-            Param_Alias:iAlias? iAlias : @"",
-            Param_Sequence:@(seq)
+            ALIAS:iAlias? iAlias : @"",
+            SEQUENCE:@(seq)
         };
-        NSDictionary *result = [self convertResultWithCode:iResCode content:content];
-        callback(result, NO);
+        NSDictionary *result = [weakself convertResultWithCode:iResCode content:content];
+        if ([JPushStore shared].tagAliasCallBack) {
+            [JPushStore shared].tagAliasCallBack(result, YES);
+        }
     } seq:seq];
 }
 
 // 删除别名
-- (void)deleteAlias:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
+- (void)deleteAlias:(NSDictionary *)params {
     [self logger:@"deleteAlias with params:" log:params];
-    NSInteger seq = [params[Param_Sequence] intValue];
+    NSInteger seq = params[SEQUENCE]?[params[SEQUENCE] integerValue]:-1;
+    weakObj(self)
     [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
         NSDictionary *content = @{
-            Param_Alias:iAlias? iAlias : @"",
-            Param_Sequence:@(seq)
+            ALIAS:iAlias? iAlias : @"",
+            SEQUENCE:@(seq)
         };
-        NSDictionary *result = [self convertResultWithCode:iResCode content:content];
-        callback(result, NO);
+        NSDictionary *result = [weakself convertResultWithCode:iResCode content:content];
+        if ([JPushStore shared].tagAliasCallBack) {
+            [JPushStore shared].tagAliasCallBack(result, YES);
+        }
     } seq:seq];
 }
 
 // 查询别名
-- (void)queryAlias:(NSDictionary *)params callback:(UniModuleKeepAliveCallback)callback {
+- (void)queryAlias:(NSDictionary *)params {
     [self logger:@"queryAlias with params:" log:params];
-    NSInteger seq = [params[Param_Sequence] intValue];
+    NSInteger seq = params[SEQUENCE]?[params[SEQUENCE] integerValue]:-1;
+    weakObj(self)
     [JPUSHService getAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
         NSDictionary *content = @{
-            Param_Alias:iAlias? iAlias : @"",
-            Param_Sequence:@(seq)
+            ALIAS:iAlias? iAlias : @"",
+            SEQUENCE:@(seq)
         };
-        NSDictionary *result = [self convertResultWithCode:iResCode content:content];
-        callback(result, NO);
+        NSDictionary *result = [weakself convertResultWithCode:iResCode content:content];
+        if ([JPushStore shared].tagAliasCallBack) {
+            [JPushStore shared].tagAliasCallBack(result, YES);
+        }
     } seq:seq];
 }
 
@@ -403,55 +453,143 @@ UNI_EXPORT_METHOD(@selector(addGeofenceListener:))
 }
 
 
-
+UNI_EXPORT_METHOD(@selector(addLocalNotificationListener:))
 UNI_EXPORT_METHOD(@selector(addLocalNotification:))
+UNI_EXPORT_METHOD(@selector(removeLocalNotification:))
+UNI_EXPORT_METHOD(@selector(clearLocalNotifications))
+
 
 #pragma - 本地通知
-- (void)addLocalNotification:(NSDictionary *)params {
-    
-    NSString *requestIdentifier = params[@"messageID"];
-    NSString *title = params[@"title"];
-    NSString *content = params[@"content"];
-    NSDictionary *extras = params[@"extras"];
-    
-    JPushNotificationContent *notiContent = [[JPushNotificationContent alloc] init];
-    notiContent.title = title;
-    notiContent.body = content;
-    notiContent.badge = @([extras[@"badge"] intValue]);
-    if ([extras[@"sound"] isKindOfClass:[NSString class]] && [extras[@"sound"] length] > 0) {
-        notiContent.sound = extras[@"sound"];
-    }
-   
-    JPushNotificationTrigger *notiTrigger = [[JPushNotificationTrigger alloc] init];
-    NSTimeInterval delay = 0;
-    if (extras != nil && extras[@"delay"]) {
-        delay = [extras[@"delay"] intValue];
-    }
+
+- (void)addLocalNotificationListener:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"addLocalNotificationListener" log:nil];
+    [JPushStore shared].localNotiCallback = callback;
+}
+
+
+- (JPushNotificationContent *)generateNotificationCotent:(NSDictionary *)dic {
+    JPushNotificationContent *content = [[JPushNotificationContent alloc] init];
+    content.title = dic[@"title"];
+    content.subtitle = dic[@"subtitle"];
+    content.body = dic[@"body"];
+    content.badge = dic[@"badge"];
+    content.action = dic[@"action"];
+    content.userInfo = dic[@"userInfo"];
+    content.categoryIdentifier = dic[@"categoryIdentifier"];
     if (@available(iOS 10.0, *)) {
-        notiTrigger.timeInterval = delay;
-    } else {
-        notiTrigger.fireDate = [NSDate dateWithTimeIntervalSinceNow:delay];
+        content.threadIdentifier = dic[@"threadIdentifier"];
     }
     
+    if (@available(iOS 10.0, *)) {
+        JPushNotificationSound *soundSetting = [[JPushNotificationSound alloc] init];
+        soundSetting.soundName = dic[@"sound"];
+        //如果是告警通知
+        if (@available(iOS 12.0, *)) {
+            soundSetting.criticalSoundName = dic[@"criticalSoundName"];
+            soundSetting.criticalSoundVolume = [dic[@"criticalSoundVolume"] floatValue];
+        }
+        content.soundSetting = soundSetting;
+    }else {
+        content.sound = dic[@"sound"];
+    }
+    
+    if (@available(iOS 10.0, *)) {
+        if ([dic[@"attachments"] isKindOfClass:[NSArray class]]) {
+            NSMutableArray *attachmentsArr = [NSMutableArray array];
+            for (NSDictionary *attachmentDic in dic[@"attachments"]) {
+                UNNotificationAttachment *attachment = [UNNotificationAttachment attachmentWithIdentifier:attachmentDic[@"identifier"] URL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:attachmentDic[@"resourceName"] ofType:attachmentDic[@"type"]]] options:nil error:nil];
+                [attachmentsArr addObject:attachment];
+            }
+            content.attachments = [attachmentsArr copy];
+        }
+    }
+    
+    if (@available(iOS 10.0, *)) {
+        content.launchImageName = dic[@"launchImageName"];
+    }
+    
+    if (@available(iOS 12.0, *)) {
+        content.summaryArgument = dic[@"summaryArgument"];
+        content.summaryArgumentCount = [dic[@"summaryArgumentCount"] integerValue];
+    }
+    
+    if (@available(iOS 13.0, *)) {
+        content.targetContentIdentifier = dic[@"targetContentIdentifier"];
+    }
+    
+    return content;
+}
+
+- (JPushNotificationTrigger *)generateNotificationTrigger:(NSDictionary *)params {
+    JPushNotificationTrigger *trigger = [[JPushNotificationTrigger alloc] init];
+    trigger.repeat = [params[@"repeat"] boolValue];
+    
+    NSDictionary *region = params[@"region"];
+    if ([region isKindOfClass:[NSDictionary class]]) {
+        double latitude = [region[@"latitude"] doubleValue];
+        double longitude = [region[@"longitude"] doubleValue];
+        double radius = [region[@"radius"] doubleValue];
+        NSString *identifier = region[@"identifier"];
+        CLCircularRegion *re = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(latitude, longitude) radius:radius identifier:identifier];
+        trigger.region = re;
+        return trigger;
+    }
+    NSTimeInterval delay = [params[@"delay"] integerValue];
+    if (@available(iOS 10.0, *)) {
+        trigger.timeInterval = delay;
+    } else {
+        trigger.fireDate = [NSDate dateWithTimeIntervalSinceNow:delay];
+    }
+    return trigger;
+}
+
+
+- (void)addLocalNotification:(NSDictionary *)params {
+
+    NSString *messageID = params[MESSAGE_ID]?params[MESSAGE_ID]:@"";
+    
+    JPushNotificationContent *content = [[JPushNotificationContent alloc] init];
+    NSString *notificationTitle = params[TITLE]?params[TITLE]:@"";
+    NSString *notificationContent = params[CONTENT]?params[CONTENT]:@"";
+    content.title = notificationTitle;
+    content.body = notificationContent;
+    if(params[EXTRAS]){
+        content.userInfo = @{MESSAGE_ID:messageID,TITLE:notificationTitle,CONTENT:notificationContent,EXTRAS:params[EXTRAS]};
+    }else{
+        content.userInfo = @{MESSAGE_ID:messageID,TITLE:notificationTitle,CONTENT:notificationContent};
+    }
+    JPushNotificationTrigger *trigger = [[JPushNotificationTrigger alloc] init];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:now];
+    components = dateComponent;
+    components.second = [dateComponent second]+1;
+    if (@available(iOS 10.0, *)) {
+        trigger.dateComponents = components;
+    } else {
+        trigger.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    }
     JPushNotificationRequest *request = [[JPushNotificationRequest alloc] init];
-    request.requestIdentifier = requestIdentifier;
-    request.content = notiContent;
-    request.trigger = notiTrigger;
+    request.requestIdentifier = messageID;
+    request.content = content;
+    request.trigger = trigger;
     [JPUSHService addNotification:request];
     
 }
 
 // 移除指定的本地通知
 - (void)removeLocalNotification:(NSDictionary *)params {
-    [self logger:@"removeLocalNotification with params" log:params];
-    NSArray *messageIDs = params[@"identifiers"];
-    JPushNotificationIdentifier *identifier = [[JPushNotificationIdentifier alloc] init];
-    identifier.identifiers = messageIDs;
-    if (@available(iOS 10.0, *)) {
-        BOOL delivered = [params[@"delivered"] boolValue];
-        identifier.delivered = delivered;
+    NSString *requestIdentifier = params[MESSAGE_ID];
+    if ([requestIdentifier isKindOfClass:[NSString class]]) {
+        JPushNotificationIdentifier *identifier = [[JPushNotificationIdentifier alloc] init];
+        identifier.identifiers = @[requestIdentifier];
+        if (@available(iOS 10.0, *)) {
+            identifier.delivered = YES;
+        }
+        [JPUSHService removeNotification:identifier];
     }
-    [JPUSHService removeNotification:identifier];
 }
 
 // 移除所有的本地通知
