@@ -520,26 +520,6 @@ jpushModule.queryAlias({
 jpushModule.initCrashHandler()
 ```
 
-## 获取通知的授权状态 (ios only)
-### API - requestNotificationAuthorization(CALLBACK)
-获取通知的授权状态
-
-#### 参数说明
-
-- CALLBACK
-
-|参数名称|参数类型|参数说明|
-|:-----:|:----:|:-----:|
-|status|number|0 - NotDetermined 1 - Denied 2 - Authorized 3 - Provisional (ios 12 及以上才有)|
-
-#### 示例
-```javascript
-jpushModule.requestNotificationAuthorization((result)=>{
-		let status = result.status
-})
-```
-
-
 ## 设置地理围栏的最大个数
 
 ### API - setMaxGeofenceNumber(number)

@@ -89,19 +89,6 @@
 				})	
 			},
 			
-			addLocalNotification() {
-				jpushModule.addLocalNotification({
-					messageID:'123',
-					title:'title',
-					content:'content',
-					extras:{
-						delay: 10,
-						badge: 8,
-					}
-				})
-			},
-			
-			
 			showToast(result){
 				uni.showToast({
 					icon:'none',
