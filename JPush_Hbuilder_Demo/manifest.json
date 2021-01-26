@@ -56,49 +56,10 @@
             }
         },
         "nativePlugins" : {
-            "JG-JCore" : {
-                "JPUSH_APPKEY_IOS" : "02c7f79c9248ecadf25140f7",
-                "JPUSH_APPKEY_ANDROID" : "",
-                "JPUSH_CHANNEL_ANDROID" : "",
-                "JPUSH_CHANNEL_IOS" : "test",
-                "__plugin_info__" : {
-                    "name" : "JG-JCore",
-                    "description" : "极光推送JCore插件",
-                    "platforms" : "Android,iOS",
-                    "url" : "",
-                    "android_package_name" : "",
-                    "ios_bundle_id" : "",
-                    "isCloud" : false,
-                    "bought" : -1,
-                    "pid" : "",
-                    "parameters" : {
-                        "JPUSH_APPKEY_IOS" : {
-                            "des" : "[iOS]极光 portal 配置应用信息时分配的 AppKey",
-                            "key" : "JCore:APP_KEY",
-                            "value" : ""
-                        },
-                        "JPUSH_APPKEY_ANDROID" : {
-                            "des" : "[Android]极光 portal 配置应用信息时分配的 AppKey",
-                            "key" : "JPUSH_APPKEY",
-                            "value" : ""
-                        },
-                        "JPUSH_CHANNEL_ANDROID" : {
-                            "des" : "[Android]用于统计分发渠道，不需要可填默认值 developer-default",
-                            "key" : "JPUSH_CHANNEL",
-                            "value" : ""
-                        },
-                        "JPUSH_CHANNEL_IOS" : {
-                            "des" : "[iOS]用于统计分发渠道，不需要可填默认值 developer-default",
-                            "key" : "JCore:CHANNEL",
-                            "value" : ""
-                        }
-                    }
-                }
-            },
             "JG-JPush" : {
                 "JPUSH_DEFAULTINITJPUSH_IOS" : "false",
                 "JPUSH_ISPRODUCTION_IOS" : "false",
-                "JPUSH_ADVERTISINGID_IOS" : "",
+                "JPUSH_ADVERTISINGID_IOS" : "123456",
                 "JPUSH_APPKEY_ANDROID" : "",
                 "JPUSH_CHANNEL_ANDROID" : "",
                 "__plugin_info__" : {
@@ -135,6 +96,45 @@
                         "JPUSH_CHANNEL_ANDROID" : {
                             "des" : "[Android]用于统计分发渠道，不需要可填默认值 developer-default",
                             "key" : "JPUSH_CHANNEL",
+                            "value" : ""
+                        }
+                    }
+                }
+            },
+            "JG-JCore" : {
+                "JPUSH_CHANNEL_IOS" : "test",
+                "JPUSH_CHANNEL_ANDROID" : "",
+                "JPUSH_APPKEY_IOS" : "02c7f79c9248ecadf25140f7",
+                "JPUSH_APPKEY_ANDROID" : "",
+                "__plugin_info__" : {
+                    "name" : "JG-JCore",
+                    "description" : "极光推送JCore插件",
+                    "platforms" : "Android,iOS",
+                    "url" : "",
+                    "android_package_name" : "",
+                    "ios_bundle_id" : "",
+                    "isCloud" : false,
+                    "bought" : -1,
+                    "pid" : "",
+                    "parameters" : {
+                        "JPUSH_CHANNEL_IOS" : {
+                            "des" : "[iOS]用于统计分发渠道，不需要可填默认值 developer-default",
+                            "key" : "JCore:CHANNEL",
+                            "value" : ""
+                        },
+                        "JPUSH_CHANNEL_ANDROID" : {
+                            "des" : "[Android]用于统计分发渠道，不需要可填默认值 developer-default",
+                            "key" : "JPUSH_CHANNEL",
+                            "value" : ""
+                        },
+                        "JPUSH_APPKEY_IOS" : {
+                            "des" : "[iOS]极光 portal 配置应用信息时分配的 AppKey",
+                            "key" : "JCore:APP_KEY",
+                            "value" : ""
+                        },
+                        "JPUSH_APPKEY_ANDROID" : {
+                            "des" : "[Android]极光 portal 配置应用信息时分配的 AppKey",
+                            "key" : "JPUSH_APPKEY",
                             "value" : ""
                         }
                     }

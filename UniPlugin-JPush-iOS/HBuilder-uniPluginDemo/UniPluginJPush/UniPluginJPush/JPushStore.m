@@ -42,7 +42,7 @@
     [JPUSHService setInMessageDelegate:[JPushStore shared]];
 }
 
-#pragma mark -
+#pragma mark - 初始化
 - (void)setupWithOption:(NSDictionary *)launchOptions {
 
     NSDictionary *launchingOption = launchOptions;
@@ -335,7 +335,9 @@
     PKPushRegistry *voipRegistry = [[PKPushRegistry alloc] initWithQueue:mainQueue];
     voipRegistry.delegate = self;
     // Set the push type to VoIP
-    voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+    if (@available(iOS 9.0, *)) {
+        voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+    }
 }
 
 #pragma - PKPushRegistryDelegate
@@ -425,6 +427,7 @@
 }
 
 
+#pragma mark - 地理位置权限
 // 请求定位权限
 - (void)requestLocationAuthorization {
     if (!_currentManager) {
@@ -433,7 +436,6 @@
     _currentManager.delegate = self;
     [_currentManager requestAlwaysAuthorization];
     [_currentManager requestWhenInUseAuthorization];
-    
 }
 
 - (int)getLocationAuthorizationStatus {

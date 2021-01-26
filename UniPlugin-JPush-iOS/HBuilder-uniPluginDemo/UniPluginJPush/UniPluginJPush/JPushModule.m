@@ -218,7 +218,7 @@ UNI_EXPORT_METHOD(@selector(setIsAllowedInMessagePop:))
 UNI_EXPORT_METHOD(@selector(pullInMessage:))
 UNI_EXPORT_METHOD(@selector(addInMessageListener:))
 
-#pragma - 应用内消息
+#pragma mark - 应用内消息
 /**
  * 是否允许应用内消息弹出,默认为允许
  */
@@ -435,7 +435,7 @@ UNI_EXPORT_METHOD(@selector(deleteGeofence:))
 UNI_EXPORT_METHOD(@selector(addGeofenceListener:))
 
 
-#pragma - 地理围栏
+#pragma mark - 地理围栏
 - (void)setMaxGeofenceNumber:(NSInteger)maxCount {
     [self logger:@"setMaxGeofenceNumber with maxCount:" log:@(maxCount)];
     [JPUSHService setGeofenecMaxCount:maxCount];
@@ -459,7 +459,7 @@ UNI_EXPORT_METHOD(@selector(removeLocalNotification:))
 UNI_EXPORT_METHOD(@selector(clearLocalNotifications))
 
 
-#pragma - 本地通知
+#pragma mark - 本地通知
 
 - (void)addLocalNotificationListener:(UniModuleKeepAliveCallback)callback {
     [self logger:@"addLocalNotificationListener" log:nil];
@@ -602,7 +602,7 @@ UNI_EXPORT_METHOD(@selector(clearLocalNotifications))
 UNI_EXPORT_METHOD(@selector(initVoipService))
 UNI_EXPORT_METHOD(@selector(addVoipPushIncomingListener:))
 
-#pragma - voip
+#pragma mark - voip
 // 注册voip服务
 - (void)initVoipService {
     [self logger:@"initVoipService" log:nil];
@@ -614,7 +614,7 @@ UNI_EXPORT_METHOD(@selector(addVoipPushIncomingListener:))
     [JPushStore shared].voipCallback = callback;
 }
 
-#pragma - tools
+#pragma mark - other
 - (NSDictionary *)convertResultWithCode:(NSInteger)code content:(NSDictionary *)dicInfo {
     
     NSMutableDictionary *result = [NSMutableDictionary dictionary];

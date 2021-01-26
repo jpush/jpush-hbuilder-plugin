@@ -50,6 +50,8 @@ jpushModule.requestLocationAuthorization((result)=>{
 
 ### API - initVoipService()
 
+iOS9.0及以上可用
+
 #### 示例
 ```javascript
 jpushModule.initVoipService()

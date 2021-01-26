@@ -64,7 +64,8 @@ jpushModule.openSettingsForNotification((result)=>{
 ## 初始化函数
 
 ### API - initJPushService()
-如果在mainfest.json里 将JPUSH_DEFAULTINITJPUSH_IOS值配置为"true"，就不需要调用该初始化方法。
+初始化JPush接口。
+iOS端如果在mainfest.json里 将JPUSH_DEFAULTINITJPUSH_IOS值配置为"true"，插件内部将默认初始化JPush，用户则不需要调用该初始化方法。
 
 #### 示例
 ```javascript
@@ -468,7 +469,7 @@ jpushModule.getAllTags({
 |参数名称|参数类型|参数说明|
 |:-----:|:----:|:-----:|
 |sequence|number|请求时传入的序列号，会在回调时原样返回|
-|alias|string|有效的别名组成：字母（区分大小写）、数字、下划线、汉字、特殊字符@!#$&*+=.|
+|alias|string|有效的别名组成：字母（区分大小写）、数字、下划线、汉字、特殊字符@!#$&\*+=.\||
 
 #### 示例
 ```javascript
@@ -626,4 +627,9 @@ jpushModule.setMobileNumber({
 					mobileNumber: '15889230000'
 				})
 ```
+
+
+## 错误码
+
+请参考[极光官网](https://docs.jiguang.cn/jpush/client/iOS/ios_api/)
 
