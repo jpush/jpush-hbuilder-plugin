@@ -1,0 +1,2 @@
+include ':uniplugin_jpush'
+include ':app'

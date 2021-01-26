@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.jiguang.uniplugin_jpush">
+
+    <!-- Required -->
+    <permission
+        android:name="${applicationId}.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+    <!-- Required  一些系统要求的权限，如访问网络等 -->
+    <uses-permission android:name="${applicationId}.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 华为角标 -->
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+    <!-- Optional for location -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- Android Q后台定位权限 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+
+    <!--xiaomi_permission_start-->
+    <permission
+        android:name="${applicationId}.permission.MIPUSH_RECEIVE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="${applicationId}.permission.MIPUSH_RECEIVE" />
+    <!--xiaomi_permission_end-->
+    <!--oppo_permission_start-->
+    <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE" />
+    <uses-permission android:name="com.heytap.mcs.permission.RECIEVE_MCS_MESSAGE" />
+    <!--oppo_permission_end-->
+
+
+
+<!--    <uses-sdk tools:overrideLibrary="-->
+<!--     cn.jpush.android.thirdpush.fcm-->
+<!--    ,cn.jpush.android.thirdpush.huawei-->
+<!--    ,cn.jpush.android.thirdpush.meizu-->
+<!--    ,cn.jpush.android.thirdpush.oppo-->
+<!--    ,cn.jpush.android.thirdpush.vivo-->
+<!--    ,cn.jpush.android.thirdpush.xiaomi-->
+<!--    ,com.google.firebase.firebase_core-->
+<!--    ,com.google.firebase.messaging-->
+<!--    ,com.google.firebase.analytics.connector.impl-->
+<!--    ,com.google.firebase.measurement-->
+<!--    ,com.google.android.gms.measurement.api-->
+<!--    ,com.google.firebase.measurement_impl-->
+<!--    ,com.google.firebase.iid-->
+<!--    ,com.google.firebase-->
+<!--    ,com.google.firebase.iid.internal-->
+<!--    ,com.google.android.gms.base-->
+<!--    ,com.google.android.gms.tasks-->
+<!--    ,com.google.firebase.analytics.connector-->
+<!--    ,com.google.android.gms.stats-->
+<!--    ,com.google.android.gms.ads_identifier-->
+<!--    ,com.google.android.gms.cn.jiguang.uniplugin_jpush.common-->
+<!--    ,com.google.android.gms.measurement_base-->
+<!--    ,com.huawei.android.hms.openid-->
+<!--    ,com.huawei.agconnect.core-->
+<!--    ,com.huawei.hmf.tasks-->
+<!--    ,com.huawei.hms.framework.network.grs-->
+<!--    ,com.huawei.hms.framework.cn.jiguang.uniplugin_jpush.common-->
+<!--    ,com.huawei.android.hms.base-->
+<!--    ,com.huawei.android.hms.push-->
+<!--    ,android.support.mediacompat-->
+<!--    ,android.support.fragment-->
+<!--    ,android.support.coreutils-->
+<!--    ,android.support.coreui-->
+<!--    ,android.support.compat-->
+<!--    ,android.arch.lifecycle" />-->
+
+    <application>
+
+    <!--jpush_config_start-->
+    <!-- Rich push 核心功能 since 2.0.6 -->
+    <activity
+        android:name="cn.jpush.android.ui.PopWinActivity"
+        android:exported="true"
+        android:theme="@style/MyDialogStyle">
+        <intent-filter>
+            <category android:name="android.intent.category.DEFAULT" />
+
+            <action android:name="cn.jpush.android.ui.PopWinActivity" />
+
+            <category android:name="${applicationId}" />
+        </intent-filter>
+    </activity>
+
+    <!-- Required SDK核心功能 -->
+    <activity
+        android:name="cn.jpush.android.ui.PushActivity"
+        android:configChanges="orientation|keyboardHidden"
+        android:exported="true"
+        android:theme="@android:style/Theme.NoTitleBar">
+        <intent-filter>
+            <action android:name="cn.jpush.android.ui.PushActivity" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="${applicationId}" />
+        </intent-filter>
+    </activity>
+
+    <!-- since 3.5.0 Required SDK 核心功能 -->
+    <!-- 3.5.0新增，用于定时展示功能 -->
+    <receiver
+        android:name="cn.jpush.android.service.SchedulerReceiver"
+        android:exported="false" />
+
+    <!-- 3.6.7 新增，用于负反馈组件 -->
+    <service android:name="cn.jpush.android.service.MessagingIntentService" />
+
+    <!-- since 3.0.9 Required SDK 核心功能 -->
+    <provider
+        android:name="cn.jpush.android.service.DataProvider"
+        android:authorities="${applicationId}.DataProvider"
+        android:exported="false"
+        android:process=":pushcore" />
+    <!-- since 3.1.0 Required SDK 核心功能 -->
+    <provider
+        android:name="cn.jpush.android.service.DownloadProvider"
+        android:authorities="${applicationId}.DownloadProvider"
+        android:exported="true" />
+
+    <!-- since 3.3.0 Required SDK核心功能 -->
+    <activity
+        android:name="cn.jpush.android.service.JNotifyActivity"
+        android:exported="true"
+        android:taskAffinity="jpush.custom"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        <intent-filter>
+            <action android:name="cn.jpush.android.intent.JNotifyActivity" />
+
+            <category android:name="${applicationId}" />
+        </intent-filter>
+    </activity>
+    <!-- since 3.5.6 新增华硕通道 -->
+    <receiver android:name="cn.jpush.android.asus.AsusPushMessageReceiver" />
+    <!--jpush_config_end-->
+
+    <!--(jpush|jmessage)_config_start，jpush和jmessage公用的组件-->
+    <!-- Required SDK 核心功能 -->
+    <!-- 可配置android:process参数将PushService放在其他进程中 -->
+    <service
+        android:name="cn.jpush.android.service.PushService"
+        android:enabled="true"
+        android:exported="false"
+        android:process=":pushcore">
+        <intent-filter>
+            <action android:name="cn.jpush.android.intent.REGISTER" />
+            <action android:name="cn.jpush.android.intent.REPORT" />
+            <action android:name="cn.jpush.android.intent.PushService" />
+            <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+        </intent-filter>
+    </service>
+
+        <!-- Since JCore2.0.0 Required SDK核心功能-->
+        <!-- 可配置android:process参数将Service放在其他进程中；android:enabled属性不能是false -->
+        <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
+        <service android:name="cn.jpush.android.service.JCommonService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":pushcore">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service>
+
+        <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
+    <!-- 若不启用该功能可删除该组件，或把 enabled 设置成 false ；App 不会被其他 App 拉起，但会拉起其他的 App。 -->
+    <service
+        android:name="cn.jpush.android.service.DaemonService"
+        android:enabled="true"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="cn.jpush.android.intent.DaemonService" />
+
+            <category android:name="${applicationId}" />
+        </intent-filter>
+    </service>
+    <!-- 可选，如果使用静态Activity方式拉起，该组件必须声明 -->
+    <activity
+        android:name="cn.jpush.android.service.DActivity"
+        android:enabled="true"
+        android:exported="true"
+        android:taskAffinity="jpush.custom"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        <intent-filter>
+            <action android:name="cn.jpush.android.intent.DActivity" />
+
+            <category android:name="${applicationId}" />
+        </intent-filter>
+    </activity>
+
+    <!-- Required SDK核心功能 -->
+    <receiver
+        android:name="cn.jpush.android.service.PushReceiver"
+        android:enabled="true">
+        <intent-filter android:priority="1000">
+            <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" /> <!-- Required  显示通知栏 -->
+            <category android:name="${applicationId}" />
+        </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.USER_PRESENT" />
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+        </intent-filter>
+        <!-- Optional -->
+        <intent-filter>
+            <action android:name="android.intent.action.PACKAGE_ADDED" />
+            <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+            <data android:scheme="package" />
+        </intent-filter>
+    </receiver>
+
+    <!-- Required SDK核心功能 -->
+    <receiver
+        android:name="cn.jpush.android.service.AlarmReceiver"
+        android:exported="false" />
+    <!--(jpush|jmessage)_config_end-->
+
+
+        <receiver
+            android:name=".receiver.JPushModuleReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receiver.JPushBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </receiver>
+
+
+    <!--xiaomi_config_start-->
+    <service
+        android:name="com.xiaomi.push.service.XMJobService"
+        android:enabled="true"
+        android:exported="false"
+        android:permission="android.permission.BIND_JOB_SERVICE"
+        android:process=":pushcore" />
+    <service
+        android:name="com.xiaomi.push.service.XMPushService"
+        android:enabled="true"
+        android:process=":pushcore" />
+    <service
+        android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
+        android:enabled="true"
+        android:exported="true" />
+    <service
+        android:name="com.xiaomi.mipush.sdk.MessageHandleService"
+        android:enabled="true" />
+
+    <receiver
+        android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+    </receiver>
+    <receiver
+        android:name="com.xiaomi.push.service.receivers.PingReceiver"
+        android:exported="false"
+        android:process=":pushcore">
+        <intent-filter>
+            <action android:name="com.xiaomi.push.PING_TIMER" />
+        </intent-filter>
+    </receiver>
+    <receiver
+        android:name="cn.jpush.android.service.PluginXiaomiPlatformsReceiver"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
+        </intent-filter>
+        <intent-filter>
+            <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
+        </intent-filter>
+        <intent-filter>
+            <action android:name="com.xiaomi.mipush.ERROR" />
+        </intent-filter>
+    </receiver>
+
+
+    <!--xiaomi_config_end-->
+
+    <!--huawei_config_start-->
+    <service
+        android:name="cn.jpush.android.service.PluginHuaweiPlatformsService"
+        android:exported="false">
+        <intent-filter>
+            <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
+        </intent-filter>
+    </service>
+    <!--huawei_config_end-->
+
+    <!--meizu_config_start-->
+    <receiver android:name="cn.jpush.android.service.PluginMeizuPlatformsReceiver">
+        <intent-filter>
+            <!-- 接收 push 消息 -->
+            <action android:name="com.meizu.flyme.push.intent.MESSAGE" />
+            <!-- 接收 register 消息 -->
+            <action android:name="com.meizu.flyme.push.intent.REGISTER.FEEDBACK" />
+            <!-- 接收 unregister 消息-->
+            <action android:name="com.meizu.flyme.push.intent.UNREGISTER.FEEDBACK" />
+            <!-- 兼容低版本 Flyme3 推送服务配置 -->
+            <action android:name="com.meizu.c2dm.intent.REGISTRATION" />
+            <action android:name="com.meizu.c2dm.intent.RECEIVE" />
+
+            <category android:name="${applicationId}" />
+        </intent-filter>
+    </receiver>
+
+    <!--meizu_config_end-->
+
+    <!--fcm_config_start-->
+    <service android:name="cn.jpush.android.service.PluginFCMMessagingService">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        </intent-filter>
+    </service>
+    <!--fcm_config_end-->
+
+    <!--oppo_config_start-->
+    <service
+        android:name="cn.jpush.android.service.PluginOppoPushService"
+        android:permission="com.coloros.mcs.permission.SEND_MCS_MESSAGE">
+        <intent-filter>
+            <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE" />
+        </intent-filter>
+    </service>
+    <!-- since JPushv3.6.8 ，oppov2.1.0 oppo 核心功能-->
+    <service
+        android:name="com.heytap.msp.push.service.DataMessageCallbackService"
+        android:permission="com.heytap.mcs.permission.SEND_PUSH_MESSAGE">
+
+        <intent-filter>
+            <action android:name="com.heytap.mcs.action.RECEIVE_MCS_MESSAGE" />
+
+            <action android:name="com.heytap.msp.push.RECEIVE_MCS_MESSAGE" />
+        </intent-filter>
+    </service> <!--兼容Q版本-->
+    <!--oppo_config_end-->
+
+    <!--vivo_config_start-->
+    <receiver android:name="cn.jpush.android.service.PluginVivoMessageReceiver">
+        <intent-filter>
+            <!-- 接收 push 消息 -->
+            <action android:name="com.vivo.pushclient.action.RECEIVE" />
+        </intent-filter>
+    </receiver>
+    <service
+        android:name="com.vivo.push.sdk.service.CommandClientService"
+        android:exported="true" />
+    <activity
+        android:name="com.vivo.push.sdk.LinkProxyClientActivity"
+        android:exported="false"
+        android:screenOrientation="portrait"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+    <!--vivo_config_end-->
+
+    <!--Required_config-->
+
+
+
+    </application>
+
+</manifest>

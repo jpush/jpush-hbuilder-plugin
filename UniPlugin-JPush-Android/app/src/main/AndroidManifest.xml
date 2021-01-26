@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.HBuilder.UniPlugin">
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
+    <!-- Barcode(二维码)  begin -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <!-- Barcode(二维码)  end -->
+
+    <application
+        android:name="io.dcloud.application.DCloudApplication"
+        android:allowBackup="true"
+        android:allowClearUserData="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:debuggable="true"
+        android:supportsRtl="true">
+
+        <!-- 应用入口 -->
+        <activity
+            android:name="io.dcloud.PandoraEntry"
+            android:theme="@style/TranslucentTheme"
+            android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <data android:scheme="hbuilder"/>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+            <intent-filter>
+                <data android:mimeType="image/*"/>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <meta-data android:name="dcloud_uninview_background"
+            android:value="true"/>
+
+        <activity
+            android:name="io.dcloud.PandoraEntryActivity"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale|keyboard"
+            android:hardwareAccelerated="true"
+            android:permission="com.miui.securitycenter.permission.AppPermissionsEditor"
+            android:screenOrientation="user"
+            android:theme="@style/DCloudTheme"
+            android:windowSoftInputMode="adjustResize">
+
+            <intent-filter>
+
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+
+                <action
+                    android:name="android.intent.action.VIEW" />
+
+                <data
+                    android:scheme="h56131bcf" />
+            </intent-filter>
+        </activity>
+        <provider
+            android:name="io.dcloud.common.util.DCloud_FileProvider"
+            android:authorities="com.HBuilder.UniPlugin.dc.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/dcloud_file_provider" />
+        </provider>
+
+<!--        <meta-data-->
+<!--            android:name="XIAOMI_APPKEY"-->
+<!--            android:value="${XIAOMI_APPKEY}" />-->
+<!--        <meta-data-->
+<!--            android:name="XIAOMI_APPID"-->
+<!--            android:value="${XIAOMI_APPID}" />-->
+<!--        <meta-data-->
+<!--            android:name="MEIZU_APPKEY"-->
+<!--            android:value="${MEIZU_APPKEY}" />-->
+<!--        <meta-data-->
+<!--            android:name="MEIZU_APPID"-->
+<!--            android:value="${MEIZU_APPID}" />-->
+<!--        <meta-data-->
+<!--            android:name="OPPO_APPKEY"-->
+<!--            android:value="${OPPO_APPKEY}" />-->
+<!--        <meta-data-->
+<!--            android:name="OPPO_APPID"-->
+<!--            android:value="${OPPO_APPID}" />-->
+<!--        <meta-data-->
+<!--            android:name="OPPO_APPSECRET"-->
+<!--            android:value="${OPPO_APPSECRET}" />-->
+<!--        <meta-data-->
+<!--            android:name="com.vivo.push.api_key"-->
+<!--            android:value="${VIVO_APPKEY}" />-->
+<!--        <meta-data-->
+<!--            android:name="com.vivo.push.app_id"-->
+<!--            android:value="${VIVO_APPID}" />-->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="27c9be4f927b4c204e73b529" /> <!-- </>值来自开发者平台取得的AppKey -->
+    </application>
+
+</manifest>
