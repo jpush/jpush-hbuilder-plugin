@@ -13,7 +13,7 @@
 			}],
 			"hooksClass": "JPushProxy",
 			"integrateType": "framework",
-			"deploymentTarget": "8.0",
+			"deploymentTarget": "9.0",
 			"frameworks": [
                 "CFNetwork.framework",
                 "CoreFoundation.framework",
