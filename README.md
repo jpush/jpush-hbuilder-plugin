@@ -43,6 +43,10 @@ const jv = uni.requireNativePlugin('JG-JPush');
 | JPUSH_MEIZU_APPID   | android meizu appId（选填）                                | MZ-12345678 |
 | JPUSH_XIAOMI_APPKEY   | android xiaomi appKey（选填）                                | MI-12345678 |
 | JPUSH_XIAOMI_APPID   | android xiaomi appId（选填）                                | MI-12345678 |
+|JPUSH_ISPRODUCTION_IOS|iOS 是否是生产环境（选填）|是填true,不是填false或者不填|
+|JPUSH_ADVERTISINGID_IOS|iOS 广告标识符（IDFA）（选填）| 如果不需要使用IDFA，可不填|
+|JPUSH_DEFAULTINITJPUSH_IOS| iOS 是否默认初始化（选填）|是填true，不是填false或者不填|
+
 
 #### Android 厂商配置说明
 插件支持 OPPO VIVO 魅族 小米 四大厂商推送接入，如需接入请对应配置上述厂商信息。
@@ -69,3 +73,4 @@ const jv = uni.requireNativePlugin('JG-JPush');
 ## License
 
 MIT © [JiGuang](/license)
+
