@@ -24,21 +24,32 @@ import cn.jpush.android.api.NotificationMessage;
 
 public class JPushHelper {
 
+
     public static HashMap<String, JSCallback> eventCallback = new HashMap<>();
+
+    public static void sendNotifactionEvent(JSONObject params, int notificationType) {
+        if (notificationType != 1) {
+            JPushHelper.sendEvent(JConstants.NOTIFICATION_EVENT, params);
+        } else {
+            JPushHelper.sendEvent(JConstants.LOCAL_NOTIFICATION_EVENT, params);
+        }
+
+    }
+
     public static void sendEvent(String eventName, JSONObject params) {
         try {
-            if(!TextUtils.isEmpty(eventName)&&params!=null){
-                JLogger.e("sendEvent :"+eventName+" params:"+params);
+            if (!TextUtils.isEmpty(eventName) && params != null) {
+                JLogger.d("sendEvent :" + eventName + " params:" + params);
                 JSCallback jsCallback = eventCallback.get(eventName);
-                if(jsCallback!=null){
+                if (jsCallback != null) {
                     jsCallback.invokeAndKeepAlive(params);
-                    JLogger.e("sendEvent :"+eventName+" success");
+                    JLogger.e("sendEvent :" + eventName + " success");
                     return;
                 }
-                JLogger.e("sendEvent :"+eventName+" failed");
+                JLogger.e("sendEvent :" + eventName + " failed");
             }
-        }catch (Throwable throwable){
-            JLogger.e("sendEvent error:"+throwable.getMessage());
+        } catch (Throwable throwable) {
+            JLogger.e("sendEvent error:" + throwable.getMessage());
         }
     }
 
@@ -50,6 +61,17 @@ public class JPushHelper {
         jsonObject.put(JConstants.CONTENT, message.notificationContent);
         jsonObject.put(JConstants.ANDROID, JSONObject.parseObject(JSONObject.toJSONString(message)));
         convertExtras(message.notificationExtras, jsonObject);
+        return jsonObject;
+    }
+
+    public static JSONObject convertThirdOpenNotificationToMap(String msgId, String title, String content, String extra, String android) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(JConstants.NOTIFICATION_EVENT_TYPE, JConstants.NOTIFICATION_OPENED);
+        jsonObject.put(JConstants.MESSAGE_ID, msgId);
+        jsonObject.put(JConstants.TITLE, title);
+        jsonObject.put(JConstants.CONTENT, content);
+        jsonObject.put(JConstants.ANDROID, JSONObject.parseObject(android));
+        convertExtras(extra, jsonObject);
         return jsonObject;
     }
 
@@ -68,20 +90,20 @@ public class JPushHelper {
     public static JSONObject convertNotificationBundleToMap(String eventType, Bundle bundle) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(JConstants.NOTIFICATION_EVENT_TYPE, eventType);
-        jsonObject.put(JConstants.MESSAGE_ID, bundle.getString("cn.jpush.android.MSG_ID",""));
-        jsonObject.put(JConstants.TITLE, bundle.getString("cn.jpush.android.NOTIFICATION_CONTENT_TITLE",""));
-        jsonObject.put(JConstants.CONTENT, bundle.getString("cn.jpush.android.ALERT",""));
-        convertExtras(bundle.getString("cn.jpush.android.EXTRA",""), jsonObject);
+        jsonObject.put(JConstants.MESSAGE_ID, bundle.getString("cn.jpush.android.MSG_ID", ""));
+        jsonObject.put(JConstants.TITLE, bundle.getString("cn.jpush.android.NOTIFICATION_CONTENT_TITLE", ""));
+        jsonObject.put(JConstants.CONTENT, bundle.getString("cn.jpush.android.ALERT", ""));
+        convertExtras(bundle.getString("cn.jpush.android.EXTRA", ""), jsonObject);
         return jsonObject;
     }
 
-    public static JSONObject convertCustomMessage(CustomMessage customMessage ) {
+    public static JSONObject convertCustomMessage(CustomMessage customMessage) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(JConstants.MESSAGE_ID, customMessage.messageId);
         jsonObject.put(JConstants.TITLE, customMessage.title);
         jsonObject.put(JConstants.CONTENT, customMessage.message);
         convertExtras(customMessage.extra, jsonObject);
-        jsonObject.put(JConstants.ANDROID,JSONObject.parseObject(JSONObject.toJSONString(customMessage)));
+        jsonObject.put(JConstants.ANDROID, JSONObject.parseObject(JSONObject.toJSONString(customMessage)));
         return jsonObject;
     }
 
@@ -94,9 +116,9 @@ public class JPushHelper {
             case 1:
                 Set<String> tags = message.getTags();
                 JSONArray tagsArray = new JSONArray();
-                if(tags==null || tags.isEmpty()){
+                if (tags == null || tags.isEmpty()) {
                     JLogger.d("tags is empty");
-                }else {
+                } else {
                     for (String tag : tags) {
                         tagsArray.add(tag);
                     }
@@ -136,8 +158,36 @@ public class JPushHelper {
             Intent intent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             context.startActivity(intent);
-        }catch (Throwable throwable){
+        } catch (Throwable throwable) {
             JLogger.e("");
+        }
+    }
+
+    public static JSONObject OPEN_NOTIFICATION_DATA = null;
+    public static int OPEN_NOTIFICATION_TYPE = 0;
+    public static boolean IS_DESTROY = true;// 标识当前插件是否被销毁
+
+    /**
+     * 缓存通知点击信息，再用户注册监听后返回给用户
+     *
+     * @param jsonObject
+     */
+    public static void saveOpenNotifiData(JSONObject jsonObject, int type) {
+        if (IS_DESTROY) {
+            JLogger.d("saveOpenNotifiData:" + jsonObject);
+            OPEN_NOTIFICATION_DATA = jsonObject;
+            OPEN_NOTIFICATION_TYPE = type;
+        }
+    }
+
+    public static void sendCacheOpenNotifiToUser(int type) {
+        if (type == 0 && OPEN_NOTIFICATION_TYPE == 1) {
+            return;
+        }
+        if (!IS_DESTROY && OPEN_NOTIFICATION_DATA != null) {
+            JLogger.d("sendCacheOpenNotifiToUser:" + OPEN_NOTIFICATION_DATA);
+            sendNotifactionEvent(OPEN_NOTIFICATION_DATA, OPEN_NOTIFICATION_TYPE);
+            OPEN_NOTIFICATION_DATA = null;
         }
     }
 

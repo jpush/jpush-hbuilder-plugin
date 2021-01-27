@@ -26,6 +26,7 @@ public class JConstants {
     public static final String MESSAGE_ID = "messageID";
     public static final String TITLE = "title";
     public static final String CONTENT = "content";
+    public static final String PLATFORM = "platform";
     public static final String EXTRAS = "extras";
     public static final String ANDROID = "android";//透传所有消息字段
     //消息事件类型

@@ -64,40 +64,75 @@
 				{
 					"type": "module",
 					"name": "JG-JPush",
-					"class": "cn.jiguang.uniplugin_jverification.JVerificationWXModule"
+					"class": "cn.jiguang.uniplugin_jpush.JPushModule"
 				}
 			],
 			"integrateType": "aar",
-			"minSdkVersion": "16",
+			"minSdkVersion": "19",
 			"permissions": [
+				"${applicationId}.permission.JPUSH_MESSAGE",
+				"android.permission.RECEIVE_USER_PRESENT",
 				"android.permission.INTERNET",
 				"android.permission.READ_PHONE_STATE",
 				"android.permission.WRITE_EXTERNAL_STORAGE",
+				"android.permission.READ_EXTERNAL_STORAGE",
+				"android.permission.WRITE_SETTINGS",
+				"android.permission.MOUNT_UNMOUNT_FILESYSTEMS",
 				"android.permission.ACCESS_NETWORK_STATE",
 				"android.permission.ACCESS_WIFI_STATE",
-				"android.permission.CHANGE_NETWORK_STATE",
-				"android.permission.WRITE_SETTINGS",
-				"android.permission.SYSTEM_ALERT_WINDOW",
-				"android.permission.CHANGE_WIFI_STATE",
-				"android.permission.GET_TASKS",
+				"com.huawei.android.launcher.permission.CHANGE_BADGE",
 				"android.permission.VIBRATE",
-				"android.permission.WAKE_LOCK"
+				"android.permission.SYSTEM_ALERT_WINDOW",
+				"android.permission.ACCESS_COARSE_LOCATION",
+				"android.permission.CHANGE_WIFI_STATE",
+				"android.permission.ACCESS_FINE_LOCATION",
+				"android.permission.ACCESS_BACKGROUND_LOCATION",
+				"android.permission.ACCESS_LOCATION_EXTRA_COMMANDS",
+				"android.permission.CHANGE_NETWORK_STATE",
+				"android.permission.GET_TASKS",
+				"android.permission.QUERY_ALL_PACKAGES",
+				"${applicationId}.permission.MIPUSH_RECEIVE",
+				"com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE",
+				"com.heytap.mcs.permission.RECIEVE_MCS_MESSAGE"
 			],
-			"abis": [  
-				"armeabi-v7a",  
-				"arm64-v8a",
-				"x86"  
-			],
-			"parameters": {  
-                "JPUSH_APPKEY_ANDROID": {  
-                    "des": "[Android]极光 portal 配置应用信息时分配的 AppKey",  
-                    "key": "JPUSH_APPKEY"  
+			"parameters": {
+				"JPUSH_OPPO_APPKEY": {
+					"des": "厂商 oppo appkey,示例：OP-12345678",
+					"key": "OPPO_APPKEY"
 				},
-				"JPUSH_CHANNEL_ANDROID":{
-					"des": "[Android]用于统计分发渠道，不需要可填默认值 developer-default",  
-                    "key": "JPUSH_CHANNEL"
+				"JPUSH_OPPO_APPID":{
+					"des": "厂商 oppo appId,示例：OP-12345678",
+					"key": "OPPO_APPID"
+				},
+				"JPUSH_OPPO_APPSECRET":{
+					"des": "厂商 oppo appSecret,示例：OP-12345678",
+					"key": "OPPO_APPSECRET"
+				},
+				"JPUSH_VIVO_APPKEY":{
+					"des": "厂商 vivo appkey,示例：12345678",
+					"key": "com.vivo.push.api_key"
+				},
+				"JPUSH_VIVO_APPID":{
+					"des": "厂商 vivo appId,示例：12345678",
+					"key": "com.vivo.push.app_id"
+				},
+				"JPUSH_MEIZU_APPKEY":{
+					"des": "厂商 meizu appKey,示例：MZ-12345678",
+					"key": "MEIZU_APPKEY"
+				},
+				"JPUSH_MEIZU_APPID":{
+					"des": "厂商 meizu appId,示例：MZ-12345678",
+					"key": "MEIZU_APPID"
+				},
+				"JPUSH_XIAOMI_APPKEY":{
+					"des": "厂商 xiaomi appKey,示例：MI-12345678",
+					"key": "XIAOMI_APPKEY"
+				},
+				"JPUSH_XIAOMI_APPID":{
+					"des": "厂商 xiaomi appId,示例：MI-12345678",
+					"key": "XIAOMI_APPID"
 				}
-            }
+			}
 		}
 	}
 }

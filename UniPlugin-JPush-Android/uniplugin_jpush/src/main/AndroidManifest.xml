@@ -304,15 +304,15 @@
 
     <!--xiaomi_config_end-->
 
-    <!--huawei_config_start-->
-    <service
-        android:name="cn.jpush.android.service.PluginHuaweiPlatformsService"
-        android:exported="false">
-        <intent-filter>
-            <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
-        </intent-filter>
-    </service>
-    <!--huawei_config_end-->
+<!--    &lt;!&ndash;huawei_config_start&ndash;&gt;-->
+<!--    <service-->
+<!--        android:name="cn.jpush.android.service.PluginHuaweiPlatformsService"-->
+<!--        android:exported="false">-->
+<!--        <intent-filter>-->
+<!--            <action android:name="com.huawei.push.action.MESSAGING_EVENT" />-->
+<!--        </intent-filter>-->
+<!--    </service>-->
+<!--    &lt;!&ndash;huawei_config_end&ndash;&gt;-->
 
     <!--meizu_config_start-->
     <receiver android:name="cn.jpush.android.service.PluginMeizuPlatformsReceiver">
@@ -333,13 +333,13 @@
 
     <!--meizu_config_end-->
 
-    <!--fcm_config_start-->
-    <service android:name="cn.jpush.android.service.PluginFCMMessagingService">
-        <intent-filter>
-            <action android:name="com.google.firebase.MESSAGING_EVENT" />
-        </intent-filter>
-    </service>
-    <!--fcm_config_end-->
+<!--    &lt;!&ndash;fcm_config_start&ndash;&gt;-->
+<!--    <service android:name="cn.jpush.android.service.PluginFCMMessagingService">-->
+<!--        <intent-filter>-->
+<!--            <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+<!--        </intent-filter>-->
+<!--    </service>-->
+<!--    &lt;!&ndash;fcm_config_end&ndash;&gt;-->
 
     <!--oppo_config_start-->
     <service
@@ -380,8 +380,15 @@
 
     <!--vivo_config_end-->
 
-    <!--Required_config-->
-
+        <activity
+            android:name="cn.jiguang.uniplugin_jpush.OpenClickActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="cn.jiguang.uniplugin_jpush.OpenClickActivity" />
+            </intent-filter>
+        </activity>
 
 
     </application>

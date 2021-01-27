@@ -92,39 +92,39 @@
                 android:resource="@xml/dcloud_file_provider" />
         </provider>
 
-<!--        <meta-data-->
-<!--            android:name="XIAOMI_APPKEY"-->
-<!--            android:value="${XIAOMI_APPKEY}" />-->
-<!--        <meta-data-->
-<!--            android:name="XIAOMI_APPID"-->
-<!--            android:value="${XIAOMI_APPID}" />-->
-<!--        <meta-data-->
-<!--            android:name="MEIZU_APPKEY"-->
-<!--            android:value="${MEIZU_APPKEY}" />-->
-<!--        <meta-data-->
-<!--            android:name="MEIZU_APPID"-->
-<!--            android:value="${MEIZU_APPID}" />-->
-<!--        <meta-data-->
-<!--            android:name="OPPO_APPKEY"-->
-<!--            android:value="${OPPO_APPKEY}" />-->
-<!--        <meta-data-->
-<!--            android:name="OPPO_APPID"-->
-<!--            android:value="${OPPO_APPID}" />-->
-<!--        <meta-data-->
-<!--            android:name="OPPO_APPSECRET"-->
-<!--            android:value="${OPPO_APPSECRET}" />-->
-<!--        <meta-data-->
-<!--            android:name="com.vivo.push.api_key"-->
-<!--            android:value="${VIVO_APPKEY}" />-->
-<!--        <meta-data-->
-<!--            android:name="com.vivo.push.app_id"-->
-<!--            android:value="${VIVO_APPID}" />-->
+        <meta-data
+            android:name="XIAOMI_APPKEY"
+            android:value="MI-123" />
+        <meta-data
+            android:name="XIAOMI_APPID"
+            android:value="MI-123" />
+        <meta-data
+            android:name="MEIZU_APPKEY"
+            android:value="MZ-123" />
+        <meta-data
+            android:name="MEIZU_APPID"
+            android:value="MZ-123" />
+        <meta-data
+            android:name="OPPO_APPKEY"
+            android:value="OP-123" />
+        <meta-data
+            android:name="OPPO_APPID"
+            android:value="OP-123" />
+        <meta-data
+            android:name="OPPO_APPSECRET"
+            android:value="OP-123" />
+        <meta-data
+            android:name="com.vivo.push.api_key"
+            android:value="123" />
+        <meta-data
+            android:name="com.vivo.push.app_id"
+            android:value="233" />
         <meta-data
             android:name="JPUSH_CHANNEL"
             android:value="default" />
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="27c9be4f927b4c204e73b529" /> <!-- </>值来自开发者平台取得的AppKey -->
+            android:value="7b4b94cca0d185d611e53cca" /> <!-- </>值来自开发者平台取得的AppKey -->
     </application>
 
 </manifest>

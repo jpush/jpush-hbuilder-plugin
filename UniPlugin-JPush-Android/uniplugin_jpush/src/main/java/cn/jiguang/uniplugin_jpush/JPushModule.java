@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.taobao.weex.bridge.JSCallback;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,57 +31,59 @@ public class JPushModule extends UniDestroyableModule {
     public static boolean isAppForeground = false;
     public static Context uniContext = null;
 
+    public void updatePluginStatu() {
+        uniContext = mWXSDKInstance.getContext();
+        JPushHelper.IS_DESTROY = false;
+    }
+
     @UniJSMethod(uiThread = true)
     public void setLoggerEnable(boolean enable) {
-        uniContext = mWXSDKInstance.getContext();
+        updatePluginStatu();
         JPushInterface.setDebugMode(enable);
         JLogger.setLoggerEnable(enable);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void initJPushService() {
-        uniContext = mWXSDKInstance.getContext();
-JPushInterface.init(mWXSDKInstance.getContext());
+        updatePluginStatu();
+        JPushInterface.init(mWXSDKInstance.getContext());
         if (JPushBroadcastReceiver.NOTIFICATION_BUNDLE != null) {
-        uniContext = mWXSDKInstance.getContext();
-JSONObject jsonObject = JPushHelper.convertNotificationBundleToMap(JConstants.NOTIFICATION_OPENED, JPushBroadcastReceiver.NOTIFICATION_BUNDLE);
+            JSONObject jsonObject = JPushHelper.convertNotificationBundleToMap(JConstants.NOTIFICATION_OPENED, JPushBroadcastReceiver.NOTIFICATION_BUNDLE);
             JPushHelper.sendEvent(JConstants.NOTIFICATION_EVENT, jsonObject);
             JPushBroadcastReceiver.NOTIFICATION_BUNDLE = null;
         }
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void stopPush() {
-        uniContext = mWXSDKInstance.getContext();
-JPushInterface.stopPush(mWXSDKInstance.getContext());
+        updatePluginStatu();
+        JPushInterface.stopPush(mWXSDKInstance.getContext());
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void resumePush() {
-        uniContext = mWXSDKInstance.getContext();
-JPushInterface.resumePush(mWXSDKInstance.getContext());
+        updatePluginStatu();
+        JPushInterface.resumePush(mWXSDKInstance.getContext());
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void isPushStopped(JSCallback callback) {
-        uniContext = mWXSDKInstance.getContext();
-boolean isPushStopped = JPushInterface.isPushStopped(mWXSDKInstance.getContext());
+        updatePluginStatu();
+        boolean isPushStopped = JPushInterface.isPushStopped(mWXSDKInstance.getContext());
         if (callback == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.CALLBACK_NULL);
+            JLogger.w(JConstants.CALLBACK_NULL);
             return;
         }
-         JSONObject jsonObject = new JSONObject();
-         jsonObject.put(JConstants.CODE, isPushStopped?0:1);
-         callback.invoke(jsonObject);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(JConstants.CODE, isPushStopped ? 0 : 1);
+        callback.invoke(jsonObject);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void setChannel(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         String channel = readableMap.getString(JConstants.CHANNEL);
@@ -91,29 +94,25 @@ JLogger.w(JConstants.PARAMS_NULL);
         }
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void setPushTime(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         JSONArray readableArray = readableMap.getJSONArray(JConstants.PUSH_TIME_DAYS);
         int startHour = readableMap.getIntValue(JConstants.PUSH_TIME_START_HOUR);
         int endHour = readableMap.getIntValue(JConstants.PUSH_TIME_END_HOUR);
         if (readableArray == null || startHour < 0 || startHour > 23 || endHour < 0 || endHour > 23) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         Set<Integer> days = new HashSet<Integer>();
         for (int i = 0; i < readableArray.size(); i++) {
-        uniContext = mWXSDKInstance.getContext();
-int day = readableArray.getIntValue(i);
+            int day = readableArray.getIntValue(i);
             if (day > 6 || day < 0) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+                JLogger.w(JConstants.PARAMS_NULL);
                 return;
             }
             days.add(day);
@@ -121,12 +120,11 @@ JLogger.w(JConstants.PARAMS_NULL);
         JPushInterface.setPushTime(mWXSDKInstance.getContext(), days, startHour, endHour);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void setSilenceTime(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         int startHour = readableMap.getIntValue(JConstants.SILENCE_TIME_START_HOUR);
@@ -134,46 +132,42 @@ JLogger.w(JConstants.PARAMS_NULL);
         int endHour = readableMap.getIntValue(JConstants.SILENCE_TIME_END_HOUR);
         int endMinute = readableMap.getIntValue(JConstants.SILENCE_TIME_END_MINUTE);
         if (startHour == 0 || startMinute == 0 || endHour == 0 || endMinute == 0) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         JPushInterface.setSilenceTime(mWXSDKInstance.getContext(), startHour, startMinute, endHour, endMinute);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void getRegistrationID(JSCallback callback) {
-        uniContext = mWXSDKInstance.getContext();
-if (callback == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.CALLBACK_NULL);
+        updatePluginStatu();
+        if (callback == null) {
+            JLogger.w(JConstants.CALLBACK_NULL);
             return;
         }
         String registrationID = JPushInterface.getRegistrationID(mWXSDKInstance.getContext());
         JSONObject jsonObject = new JSONObject();
-         jsonObject.put(JConstants.REGISTRATION_ID, registrationID);
-         jsonObject.put(JConstants.CODE, JConstants.CODE_SUCESS);
+        jsonObject.put(JConstants.REGISTRATION_ID, registrationID);
+        jsonObject.put(JConstants.CODE, JConstants.CODE_SUCESS);
         callback.invoke(jsonObject);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void getUdid(JSCallback callback) {
-        uniContext = mWXSDKInstance.getContext();
-if (callback == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.CALLBACK_NULL);
+        updatePluginStatu();
+        if (callback == null) {
+            JLogger.w(JConstants.CALLBACK_NULL);
             return;
         }
         String udid = JPushInterface.getUdid(mWXSDKInstance.getContext());
         callback.invoke(udid);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void setLatestNotificationNumber(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         if (readableMap.containsKey(JConstants.NOTIFICATION_MAX_NUMBER)) {
@@ -184,32 +178,29 @@ JLogger.w(JConstants.PARAMS_NULL);
         }
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void setDefaultPushNotificationBuilder(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         BasicPushNotificationBuilder builder = new BasicPushNotificationBuilder(mWXSDKInstance.getContext());
         JPushInterface.setDefaultPushNotificationBuilder(builder);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void filterValidTags(JSONObject readableMap, JSCallback callback) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         if (readableMap.containsKey(JConstants.TAGS)) {
             JSONArray tags = readableMap.getJSONArray(JConstants.TAGS);
             Set<String> tagSet = new HashSet<>();
             for (int i = 0; i < tags.size(); i++) {
-        uniContext = mWXSDKInstance.getContext();
-String tag = tags.getString(i);
+                String tag = tags.getString(i);
                 tagSet.add(tag);
             }
             JPushInterface.filterValidTags(tagSet);
@@ -218,12 +209,11 @@ String tag = tags.getString(i);
         }
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void updateTags(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         if (readableMap.containsKey(JConstants.TAGS)) {
@@ -231,8 +221,7 @@ JLogger.w(JConstants.PARAMS_NULL);
             int sequence = readableMap.getIntValue(JConstants.SEQUENCE);
             Set<String> tagSet = new HashSet<>();
             for (int i = 0; i < tags.size(); i++) {
-        uniContext = mWXSDKInstance.getContext();
-String tag = tags.getString(i);
+                String tag = tags.getString(i);
                 tagSet.add(tag);
             }
             JPushInterface.setTags(mWXSDKInstance.getContext(), sequence, tagSet);
@@ -241,12 +230,11 @@ String tag = tags.getString(i);
         }
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void addTags(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         if (readableMap.containsKey(JConstants.TAGS)) {
@@ -254,8 +242,7 @@ JLogger.w(JConstants.PARAMS_NULL);
             int sequence = readableMap.getIntValue(JConstants.SEQUENCE);
             Set<String> tagSet = new HashSet<>();
             for (int i = 0; i < tags.size(); i++) {
-        uniContext = mWXSDKInstance.getContext();
-String tag = tags.getString(i);
+                String tag = tags.getString(i);
                 tagSet.add(tag);
             }
             JPushInterface.addTags(mWXSDKInstance.getContext(), sequence, tagSet);
@@ -264,12 +251,11 @@ String tag = tags.getString(i);
         }
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void deleteTags(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         if (readableMap.containsKey(JConstants.TAGS)) {
@@ -277,8 +263,7 @@ JLogger.w(JConstants.PARAMS_NULL);
             int sequence = readableMap.getIntValue(JConstants.SEQUENCE);
             Set<String> tagSet = new HashSet<>();
             for (int i = 0; i < tags.size(); i++) {
-        uniContext = mWXSDKInstance.getContext();
-String tag = tags.getString(i);
+                String tag = tags.getString(i);
                 tagSet.add(tag);
             }
             JPushInterface.deleteTags(mWXSDKInstance.getContext(), sequence, tagSet);
@@ -287,12 +272,11 @@ String tag = tags.getString(i);
         }
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void cleanTags(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         int sequence = readableMap.getIntValue(JConstants.SEQUENCE);
@@ -301,10 +285,9 @@ JLogger.w(JConstants.PARAMS_NULL);
 
     @UniJSMethod(uiThread = true)
     public void queryTag(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         int sequence = readableMap.getIntValue(JConstants.SEQUENCE);
@@ -312,12 +295,11 @@ JLogger.w(JConstants.PARAMS_NULL);
         JPushInterface.checkTagBindState(mWXSDKInstance.getContext(), sequence, tag);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void getAllTags(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         int sequence = readableMap.getIntValue(JConstants.SEQUENCE);
@@ -325,13 +307,11 @@ JLogger.w(JConstants.PARAMS_NULL);
     }
 
 
-
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void setAlias(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         int sequence = readableMap.getIntValue(JConstants.SEQUENCE);
@@ -339,36 +319,33 @@ JLogger.w(JConstants.PARAMS_NULL);
         JPushInterface.setAlias(mWXSDKInstance.getContext(), sequence, alias);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void deleteAlias(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         int sequence = readableMap.getIntValue(JConstants.SEQUENCE);
         JPushInterface.deleteAlias(mWXSDKInstance.getContext(), sequence);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void queryAlias(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         int sequence = readableMap.getIntValue(JConstants.SEQUENCE);
         JPushInterface.getAlias(mWXSDKInstance.getContext(), sequence);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void setMobileNumber(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         int sequence = readableMap.getIntValue(JConstants.SEQUENCE);
@@ -376,42 +353,41 @@ JLogger.w(JConstants.PARAMS_NULL);
         JPushInterface.setMobileNumber(mWXSDKInstance.getContext(), sequence, mobileNumber);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void onResume() {
-        uniContext = mWXSDKInstance.getContext();
-JPushInterface.onResume(mWXSDKInstance.getContext());
+        updatePluginStatu();
+        JPushInterface.onResume(mWXSDKInstance.getContext());
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void onPause() {
-        uniContext = mWXSDKInstance.getContext();
-JPushInterface.onPause(mWXSDKInstance.getContext());
+        updatePluginStatu();
+        JPushInterface.onPause(mWXSDKInstance.getContext());
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void onKillProcess() {
-        uniContext = mWXSDKInstance.getContext();
-JPushInterface.onKillProcess(mWXSDKInstance.getContext());
+        updatePluginStatu();
+        JPushInterface.onKillProcess(mWXSDKInstance.getContext());
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void initCrashHandler() {
-        uniContext = mWXSDKInstance.getContext();
-JPushInterface.initCrashHandler(mWXSDKInstance.getContext());
+        updatePluginStatu();
+        JPushInterface.initCrashHandler(mWXSDKInstance.getContext());
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void stopCrashHandler() {
-        uniContext = mWXSDKInstance.getContext();
-JPushInterface.stopCrashHandler(mWXSDKInstance.getContext());
+        updatePluginStatu();
+        JPushInterface.stopCrashHandler(mWXSDKInstance.getContext());
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void addLocalNotification(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         if (!readableMap.containsKey(JConstants.MESSAGE_ID)) {
@@ -419,7 +395,7 @@ JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         String notificationID = readableMap.getString(JConstants.MESSAGE_ID);
-        if(notificationID==null || TextUtils.isEmpty(notificationID)){
+        if (notificationID == null || TextUtils.isEmpty(notificationID)) {
             JLogger.w(JConstants.PARAMS_ILLEGAL);
             return;
         }
@@ -437,17 +413,16 @@ JLogger.w(JConstants.PARAMS_NULL);
         JPushInterface.addLocalNotification(mWXSDKInstance.getContext(), notification);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void removeLocalNotification(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         if (readableMap.containsKey(JConstants.MESSAGE_ID)) {
             String notificationID = readableMap.getString(JConstants.MESSAGE_ID);
-            if(notificationID==null || TextUtils.isEmpty(notificationID)){
+            if (notificationID == null || TextUtils.isEmpty(notificationID)) {
                 JLogger.w(JConstants.PARAMS_ILLEGAL);
                 return;
             }
@@ -458,24 +433,23 @@ JLogger.w(JConstants.PARAMS_NULL);
         }
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void clearLocalNotifications() {
-        uniContext = mWXSDKInstance.getContext();
-JPushInterface.clearLocalNotifications(mWXSDKInstance.getContext());
+        updatePluginStatu();
+        JPushInterface.clearLocalNotifications(mWXSDKInstance.getContext());
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void requestPermission() {
-        uniContext = mWXSDKInstance.getContext();
-JPushInterface.requestPermission(mWXSDKInstance.getContext());
+        updatePluginStatu();
+        JPushInterface.requestPermission(mWXSDKInstance.getContext());
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void setGeofenceInterval(JSONObject readableMap) {
-        uniContext = mWXSDKInstance.getContext();
-if (readableMap == null) {
-        uniContext = mWXSDKInstance.getContext();
-JLogger.w(JConstants.PARAMS_NULL);
+        updatePluginStatu();
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
         if (readableMap.containsKey(JConstants.GEO_FENCE_INTERVAL)) {
@@ -486,15 +460,15 @@ JLogger.w(JConstants.PARAMS_NULL);
         }
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void setMaxGeofenceNumber(int maxNumber) {
-        uniContext = mWXSDKInstance.getContext();
-JPushInterface.setMaxGeofenceNumber(mWXSDKInstance.getContext(), maxNumber);
+        updatePluginStatu();
+        JPushInterface.setMaxGeofenceNumber(mWXSDKInstance.getContext(), maxNumber);
     }
 
-     @UniJSMethod(uiThread = true)
+    @UniJSMethod(uiThread = true)
     public void deleteGeofence(String id) {
-         uniContext = mWXSDKInstance.getContext();
+        updatePluginStatu();
         if (!TextUtils.isEmpty(id)) {
             JPushInterface.deleteGeofence(mWXSDKInstance.getContext(), id);
         } else {
@@ -504,55 +478,55 @@ JPushInterface.setMaxGeofenceNumber(mWXSDKInstance.getContext(), maxNumber);
 
     @UniJSMethod(uiThread = true)
     public void setBadge(int number) {
-        uniContext = mWXSDKInstance.getContext();
-        JPushInterface.setBadgeNumber(mWXSDKInstance.getContext(),number);
+        updatePluginStatu();
+        JPushInterface.setBadgeNumber(mWXSDKInstance.getContext(), number);
     }
 
-     @UniJSMethod(uiThread = true)
-    public void clearAllNotifications(){
-         uniContext = mWXSDKInstance.getContext();
+    @UniJSMethod(uiThread = true)
+    public void clearAllNotifications() {
+        updatePluginStatu();
         JPushInterface.clearAllNotifications(mWXSDKInstance.getContext());
     }
 
-     @UniJSMethod(uiThread = true)
-    public void clearNotificationById(JSONObject readableMap){
-         uniContext = mWXSDKInstance.getContext();
-        if (readableMap == null){
+    @UniJSMethod(uiThread = true)
+    public void clearNotificationById(JSONObject readableMap) {
+        updatePluginStatu();
+        if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
             return;
         }
-        if (readableMap.containsKey(JConstants.NOTIFICATION_ID)){
+        if (readableMap.containsKey(JConstants.NOTIFICATION_ID)) {
             Integer id = readableMap.getIntValue(JConstants.NOTIFICATION_ID);
-            JPushInterface.clearNotificationById(mWXSDKInstance.getContext(),id);
-        }else {
+            JPushInterface.clearNotificationById(mWXSDKInstance.getContext(), id);
+        } else {
             JLogger.w("there are no " + JConstants.GEO_FENCE_ID);
         }
     }
 
-     @UniJSMethod(uiThread = true)
-    public void setPowerSaveMode(boolean bool){
-         uniContext = mWXSDKInstance.getContext();
-        JPushInterface.setPowerSaveMode(mWXSDKInstance.getContext(),bool);
-    }
-
-     @UniJSMethod(uiThread = true)
-    public void isNotificationEnabled(JSCallback callback){
-         uniContext = mWXSDKInstance.getContext();
-        Integer isEnabled = JPushInterface.isNotificationEnabled(mWXSDKInstance.getContext());
-        if (callback == null){
-            JLogger.w(JConstants.CALLBACK_NULL);
-            return;
-        }
-         JSONObject jsonObject = new JSONObject();
-         jsonObject.put(JConstants.CODE, isEnabled);
-         callback.invoke(jsonObject);
+    @UniJSMethod(uiThread = true)
+    public void setPowerSaveMode(boolean bool) {
+        updatePluginStatu();
+        JPushInterface.setPowerSaveMode(mWXSDKInstance.getContext(), bool);
     }
 
     @UniJSMethod(uiThread = true)
-    public void openSettingsForNotification(JSCallback callback){
-        uniContext = mWXSDKInstance.getContext();
-       JPushInterface.goToAppNotificationSettings(mWXSDKInstance.getContext());
-        if (callback == null){
+    public void isNotificationEnabled(JSCallback callback) {
+        updatePluginStatu();
+        Integer isEnabled = JPushInterface.isNotificationEnabled(mWXSDKInstance.getContext());
+        if (callback == null) {
+            JLogger.w(JConstants.CALLBACK_NULL);
+            return;
+        }
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(JConstants.CODE, isEnabled);
+        callback.invoke(jsonObject);
+    }
+
+    @UniJSMethod(uiThread = true)
+    public void openSettingsForNotification(JSCallback callback) {
+        updatePluginStatu();
+        JPushInterface.goToAppNotificationSettings(mWXSDKInstance.getContext());
+        if (callback == null) {
             JLogger.w(JConstants.CALLBACK_NULL);
             return;
         }
@@ -562,76 +536,85 @@ JPushInterface.setMaxGeofenceNumber(mWXSDKInstance.getContext(), maxNumber);
     }
 
     @UniJSMethod(uiThread = true)
-    public void addConnectEventListener(JSCallback callback){
-        if(callback!=null){
+    public void addConnectEventListener(JSCallback callback) {
+        updatePluginStatu();
+        if (callback != null) {
             JLogger.w("addConnectEventListener");
-            JPushHelper.eventCallback.put(JConstants.CONNECT_EVENT,callback);
+            JPushHelper.eventCallback.put(JConstants.CONNECT_EVENT, callback);
         }
     }
 
 
-
     @UniJSMethod(uiThread = true)
-    public void addNotificationListener(JSCallback callback){
-        if(callback!=null){
+    public void addNotificationListener(JSCallback callback) {
+        updatePluginStatu();
+        if (callback != null) {
             JLogger.w("addNotificationListener");
-            JPushHelper.eventCallback.put(JConstants.NOTIFICATION_EVENT,callback);
+            JPushHelper.eventCallback.put(JConstants.NOTIFICATION_EVENT, callback);
+            JPushHelper.sendCacheOpenNotifiToUser(0);
         }
     }
 
     @UniJSMethod(uiThread = true)
-    public void addCustomMessageListener(JSCallback callback){
-        if(callback!=null){
+    public void addCustomMessageListener(JSCallback callback) {
+        updatePluginStatu();
+        if (callback != null) {
             JLogger.w("addCustomMessageListener");
-            JPushHelper.eventCallback.put(JConstants.CUSTOM_MESSAGE_EVENT,callback);
+            JPushHelper.eventCallback.put(JConstants.CUSTOM_MESSAGE_EVENT, callback);
         }
     }
 
     @UniJSMethod(uiThread = true)
-    public void addInMessageListener(JSCallback callback){
-        if(callback!=null){
+    public void addInMessageListener(JSCallback callback) {
+        updatePluginStatu();
+        if (callback != null) {
             JLogger.w("addInMessageListener");
-            JPushHelper.eventCallback.put(JConstants.INAPP_MESSAGE_EVENT,callback);
+            JPushHelper.eventCallback.put(JConstants.INAPP_MESSAGE_EVENT, callback);
         }
     }
 
     @UniJSMethod(uiThread = true)
-    public void addLocalNotificationListener(JSCallback callback){
-        if(callback!=null){
+    public void addLocalNotificationListener(JSCallback callback) {
+        updatePluginStatu();
+        if (callback != null) {
             JLogger.w("addCustomMessageListener");
-            JPushHelper.eventCallback.put(JConstants.LOCAL_NOTIFICATION_EVENT,callback);
+            JPushHelper.eventCallback.put(JConstants.LOCAL_NOTIFICATION_EVENT, callback);
+            JPushHelper.sendCacheOpenNotifiToUser(1);
         }
     }
 
     @UniJSMethod(uiThread = true)
-    public void addMobileNumberListener(JSCallback callback){
-        if(callback!=null){
+    public void addMobileNumberListener(JSCallback callback) {
+        updatePluginStatu();
+        if (callback != null) {
             JLogger.w("addMobileNumberListener");
-            JPushHelper.eventCallback.put(JConstants.MOBILE_NUMBER_EVENT,callback);
+            JPushHelper.eventCallback.put(JConstants.MOBILE_NUMBER_EVENT, callback);
         }
     }
 
     @UniJSMethod(uiThread = true)
-    public void addCommandListener(JSCallback callback){
-        if(callback!=null){
+    public void addCommandListener(JSCallback callback) {
+        updatePluginStatu();
+        if (callback != null) {
             JLogger.w("addCommandListener");
-            JPushHelper.eventCallback.put(JConstants.COMMAND_EVENT,callback);
+            JPushHelper.eventCallback.put(JConstants.COMMAND_EVENT, callback);
         }
     }
 
     @UniJSMethod(uiThread = true)
-    public void setIsAllowedInMessagePop(boolean allowedInMessagePop){
+    public void setIsAllowedInMessagePop(boolean allowedInMessagePop) {
+        updatePluginStatu();
         JPushModuleReceiver.IS_NEED_SHOW_INAPP_MESSAGE = allowedInMessagePop;
     }
 
     @UniJSMethod(uiThread = true)
-    public void addTagAliasListener(JSCallback callback){
-        if(callback!=null){
+    public void addTagAliasListener(JSCallback callback) {
+        updatePluginStatu();
+        if (callback != null) {
             JLogger.w("addTagAliasListener");
-            JPushHelper.eventCallback.put(JConstants.TAG_ALIAS_EVENT,callback);
+            JPushHelper.eventCallback.put(JConstants.TAG_ALIAS_EVENT, callback);
         }
     }
-
 
 
     //*****************************应用前后台状态监听*****************************
@@ -679,6 +662,8 @@ JPushInterface.setMaxGeofenceNumber(mWXSDKInstance.getContext(), maxNumber);
 
     @Override
     public void destroy() {
-
+        JLogger.e("destroy");
+        JPushHelper.IS_DESTROY = true;
+        JPushHelper.eventCallback = new HashMap<>();
     }
 }

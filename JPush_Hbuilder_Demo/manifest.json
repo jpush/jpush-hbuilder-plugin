@@ -1,6 +1,6 @@
 {
     "name" : "JPush_Hbuilder_Demo",
-    "appid" : "__UNI__92B2330",
+    "appid" : "__UNI__B1941DA",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -57,10 +57,10 @@
         },
         "nativePlugins" : {
             "JG-JCore" : {
-                "JPUSH_APPKEY_IOS" : "02c7f79c9248ecadf25140f7",
                 "JPUSH_APPKEY_ANDROID" : "",
+                "JPUSH_APPKEY_IOS" : "",
+                "JPUSH_CHANNEL_IOS" : "",
                 "JPUSH_CHANNEL_ANDROID" : "",
-                "JPUSH_CHANNEL_IOS" : "test",
                 "__plugin_info__" : {
                     "name" : "JG-JCore",
                     "description" : "极光推送JCore插件",
@@ -72,35 +72,42 @@
                     "bought" : -1,
                     "pid" : "",
                     "parameters" : {
-                        "JPUSH_APPKEY_IOS" : {
-                            "des" : "[iOS]极光 portal 配置应用信息时分配的 AppKey",
-                            "key" : "JCore:APP_KEY",
-                            "value" : ""
-                        },
                         "JPUSH_APPKEY_ANDROID" : {
                             "des" : "[Android]极光 portal 配置应用信息时分配的 AppKey",
                             "key" : "JPUSH_APPKEY",
                             "value" : ""
                         },
-                        "JPUSH_CHANNEL_ANDROID" : {
-                            "des" : "[Android]用于统计分发渠道，不需要可填默认值 developer-default",
-                            "key" : "JPUSH_CHANNEL",
+                        "JPUSH_APPKEY_IOS" : {
+                            "des" : "[iOS]极光 portal 配置应用信息时分配的 AppKey",
+                            "key" : "JCore:APP_KEY",
                             "value" : ""
                         },
                         "JPUSH_CHANNEL_IOS" : {
                             "des" : "[iOS]用于统计分发渠道，不需要可填默认值 developer-default",
                             "key" : "JCore:CHANNEL",
                             "value" : ""
+                        },
+                        "JPUSH_CHANNEL_ANDROID" : {
+                            "des" : "[Android]用于统计分发渠道，不需要可填默认值 developer-default",
+                            "key" : "JPUSH_CHANNEL",
+                            "value" : ""
                         }
                     }
                 }
             },
             "JG-JPush" : {
-                "JPUSH_DEFAULTINITJPUSH_IOS" : "false",
-                "JPUSH_ISPRODUCTION_IOS" : "false",
+                "JPUSH_XIAOMI_APPKEY" : "",
+                "JPUSH_MEIZU_APPID" : "",
+                "JPUSH_OPPO_APPSECRET" : "",
+                "JPUSH_OPPO_APPKEY" : "",
                 "JPUSH_ADVERTISINGID_IOS" : "",
-                "JPUSH_APPKEY_ANDROID" : "",
-                "JPUSH_CHANNEL_ANDROID" : "",
+                "JPUSH_MEIZU_APPKEY" : "",
+                "JPUSH_OPPO_APPID" : "",
+                "JPUSH_DEFAULTINITJPUSH_IOS" : "",
+                "JPUSH_VIVO_APPKEY" : "",
+                "JPUSH_VIVO_APPID" : "",
+                "JPUSH_ISPRODUCTION_IOS" : "",
+                "JPUSH_XIAOMI_APPID" : "",
                 "__plugin_info__" : {
                     "name" : "JG-JPush",
                     "description" : "极光推送Hbuilder插件",
@@ -112,14 +119,24 @@
                     "bought" : -1,
                     "pid" : "",
                     "parameters" : {
-                        "JPUSH_DEFAULTINITJPUSH_IOS" : {
-                            "des" : "[iOS]是否默认初始化，是填true，不是填false或者不填",
-                            "key" : "JPush:DEFAULTINITJPUSH",
+                        "JPUSH_XIAOMI_APPKEY" : {
+                            "des" : "厂商 xiaomi appKey,示例：MI-12345678",
+                            "key" : "XIAOMI_APPKEY",
                             "value" : ""
                         },
-                        "JPUSH_ISPRODUCTION_IOS" : {
-                            "des" : "[iOS]是否是生产环境，是填true,不是填false或者不填",
-                            "key" : "JPush:ISPRODUCTION",
+                        "JPUSH_MEIZU_APPID" : {
+                            "des" : "厂商 meizu appId,示例：MZ-12345678",
+                            "key" : "MEIZU_APPID",
+                            "value" : ""
+                        },
+                        "JPUSH_OPPO_APPSECRET" : {
+                            "des" : "厂商 oppo appSecret,示例：OP-12345678",
+                            "key" : "OPPO_APPSECRET",
+                            "value" : ""
+                        },
+                        "JPUSH_OPPO_APPKEY" : {
+                            "des" : "厂商 oppo appkey,示例：OP-12345678",
+                            "key" : "OPPO_APPKEY",
                             "value" : ""
                         },
                         "JPUSH_ADVERTISINGID_IOS" : {
@@ -127,14 +144,39 @@
                             "key" : "JPush:ADVERTISINGID",
                             "value" : ""
                         },
-                        "JPUSH_APPKEY_ANDROID" : {
-                            "des" : "[Android]极光 portal 配置应用信息时分配的 AppKey",
-                            "key" : "JPUSH_APPKEY",
+                        "JPUSH_MEIZU_APPKEY" : {
+                            "des" : "厂商 meizu appKey,示例：MZ-12345678",
+                            "key" : "MEIZU_APPKEY",
                             "value" : ""
                         },
-                        "JPUSH_CHANNEL_ANDROID" : {
-                            "des" : "[Android]用于统计分发渠道，不需要可填默认值 developer-default",
-                            "key" : "JPUSH_CHANNEL",
+                        "JPUSH_OPPO_APPID" : {
+                            "des" : "厂商 oppo appId,示例：OP-12345678",
+                            "key" : "OPPO_APPID",
+                            "value" : ""
+                        },
+                        "JPUSH_DEFAULTINITJPUSH_IOS" : {
+                            "des" : "[iOS]是否默认初始化，是填true，不是填false或者不填",
+                            "key" : "JPush:DEFAULTINITJPUSH",
+                            "value" : ""
+                        },
+                        "JPUSH_VIVO_APPKEY" : {
+                            "des" : "厂商 vivo appkey,示例：12345678",
+                            "key" : "com.vivo.push.api_key",
+                            "value" : ""
+                        },
+                        "JPUSH_VIVO_APPID" : {
+                            "des" : "厂商 vivo appId,示例：12345678",
+                            "key" : "com.vivo.push.app_id",
+                            "value" : ""
+                        },
+                        "JPUSH_ISPRODUCTION_IOS" : {
+                            "des" : "[iOS]是否是生产环境，是填true,不是填false或者不填",
+                            "key" : "JPush:ISPRODUCTION",
+                            "value" : ""
+                        },
+                        "JPUSH_XIAOMI_APPID" : {
+                            "des" : "厂商 xiaomi appId,示例：MI-12345678",
+                            "key" : "XIAOMI_APPID",
                             "value" : ""
                         }
                     }
