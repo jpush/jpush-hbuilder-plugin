@@ -4,13 +4,29 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Headers/JCoreModule.h</key>
+		<data>
+		4aMcBALZuuQeh2JQjJqqvSkc2mA=
+		</data>
 		<key>Info.plist</key>
 		<data>
-		iiDaCXrgXjUTZL/huUAmNMSpcog=
+		b4VTqlvap+6I3sPb0nhWD5ZHha4=
 		</data>
 	</dict>
 	<key>files2</key>
-	<dict/>
+	<dict>
+		<key>Headers/JCoreModule.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4aMcBALZuuQeh2JQjJqqvSkc2mA=
+			</data>
+			<key>hash2</key>
+			<data>
+			h/0w2CaU3JBhKI3Pp4EiSWqLf/ZY1Ju+5+tBAdowZ5k=
+			</data>
+		</dict>
+	</dict>
 	<key>rules</key>
 	<dict>
 		<key>^.*</key>

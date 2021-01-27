@@ -1,3 +1,25 @@
+# JPush Hbuilder API Only for iOS
+
+## 获取通知的授权状态 
+### API - requestNotificationAuthorization(CALLBACK)
+获取通知的授权状态
+
+#### 参数说明
+
+- CALLBACK
+
+|参数名称|参数类型|参数说明|
+|:-----:|:----:|:-----:|
+|status|number|0 - NotDetermined 1 - Denied 2 - Authorized 3 - Provisional (ios 12 及以上才有)|
+
+#### 示例
+```javascript
+jpushModule.requestNotificationAuthorization((result)=>{
+		let status = result.status
+})
+```
+
+
 ## 获取系统定位服务是否开启
 
 对应iOS设备的［设置］－［隐私］－［定位］按钮是否开启
@@ -49,6 +71,8 @@ jpushModule.requestLocationAuthorization((result)=>{
 ## 注册voip服务
 
 ### API - initVoipService()
+
+iOS9.0及以上可用
 
 #### 示例
 ```javascript

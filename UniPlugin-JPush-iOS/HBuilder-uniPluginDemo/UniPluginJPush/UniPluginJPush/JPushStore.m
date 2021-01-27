@@ -33,16 +33,17 @@
 - (void)initJPushService:(NSDictionary *)launchOptions {
     
     [self registerForRemoteNotificationConfig];
+    // 地理围栏功能 最好在sdk初始化之前调用
+    [JPUSHService registerLbsGeofenceDelegate:[JPushStore shared] withLaunchOptions:launchOptions];
+    // 初始化sdk
     [self setupWithOption:launchOptions];
     // 监听透传消息
     [self addCustomMessageObserver];
-    // 地理围栏功能
-    [JPUSHService registerLbsGeofenceDelegate:[JPushStore shared] withLaunchOptions:launchOptions];
     //应用内消息代理
     [JPUSHService setInMessageDelegate:[JPushStore shared]];
 }
 
-#pragma mark -
+#pragma mark - 初始化
 - (void)setupWithOption:(NSDictionary *)launchOptions {
 
     NSDictionary *launchingOption = launchOptions;
@@ -335,7 +336,9 @@
     PKPushRegistry *voipRegistry = [[PKPushRegistry alloc] initWithQueue:mainQueue];
     voipRegistry.delegate = self;
     // Set the push type to VoIP
-    voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+    if (@available(iOS 9.0, *)) {
+        voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+    }
 }
 
 #pragma - PKPushRegistryDelegate
@@ -425,6 +428,7 @@
 }
 
 
+#pragma mark - 地理位置权限
 // 请求定位权限
 - (void)requestLocationAuthorization {
     if (!_currentManager) {
@@ -433,7 +437,6 @@
     _currentManager.delegate = self;
     [_currentManager requestAlwaysAuthorization];
     [_currentManager requestWhenInUseAuthorization];
-    
 }
 
 - (int)getLocationAuthorizationStatus {

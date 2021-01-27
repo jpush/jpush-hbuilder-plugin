@@ -218,7 +218,7 @@ UNI_EXPORT_METHOD(@selector(setIsAllowedInMessagePop:))
 UNI_EXPORT_METHOD(@selector(pullInMessage:))
 UNI_EXPORT_METHOD(@selector(addInMessageListener:))
 
-#pragma - 应用内消息
+#pragma mark - 应用内消息
 /**
  * 是否允许应用内消息弹出,默认为允许
  */
@@ -435,7 +435,7 @@ UNI_EXPORT_METHOD(@selector(deleteGeofence:))
 UNI_EXPORT_METHOD(@selector(addGeofenceListener:))
 
 
-#pragma - 地理围栏
+#pragma mark - 地理围栏
 - (void)setMaxGeofenceNumber:(NSInteger)maxCount {
     [self logger:@"setMaxGeofenceNumber with maxCount:" log:@(maxCount)];
     [JPUSHService setGeofenecMaxCount:maxCount];
@@ -459,90 +459,12 @@ UNI_EXPORT_METHOD(@selector(removeLocalNotification:))
 UNI_EXPORT_METHOD(@selector(clearLocalNotifications))
 
 
-#pragma - 本地通知
+#pragma mark - 本地通知
 
 - (void)addLocalNotificationListener:(UniModuleKeepAliveCallback)callback {
     [self logger:@"addLocalNotificationListener" log:nil];
     [JPushStore shared].localNotiCallback = callback;
 }
-
-
-- (JPushNotificationContent *)generateNotificationCotent:(NSDictionary *)dic {
-    JPushNotificationContent *content = [[JPushNotificationContent alloc] init];
-    content.title = dic[@"title"];
-    content.subtitle = dic[@"subtitle"];
-    content.body = dic[@"body"];
-    content.badge = dic[@"badge"];
-    content.action = dic[@"action"];
-    content.userInfo = dic[@"userInfo"];
-    content.categoryIdentifier = dic[@"categoryIdentifier"];
-    if (@available(iOS 10.0, *)) {
-        content.threadIdentifier = dic[@"threadIdentifier"];
-    }
-    
-    if (@available(iOS 10.0, *)) {
-        JPushNotificationSound *soundSetting = [[JPushNotificationSound alloc] init];
-        soundSetting.soundName = dic[@"sound"];
-        //如果是告警通知
-        if (@available(iOS 12.0, *)) {
-            soundSetting.criticalSoundName = dic[@"criticalSoundName"];
-            soundSetting.criticalSoundVolume = [dic[@"criticalSoundVolume"] floatValue];
-        }
-        content.soundSetting = soundSetting;
-    }else {
-        content.sound = dic[@"sound"];
-    }
-    
-    if (@available(iOS 10.0, *)) {
-        if ([dic[@"attachments"] isKindOfClass:[NSArray class]]) {
-            NSMutableArray *attachmentsArr = [NSMutableArray array];
-            for (NSDictionary *attachmentDic in dic[@"attachments"]) {
-                UNNotificationAttachment *attachment = [UNNotificationAttachment attachmentWithIdentifier:attachmentDic[@"identifier"] URL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:attachmentDic[@"resourceName"] ofType:attachmentDic[@"type"]]] options:nil error:nil];
-                [attachmentsArr addObject:attachment];
-            }
-            content.attachments = [attachmentsArr copy];
-        }
-    }
-    
-    if (@available(iOS 10.0, *)) {
-        content.launchImageName = dic[@"launchImageName"];
-    }
-    
-    if (@available(iOS 12.0, *)) {
-        content.summaryArgument = dic[@"summaryArgument"];
-        content.summaryArgumentCount = [dic[@"summaryArgumentCount"] integerValue];
-    }
-    
-    if (@available(iOS 13.0, *)) {
-        content.targetContentIdentifier = dic[@"targetContentIdentifier"];
-    }
-    
-    return content;
-}
-
-- (JPushNotificationTrigger *)generateNotificationTrigger:(NSDictionary *)params {
-    JPushNotificationTrigger *trigger = [[JPushNotificationTrigger alloc] init];
-    trigger.repeat = [params[@"repeat"] boolValue];
-    
-    NSDictionary *region = params[@"region"];
-    if ([region isKindOfClass:[NSDictionary class]]) {
-        double latitude = [region[@"latitude"] doubleValue];
-        double longitude = [region[@"longitude"] doubleValue];
-        double radius = [region[@"radius"] doubleValue];
-        NSString *identifier = region[@"identifier"];
-        CLCircularRegion *re = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(latitude, longitude) radius:radius identifier:identifier];
-        trigger.region = re;
-        return trigger;
-    }
-    NSTimeInterval delay = [params[@"delay"] integerValue];
-    if (@available(iOS 10.0, *)) {
-        trigger.timeInterval = delay;
-    } else {
-        trigger.fireDate = [NSDate dateWithTimeIntervalSinceNow:delay];
-    }
-    return trigger;
-}
-
 
 - (void)addLocalNotification:(NSDictionary *)params {
 
@@ -602,7 +524,7 @@ UNI_EXPORT_METHOD(@selector(clearLocalNotifications))
 UNI_EXPORT_METHOD(@selector(initVoipService))
 UNI_EXPORT_METHOD(@selector(addVoipPushIncomingListener:))
 
-#pragma - voip
+#pragma mark - voip
 // 注册voip服务
 - (void)initVoipService {
     [self logger:@"initVoipService" log:nil];
@@ -614,7 +536,7 @@ UNI_EXPORT_METHOD(@selector(addVoipPushIncomingListener:))
     [JPushStore shared].voipCallback = callback;
 }
 
-#pragma - tools
+#pragma mark - other
 - (NSDictionary *)convertResultWithCode:(NSInteger)code content:(NSDictionary *)dicInfo {
     
     NSMutableDictionary *result = [NSMutableDictionary dictionary];
