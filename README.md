@@ -5,7 +5,7 @@
 支持 iOS 和 Android 推送，同时适配各大厂商推送。
 
 ## uniapp插件市场地址
-[极光推送官方SDK]()
+[极光推送官方SDK](https://ext.dcloud.net.cn/plugin?id=4035)
 
 ## 接入
 - 1.将 nativeplugins/JG-JPush 导入项目对应位置。

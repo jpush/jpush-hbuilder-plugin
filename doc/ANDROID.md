@@ -216,3 +216,29 @@ jpushModule.isNotificationEnabled(result=>{//number
 				let code = result.code
 			});
 ```
+## Android 厂商推送注意事项
+
+厂商跳转需要配置应用原生的 Activity，具体配置参考[各厂商集成文档](https://docs.jiguang.cn/jpush/client/Android/android_sdk/)。
+
+使用[极光 restapi 推送](https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#notification)进行厂商推送时,需要配合设置对应的 "uri_action","uri_activity" 参数。
+
+如不配置，将无法拿到厂商通知点击内容。
+
+### 针对 Uniapp 插件预留的厂商跳转页面
+Uniapp 插件用户可以直接指定以下跳转参数，轻松实现厂商的[通知点击事件回调](https://github.com/jpush/jpush-hbuilder-plugin/blob/master/doc/API.md#%E9%80%9A%E7%9F%A5%E4%BA%8B%E4%BB%B6%E5%9B%9E%E8%B0%83)兼容。
+
+- "uri_action":"cn.jiguang.uniplugin_jpush.OpenClickActivity",
+- "uri_activity":"cn.jiguang.uniplugin_jpush.OpenClickActivity"
+
+### 自定义 Activity
+如果您配置了自己的跳转 Activity，如需兼容插件[通知点击事件回调](https://github.com/jpush/jpush-hbuilder-plugin/blob/master/doc/API.md#%E9%80%9A%E7%9F%A5%E4%BA%8B%E4%BB%B6%E5%9B%9E%E8%B0%83)，可以通过调用以下原生方法实现：
+
+```java
+JSONObject thirdOpenNotification = JPushHelper.convertThirdOpenNotificationToMap(msgId, title, content, extras, data);
+JPushHelper.sendNotifactionEvent(thirdOpenNotification, 0);
+JPushHelper.saveOpenNotifiData(thirdOpenNotification, 0);
+```
+
+
+
+

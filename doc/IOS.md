@@ -66,6 +66,32 @@ jpushModule.requestLocationAuthorization((result)=>{
 				})
 ```
 
+## 地理围栏事件回调
+
+###  API - addGeofenceListener(CALLBACK)
+地理围栏事件监听
+
+#### 参数说明
+
+- CALLBACK
+
+|参数名称|参数类型|参数说明|
+|:-----:|:----:|:-----:|
+|code|string|状态码 0 - 成功|
+|msg|string|状态码不为0时返回的错误信息|
+|type|string|地理围栏事件 enter - 进入地理围栏区域 exit - 离开地理围栏区域|
+|geofenceId|string|地理围栏id|
+|userInfo|dictionary|地理围栏触发时返回的信息|
+
+#### 示例
+```javascript
+jpushModule.addGeofenceListener(result=>{
+				let code = result.code
+				let type = result.type
+				let geofenceId = result.geofenceId
+				let userInfo = result.userInfo
+			})
+```
 
 
 ## 注册voip服务
