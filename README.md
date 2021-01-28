@@ -1,6 +1,6 @@
 # jpush-hbuilder-plugin
 
-[极光推送](https://www.jiguang.cn/) 官方支持的 Hbuilder 插件（Android & iOS）。是基于 HBuilder 提供的 [uni-app 原生插件扩展](https://ask.dcloud.net.cn/article/35428) 进而开发出的推送插件。
+[极光推送](https://www.jiguang.cn/) 官方支持的 Hbuilder 插件（Android & iOS）。是基于 HBuilder 提供的 [uni-app 原生插件扩展](https://nativesupport.dcloud.net.cn/NativePlugin/README) 进而开发出的推送插件。
 
 支持 iOS 和 Android 推送，同时适配各大厂商推送。
 
