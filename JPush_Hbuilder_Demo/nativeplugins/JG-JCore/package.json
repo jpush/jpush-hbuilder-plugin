@@ -1,0 +1,58 @@
+{
+    "name": "JG-JCore",
+    "id": "JG-JCore",
+    "version": "1.0.1",
+    "description": "极光推送JCore插件",
+    "_dp_type":"nativeplugin",
+    "_dp_nativeplugin":{
+        "ios": {
+            "plugins": [
+                {
+                    "type": "module",
+                    "name": "JG-JCore",
+                    "class": "JCoreModule"
+                }
+            ],
+            "integrateType": "framework",
+            "deploymentTarget": "9.0",
+            "parameters": {
+                "JPUSH_APPKEY_IOS": {
+                    "des": "[iOS]极光portal配置应用信息时分配的AppKey",
+                    "key": "JCore:APP_KEY"
+                },
+                "JPUSH_CHANNEL_IOS": {
+                    "des": "[iOS]用于统计分发渠道，不需要可填默认值developer-default",
+                    "key": "JCore:CHANNEL"
+                }
+            }
+        },
+        "android": {
+            "plugins": [
+                {
+                    "type": "module",
+                    "name": "JG-JCore",
+                    "class": "cn.jiguang.uniplugin_jcore.JCoreModule"
+                }
+            ],
+            "integrateType": "aar",
+            "minSdkVersion": "19",
+            "permissions": [
+            ],
+            "abis": [
+                "armeabi-v7a",
+                "arm64-v8a",
+                "x86"
+            ],
+            "parameters": {
+                "JPUSH_APPKEY_ANDROID": {
+                    "des": "[Android]极光portal配置应用信息时分配的AppKey",
+                    "key": "JPUSH_APPKEY"
+                },
+                "JPUSH_CHANNEL_ANDROID":{
+                    "des": "[Android]用于统计分发渠道，不需要可填默认值developer-default",
+                    "key": "JPUSH_CHANNEL"
+                }
+            }
+        }
+    }
+}

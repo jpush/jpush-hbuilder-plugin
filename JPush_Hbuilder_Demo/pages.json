@@ -1,0 +1,71 @@
+{
+	
+	"pages": [
+				{
+				"path": "pages/index/index",
+				"style": {
+					"navigationBarTitleText": "uni-app"
+					}
+				},
+			
+				{
+				"path": "pages/index/tags",
+				"style": {
+						"navigationBarTitleText": "uni-app"
+					}
+				},
+				
+				{
+				"path": "pages/index/localNoti",
+				"style": {
+						"navigationBarTitleText": "uni-app"
+					}
+				},
+				
+				{
+				"path": "pages/index/other",
+				"style": {
+						"navigationBarTitleText": "uni-app"
+					}
+				}
+			
+			],
+	
+	"tabBar": {
+	    "color": "#7A7E83",
+	    "selectedColor": "#3cc51f",
+	    "borderStyle": "black",
+	    "backgroundColor": "#ffffff",
+	    "list": [{
+	        "pagePath": "pages/index/index",
+	        "iconPath": "static/image/icon_component.png",
+	        "selectedIconPath": "static/image/icon_component_HL.png",
+	        "text": "首页"
+	    }, {
+	        "pagePath": "pages/index/tags",
+	        "iconPath": "static/image/icon_API.png",
+	        "selectedIconPath": "static/image/icon_API_HL.png",
+	        "text": "TagAlias"
+	    }, {
+	        "pagePath": "pages/index/localNoti",
+	        "iconPath": "static/image/icon_API.png",
+	        "selectedIconPath": "static/image/icon_API_HL.png",
+	        "text": "本地通知"
+	    }, {
+	        "pagePath": "pages/index/other",
+	        "iconPath": "static/image/icon_API.png",
+	        "selectedIconPath": "static/image/icon_API_HL.png",
+	        "text": "其他"
+	    }]
+	},
+	
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	}
+}

@@ -1,0 +1,357 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2A21734A25ADE6480084EBAE /* JPUSHService.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A21734925ADE6480084EBAE /* JPUSHService.h */; };
+		2A21734E25ADE6AD0084EBAE /* JPushModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A21734C25ADE6AD0084EBAE /* JPushModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2A21734F25ADE6AD0084EBAE /* JPushModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A21734D25ADE6AD0084EBAE /* JPushModule.m */; };
+		2A21736F25AEE7390084EBAE /* JPushProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A21736D25AEE7390084EBAE /* JPushProxy.h */; };
+		2A21737025AEE7390084EBAE /* JPushProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A21736E25AEE7390084EBAE /* JPushProxy.m */; };
+		2A21737725AF4BFF0084EBAE /* JPushStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A21737525AF4BFF0084EBAE /* JPushStore.h */; };
+		2A21737825AF4BFF0084EBAE /* JPushStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A21737625AF4BFF0084EBAE /* JPushStore.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2A21731725ADE1380084EBAE /* UniPluginJPush.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UniPluginJPush.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A21731B25ADE1380084EBAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A21734925ADE6480084EBAE /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		2A21734C25ADE6AD0084EBAE /* JPushModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPushModule.h; sourceTree = "<group>"; };
+		2A21734D25ADE6AD0084EBAE /* JPushModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPushModule.m; sourceTree = "<group>"; };
+		2A21736D25AEE7390084EBAE /* JPushProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPushProxy.h; sourceTree = "<group>"; };
+		2A21736E25AEE7390084EBAE /* JPushProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPushProxy.m; sourceTree = "<group>"; };
+		2A21737525AF4BFF0084EBAE /* JPushStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPushStore.h; sourceTree = "<group>"; };
+		2A21737625AF4BFF0084EBAE /* JPushStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPushStore.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2A21731425ADE1380084EBAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2A21730D25ADE1380084EBAE = {
+			isa = PBXGroup;
+			children = (
+				2A21734925ADE6480084EBAE /* JPUSHService.h */,
+				2A21731925ADE1380084EBAE /* UniPluginJPush */,
+				2A21731825ADE1380084EBAE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2A21731825ADE1380084EBAE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A21731725ADE1380084EBAE /* UniPluginJPush.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2A21731925ADE1380084EBAE /* UniPluginJPush */ = {
+			isa = PBXGroup;
+			children = (
+				2A21731B25ADE1380084EBAE /* Info.plist */,
+				2A21734C25ADE6AD0084EBAE /* JPushModule.h */,
+				2A21734D25ADE6AD0084EBAE /* JPushModule.m */,
+				2A21736D25AEE7390084EBAE /* JPushProxy.h */,
+				2A21736E25AEE7390084EBAE /* JPushProxy.m */,
+				2A21737525AF4BFF0084EBAE /* JPushStore.h */,
+				2A21737625AF4BFF0084EBAE /* JPushStore.m */,
+			);
+			path = UniPluginJPush;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2A21731225ADE1380084EBAE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A21736F25AEE7390084EBAE /* JPushProxy.h in Headers */,
+				2A21737725AF4BFF0084EBAE /* JPushStore.h in Headers */,
+				2A21734E25ADE6AD0084EBAE /* JPushModule.h in Headers */,
+				2A21734A25ADE6480084EBAE /* JPUSHService.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		2A21731625ADE1380084EBAE /* UniPluginJPush */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A21731F25ADE1380084EBAE /* Build configuration list for PBXNativeTarget "UniPluginJPush" */;
+			buildPhases = (
+				2A21731225ADE1380084EBAE /* Headers */,
+				2A21731325ADE1380084EBAE /* Sources */,
+				2A21731425ADE1380084EBAE /* Frameworks */,
+				2A21731525ADE1380084EBAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UniPluginJPush;
+			productName = UniPluginJPush;
+			productReference = 2A21731725ADE1380084EBAE /* UniPluginJPush.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2A21730E25ADE1380084EBAE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1210;
+				TargetAttributes = {
+					2A21731625ADE1380084EBAE = {
+						CreatedOnToolsVersion = 12.1;
+					};
+				};
+			};
+			buildConfigurationList = 2A21731125ADE1380084EBAE /* Build configuration list for PBXProject "UniPluginJPush" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2A21730D25ADE1380084EBAE;
+			productRefGroup = 2A21731825ADE1380084EBAE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2A21731625ADE1380084EBAE /* UniPluginJPush */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2A21731525ADE1380084EBAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2A21731325ADE1380084EBAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A21737825AF4BFF0084EBAE /* JPushStore.m in Sources */,
+				2A21734F25ADE6AD0084EBAE /* JPushModule.m in Sources */,
+				2A21737025AEE7390084EBAE /* JPushProxy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2A21731D25ADE1380084EBAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2A21731E25ADE1380084EBAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2A21732025ADE1380084EBAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = NR98HQYYXF;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../SDK/inc\"/**";
+				INFOPLIST_FILE = UniPluginJPush/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hsn.text.UniPluginJPush;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2A21732125ADE1380084EBAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = NR98HQYYXF;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../SDK/inc\"/**";
+				INFOPLIST_FILE = UniPluginJPush/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hsn.text.UniPluginJPush;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2A21731125ADE1380084EBAE /* Build configuration list for PBXProject "UniPluginJPush" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A21731D25ADE1380084EBAE /* Debug */,
+				2A21731E25ADE1380084EBAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2A21731F25ADE1380084EBAE /* Build configuration list for PBXNativeTarget "UniPluginJPush" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A21732025ADE1380084EBAE /* Debug */,
+				2A21732125ADE1380084EBAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2A21730E25ADE1380084EBAE /* Project object */;
+}
