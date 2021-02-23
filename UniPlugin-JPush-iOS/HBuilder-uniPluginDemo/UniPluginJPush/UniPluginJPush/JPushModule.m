@@ -42,7 +42,7 @@
 
 @implementation JPushModule
 
-BOOL debugMode = NO;
+BOOL jpush_debugMode = NO;
 
 UNI_EXPORT_METHOD(@selector(setBadge:))
 UNI_EXPORT_METHOD(@selector(addMobileNumberListener:))
@@ -87,7 +87,7 @@ UNI_EXPORT_METHOD(@selector(getRegistrationID:))
 //设置调试模式，默认关闭状态
 - (void)setLoggerEnable:(BOOL)enable {
     [self logger:@"setLoggerEnable:" log:(enable?@"true":@"false")];
-    debugMode = enable;
+    jpush_debugMode = enable;
     if (enable) {
         [JPUSHService setDebugMode];
     }else {
@@ -552,7 +552,7 @@ UNI_EXPORT_METHOD(@selector(addVoipPushIncomingListener:))
 // debug 打印控制
 - (void)logger:(NSObject *)tag log:(NSObject *)log
 {
-    if(debugMode){
+    if(jpush_debugMode){
           NSLog(@"JPushModule--->%@ %@", tag,log);
     }
 }
