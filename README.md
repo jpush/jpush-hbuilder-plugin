@@ -57,16 +57,16 @@ const jv = uni.requireNativePlugin('JG-JPush');
 - [fcm厂商接入](https://docs.jiguang.cn/jpush/client/Android/fcm-Push-guide/)
 
 ## API
-- [公用 API](/doc/API.md)
-- [Android 独有API](/doc/ANDROID.md)
-- [iOS 独有API](/doc/IOS.md)
+- [公用 API](https://github.com/jpush/jpush-hbuilder-plugin/blob/master/doc/API.md)
+- [Android 独有API](https://github.com/jpush/jpush-hbuilder-plugin/blob/master/doc/ANDROID.md)
+- [iOS 独有API](https://github.com/jpush/jpush-hbuilder-plugin/blob/master/doc/IOS.md)
 
 ## 参考资料
 
 [官方文档](https://docs.jiguang.cn/jpush/guideline/intro/)
 
 ## Support
-- 集成前请先尝试 demo 工程跑通
+- 集成前请先尝试 [demo 工程](https://github.com/jpush/jpush-hbuilder-plugin/tree/master/JPush_Hbuilder_Demo)跑通
 - 出现问题请先打开 debug 模式，拿到前端和原生日志
 - 更多问题请前往[极光社区](http://community.jiguang.cn/)
 
