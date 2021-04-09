@@ -205,6 +205,21 @@ UNI_EXPORT_METHOD(@selector(addCustomMessageListener:))
 - (void)addNotificationListener:(UniModuleKeepAliveCallback)callback {
     [self logger:@"addPushNotificationReceiveListener" log:nil];
     [JPushStore shared].pushNotiCallback = callback;
+    
+    /* 经测试，app杀死的情况，点击通知进入app，各函数的执行情况为：
+     1. application:didFinishLaunchingWithOptions:
+     2. jpushNotificationCenter:didReceiveNotificationResponse: withCompletionHandler:
+     3. uniapp --- onLaunch()
+    以下代码为了防止的情况：当app杀死的情况下，点击通知进入app，因为该方法在点击通知的回调方法(jpushNotificationCenter:didReceiveNotificationResponse: withCompletionHandler:)之后,callback值为空，所以并没有回调值给js端，导致js端监听不到通知。
+     */
+    static BOOL onceLaunchPushBack = NO;
+    if (onceLaunchPushBack == YES) {
+        return;
+    }
+    onceLaunchPushBack = YES;
+    if ([JPushStore shared].launchOptions != nil && [[JPushStore shared].launchOptions isKindOfClass:[NSDictionary class]] && [[JPushStore shared].launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey] != nil) {
+        [[JPushStore shared] handeleApnsCallback:[[JPushStore shared].launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey] type:NOTIFICATION_OPENED];
+    }
 }
 
 // 监听自定义消息/应用处于前台
