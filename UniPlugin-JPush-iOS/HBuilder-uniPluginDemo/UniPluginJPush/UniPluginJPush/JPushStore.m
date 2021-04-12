@@ -384,21 +384,31 @@
 - (NSDictionary *)convertApnsMessage:(NSDictionary *)userInfo type:(NSString *)type{
     NSMutableDictionary *extras = [NSMutableDictionary dictionary];
     for (NSString *key in userInfo.allKeys) {
-        if ([key isEqualToString:@"_j_business"] || [key isEqualToString:@"_j_msgid"] || [key isEqualToString:@"_j_uid"] || [key isEqualToString:@"aps"] || [key isEqualToString:@"_j_geofence"] || [key isEqualToString:@"_j_extras"] || [key isEqualToString:@"_j_ad_content"]) {
+        if ([key isEqualToString:@"_j_business"] || [key isEqualToString:@"_j_msgid"] || [key isEqualToString:@"_j_uid"] || [key isEqualToString:@"aps"] || [key isEqualToString:@"_j_geofence"] || [key isEqualToString:@"_j_extras"] || [key isEqualToString:@"_j_ad_content"] || [key isEqualToString:@"_j_data_"]) {
             continue;
         }
         [extras setValue:userInfo[key] forKey:key];
     }
 
-    NSString *title = userInfo[@"aps"][@"alert"][@"title"];
-    NSString *content = userInfo[@"aps"][@"alert"][@"body"];
-    NSString *badge = userInfo[@"aps"][@"badge"];
-    NSString *sound = userInfo[@"aps"][@"sound"];
-    if (userInfo[@"_j_extras"]) {
-        title = userInfo[@"_j_extras"][@"alert"][@"title"];
-        content = userInfo[@"_j_extras"][@"alert"][@"body"];
+    id alertData =  userInfo[@"aps"][@"alert"];
+    NSString *badge = userInfo[@"aps"][@"badge"]?[userInfo[@"aps"][@"badge"] stringValue]:@"";
+    NSString *sound = userInfo[@"aps"][@"sound"]?userInfo[@"aps"][@"sound"]:@"";
+    NSString *title = @"";
+    NSString *content = @"";
+    if([alertData isKindOfClass:[NSString class]]){
+        content = alertData;
+    }else if([alertData isKindOfClass:[NSDictionary class]]){
+        title = alertData[@"title"]?alertData[@"title"]:@"";
+        content = alertData[@"body"]?alertData[@"body"]:@"";
+    }
+    
+    if (userInfo[@"_j_extras"] && [userInfo[@"_j_extras"] isKindOfClass:[NSDictionary class]]) {
         badge = userInfo[@"_j_extras"][@"badge"];
         sound = userInfo[@"_j_extras"][@"sound"];
+        if ([userInfo[@"_j_extras"][@"alert"] isKindOfClass:[NSDictionary class]]) {
+            title = userInfo[@"_j_extras"][@"alert"][@"title"];
+            content = userInfo[@"_j_extras"][@"alert"][@"body"];
+        }
     }
 
     NSMutableDictionary *temResult = [NSMutableDictionary dictionaryWithDictionary:@{
@@ -420,7 +430,10 @@
 // 处理本地通知回调
 - (void)handlerLocalNotiCallback:(NSDictionary *)userInfo type:(NSString *)type {
    
-    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithDictionary:userInfo];
+    NSMutableDictionary *result = [NSMutableDictionary dictionary];
+    if (userInfo && [userInfo isKindOfClass:[NSDictionary class]]) {
+       result = [NSMutableDictionary dictionaryWithDictionary:userInfo];
+    }
     [result setValue:type forKey:NOTIFICATION_EVENTTYPE];
     if ([JPushStore shared].localNotiCallback) {
         [JPushStore shared].localNotiCallback(result, YES);
