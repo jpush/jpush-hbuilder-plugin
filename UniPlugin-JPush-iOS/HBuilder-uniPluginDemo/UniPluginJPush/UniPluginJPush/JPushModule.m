@@ -217,7 +217,10 @@ UNI_EXPORT_METHOD(@selector(addCustomMessageListener:))
         return;
     }
     onceLaunchPushBack = YES;
-    if ([JPushStore shared].launchOptions != nil && [[JPushStore shared].launchOptions isKindOfClass:[NSDictionary class]] && [[JPushStore shared].launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey] != nil) {
+    if ([JPushStore shared].launchOptions == nil || ![[JPushStore shared].launchOptions isKindOfClass:[NSDictionary class]]) {
+        return;
+    }
+    if ([[JPushStore shared].launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey] != nil) {
         [[JPushStore shared] handeleApnsCallback:[[JPushStore shared].launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey] type:NOTIFICATION_OPENED];
     }
 }
@@ -479,6 +482,21 @@ UNI_EXPORT_METHOD(@selector(clearLocalNotifications))
 - (void)addLocalNotificationListener:(UniModuleKeepAliveCallback)callback {
     [self logger:@"addLocalNotificationListener" log:nil];
     [JPushStore shared].localNotiCallback = callback;
+    
+    // 解决 app被本地通知唤醒 接收不到通知回调
+    static BOOL onceLaunchLocalPushBack = NO;
+    if (onceLaunchLocalPushBack == YES) {
+        return;
+    }
+    onceLaunchLocalPushBack = YES;
+    if ([JPushStore shared].launchOptions == nil || ![[JPushStore shared].launchOptions isKindOfClass:[NSDictionary class]]) {
+        return;
+    }
+    
+    if ([[JPushStore shared].launchOptions valueForKey:UIApplicationLaunchOptionsLocalNotificationKey] != nil){
+        UILocalNotification *localNotification = [[JPushStore shared].launchOptions valueForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+        [[JPushStore shared] handlerLocalNotiCallback:localNotification.userInfo type:NOTIFICATION_OPENED];
+    }
 }
 
 - (void)addLocalNotification:(NSDictionary *)params {
