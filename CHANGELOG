@@ -6,3 +6,6 @@ v1.0.1
 
 v1.0.2
 解决jpush和jverification uniapp插件同时集成打包失败的问题。
+
+v1.0.3
+解决当app在离线状态，点击app通知进入app，不会触发监听通知事件的问题。
