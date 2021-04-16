@@ -26,6 +26,38 @@
 						})
 					}
 				})
+
+				jpushModule.addGeofenceListener(result=>{
+				let code = result.code
+				let type = result.type
+				let geofenceId = result.geofenceId
+				let userInfo = result.userInfo
+				uni.showToast({
+					icon: 'none',
+					title: '触发地理围栏',
+					duration: 3000
+				})
+			})
+			
+				jpushModule.setIsAllowedInMessagePop(true)
+				jpushModule.pullInMessage(result=>{
+					let code = result.code
+					console.log(code)
+				})
+				
+				jpushModule.addInMessageListener(result=>{
+					let eventType = result.eventType
+					let messageType = result.messageType
+					let content = result.content
+					console.log('inMessageListener',eventType,messageType,content)
+					
+					uni.showToast({
+						icon: 'none',
+						title: JSON.stringify(result),
+						duration: 3000
+					})
+				})
+			
 			}
 			
 			jpushModule.initJPushService();
@@ -65,37 +97,6 @@
 				let title = result.title
 				let content = result.content
 				let extras = result.extras
-				uni.showToast({
-					icon: 'none',
-					title: JSON.stringify(result),
-					duration: 3000
-				})
-			})
-			
-			jpushModule.addGeofenceListener(result=>{
-				let code = result.code
-				let type = result.type
-				let geofenceId = result.geofenceId
-				let userInfo = result.userInfo
-				uni.showToast({
-					icon: 'none',
-					title: '触发地理围栏',
-					duration: 3000
-				})
-			})
-			
-			jpushModule.setIsAllowedInMessagePop(true)
-			jpushModule.pullInMessage(result=>{
-				let code = result.code
-				console.log(code)
-			})
-			
-			jpushModule.addInMessageListener(result=>{
-				let eventType = result.eventType
-				let messageType = result.messageType
-				let content = result.content
-				console.log('inMessageListener',eventType,messageType,content)
-				
 				uni.showToast({
 					icon: 'none',
 					title: JSON.stringify(result),
