@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="f6t-Ec-It2"/>
+                        <viewControllerLayoutGuide type="bottom" id="hzB-Sj-9L7"/>
+                    </layoutGuides>
+                    <view key="view" tag="9001" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSC-M2-Arp">
+                                <rect key="frame" x="0.0" y="717" width="414" height="179"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bhd-RI-rtd">
+                                        <rect key="frame" x="97.5" y="67" width="219.5" height="45"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app.png" translatesAutoresizingMaskIntoConstraints="NO" id="21R-2d-dR7">
+                                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="U2Q-tQ-tvl"/>
+                                                    <constraint firstAttribute="width" constant="45" id="tpn-Bb-51Z"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="21R-2d-dR7" secondAttribute="bottom" id="3y6-JN-veu"/>
+                                            <constraint firstItem="21R-2d-dR7" firstAttribute="leading" secondItem="Bhd-RI-rtd" secondAttribute="leading" id="r7x-Jd-8mg"/>
+                                            <constraint firstItem="21R-2d-dR7" firstAttribute="top" secondItem="Bhd-RI-rtd" secondAttribute="top" id="tqC-q0-S9v"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HBuilder Hello" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="GJd-Yh-RWb">
+                                        <rect key="frame" x="162.5" y="74.5" width="154.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Bhd-RI-rtd" firstAttribute="centerX" secondItem="hSC-M2-Arp" secondAttribute="centerX" id="1Jg-6Z-arP"/>
+                                    <constraint firstItem="GJd-Yh-RWb" firstAttribute="leading" secondItem="21R-2d-dR7" secondAttribute="trailing" constant="20" id="6I5-cv-ny2"/>
+                                    <constraint firstItem="GJd-Yh-RWb" firstAttribute="trailing" secondItem="Bhd-RI-rtd" secondAttribute="trailing" id="KuQ-ja-ZGP"/>
+                                    <constraint firstItem="Bhd-RI-rtd" firstAttribute="centerY" secondItem="hSC-M2-Arp" secondAttribute="centerY" id="SwA-UW-ow6"/>
+                                    <constraint firstItem="GJd-Yh-RWb" firstAttribute="centerY" secondItem="21R-2d-dR7" secondAttribute="centerY" id="idi-ks-9kB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="hSC-M2-Arp" secondAttribute="bottom" id="Me2-fY-hTk"/>
+                            <constraint firstAttribute="trailing" secondItem="hSC-M2-Arp" secondAttribute="trailing" id="U4M-fy-ALN"/>
+                            <constraint firstItem="hSC-M2-Arp" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="gcC-0z-unB"/>
+                            <constraint firstItem="hSC-M2-Arp" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="1:5" id="pPD-mu-zv5"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="app.png" width="16" height="16"/>
+    </resources>
+</document>

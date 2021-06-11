@@ -290,6 +290,7 @@ iOSInjectionProject/
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
-UniPlugin-JPush-iOS/HBuilder-uniPluginDemo/HBuilder-Hello
-UniPlugin-JPush-iOS/SDK
+
+## UniPlugin-JPush-iOS/HBuilder-uniPluginDemo/HBuilder-Hello
+## UniPlugin-JPush-iOS/SDK
 JPush_Hbuilder_Demo/unpackage/debug
