@@ -108,6 +108,7 @@
                 "JPUSH_VIVO_APPID" : "",
                 "JPUSH_ISPRODUCTION_IOS" : "",
                 "JPUSH_XIAOMI_APPID" : "",
+                "JPUSH_HUAWEI_APPID" : "",
                 "__plugin_info__" : {
                     "name" : "JG-JPush",
                     "description" : "极光推送Hbuilder插件",
@@ -177,6 +178,11 @@
                         "JPUSH_XIAOMI_APPID" : {
                             "des" : "厂商 xiaomi appId,示例：MI-12345678",
                             "key" : "XIAOMI_APPID",
+                            "value" : ""
+                        },
+                        "JPUSH_HUAWEI_APPID" : {
+                            "des" : "厂商HUAWEI-appId,示例：appid=12346578",
+                            "key" : "com.huawei.hms.client.appid",
                             "value" : ""
                         }
                     }
