@@ -249,7 +249,13 @@
                 <category android:name="${applicationId}" />
             </intent-filter>
         </receiver>
-
+        <service
+            android:name="cn.jpush.android.service.PluginHuaweiPlatformsService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
     <!--xiaomi_config_start-->
     <service

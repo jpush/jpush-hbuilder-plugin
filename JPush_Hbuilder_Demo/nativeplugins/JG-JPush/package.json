@@ -131,6 +131,10 @@
                 "JPUSH_XIAOMI_APPID":{
                     "des": "厂商XIAOMI-appId,示例：MI-12345678",
                     "key": "XIAOMI_APPID"
+                },
+                "JPUSH_HUAWEI_APPID":{
+                    "des": "厂商HUAWEI-appId,示例：appid=12346578",
+                    "key": "com.huawei.hms.client.appid"
                 }
             }
         }

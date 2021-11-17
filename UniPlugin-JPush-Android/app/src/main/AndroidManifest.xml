@@ -125,6 +125,9 @@
         <meta-data
             android:name="JPUSH_APPKEY"
             android:value="7b4b94cca0d185d611e53cca" /> <!-- </>值来自开发者平台取得的AppKey -->
+        <meta-data
+            android:name="com.huawei.hms.client.appid"
+            android:value="appid=123" />
     </application>
 
 </manifest>
