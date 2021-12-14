@@ -141,7 +141,7 @@
         android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         <intent-filter>
             <action android:name="cn.jpush.android.intent.JNotifyActivity" />
-
+            <category android:name="android.intent.category.DEFAULT" />
             <category android:name="${applicationId}" />
         </intent-filter>
     </activity>
