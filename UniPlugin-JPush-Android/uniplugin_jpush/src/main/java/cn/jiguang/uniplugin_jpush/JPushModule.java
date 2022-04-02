@@ -47,6 +47,7 @@ public class JPushModule extends UniDestroyableModule {
     public void initJPushService() {
         updatePluginStatu();
         JPushInterface.init(mWXSDKInstance.getContext());
+        JPushInterface.setNotificationCallBackEnable(mWXSDKInstance.getContext(),true);
         if (JPushBroadcastReceiver.NOTIFICATION_BUNDLE != null) {
             JSONObject jsonObject = JPushHelper.convertNotificationBundleToMap(JConstants.NOTIFICATION_OPENED, JPushBroadcastReceiver.NOTIFICATION_BUNDLE);
             JPushHelper.sendEvent(JConstants.NOTIFICATION_EVENT, jsonObject);
