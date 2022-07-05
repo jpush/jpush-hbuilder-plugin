@@ -1,7 +1,7 @@
 {
     "name": "JG-JPush",
     "id": "JG-JPush",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "极光推送Hbuilder插件",
     "_dp_type":"nativeplugin",
     "_dp_nativeplugin":{
@@ -135,6 +135,10 @@
                 "JPUSH_HUAWEI_APPID":{
                     "des": "厂商HUAWEI-appId,示例：appid=12346578",
                     "key": "com.huawei.hms.client.appid"
+                },
+                "JPUSH_HONOR_APPID" : {
+                    "des" : "厂商HONOR-appId,示例：12346578",
+                    "key" : "com.hihonor.push.app_id"
                 }
             }
         }
