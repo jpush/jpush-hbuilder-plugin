@@ -42,6 +42,13 @@
     <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE" />
     <uses-permission android:name="com.heytap.mcs.permission.RECIEVE_MCS_MESSAGE" />
     <!--oppo_permission_end-->
+    <!--honor_permission_start-->
+    <queries>
+        <intent>
+            <action android:name="com.hihonor.push.action.BIND_PUSH_SERVICE" />
+        </intent>
+    </queries>
+    <!--honor_permission_end-->
 
 
 
@@ -307,7 +314,12 @@
             <action android:name="com.xiaomi.mipush.ERROR" />
         </intent-filter>
     </receiver>
-
+        <activity
+            android:name="com.xiaomi.mipush.sdk.NotificationClickedActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:launchMode="singleInstance"
+            android:exported="true"
+            android:enabled="true"/>
 
     <!--xiaomi_config_end-->
 
@@ -391,6 +403,15 @@
         android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
     <!--vivo_config_end-->
+    <!--honor_config_start-->
+        <service
+            android:name="cn.jpush.android.service.JHonorService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.hihonor.push.action.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!--honor_config_end-->
 
         <activity
             android:name="cn.jiguang.uniplugin_jpush.OpenClickActivity"

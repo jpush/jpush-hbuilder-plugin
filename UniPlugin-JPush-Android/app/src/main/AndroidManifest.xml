@@ -128,6 +128,10 @@
         <meta-data
             android:name="com.huawei.hms.client.appid"
             android:value="appid=123" />
+
+        <meta-data
+            android:name="com.hihonor.push.app_id"
+            android:value="123" />
     </application>
 
 </manifest>
