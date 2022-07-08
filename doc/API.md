@@ -2,7 +2,7 @@
 
 ## 引用方式
 ```javascript
-var jpushModule = uni.requireNativePlugin("JG-JPush");
+var jpushModule = uni.requireNativePlugin("JG-JPush-Google");
 ```
 
 ## 设置 debug 模式

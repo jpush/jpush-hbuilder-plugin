@@ -1,0 +1,146 @@
+{
+    "name": "JG-JPush-Google",
+    "id": "JG-JPush-Google",
+    "version": "1.0.0",
+    "description": "极光推送Hbuilder插件",
+    "_dp_type":"nativeplugin",
+    "_dp_nativeplugin":{
+        "ios": {
+            "plugins": [{
+                "type": "module",
+                "name": "JG-JPush-Google",
+                "class": "JPushModule"
+            }],
+            "hooksClass": "JPushProxy",
+            "integrateType": "framework",
+            "deploymentTarget": "9.0",
+            "frameworks": [
+                "CFNetwork.framework",
+                "CoreFoundation.framework",
+                "CoreTelephony.framework",
+                "SystemConfiguration.framework",
+                "CoreGraphics.framework",
+                "Foundation.framework",
+                "UIKit.framework",
+                "Security.framework",
+                "libz.tbd",
+                "AdSupport.framework",
+                "UserNotifications.framework",
+                "libresolv.tbd",
+                "WebKit.framework",
+                "AppTrackingTransparency.framework",
+                "StoreKit.framework"
+            ],
+            "resources": [
+                
+            ],
+            "capabilities": {
+                "entitlements": {
+                    "aps-environment":"development"
+                }
+            },
+            "privacies": [
+                            "NSLocationAlwaysAndWhenInUseUsageDescription",
+                            "NSLocationAlwaysUsageDescription",
+                            "NSLocationWhenInUseUsageDescription"
+                        ],
+            "parameters": {
+                "JPUSH_ISPRODUCTION_IOS": {
+                    "des": "[iOS]是否是生产环境，是填true，不是填false或者不填",
+                    "key": "JPush:ISPRODUCTION"
+                },
+                "JPUSH_ADVERTISINGID_IOS": {
+                    "des": "[iOS]广告标识符（IDFA）如果不需要使用IDFA，可不填",
+                    "key": "JPush:ADVERTISINGID"
+                },
+                "JPUSH_DEFAULTINITJPUSH_IOS": {
+                    "des": "[iOS]是否默认初始化，是填true，不是填false或者不填",
+                    "key": "JPush:DEFAULTINITJPUSH"
+                }
+            }
+        },
+        "android": {
+            "plugins": [
+                {
+                    "type": "module",
+                    "name": "JG-JPush-Google",
+                    "class": "cn.jiguang.uniplugin_jpush.JPushModule"
+                }
+            ],
+            "integrateType": "aar",
+            "minSdkVersion": "19",
+            "permissions": [
+                "${applicationId}.permission.JPUSH_MESSAGE",
+                "android.permission.RECEIVE_USER_PRESENT",
+                "android.permission.INTERNET",
+                "android.permission.READ_PHONE_STATE",
+                "android.permission.WRITE_EXTERNAL_STORAGE",
+                "android.permission.READ_EXTERNAL_STORAGE",
+                "android.permission.WRITE_SETTINGS",
+                "android.permission.MOUNT_UNMOUNT_FILESYSTEMS",
+                "android.permission.ACCESS_NETWORK_STATE",
+                "android.permission.ACCESS_WIFI_STATE",
+                "com.huawei.android.launcher.permission.CHANGE_BADGE",
+                "android.permission.VIBRATE",
+                "android.permission.SYSTEM_ALERT_WINDOW",
+                "android.permission.ACCESS_COARSE_LOCATION",
+                "android.permission.CHANGE_WIFI_STATE",
+                "android.permission.ACCESS_FINE_LOCATION",
+                "android.permission.ACCESS_BACKGROUND_LOCATION",
+                "android.permission.ACCESS_LOCATION_EXTRA_COMMANDS",
+                "android.permission.CHANGE_NETWORK_STATE",
+                "android.permission.GET_TASKS",
+                "android.permission.QUERY_ALL_PACKAGES",
+                "${applicationId}.permission.MIPUSH_RECEIVE",
+                "com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE",
+                "com.heytap.mcs.permission.RECIEVE_MCS_MESSAGE"
+            ],
+            "parameters": {
+                "JPUSH_OPPO_APPKEY": {
+                    "des": "厂商OPPO-appkey,示例：OP-12345678",
+                    "key": "OPPO_APPKEY"
+                },
+                "JPUSH_OPPO_APPID":{
+                    "des": "厂商OPPO-appId,示例：OP-12345678",
+                    "key": "OPPO_APPID"
+                },
+                "JPUSH_OPPO_APPSECRET":{
+                    "des": "厂商OPPO-appSecret,示例：OP-12345678",
+                    "key": "OPPO_APPSECRET"
+                },
+                "JPUSH_VIVO_APPKEY":{
+                    "des": "厂商VIVO-appkey,示例：12345678",
+                    "key": "com.vivo.push.api_key"
+                },
+                "JPUSH_VIVO_APPID":{
+                    "des": "厂商VIVO-appId,示例：12345678",
+                    "key": "com.vivo.push.app_id"
+                },
+                "JPUSH_MEIZU_APPKEY":{
+                    "des": "厂商MEIZU-appKey,示例：MZ-12345678",
+                    "key": "MEIZU_APPKEY"
+                },
+                "JPUSH_MEIZU_APPID":{
+                    "des": "厂商MEIZU-appId,示例：MZ-12345678",
+                    "key": "MEIZU_APPID"
+                },
+                "JPUSH_XIAOMI_APPKEY":{
+                    "des": "厂商XIAOMI-appKey,示例：MI-12345678",
+                    "key": "XIAOMI_APPKEY"
+                },
+                "JPUSH_XIAOMI_APPID":{
+                    "des": "厂商XIAOMI-appId,示例：MI-12345678",
+                    "key": "XIAOMI_APPID"
+                },
+                "JPUSH_HUAWEI_APPID":{
+                    "des": "厂商HUAWEI-appId,示例：appid=12346578",
+                    "key": "com.huawei.hms.client.appid"
+                },
+                "JPUSH_HONOR_APPID" : {
+                    "des" : "厂商HONOR-appId,示例：12346578",
+                    "key" : "com.hihonor.push.app_id"
+                }
+            }
+        }
+    }
+}
