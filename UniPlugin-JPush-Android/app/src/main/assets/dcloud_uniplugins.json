@@ -5,7 +5,7 @@
       "plugins": [
         {
           "type": "module",
-          "name": "JG-JPush",
+          "name": "JG-JPush-Google",
           "class": "cn.jiguang.uniplugin_jpush.JPushModule"
         }
       ]

@@ -32,7 +32,7 @@
 
 <script>
     // 首先需要通过 uni.requireNativePlugin("ModuleName") 获取 module 
-    var jpushModule = uni.requireNativePlugin("JG-JPush")
+    var jpushModule = uni.requireNativePlugin("JG-JPush-Google")
     export default {
 		
 		data() {

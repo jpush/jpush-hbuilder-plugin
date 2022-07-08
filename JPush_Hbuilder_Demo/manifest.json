@@ -56,13 +56,12 @@
             }
         },
         "nativePlugins" : {
-            "JG-JCore" : {
-                "JPUSH_APPKEY_ANDROID" : "",
+            "JG-JCore-Google" : {
                 "JPUSH_APPKEY_IOS" : "",
                 "JPUSH_CHANNEL_IOS" : "",
                 "JPUSH_CHANNEL_ANDROID" : "",
                 "__plugin_info__" : {
-                    "name" : "JG-JCore",
+                    "name" : "JG-JCore-Google",
                     "description" : "极光推送JCore插件",
                     "platforms" : "Android,iOS",
                     "url" : "",
@@ -95,7 +94,7 @@
                     }
                 }
             },
-            "JG-JPush" : {
+            "JG-JPush-Google" : {
                 "JPUSH_XIAOMI_APPKEY" : "",
                 "JPUSH_MEIZU_APPID" : "",
                 "JPUSH_OPPO_APPSECRET" : "",
@@ -111,7 +110,7 @@
                 "JPUSH_HUAWEI_APPID" : "",
                 "JPUSH_HONOR_APPID" : "",
                 "__plugin_info__" : {
-                    "name" : "JG-JPush",
+                    "name" : "JG-JPush-Google",
                     "description" : "极光推送Hbuilder插件",
                     "platforms" : "Android,iOS",
                     "url" : "",

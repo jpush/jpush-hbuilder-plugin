@@ -8,13 +8,13 @@
 [极光推送官方SDK](https://ext.dcloud.net.cn/plugin?id=4035)
 
 ## 接入
-- 1.将 nativeplugins/JG-JPush 导入项目对应位置。
-- 2.项目 manifest.json 中接入 JG-JPush 插件，并配置插件配置。
+- 1.将 nativeplugins/JG-JPush-Google 导入项目对应位置。
+- 2.项目 manifest.json 中接入 JG-JPush-Google 插件，并配置插件配置。
 - 3.在项目中引用插件
 ```
-const jv = uni.requireNativePlugin('JG-JPush');
+const jv = uni.requireNativePlugin('JG-JPush-Google');
 ```
-- 4.引入[JG-JCore 插件](https://github.com/jpush/jcore-hbuilder-plugin)，用于适配更多的极光 Uniapp 插件，必须引入。
+- 4.引入[JG-JCore-Google 插件](https://github.com/jpush/jcore-hbuilder-plugin)，用于适配更多的极光 Uniapp 插件，必须引入。
 
 
 ## DEMO 体验
@@ -28,7 +28,7 @@ const jv = uni.requireNativePlugin('JG-JPush');
 
 注意：不要勾选uniPush！
 
-打开 manifest.xml，选中App原生插件配置，选择本地插件，导入 JG-JPush
+打开 manifest.xml，选中App原生插件配置，选择本地插件，导入 JG-JPush-Google
 
 然后配置各个属性，注意在HBuilderX中可能会出现乱序现象，请仔细认真填写
 
