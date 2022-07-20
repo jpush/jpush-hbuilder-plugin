@@ -26,7 +26,7 @@
 
 <script>
 	// 首先需要通过 uni.requireNativePlugin("ModuleName") 获取 module
-	var jpushModule = uni.requireNativePlugin("JG-JPush-Google")
+	var jpushModule = uni.requireNativePlugin("JG-JPushGoogle")
 	var seq = 1
 	jpushModule.addTagAliasListener(result=>{
 		uni.showToast({

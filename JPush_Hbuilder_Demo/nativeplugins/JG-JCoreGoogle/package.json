@@ -1,7 +1,7 @@
 {
-    "name": "JG-JCore-Google",
-    "id": "JG-JCore-Google",
-    "version": "1.0.1",
+    "name": "JG-JCoreGoogle",
+    "id": "JG-JCoreGoogle",
+    "version": "1.0.0",
     "description": "极光推送JCore插件",
     "_dp_type":"nativeplugin",
     "_dp_nativeplugin":{
@@ -9,7 +9,7 @@
             "plugins": [
                 {
                     "type": "module",
-                    "name": "JG-JCore-Google",
+                    "name": "JG-JCoreGoogle",
                     "class": "JCoreModule"
                 }
             ],
@@ -30,7 +30,7 @@
             "plugins": [
                 {
                     "type": "module",
-                    "name": "JG-JCore-Google",
+                    "name": "JG-JCoreGoogle",
                     "class": "cn.jiguang.uniplugin_jcore.JCoreModule"
                 }
             ],

@@ -2,7 +2,7 @@
 
 ## 引用方式
 ```javascript
-var jpushModule = uni.requireNativePlugin("JG-JPush-Google");
+var jpushModule = uni.requireNativePlugin("JG-JPushGoogle");
 ```
 
 ## 停止推送服务
