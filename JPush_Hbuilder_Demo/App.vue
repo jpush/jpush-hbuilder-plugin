@@ -1,6 +1,6 @@
 
 <script>
-	var jpushModule = uni.requireNativePlugin("JG-JPush-Google")
+	var jpushModule = uni.requireNativePlugin("JG-JPushGoogle")
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
