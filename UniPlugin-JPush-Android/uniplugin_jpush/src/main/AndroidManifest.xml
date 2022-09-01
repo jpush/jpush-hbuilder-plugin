@@ -32,6 +32,7 @@
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!--xiaomi_permission_start-->
     <permission
         android:name="${applicationId}.permission.MIPUSH_RECEIVE"
@@ -284,15 +285,15 @@
         android:name="com.xiaomi.mipush.sdk.MessageHandleService"
         android:enabled="true" />
 
-    <receiver
-        android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
-    </receiver>
+        <!-- CP反馈NetworkStatusReceiver静态注册会被检出自启风险，故移除，仅使用动态注册 -->
+        <!-- <receiver -->
+        <!-- android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.net.conn.CONNECTIVITY_CHANGE" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
     <receiver
         android:name="com.xiaomi.push.service.receivers.PingReceiver"
         android:exported="false"
@@ -314,12 +315,25 @@
             <action android:name="com.xiaomi.mipush.ERROR" />
         </intent-filter>
     </receiver>
+        <!-- 支持VoIP和场景化通过透明页点击跳转 -->
+        <!-- 对于targetSdkVersion变更为S及以上的应用，需要接入MiPushSDK 4.9.1及以上版本(海外版需接入4.8.6及以上版本)，并声明NotificationClickedActivity -->
         <activity
             android:name="com.xiaomi.mipush.sdk.NotificationClickedActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:launchMode="singleInstance"
+            android:enabled="true"
+            android:excludeFromRecents="true"
             android:exported="true"
-            android:enabled="true"/>
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+
+                <!-- 为更好的兼容后期Android版本更新，预注册一个Action，暂时无用 -->
+                <action android:name="com.xiaomi.mipush.sdk.NotificationClickedActivity" />
+            </intent-filter>
+
+            <meta-data
+                android:name="supportStyle"
+                android:value="scene|voip" />
+        </activity>
 
     <!--xiaomi_config_end-->
 
@@ -395,6 +409,7 @@
     </receiver>
     <service
         android:name="com.vivo.push.sdk.service.CommandClientService"
+        android:permission="com.push.permission.UPSTAGESERVICE"
         android:exported="true" />
     <activity
         android:name="com.vivo.push.sdk.LinkProxyClientActivity"
