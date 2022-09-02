@@ -232,35 +232,6 @@ UNI_EXPORT_METHOD(@selector(addCustomMessageListener:))
 }
 
 
-UNI_EXPORT_METHOD(@selector(setIsAllowedInMessagePop:))
-UNI_EXPORT_METHOD(@selector(pullInMessage:))
-UNI_EXPORT_METHOD(@selector(addInMessageListener:))
-
-#pragma mark - 应用内消息
-/**
- * 是否允许应用内消息弹出,默认为允许
- */
-- (void)setIsAllowedInMessagePop:(BOOL)enable {
-    [self logger:@"jPushInMessageIsAllowedInMessagePop" log:enable?@"true":@"false"];
-    [JPushStore shared].allowedInMessagePop = enable;
-}
-
-// 主动拉取应用内消息的接口
-- (void)pullInMessage:(UniModuleKeepAliveCallback)callback {
-    [self logger:@"pullInMessage" log:nil];
-    weakObj(self)
-    [JPUSHService pullInMessageCompletion:^(NSInteger iResCode) {
-        NSDictionary *dic = [weakself convertResultWithCode:iResCode content:nil];
-        callback(dic, NO);
-    }];
-}
-
-// 监听应用内消息
-- (void)addInMessageListener:(UniModuleKeepAliveCallback)callback {
-    [self logger:@"setInMessageListener" log:nil];
-    [JPushStore shared].inMessageCallback = callback;
-}
-
 
 UNI_EXPORT_METHOD(@selector(addTagAliasListener:))
 UNI_EXPORT_METHOD(@selector(addTags:))
@@ -456,7 +427,7 @@ UNI_EXPORT_METHOD(@selector(addGeofenceListener:))
 #pragma mark - 地理围栏
 - (void)setMaxGeofenceNumber:(NSInteger)maxCount {
     [self logger:@"setMaxGeofenceNumber with maxCount:" log:@(maxCount)];
-    [JPUSHService setGeofenecMaxCount:maxCount];
+    [JPUSHService setGeofeneceMaxCount:maxCount];
 }
 
 - (void)deleteGeofence:(NSString *)geofenceID {

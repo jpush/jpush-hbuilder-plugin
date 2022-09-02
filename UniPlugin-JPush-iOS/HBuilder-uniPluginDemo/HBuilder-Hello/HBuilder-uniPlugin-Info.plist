@@ -2,13 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>JCore</key>
-	<dict>
-		<key>CHANNEL</key>
-		<string>test</string>
-		<key>APP_KEY</key>
-		<string>02c7f79c9248ecadf25140f7</string>
-	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
@@ -84,12 +77,19 @@
 	<string>13453452345</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>JCore</key>
+	<dict>
+		<key>APP_KEY</key>
+		<string>4fcc3e237eec4c4fb804ad49</string>
+		<key>CHANNEL</key>
+		<string>test</string>
+	</dict>
 	<key>JPush</key>
 	<dict>
 		<key>ADVERTISINGID</key>
 		<string></string>
 		<key>DEFAULTINITJPUSH</key>
-		<string>true</string>
+		<string>NO</string>
 		<key>ISPRODUCTION</key>
 		<string></string>
 	</dict>

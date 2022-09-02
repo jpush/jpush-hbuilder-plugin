@@ -67,6 +67,8 @@
 		24BD5AF21C994A1700B05AA2 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BD5AF11C994A1700B05AA2 /* libicucore.tbd */; };
 		24BD5AF61C994BB200B05AA2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BD5AF51C994BB200B05AA2 /* libc++.tbd */; };
 		24F990131DFBDA3300848C2B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F990121DFBDA3300848C2B /* CoreData.framework */; };
+		2A0411D428C1EBEB0066F9AB /* jpush-ios-4.8.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0411D328C1EBEA0066F9AB /* jpush-ios-4.8.1.a */; };
+		2A0411D628C1EC320066F9AB /* jcore-ios-3.2.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0411D528C1EC310066F9AB /* jcore-ios-3.2.5.a */; };
 		2A21732D25ADE1D10084EBAE /* UniPluginJPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21732925ADE1A50084EBAE /* UniPluginJPush.framework */; };
 		2A21733225ADE4590084EBAE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACF69AA19FF899A007C64F1 /* CFNetwork.framework */; };
 		2A21733425ADE4640084EBAE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21733325ADE4630084EBAE /* CoreFoundation.framework */; };
@@ -83,9 +85,7 @@
 		2A21734225ADE4E10084EBAE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2447371A1D0830BB00D0F08F /* WebKit.framework */; };
 		2A21734425ADE4ED0084EBAE /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21734325ADE4ED0084EBAE /* AppTrackingTransparency.framework */; };
 		2A21734625ADE4F70084EBAE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21734525ADE4F70084EBAE /* StoreKit.framework */; };
-		2A21736325AEA0800084EBAE /* jpush-ios-3.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21736225AEA0800084EBAE /* jpush-ios-3.4.0.a */; };
 		2AC5D66525B822E800EA873C /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC5D66425B822E800EA873C /* PushKit.framework */; };
-		2AC5D67E25B90B3A00EA873C /* jcore-ios-2.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC5D67D25B90B3A00EA873C /* jcore-ios-2.4.0.a */; };
 		2AC5D68825B90F5900EA873C /* UniPluginJCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC5D68425B90EE300EA873C /* UniPluginJCore.framework */; };
 		2F0BA3F9215B48A700F67004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA3F8215B48A700F67004 /* Images.xcassets */; };
 		2F0BA410215B784100F67004 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA40F215B784000F67004 /* Contacts.framework */; };
@@ -321,16 +321,16 @@
 		24BD5AF11C994A1700B05AA2 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		24BD5AF51C994BB200B05AA2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		24F990121DFBDA3300848C2B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2A0411D328C1EBEA0066F9AB /* jpush-ios-4.8.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jpush-ios-4.8.1.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JPushGoogle/ios/jpush-ios-4.8.1.a"; sourceTree = "<group>"; };
+		2A0411D528C1EC310066F9AB /* jcore-ios-3.2.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jcore-ios-3.2.5.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JCoreGoogle/ios/jcore-ios-3.2.5.a"; sourceTree = "<group>"; };
 		2A21732425ADE1A50084EBAE /* UniPluginJPush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniPluginJPush.xcodeproj; path = UniPluginJPush/UniPluginJPush.xcodeproj; sourceTree = "<group>"; };
 		2A21733325ADE4630084EBAE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		2A21733D25ADE4B70084EBAE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2A21733F25ADE4C30084EBAE /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		2A21734325ADE4ED0084EBAE /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		2A21734525ADE4F70084EBAE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		2A21736225AEA0800084EBAE /* jpush-ios-3.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jpush-ios-3.4.0.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JPushGoogle/ios/jpush-ios-3.4.0.a"; sourceTree = "<group>"; };
 		2AC5D66225B6807700EA873C /* UniPluginDemo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = UniPluginDemo.entitlements; sourceTree = "<group>"; };
 		2AC5D66425B822E800EA873C /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
-		2AC5D67D25B90B3A00EA873C /* jcore-ios-2.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jcore-ios-2.4.0.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JCoreGoogle/ios/jcore-ios-2.4.0.a"; sourceTree = "<group>"; };
 		2AC5D67F25B90EE300EA873C /* UniPluginJCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniPluginJCore.xcodeproj; path = UniPluginJCore/UniPluginJCore.xcodeproj; sourceTree = "<group>"; };
 		2F0BA3F8215B48A700F67004 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../HBuilder/Images.xcassets; sourceTree = "<group>"; };
 		2F0BA3FB215B4A4100F67004 /* DCADManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCADManager.h; sourceTree = "<group>"; };
@@ -686,9 +686,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AC5D68825B90F5900EA873C /* UniPluginJCore.framework in Frameworks */,
-				2AC5D67E25B90B3A00EA873C /* jcore-ios-2.4.0.a in Frameworks */,
 				2AC5D66525B822E800EA873C /* PushKit.framework in Frameworks */,
-				2A21736325AEA0800084EBAE /* jpush-ios-3.4.0.a in Frameworks */,
 				2A21732D25ADE1D10084EBAE /* UniPluginJPush.framework in Frameworks */,
 				4FE3666A254FE5FC00DCD173 /* libuchardet.a in Frameworks */,
 				67A9340323A8BAF6004A4DF4 /* libSDWebImage.a in Frameworks */,
@@ -698,6 +696,7 @@
 				6731F3A4232F5B7A007838BC /* libresolv.tbd in Frameworks */,
 				672CE2B322DC9118005A0D88 /* DCUniVideoPublic.framework in Frameworks */,
 				67229AD1230171AE0093F29A /* libDCUniAmap.a in Frameworks */,
+				2A0411D428C1EBEB0066F9AB /* jpush-ios-4.8.1.a in Frameworks */,
 				2A21734225ADE4E10084EBAE /* WebKit.framework in Frameworks */,
 				67229AD2230171AE0093F29A /* libDCUniVideo.a in Frameworks */,
 				67229AD3230171AE0093F29A /* libDCUniBarcode.a in Frameworks */,
@@ -804,6 +803,7 @@
 				24AFD87C1CB50C4000C0F062 /* libwxpay.a in Frameworks */,
 				24AFD7FF1CB50C3200C0F062 /* AlipaySDK.framework in Frameworks */,
 				24AFD8011CB50C3200C0F062 /* iflyMSC.framework in Frameworks */,
+				2A0411D628C1EC320066F9AB /* jcore-ios-3.2.5.a in Frameworks */,
 				24AFD8021CB50C3200C0F062 /* TencentOpenAPI.framework in Frameworks */,
 				24BD5AF21C994A1700B05AA2 /* libicucore.tbd in Frameworks */,
 				2A21733225ADE4590084EBAE /* CFNetwork.framework in Frameworks */,
@@ -1157,9 +1157,9 @@
 		8EED629A198A1D13000A4449 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2AC5D67D25B90B3A00EA873C /* jcore-ios-2.4.0.a */,
+				2A0411D528C1EC310066F9AB /* jcore-ios-3.2.5.a */,
+				2A0411D328C1EBEA0066F9AB /* jpush-ios-4.8.1.a */,
 				2AC5D66425B822E800EA873C /* PushKit.framework */,
-				2A21736225AEA0800084EBAE /* jpush-ios-3.4.0.a */,
 				2A21734525ADE4F70084EBAE /* StoreKit.framework */,
 				2A21734325ADE4ED0084EBAE /* AppTrackingTransparency.framework */,
 				2A21733F25ADE4C30084EBAE /* UserNotifications.framework */,
@@ -1489,8 +1489,8 @@
 				ORGANIZATIONNAME = DCloud;
 				TargetAttributes = {
 					8EED6297198A1D13000A4449 = {
-						DevelopmentTeam = 8X2A38Q9VD;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = UT282795WK;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1734,11 +1734,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = HBuilder/UniPluginDemoDebug.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 100;
-				DEVELOPMENT_TEAM = 8X2A38Q9VD;
+				DEVELOPMENT_TEAM = UT282795WK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1766,9 +1766,9 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.push.sndemo;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.jiguang.hxhg;
 				PRODUCT_NAME = UniPluginDemo;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = cn.jiguang.hxhg;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 i386 x86_64";
 				WRAPPER_EXTENSION = app;
