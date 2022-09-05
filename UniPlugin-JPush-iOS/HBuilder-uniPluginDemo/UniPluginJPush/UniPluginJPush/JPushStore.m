@@ -24,7 +24,6 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         store = [[JPushStore alloc] init];
-        store.allowedInMessagePop = YES;
     });
     return store;
 }
@@ -39,8 +38,6 @@
     [self setupWithOption:launchOptions];
     // 监听透传消息
     [self addCustomMessageObserver];
-    //应用内消息代理
-    [JPUSHService setInMessageDelegate:[JPushStore shared]];
 }
 
 #pragma mark - 初始化
@@ -247,86 +244,6 @@
     if ([JPushStore shared].geofenceCallback) {
         [JPushStore shared].geofenceCallback(result, YES);
     }
-}
-
-
-
-#pragma mark - 应用内消息
-/**
- *是否允许应用内消息弹出,默认为允许
-*/
-- (BOOL)jPushInMessageIsAllowedInMessagePop {
-    return self.allowedInMessagePop;
-}
-
-/**
- *应用内消息已消失
-*/
-- (void)jPushInMessageAlreadyDisappear {
-    NSDictionary *result = [self convertInMessageResult:nil Content:nil type:@"disappear"];
-    if (self.inMessageCallback) {
-        self.inMessageCallback(result, YES);
-    }
-}
-
-
-/**
- inMessage展示的回调
- 
- @param messageType inMessage
- @param content 下发的数据，广告类的返回数据为空时返回的信息
-
- */
-- (void)jPushInMessageAlreadyPopInMessageType:(JPushInMessageContentType)messageType Content:(NSDictionary *)content {
-    
-    NSDictionary *result = [self convertInMessageResult:messageType Content:content type:@"show"];
-    if (self.inMessageCallback) {
-        self.inMessageCallback(result, YES);
-    }
-}
-
-/**
- inMessage点击的回调
- 
- @param messageType inMessage
- @param content 下发的数据，广告类的返回数据为空时返回的信息
-
- */
-- (void)jpushInMessagedidClickInMessageType:(JPushInMessageContentType)messageType Content:(NSDictionary *)content {
-    
-    NSDictionary *result = [self convertInMessageResult:messageType Content:content type:@"click"];
-    if (self.inMessageCallback) {
-        self.inMessageCallback(result, YES);
-    }
-}
-
-- (NSDictionary *)convertInMessageResult:(JPushInMessageContentType)messageType Content:(NSDictionary *)content type:(NSString *)type{
-    
-    if ([type isEqualToString:@"disappear"]) {
-        NSDictionary *result = @{
-            @"eventType":type,
-        };
-        return result;
-    }
-    
-    NSString *inMeassageType = @"";
-    switch (messageType) {
-        case JPushAdContentType:
-            inMeassageType = @"inMessageAd";
-            break;
-        case JPushNotiContentType:
-            inMeassageType = @"inMessageNoti";
-            break;
-        default:
-            break;
-    }
-    
-    NSDictionary *result = @{
-        @"messageType":inMeassageType,
-        @"eventType":type?:@"",
-        @"content":content?:@{},
-    };
-    return result;
 }
 
 
