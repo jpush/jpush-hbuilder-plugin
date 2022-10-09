@@ -26,7 +26,9 @@ const jv = uni.requireNativePlugin('JG-JPush');
 
 ### 1.2 配置插件
 
-注意：不要勾选uniPush！
+**HBuilderX 3.6.2 及之后版本，请打开mainfest配置文件，选择 App模块配置，勾选 Push 模块。**
+
+**注意：不要勾选uniPush！**
 
 打开 manifest.xml，选中App原生插件配置，选择本地插件，导入 JG-JPush
 
