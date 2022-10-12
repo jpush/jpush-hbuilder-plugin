@@ -6,25 +6,27 @@
     <permission
         android:name="${applicationId}.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
-    <!-- Required  一些系统要求的权限，如访问网络等 -->
+    <!-- Required -->
     <uses-permission android:name="${applicationId}.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!--华为角标-->
+    <uses-permission
+        android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
+    <!--vivo 角标-->
+    <uses-permission android:name="com.vivo.notification.permission.BADGE_ICON" />
+    <!--honor 角标-->
+    <uses-permission android:name="com.hihonor.android.launcher.permission.CHANGE_BADGE" />
+    <!--小米 推送必须-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Optional for location -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
-    <!-- 华为角标 -->
-    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
-    <!-- vivo 角标 -->
-    <uses-permission android:name="com.vivo.notification.permission.BADGE_ICON" />
-
-    <!-- Optional for location -->
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!--xiaomi_permission_start-->
     <permission
         android:name="${applicationId}.permission.MIPUSH_RECEIVE"
@@ -138,7 +140,7 @@
     <activity
         android:name="cn.jpush.android.service.JNotifyActivity"
         android:exported="true"
-        android:taskAffinity="jpush.custom"
+        android:taskAffinity=""
         android:theme="@style/JPushTheme" >
         <intent-filter>
             <action android:name="cn.jpush.android.intent.JNotifyActivity" />
@@ -195,7 +197,7 @@
         android:name="cn.jpush.android.service.DActivity"
         android:enabled="true"
         android:exported="true"
-        android:taskAffinity="jpush.custom"
+        android:taskAffinity=""
         android:theme="@android:style/Theme.Translucent.NoTitleBar">
         <intent-filter>
             <action android:name="cn.jpush.android.intent.DActivity" />
@@ -316,12 +318,6 @@
             android:exported="true"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-            <intent-filter>
-
-                <!-- 为更好的兼容后期Android版本更新，预注册一个Action，暂时无用 -->
-                <action android:name="com.xiaomi.mipush.sdk.NotificationClickedActivity" />
-            </intent-filter>
-
             <meta-data
                 android:name="supportStyle"
                 android:value="scene|voip" />
@@ -341,6 +337,7 @@
 
     <!--meizu_config_start-->
     <receiver android:name="cn.jpush.android.service.PluginMeizuPlatformsReceiver"
+        android:permission="com.meizu.flyme.permission.PUSH"
         android:exported="true"
         >
         <intent-filter>
@@ -434,7 +431,7 @@
         <activity
             android:name="cn.android.service.JTransitActivity"
             android:exported="true"
-            android:taskAffinity="jpush.custom"
+            android:taskAffinity=""
             android:theme="@style/JPushTheme" >
             <intent-filter>
                 <action android:name="cn.android.service.JTransitActivity" />
