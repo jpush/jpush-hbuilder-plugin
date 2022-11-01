@@ -9,6 +9,8 @@ public class JConstants {
     public static final String CODE = "code";
     public static final int CODE_SUCESS = 0;
     public static final String CHANNEL = "channel";
+    public static final String CHANNEL_ID = "channel_id";
+    public static final String SOUND = "sound";
     public static final String SEQUENCE = "sequence";
     public static final String CONNECT_ENABLE = "connectEnable";
     //电话号码
@@ -60,6 +62,7 @@ public class JConstants {
     //error
     public static final String PARAMS_NULL = "params cant be null";
     public static final String PARAMS_ILLEGAL = "params illegal";
+    public static final String PARAMS_ILLEGAL_CHANNEL = "params illegal,channel and channel id must config";
     public static final String CALLBACK_NULL = "callback cant be null";
     //event
     public static final String CONNECT_EVENT = "ConnectEvent";

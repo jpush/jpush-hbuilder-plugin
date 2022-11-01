@@ -114,6 +114,11 @@
                 "JPUSH_XIAOMI_APPID" : "",
                 "JPUSH_HUAWEI_APPID" : "",
                 "JPUSH_HONOR_APPID" : "",
+                "JPUSH_GOOGLE_API_KEY" : "",
+                "JPUSH_GOOGLE_APP_ID" : "",
+                "JPUSH_GOOGLE_PROJECT_NUMBER" : "",
+                "JPUSH_GOOGLE_PROJECT_ID" : "",
+                "JPUSH_GOOGLE_STORAGE_BUCKET" : "",
                 "__plugin_info__" : {
                     "name" : "JG-JPush",
                     "description" : "极光推送Hbuilder插件",
@@ -193,6 +198,31 @@
                         "JPUSH_HONOR_APPID" : {
                             "des" : "厂商HONOR-appId,示例：12346578",
                             "key" : "com.hihonor.push.app_id",
+                            "value" : ""
+                        },
+                        "JPUSH_GOOGLE_API_KEY" : {
+                            "des" : "厂商google api_key,示例:asxa1232",
+                            "key" : "google_api_key",
+                            "value" : ""
+                        },
+                        "JPUSH_GOOGLE_APP_ID" : {
+                            "des" : "厂商google mobilesdk_app_id,示例：12346578",
+                            "key" : "google_app_id",
+                            "value" : ""
+                        },
+                        "JPUSH_GOOGLE_PROJECT_NUMBER" : {
+                            "des" : "厂商google project_number,示例：12346578",
+                            "key" : "gcm_defaultSenderId",
+                            "value" : ""
+                        },
+                        "JPUSH_GOOGLE_PROJECT_ID" : {
+                            "des" : "厂商google project_id ,示例：12346578",
+                            "key" : "project_id",
+                            "value" : ""
+                        },
+                        "JPUSH_GOOGLE_STORAGE_BUCKET" : {
+                            "des" : "厂商google storage_bucket,示例：12346578",
+                            "key" : "google_storage_bucket",
                             "value" : ""
                         }
                     }

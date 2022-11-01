@@ -132,6 +132,11 @@
         <meta-data
             android:name="com.hihonor.push.app_id"
             android:value="123" />
+        <meta-data android:name="google_api_key" android:value="123"/>
+        <meta-data android:name="google_app_id" android:value="123"/>
+        <meta-data android:name="gcm_defaultSenderId" android:value="123"/>
+        <meta-data android:name="project_id" android:value="123"/>
+        <meta-data android:name="google_storage_bucket" android:value="123"/>
     </application>
 
 </manifest>
