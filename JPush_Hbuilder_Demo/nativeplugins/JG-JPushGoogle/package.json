@@ -1,7 +1,7 @@
 {
     "name": "JG-JPushGoogle",
     "id": "JG-JPushGoogle",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "极光推送Google版本Hbuilder插件",
     "_dp_type":"nativeplugin",
     "_dp_nativeplugin":{
@@ -139,6 +139,26 @@
                 "JPUSH_HONOR_APPID" : {
                     "des" : "厂商HONOR-appId,示例：12346578",
                     "key" : "com.hihonor.push.app_id"
+                },
+                "JPUSH_GOOGLE_API_KEY" : {
+                    "des" : "厂商google api_key,示例:g-12345678",
+                    "key" : "google_api_key"
+                },
+                "JPUSH_GOOGLE_APP_ID" : {
+                    "des" : "厂商google mobilesdk_app_id,示例：g-12346578",
+                    "key" : "google_app_id"
+                },
+                "JPUSH_GOOGLE_PROJECT_NUMBER" : {
+                    "des" : "厂商google project_number,示例：g-12346578",
+                    "key" : "gcm_defaultSenderId"
+                },
+                "JPUSH_GOOGLE_PROJECT_ID" : {
+                    "des" : "厂商google project_id ,示例：g-12346578",
+                    "key" : "project_id"
+                },
+                "JPUSH_GOOGLE_STORAGE_BUCKET" : {
+                    "des" : "厂商google storage_bucket,示例：g-12346578",
+                    "key" : "google_storage_bucket"
                 }
             }
         }

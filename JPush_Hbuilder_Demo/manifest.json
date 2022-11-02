@@ -1,9 +1,9 @@
 {
     "name" : "JPush_Hbuilder_Demo",
-    "appid" : "__UNI__B1941DA",
+    "appid" : "__UNI__F550D9E",
     "description" : "",
-    "versionName" : "1.0.0",
-    "versionCode" : "100",
+    "versionName" : "1.0.1",
+    "versionCode" : 101,
     "transformPx" : false,
     "app-plus" : {
         /* 5+App特有相关 */
@@ -15,9 +15,7 @@
             "autoclose" : true,
             "delay" : 0
         },
-        "modules" : {
-            "Push" : {}
-        },
+        "modules" : {},
         /* 模块配置 */
         "distribute" : {
             /* 应用发布信息 */
@@ -47,7 +45,8 @@
                     "NSLocationWhenInUseUsageDescription" : "This app requires location services to work"
                 },
                 "UIBackgroundModes" : "remote-notification,voip,fetch,location",
-                "idfa" : true
+                "idfa" : true,
+                "dSYMs" : false
             },
             /* ios打包配置 */
             "sdkConfigs" : {
@@ -96,26 +95,32 @@
                             "value" : ""
                         }
                     }
-                }
+                },
+                "JPUSH_APPKEY_ANDROID" : "eb67142502ec9f5556875b9a"
             },
             "JG-JPushGoogle" : {
-                "JPUSH_XIAOMI_APPKEY" : "",
-                "JPUSH_MEIZU_APPID" : "",
-                "JPUSH_OPPO_APPSECRET" : "",
-                "JPUSH_OPPO_APPKEY" : "",
+                "JPUSH_ISPRODUCTION_IOS" : "",
                 "JPUSH_ADVERTISINGID_IOS" : "",
-                "JPUSH_MEIZU_APPKEY" : "",
-                "JPUSH_OPPO_APPID" : "",
                 "JPUSH_DEFAULTINITJPUSH_IOS" : "",
+                "JPUSH_OPPO_APPKEY" : "",
+                "JPUSH_OPPO_APPID" : "",
+                "JPUSH_OPPO_APPSECRET" : "",
                 "JPUSH_VIVO_APPKEY" : "",
                 "JPUSH_VIVO_APPID" : "",
-                "JPUSH_ISPRODUCTION_IOS" : "",
+                "JPUSH_MEIZU_APPKEY" : "",
+                "JPUSH_MEIZU_APPID" : "",
+                "JPUSH_XIAOMI_APPKEY" : "",
                 "JPUSH_XIAOMI_APPID" : "",
                 "JPUSH_HUAWEI_APPID" : "",
                 "JPUSH_HONOR_APPID" : "",
+                "JPUSH_GOOGLE_API_KEY" : "g-AIzaSyBxPXGKxozP_tlsTC2vCR0YMFgu37DcAUc",
+                "JPUSH_GOOGLE_APP_ID" : "g-1:664955540508:android:be2efc395d4aa2626a7bd9",
+                "JPUSH_GOOGLE_PROJECT_NUMBER" : "g-664955540508",
+                "JPUSH_GOOGLE_PROJECT_ID" : "g-southtest-ddf6e",
+                "JPUSH_GOOGLE_STORAGE_BUCKET" : "g-southtest-ddf6e.appspot.com",
                 "__plugin_info__" : {
                     "name" : "JG-JPushGoogle",
-                    "description" : "极光推送Hbuilder插件",
+                    "description" : "极光推送Google版本Hbuilder插件",
                     "platforms" : "Android,iOS",
                     "url" : "",
                     "android_package_name" : "",
@@ -124,39 +129,14 @@
                     "bought" : -1,
                     "pid" : "",
                     "parameters" : {
-                        "JPUSH_XIAOMI_APPKEY" : {
-                            "des" : "厂商 xiaomi appKey,示例：MI-12345678",
-                            "key" : "XIAOMI_APPKEY",
-                            "value" : ""
-                        },
-                        "JPUSH_MEIZU_APPID" : {
-                            "des" : "厂商 meizu appId,示例：MZ-12345678",
-                            "key" : "MEIZU_APPID",
-                            "value" : ""
-                        },
-                        "JPUSH_OPPO_APPSECRET" : {
-                            "des" : "厂商 oppo appSecret,示例：OP-12345678",
-                            "key" : "OPPO_APPSECRET",
-                            "value" : ""
-                        },
-                        "JPUSH_OPPO_APPKEY" : {
-                            "des" : "厂商 oppo appkey,示例：OP-12345678",
-                            "key" : "OPPO_APPKEY",
+                        "JPUSH_ISPRODUCTION_IOS" : {
+                            "des" : "[iOS]是否是生产环境，是填true，不是填false或者不填",
+                            "key" : "JPush:ISPRODUCTION",
                             "value" : ""
                         },
                         "JPUSH_ADVERTISINGID_IOS" : {
-                            "des" : "[iOS]广告标识符（IDFA） 如果不需要使用IDFA，可不填",
+                            "des" : "[iOS]广告标识符（IDFA）如果不需要使用IDFA，可不填",
                             "key" : "JPush:ADVERTISINGID",
-                            "value" : ""
-                        },
-                        "JPUSH_MEIZU_APPKEY" : {
-                            "des" : "厂商 meizu appKey,示例：MZ-12345678",
-                            "key" : "MEIZU_APPKEY",
-                            "value" : ""
-                        },
-                        "JPUSH_OPPO_APPID" : {
-                            "des" : "厂商 oppo appId,示例：OP-12345678",
-                            "key" : "OPPO_APPID",
                             "value" : ""
                         },
                         "JPUSH_DEFAULTINITJPUSH_IOS" : {
@@ -164,23 +144,48 @@
                             "key" : "JPush:DEFAULTINITJPUSH",
                             "value" : ""
                         },
+                        "JPUSH_OPPO_APPKEY" : {
+                            "des" : "厂商OPPO-appkey,示例：OP-12345678",
+                            "key" : "OPPO_APPKEY",
+                            "value" : ""
+                        },
+                        "JPUSH_OPPO_APPID" : {
+                            "des" : "厂商OPPO-appId,示例：OP-12345678",
+                            "key" : "OPPO_APPID",
+                            "value" : ""
+                        },
+                        "JPUSH_OPPO_APPSECRET" : {
+                            "des" : "厂商OPPO-appSecret,示例：OP-12345678",
+                            "key" : "OPPO_APPSECRET",
+                            "value" : ""
+                        },
                         "JPUSH_VIVO_APPKEY" : {
-                            "des" : "厂商 vivo appkey,示例：12345678",
+                            "des" : "厂商VIVO-appkey,示例：12345678",
                             "key" : "com.vivo.push.api_key",
                             "value" : ""
                         },
                         "JPUSH_VIVO_APPID" : {
-                            "des" : "厂商 vivo appId,示例：12345678",
+                            "des" : "厂商VIVO-appId,示例：12345678",
                             "key" : "com.vivo.push.app_id",
                             "value" : ""
                         },
-                        "JPUSH_ISPRODUCTION_IOS" : {
-                            "des" : "[iOS]是否是生产环境，是填true,不是填false或者不填",
-                            "key" : "JPush:ISPRODUCTION",
+                        "JPUSH_MEIZU_APPKEY" : {
+                            "des" : "厂商MEIZU-appKey,示例：MZ-12345678",
+                            "key" : "MEIZU_APPKEY",
+                            "value" : ""
+                        },
+                        "JPUSH_MEIZU_APPID" : {
+                            "des" : "厂商MEIZU-appId,示例：MZ-12345678",
+                            "key" : "MEIZU_APPID",
+                            "value" : ""
+                        },
+                        "JPUSH_XIAOMI_APPKEY" : {
+                            "des" : "厂商XIAOMI-appKey,示例：MI-12345678",
+                            "key" : "XIAOMI_APPKEY",
                             "value" : ""
                         },
                         "JPUSH_XIAOMI_APPID" : {
-                            "des" : "厂商 xiaomi appId,示例：MI-12345678",
+                            "des" : "厂商XIAOMI-appId,示例：MI-12345678",
                             "key" : "XIAOMI_APPID",
                             "value" : ""
                         },
@@ -192,6 +197,31 @@
                         "JPUSH_HONOR_APPID" : {
                             "des" : "厂商HONOR-appId,示例：12346578",
                             "key" : "com.hihonor.push.app_id",
+                            "value" : ""
+                        },
+                        "JPUSH_GOOGLE_API_KEY" : {
+                            "des" : "厂商google api_key,示例:g-12345678",
+                            "key" : "google_api_key",
+                            "value" : ""
+                        },
+                        "JPUSH_GOOGLE_APP_ID" : {
+                            "des" : "厂商google mobilesdk_app_id,示例：g-12346578",
+                            "key" : "google_app_id",
+                            "value" : ""
+                        },
+                        "JPUSH_GOOGLE_PROJECT_NUMBER" : {
+                            "des" : "厂商google project_number,示例：g-12346578",
+                            "key" : "gcm_defaultSenderId",
+                            "value" : ""
+                        },
+                        "JPUSH_GOOGLE_PROJECT_ID" : {
+                            "des" : "厂商google project_id ,示例：g-12346578",
+                            "key" : "project_id",
+                            "value" : ""
+                        },
+                        "JPUSH_GOOGLE_STORAGE_BUCKET" : {
+                            "des" : "厂商google storage_bucket,示例：g-12346578",
+                            "key" : "google_storage_bucket",
                             "value" : ""
                         }
                     }

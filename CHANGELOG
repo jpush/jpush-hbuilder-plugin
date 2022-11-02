@@ -1,3 +1,6 @@
+v1.0.5
+1、新增适配FCM推送通道
+2、新增API：setChannelAndSound
 v1.0.4
 更新Jpush 4.8.4 和JCore3.3.6
 v1.0.3
