@@ -47,18 +47,18 @@ const jv = uni.requireNativePlugin('JG-JPush');
 | JPUSH_XIAOMI_APPID   | android xiaomi appId（选填）                                | MI-12345678 |
 | JPUSH_HUAWEI_APPID   | android huawei appId（选填）                                | appid=12345678 |
 | JPUSH_HONOR_APPID   | android honor appId（选填）                                | 12345678 |
+| JPUSH_GOOGLE_API_KEY   | android google api_key（选填）                                | g-12345678 |
+| JPUSH_GOOGLE_APP_ID   | android google mobilesdk_app_id（选填）                                | g-12345678 |
+| JPUSH_GOOGLE_PROJECT_NUMBER   | android google project_number（选填）                                | g-12345678 |
+| JPUSH_GOOGLE_PROJECT_ID   | android google project_id（选填）                                | g-12345678 |
+| JPUSH_GOOGLE_STORAGE_BUCKET   | android google storage_bucket（选填）                                | g-12345678 |
 |JPUSH_ISPRODUCTION_IOS|iOS 是否是生产环境（选填）|是填true,不是填false或者不填|
 |JPUSH_ADVERTISINGID_IOS|iOS 广告标识符（IDFA）（选填）| 如果不需要使用IDFA，可不填|
 |JPUSH_DEFAULTINITJPUSH_IOS| iOS 是否默认初始化（选填）|是填true，不是填false或者不填|
 
-
 #### Android 厂商配置说明
-插件支持 OPPO VIVO 魅族 小米 华为 荣耀六大厂商推送接入，如需接入请对应配置上述厂商信息。
+插件支持 OPPO VIVO 魅族 小米 华为 荣耀 FCM 七大厂商推送接入，如需接入请对应配置上述厂商信息。
 
-因FCM 厂商需要单独配置 json 及对应原生插件库，不在此插件支持范围，如需接入，需使用 Uniapp 本地打包导入 AndroidStudio，并按照极光厂商接入文档自行配置接入。
-
-
-- [fcm厂商接入](https://docs.jiguang.cn/jpush/client/Android/fcm-Push-guide/)
 
 ## API
 - [公用 API](https://github.com/jpush/jpush-hbuilder-plugin/blob/master/doc/API.md)

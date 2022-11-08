@@ -33,8 +33,8 @@ repositories {
 }
 
 dependencies {
-    releaseCompileOnly fileTree(dir: 'libs', include: ['*.jar'])
-    debugImplementation fileTree(dir: 'libs', include: ['*.jar'])
+    releaseCompileOnly fileTree(dir: 'libs', include: ['*.jar',"*.aar"])
+    debugCompileOnly fileTree(dir: 'libs', include: ['*.jar',"*.aar"])
 
     compileOnly 'com.android.support:recyclerview-v7:28.0.0'
     compileOnly 'com.android.support:support-v4:28.0.0'
