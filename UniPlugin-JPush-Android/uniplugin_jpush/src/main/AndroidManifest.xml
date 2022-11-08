@@ -407,6 +407,14 @@
         android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
     <!--vivo_config_end-->
+    <!--fcm_config_start-->
+        <service android:name="cn.jpush.android.service.PluginFCMMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+    <!--fcm_config_end-->
     <!--honor_config_start-->
         <service
             android:name="cn.jpush.android.service.JHonorService"
