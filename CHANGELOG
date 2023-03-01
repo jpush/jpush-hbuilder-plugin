@@ -1,3 +1,5 @@
+v1.0.6
+更新Jpush 4.9.0 和JCore4.1.0
 v1.0.5
 1、新增适配FCM推送通道
 2、新增API：setChannelAndSound

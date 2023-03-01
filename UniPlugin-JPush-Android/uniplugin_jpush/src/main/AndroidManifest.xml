@@ -215,22 +215,9 @@
             <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" /> <!-- Required  显示通知栏 -->
             <category android:name="${applicationId}" />
         </intent-filter>
-        <intent-filter>
-            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-        </intent-filter>
-        <!-- Optional -->
-        <intent-filter>
-            <action android:name="android.intent.action.PACKAGE_ADDED" />
-            <action android:name="android.intent.action.PACKAGE_REMOVED" />
-
-            <data android:scheme="package" />
-        </intent-filter>
     </receiver>
 
-    <!-- Required SDK核心功能 -->
-    <receiver
-        android:name="cn.jpush.android.service.AlarmReceiver"
-        android:exported="false" />
+
     <!--(jpush|jmessage)_config_end-->
 
 
@@ -271,10 +258,11 @@
         android:name="com.xiaomi.push.service.XMPushService"
         android:enabled="true"
         android:process=":pushcore" />
-    <service
-        android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
-        android:enabled="true"
-        android:exported="true" />
+        <service
+            android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="com.xiaomi.xmsf.permission.MIPUSH_RECEIVE" />
     <service
         android:name="com.xiaomi.mipush.sdk.MessageHandleService"
         android:enabled="true" />
