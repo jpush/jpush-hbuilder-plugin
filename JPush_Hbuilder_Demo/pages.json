@@ -38,23 +38,23 @@
 	    "backgroundColor": "#ffffff",
 	    "list": [{
 	        "pagePath": "pages/index/index",
-	        "iconPath": "static/image/icon_component.png",
-	        "selectedIconPath": "static/image/icon_component_HL.png",
+	        "iconPath": "static/component.png",
+	        "selectedIconPath": "static/componentHL.png",
 	        "text": "首页"
 	    }, {
 	        "pagePath": "pages/index/tags",
-	        "iconPath": "static/image/icon_API.png",
-	        "selectedIconPath": "static/image/icon_API_HL.png",
+	       "iconPath": "static/api.png",
+	       "selectedIconPath": "static/apiHL.png",
 	        "text": "TagAlias"
 	    }, {
 	        "pagePath": "pages/index/localNoti",
-	        "iconPath": "static/image/icon_API.png",
-	        "selectedIconPath": "static/image/icon_API_HL.png",
+	       "iconPath": "static/api.png",
+	       "selectedIconPath": "static/apiHL.png",
 	        "text": "本地通知"
 	    }, {
 	        "pagePath": "pages/index/other",
-	        "iconPath": "static/image/icon_API.png",
-	        "selectedIconPath": "static/image/icon_API_HL.png",
+	        "iconPath": "static/api.png",
+	        "selectedIconPath": "static/apiHL.png",
 	        "text": "其他"
 	    }]
 	},
