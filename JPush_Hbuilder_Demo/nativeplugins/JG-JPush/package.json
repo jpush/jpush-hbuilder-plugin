@@ -1,7 +1,7 @@
 {
     "name": "JG-JPush",
     "id": "JG-JPush",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "description": "极光推送Hbuilder插件",
     "_dp_type":"nativeplugin",
     "_dp_nativeplugin":{

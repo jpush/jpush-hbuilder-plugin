@@ -33,3 +33,6 @@ v1.1.4
 2、新增API：setChannelAndSound
 v1.1.5
 更新Jpush 4.9.0 和JCore 4.1.0
+v1.1.6
+1、iOS新增通知删除回调
+2、适配xcode14, 插件最低支持版本为iOS11
