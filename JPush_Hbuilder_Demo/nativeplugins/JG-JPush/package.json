@@ -6,6 +6,10 @@
     "_dp_type":"nativeplugin",
     "_dp_nativeplugin":{
         "ios": {
+			"deploymentTarget": "11.0",	
+			"validArchitectures": [    
+				"arm64"
+			],
             "plugins": [{
                 "type": "module",
                 "name": "JG-JPush",
@@ -13,7 +17,6 @@
             }],
             "hooksClass": "JPushProxy",
             "integrateType": "framework",
-            "deploymentTarget": "9.0",
             "frameworks": [
                 "CFNetwork.framework",
                 "CoreFoundation.framework",

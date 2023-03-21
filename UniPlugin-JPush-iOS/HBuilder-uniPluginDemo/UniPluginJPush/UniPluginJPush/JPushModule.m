@@ -478,6 +478,7 @@ UNI_EXPORT_METHOD(@selector(clearLocalNotifications))
     NSString *notificationContent = params[CONTENT]?params[CONTENT]:@"";
     content.title = notificationTitle;
     content.body = notificationContent;
+    content.categoryIdentifier = @"jpush_noti_dismissAction_callback_category";
     if(params[EXTRAS]){
         content.userInfo = @{MESSAGE_ID:messageID,TITLE:notificationTitle,CONTENT:notificationContent,EXTRAS:params[EXTRAS]};
     }else{
@@ -495,6 +496,10 @@ UNI_EXPORT_METHOD(@selector(clearLocalNotifications))
         trigger.dateComponents = components;
     } else {
         trigger.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    }
+    if (@available(iOS 15.0, *)) {
+      content.interruptionLevel = UNNotificationInterruptionLevelTimeSensitive;
+      content.relevanceScore = 1;
     }
     JPushNotificationRequest *request = [[JPushNotificationRequest alloc] init];
     request.requestIdentifier = messageID;

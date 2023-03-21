@@ -83,6 +83,12 @@
     } else {
         entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
     }
+    
+    if (@available(iOS 10.0, *)) {
+        UNNotificationCategory *sumFormatCategory = [UNNotificationCategory categoryWithIdentifier:@"jpush_noti_dismissAction_callback_category" actions:@[] intentIdentifiers:@[] options:UNNotificationCategoryOptionCustomDismissAction];
+        entity.categories = [NSSet setWithObject:sumFormatCategory];
+    }
+    
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:[JPushStore shared]];
     
 }
@@ -182,11 +188,20 @@
 // 点击通知会触发
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
     NSDictionary * userInfo = response.notification.request.content.userInfo;
+    
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [self handeleApnsCallback:userInfo type:NOTIFICATION_OPENED];
+        if ([response.actionIdentifier isEqualToString:UNNotificationDismissActionIdentifier]){
+            [self handeleApnsCallback:userInfo type:NOTIFICATION_DISMISSED];
+        }else {
+            [self handeleApnsCallback:userInfo type:NOTIFICATION_OPENED];
+        }
     }
     else {
-        [self handlerLocalNotiCallback:userInfo type:NOTIFICATION_OPENED];
+        if ([response.actionIdentifier isEqualToString:UNNotificationDismissActionIdentifier]){
+            [self handlerLocalNotiCallback:userInfo type:NOTIFICATION_DISMISSED];
+        }else {
+            [self handlerLocalNotiCallback:userInfo type:NOTIFICATION_OPENED];
+        }
     }
     completionHandler();
 }
