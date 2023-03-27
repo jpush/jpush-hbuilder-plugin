@@ -15,6 +15,8 @@
 
 @property (nonatomic, strong) CLLocationManager *currentManager;
 
+@property (nonatomic, strong) NSMutableArray *callBackShowNotisArr; // apns展示型通知已经回调过的
+
 @end
 
 @implementation JPushStore
@@ -26,6 +28,15 @@
         store = [[JPushStore alloc] init];
     });
     return store;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _callBackShowNotisArr = [NSMutableArray array];
+    }
+    return self;
 }
 
 // jpush初始化
@@ -306,7 +317,37 @@
 #pragma mark -
 // 处理远程通知回调
 - (void)handeleApnsCallback:(NSDictionary *)userInfo type:(NSString *)type {
+    if (!userInfo || ![userInfo isKindOfClass:[NSDictionary class]]) {
+        return;
+    }
+    
     [JPUSHService handleRemoteNotification:userInfo];
+    
+    // 处理带有content-available 推送唤醒通知送达时会回调两次的问题
+    NSNumber *notiId = userInfo[@"_j_msgid"];
+    for (NSDictionary *info in [self.callBackShowNotisArr mutableCopy]) {
+        if ([info isKindOfClass:[NSDictionary class]]) {
+            NSNumber *messageID = info[@"_j_msgid"];
+            if (notiId && [notiId isKindOfClass:[NSNumber class]] && messageID && [messageID isKindOfClass:[NSNumber class]] && [[notiId stringValue] isEqualToString:[messageID stringValue]]) {
+                NSLog(@"already callback");
+                [self.callBackShowNotisArr removeAllObjects];
+                return;
+            }
+        }
+    }
+    if ([type isEqualToString:NOTIFICATION_ARRIVED]) {
+        NSDictionary *aps = userInfo[@"aps"];
+        if (aps && [aps isKindOfClass:[NSDictionary class]]) {
+            if([aps.allKeys containsObject:@"content-available"]){
+                NSNumber *contentavailable = aps[@"content-available"];
+                if (contentavailable && [contentavailable isKindOfClass:[NSNumber class]] && [contentavailable boolValue]) {
+                    [self.callBackShowNotisArr addObject:userInfo];
+                }
+            }
+        }
+    }
+    
+    // 
     NSDictionary *result = [self convertApnsMessage:userInfo type:type];
     if ([JPushStore shared].pushNotiCallback) {
         [JPushStore shared].pushNotiCallback(result, YES);
