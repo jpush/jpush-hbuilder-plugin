@@ -26,6 +26,7 @@
 #define NOTIFICATION_EVENTTYPE  @"notificationEventType"
 #define NOTIFICATION_ARRIVED    @"notificationArrived"
 #define NOTIFICATION_OPENED     @"notificationOpened"
+#define NOTIFICATION_DISMISSED  @"notificationDismissed"
 
 
 NS_ASSUME_NONNULL_BEGIN

@@ -1,7 +1,7 @@
 {
     "name": "JG-JPushGoogle",
     "id": "JG-JPushGoogle",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "极光推送Google版本Hbuilder插件",
     "_dp_type":"nativeplugin",
     "_dp_nativeplugin":{
@@ -13,7 +13,10 @@
             }],
             "hooksClass": "JPushProxy",
             "integrateType": "framework",
-            "deploymentTarget": "9.0",
+            "deploymentTarget": "11.0", 
+            "validArchitectures": [    
+                "arm64"
+            ],
             "frameworks": [
                 "CFNetwork.framework",
                 "CoreFoundation.framework",
