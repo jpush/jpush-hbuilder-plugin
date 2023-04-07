@@ -15,6 +15,8 @@
 
 @property (nonatomic, strong) CLLocationManager *currentManager;
 
+@property (nonatomic, strong) NSMutableArray *callBackShowNotisArr; // apns展示型通知已经回调过的
+
 @end
 
 @implementation JPushStore
@@ -26,6 +28,15 @@
         store = [[JPushStore alloc] init];
     });
     return store;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _callBackShowNotisArr = [NSMutableArray array];
+    }
+    return self;
 }
 
 // jpush初始化
@@ -83,6 +94,12 @@
     } else {
         entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
     }
+    
+    if (@available(iOS 10.0, *)) {
+        UNNotificationCategory *sumFormatCategory = [UNNotificationCategory categoryWithIdentifier:@"jpush_noti_dismissAction_callback_category" actions:@[] intentIdentifiers:@[] options:UNNotificationCategoryOptionCustomDismissAction];
+        entity.categories = [NSSet setWithObject:sumFormatCategory];
+    }
+    
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:[JPushStore shared]];
     
 }
@@ -182,11 +199,20 @@
 // 点击通知会触发
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
     NSDictionary * userInfo = response.notification.request.content.userInfo;
+    
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [self handeleApnsCallback:userInfo type:NOTIFICATION_OPENED];
+        if ([response.actionIdentifier isEqualToString:UNNotificationDismissActionIdentifier]){
+            [self handeleApnsCallback:userInfo type:NOTIFICATION_DISMISSED];
+        }else {
+            [self handeleApnsCallback:userInfo type:NOTIFICATION_OPENED];
+        }
     }
     else {
-        [self handlerLocalNotiCallback:userInfo type:NOTIFICATION_OPENED];
+        if ([response.actionIdentifier isEqualToString:UNNotificationDismissActionIdentifier]){
+            [self handlerLocalNotiCallback:userInfo type:NOTIFICATION_DISMISSED];
+        }else {
+            [self handlerLocalNotiCallback:userInfo type:NOTIFICATION_OPENED];
+        }
     }
     completionHandler();
 }
@@ -291,7 +317,37 @@
 #pragma mark -
 // 处理远程通知回调
 - (void)handeleApnsCallback:(NSDictionary *)userInfo type:(NSString *)type {
+    if (!userInfo || ![userInfo isKindOfClass:[NSDictionary class]]) {
+        return;
+    }
+    
     [JPUSHService handleRemoteNotification:userInfo];
+    
+    // 处理带有content-available 推送唤醒通知送达时会回调两次的问题
+    NSNumber *notiId = userInfo[@"_j_msgid"];
+    for (NSDictionary *info in [self.callBackShowNotisArr mutableCopy]) {
+        if ([info isKindOfClass:[NSDictionary class]]) {
+            NSNumber *messageID = info[@"_j_msgid"];
+            if (notiId && [notiId isKindOfClass:[NSNumber class]] && messageID && [messageID isKindOfClass:[NSNumber class]] && [[notiId stringValue] isEqualToString:[messageID stringValue]]) {
+                NSLog(@"already callback");
+                [self.callBackShowNotisArr removeAllObjects];
+                return;
+            }
+        }
+    }
+    if ([type isEqualToString:NOTIFICATION_ARRIVED]) {
+        NSDictionary *aps = userInfo[@"aps"];
+        if (aps && [aps isKindOfClass:[NSDictionary class]]) {
+            if([aps.allKeys containsObject:@"content-available"]){
+                NSNumber *contentavailable = aps[@"content-available"];
+                if (contentavailable && [contentavailable isKindOfClass:[NSNumber class]] && [contentavailable boolValue]) {
+                    [self.callBackShowNotisArr addObject:userInfo];
+                }
+            }
+        }
+    }
+    
+    // 
     NSDictionary *result = [self convertApnsMessage:userInfo type:type];
     if ([JPushStore shared].pushNotiCallback) {
         [JPushStore shared].pushNotiCallback(result, YES);

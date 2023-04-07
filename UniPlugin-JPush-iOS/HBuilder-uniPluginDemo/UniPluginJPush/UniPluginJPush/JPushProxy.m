@@ -57,15 +57,10 @@
     [JPUSHService registerDeviceToken:deviceToken];
 }
 
-// ios8 - ios10 应用前台收到apns消息
+// 推送唤醒会走这里
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    
+    NSLog(@"UniPluginProtocol Func: %@,%s",self,__func__);
     [[JPushStore shared] handeleApnsCallback:userInfo type:NOTIFICATION_ARRIVED];
-}
-
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    NSDictionary *userInfo = notification.userInfo;
-    [[JPushStore shared] handlerLocalNotiCallback:userInfo type:NOTIFICATION_ARRIVED];
 }
 
 
