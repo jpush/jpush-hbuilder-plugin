@@ -1666,6 +1666,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 100;
 				DEVELOPMENT_TEAM = YQM5H857L5;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = UT282795WK;
 				ENABLE_BITCODE = NO;
@@ -1688,6 +1689,7 @@
 					"$(SRCROOT)/../SDK/inc/**",
 				);
 				INFOPLIST_FILE = "HBuilder-Hello/HBuilder-uniPlugin-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = JPush_Hbuilder_Demo;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1697,6 +1699,7 @@
 					"$(SRCROOT)/../SDK/libs/**",
 					"$(PROJECT_DIR)",
 				);
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.jiguang.hxhg;
 				PRODUCT_NAME = UniPluginDemo;
@@ -1721,9 +1724,11 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = HBuilder/HBuilder.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 100;
 				DEVELOPMENT_TEAM = YQM5H857L5;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = UT282795WK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1744,6 +1749,7 @@
 					"$(SRCROOT)/../SDK/inc/**",
 				);
 				INFOPLIST_FILE = "HBuilder-Hello/HBuilder-uniPlugin-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = JPush_Hbuilder_Demo;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1753,11 +1759,13 @@
 					"$(SRCROOT)/../SDK/libs/**",
 					"$(PROJECT_DIR)",
 				);
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = io.dcloud.H;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.jiguang.hxhg;
 				PRODUCT_NAME = UniPluginDemo;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = wildcard;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = cn.jiguang.hxhg;
 				SWIFT_OBJC_BRIDGING_HEADER = "HBuilder-Hello/HBuilder-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
