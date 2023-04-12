@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>zh_CN</string>
+	<key>CFBundleDisplayName</key>
+	<string>HelloH5</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIcons</key>
+	<dict/>
+	<key>CFBundleIcons~ipad</key>
+	<dict/>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>tencentopenapi</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tencent1101318457</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.tencent</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wb801494298</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>alixpay</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>alixpayhbilderhello</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>weixin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wxbe7f03382358338d</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.weibo</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wb3721101999</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>DCLOUD_AD_ID</key>
+	<string>去dcloud官方网站申请对应的值</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>LSApplicationCategoryType</key>
+	<string>AlipaySDK.framework
+AMapFoundationKit.framework
+AMapLocationKit.framework
+AMapSearchKit.framework
+BaiduMapAPI_Base.framework
+BaiduMapAPI_Cloud.framework
+BaiduMapAPI_Location.framework
+BaiduMapAPI_Map.framework
+BaiduMapAPI_Search.framework
+BaiduMapAPI_Utils.framework
+BaiduMobAdSDK.framework
+BUAdSDK.framework
+BUCNAuxiliary.framework
+BUFoundation.framework
+BURelyFoundation.framework
+DCUniVideoPublic.framework
+FBAEMKit.framework
+FBSDKCoreKit_Basics.framework
+FBSDKCoreKit.framework
+FBSDKLoginKit.framework
+FirebaseAnalytics.xcframework
+FirebaseCore.xcframework
+FirebaseCoreDiagnostics.xcframework
+FirebaseInstallations.xcframework
+FirebaseMessaging.xcframework
+GeYanSdk.framework
+GoogleAppMeasurement.xcframework
+GoogleAppMeasurementIdentitySupport.xcframework
+GoogleDataTransport.xcframework
+GoogleMaps.framework
+GoogleMapsBase.framework
+GoogleMapsCore.framework
+GoogleSignIn.framework
+GoogleSignInDependencies.framework
+GoogleUtilities.xcframework
+GTSDK.framework
+iflyMSC.framework
+IJKMediaFrameworkWithSSL.framework
+KSAdSDK.framework
+KSAdSDK.xcframework
+libalixpayment.a
+libAMapImp.a
+libAMapLocationPlugin.a
+libAppleOauth.a
+libBaiduKeyVerify.a
+libBaiduLocationPlugin.a
+libBaiduMobStatForSDK.a
+libbaiduSpeech.a
+libBaiduSpeechSDK.a
+libbmapimp.a
+libcoreSupport.a
+libcrypto.a
+libDCUniAmap.a
+libDCUniBarcode.a
+libDCUniBMap.a
+libDCUniCanvas.a
+libDCUniFaceID.a
+libDCUniGoogleMap.a
+libDCUniGPUImage.a
+libDCUniLivePush.a
+libDCUniMap.a
+libDCUniVideo.a
+libDCUniZXing.a
+libFBOauth.a
+libFCMPush.a
+libGDTMobSDK.a
+libGeTuiPush.a
+libGoogleOauth.a
+libGoogleStatistic.a
+libGTCommonSDK-1.2.2.0.a
+libH5WEUIWebview.a
+libIAPPay.a
+libiflySpeech.a
+liblibAccelerometer.a
+liblibAdSupport.a
+liblibBarcode.a
+liblibBeacon.a
+liblibBlueTooth.a
+liblibCache.a
+liblibCamera.a
+liblibContacts.a
+liblibFingerprint.a
+liblibGeolocation.a
+liblibIO.a
+liblibLivePush.a
+liblibLoader.a
+liblibLog.a
+liblibMap.a
+liblibMedia.a
+liblibMessage.a
+liblibNativeObj.a
+liblibNativeUI.a
+liblibNavigator.a
+liblibNotification.a
+liblibOauth.a
+liblibOrientation.a
+liblibPayment.a
+liblibPDRCore.a
+liblibPGInvocation.a
+liblibPGProximity.a
+liblibPush.a
+liblibShare.a
+liblibSpeech.a
+liblibSqlite.a
+liblibStatistic.a
+liblibStorage.a
+liblibUI.a
+liblibVideo.a
+liblibWeex.a
+liblibXHR.a
+liblibZip.a
+libMiOauth.a
+libMiPushSDK.a
+libmp3lame.a
+libopencore-amrnb.a
+libpaypalpay.a
+libQQOauth.a
+libQQShare.a
+libSDWebImage.a
+libSinaShare.a
+libSinaWBOauth.a
+libssl.a
+libstripepay.a
+libTouchJSON.a
+libuchardet.a
+libUmengStatistic.a
+libUniAd-Baidu.a
+libUniAd-Csj.a
+libUniAd-Gdt.a
+libUniAd-Ks-content.a
+libUniAd-Ks.a
+libUniAd-Sgm.a
+libUniAD.a
+libUniADWeex.a
+libUniPush.a
+libWeChatSDK_pay.a
+libWeChatSDK.a
+libWeiboSDK.a
+libweixinShare.a
+libWXOauth.a
+libwxpay.a
+libXiaomiPush.a
+MAMapKit.framework
+Masonry.framework
+MiPassport.framework
+nanopb.xcframework
+PayPalCheckout.xcframework
+PromisesObjC.xcframework
+qucFrameWorkAll.framework
+storage.framework
+Stripe.xcframework
+Stripe3DS2.xcframework
+StripeCore.xcframework
+StripeUICore.xcframework
+TencentOpenAPI.framework
+UMAPM.framework
+UMCommon.framework
+UMDevice.framework
+UniVerify.framework
+UPLiveSDKDll.framework
+WindFoundation.xcframework
+WindSDK.framework
+WindSDK.xcframework</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>tencentweiboSdkv2</string>
+		<string>weibosdk2.5</string>
+		<string>sinaweibo</string>
+		<string>sinaweibohd</string>
+		<string>alipay</string>
+		<string>safepay</string>
+		<string>cydia</string>
+		<string>weixin</string>
+		<string>weixinULAPI</string>
+		<string>weibosdk</string>
+		<string>mqq</string>
+		<string>mqqapi</string>
+		<string>mqzone</string>
+		<string>wtloginmqq2</string>
+		<string>mqqopensdkapiV3</string>
+		<string>mqqwpa</string>
+		<string>mqqopensdkapiV2</string>
+		<string>mqqOpensdkSSoLogin</string>
+		<string>hbuilder</string>
+		<string>streamapp</string>
+		<string>iosamap</string>
+		<string>baidumap</string>
+	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MiSDKAppID</key>
+	<string>去官方网站申请对应的值</string>
+	<key>MiSDKAppKey</key>
+	<string>去官方网站申请对应的值</string>
+	<key>MiSDKRun</key>
+	<string>debug</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>照相机</string>
+	<key>NSContactsUsageDescription</key>
+	<string>通讯录</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>始终允许获取你的位置信息</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>总是获取</string>
+	<key>NSLocationWhenInUseDescription</key>
+	<string></string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
+	<key>NSLocationWhenInUseUsageDescription - 2</key>
+	<string>用户使用时期定位</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>访问麦克风</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>相册</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>请放心，开启权限不会获取您在其他站点的隐私信息，该权限仅用于标识设备并保障服务安全与提示浏览体验</string>
+	<key>StatusBarBackground</key>
+	<string>#FFFFFF</string>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeShare</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>分享到微信、微博、QQ</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>分 享</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>share</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>Pandora/apps/HelloH5/www/sa.png</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>www.test.com</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>关 于</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>about</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>key3</key>
+				<string>value3</string>
+			</dict>
+		</dict>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array/>
+	<key>UILaunchImages</key>
+	<array>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>12.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-896h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{414, 896}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>12.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-896h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{414, 896}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>12.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Landscape-896h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Landscape</string>
+			<key>UILaunchImageSize</key>
+			<string>{414, 896}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>12.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Landscape-896h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Landscape</string>
+			<key>UILaunchImageSize</key>
+			<string>{414, 896}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>8.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Landscape-736h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Landscape</string>
+			<key>UILaunchImageSize</key>
+			<string>{414, 736}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>8.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-736h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{414, 736}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>11.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-812h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{375, 812}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>11.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Landscape-812h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Landscape</string>
+			<key>UILaunchImageSize</key>
+			<string>{375, 812}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>8.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-667h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{375, 667}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>8.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Landscape-667h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Landscape</string>
+			<key>UILaunchImageSize</key>
+			<string>{320, 667}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{320, 480}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-568h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{320, 568}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Landscape-568h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Landscape</string>
+			<key>UILaunchImageSize</key>
+			<string>{320, 568}</string>
+		</dict>
+	</array>
+	<key>UILaunchImages~ipad</key>
+	<array>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Landscape7</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Landscape</string>
+			<key>UILaunchImageSize</key>
+			<string>{768, 1024}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Portrait7</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{768, 1024}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>10.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Portrait7-1366h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{1024, 1366}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>10.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Landscape-1366h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Landscape</string>
+			<key>UILaunchImageSize</key>
+			<string>{1024, 1366}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>10.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Portrait7-1194h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{834, 1194}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>10.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Landscape-1194h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Landscape</string>
+			<key>UILaunchImageSize</key>
+			<string>{834, 1194}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>8.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Portrait7-1112h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{834, 1112}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>8.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Landscape-1112h</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Landscape</string>
+			<key>UILaunchImageSize</key>
+			<string>{834, 1112}</string>
+		</dict>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiresFullScreen</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<false/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDefault</string>
+	<key>UIStatusBarTintParameters</key>
+	<dict>
+		<key>UINavigationBar</key>
+		<dict>
+			<key>Style</key>
+			<string>UIBarStyleDefault</string>
+			<key>Translucent</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UniversalLinks</key>
+	<string>填写自己的值</string>
+	<key>amap</key>
+	<dict>
+		<key>appkey</key>
+		<string>去官方网站申请对应的值</string>
+	</dict>
+	<key>baidu</key>
+	<dict>
+		<key>appkey</key>
+		<string>去官方网站申请对应的值</string>
+	</dict>
+	<key>baiduspeech</key>
+	<dict>
+		<key>API_KEY</key>
+		<string>去官方网站申请对应的值</string>
+		<key>APP_ID</key>
+		<string>去官方网站申请对应的值</string>
+		<key>SECRET_KEY</key>
+		<string>去官方网站申请对应的值</string>
+	</dict>
+	<key>dcloud_appkey</key>
+	<string>f138b355a3bcfe7e87722e0e7cda5d09</string>
+	<key>dcloud_uninview_background</key>
+	<true/>
+	<key>dcloud_uniplugins</key>
+	<array>
+		<dict>
+			<key>hooksClass</key>
+			<string>DCRichAlertProxy</string>
+			<key>plugins</key>
+			<array>
+				<dict>
+					<key>class</key>
+					<string>DCRichAlertModule</string>
+					<key>name</key>
+					<string>DCloud-RichAlert</string>
+					<key>type</key>
+					<string>module</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>getui</key>
+	<dict>
+		<key>appid</key>
+		<string>去官方网站申请对应的appid</string>
+		<key>appkey</key>
+		<string>去官方网站申请对应的key</string>
+		<key>appsecret</key>
+		<string>去官方网站申请对应的值</string>
+	</dict>
+	<key>marketChannel</key>
+	<string>按照文档格式配置对应的值</string>
+	<key>sinaweibo</key>
+	<dict>
+		<key>appSecret</key>
+		<string>去官方网站申请对应的值</string>
+		<key>appkey</key>
+		<string>去官方网站申请对应的值</string>
+		<key>redirectURI</key>
+		<string>填写自己的</string>
+	</dict>
+	<key>umeng</key>
+	<dict>
+		<key>appkey</key>
+		<string>去官方网站申请对应的值</string>
+	</dict>
+	<key>weixin</key>
+	<dict>
+		<key>appSecret</key>
+		<string>去官方网站申请对应的值</string>
+		<key>appid</key>
+		<string>去官方网站申请对应的appid</string>
+	</dict>
+	<key>xiaomioauth</key>
+	<dict>
+		<key>appid</key>
+		<string>去官方网站申请对应的appid</string>
+		<key>appsecret</key>
+		<string>去官方网站申请对应的值</string>
+		<key>redirectURI</key>
+		<string>填写自己的</string>
+	</dict>
+</dict>
+</plist>
