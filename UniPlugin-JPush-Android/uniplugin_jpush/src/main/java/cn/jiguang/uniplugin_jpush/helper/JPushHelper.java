@@ -81,7 +81,9 @@ public class JPushHelper {
         jsonObject.put(JConstants.MESSAGE_ID, message.msgId);
         jsonObject.put(JConstants.TITLE, message.inAppMsgTitle);
         jsonObject.put(JConstants.CONTENT, message.inAppMsgContentBody);
-        jsonObject.put(JConstants.INAPP_MESSAGE_TYPE, message.inAppMsgType);
+        jsonObject.put(JConstants.INAPPCLICKACTION, message.inAppClickAction);
+        jsonObject.put(JConstants.INAPPEXTRAS, message.inAppExtras);
+        jsonObject.put(JConstants.INAPPSHOWTARGET, message.inAppShowTarget);
         jsonObject.put(JConstants.ANDROID, JSONObject.parseObject(JSONObject.toJSONString(message)));
         convertExtras(message.notificationExtras, jsonObject);
         return jsonObject;
