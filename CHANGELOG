@@ -1,3 +1,5 @@
+v1.0.8
+更新JPush 500+ JCore 420
 v1.0.7
 1. [iOS]适配xcode14，iOS最低支持iOS11系统，
 2. [iOS]新增notificationDismissAction回调
