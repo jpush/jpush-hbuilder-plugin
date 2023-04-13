@@ -220,6 +220,10 @@
             <category android:name="${applicationId}" />
         </intent-filter>
     </receiver>
+        <provider
+            android:exported="false"
+            android:authorities="${applicationId}.jiguang.InitProvider"
+            android:name="cn.jpush.android.service.InitProvider"></provider>
 
     <!--(jpush|jmessage)_config_end-->
 
@@ -310,12 +314,6 @@
             android:exported="true"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-            <intent-filter>
-
-                <!-- 为更好的兼容后期Android版本更新，预注册一个Action，暂时无用 -->
-                <action android:name="com.xiaomi.mipush.sdk.NotificationClickedActivity" />
-            </intent-filter>
-
             <meta-data
                 android:name="supportStyle"
                 android:value="scene|voip" />

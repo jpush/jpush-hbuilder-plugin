@@ -72,7 +72,13 @@
 					duration: 3000
 				})
 			})
-			
+			 jpushModule.addInMessageListener(result=>{
+            				uni.showToast({
+            					icon:'none',
+            					title: JSON.stringify(result),
+            					duration: 3000
+            				})
+            			})
 			jpushModule.addLocalNotificationListener(result=>{
 				let messageID = result.messageID
 				let title = result.title
