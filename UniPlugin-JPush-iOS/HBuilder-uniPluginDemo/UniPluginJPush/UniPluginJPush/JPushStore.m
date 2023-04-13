@@ -413,6 +413,31 @@
     }
 }
 
+// devicetoken
+- (void)handleDeviceTokenSuccess:(NSData *)deviceToken {
+    const unsigned int *tokenBytes = [deviceToken bytes];
+    NSString *tokenString = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    NSDictionary *resultDic = @{
+        @"code": @(0),
+        @"deviceToken": tokenString?:@""
+    };
+    if ([JPushStore shared].devicetokenEventCallback) {
+        [JPushStore shared].devicetokenEventCallback(resultDic, YES);
+    }
+}
+
+- (void)handleDeviceTokenFail:(NSError *)err {
+    NSDictionary *resultDic = @{
+        @"code": @(-1),
+        @"msg": err.localizedDescription?:@""
+    };
+    if ([JPushStore shared].devicetokenEventCallback) {
+        [JPushStore shared].devicetokenEventCallback(resultDic, YES);
+    }
+}
 
 #pragma mark - 地理位置权限
 // 请求定位权限

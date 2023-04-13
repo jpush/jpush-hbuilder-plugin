@@ -199,6 +199,7 @@ UNI_EXPORT_METHOD(@selector(addConnectEventListener:))
 
 UNI_EXPORT_METHOD(@selector(addNotificationListener:))
 UNI_EXPORT_METHOD(@selector(addCustomMessageListener:))
+UNI_EXPORT_METHOD(@selector(addDeviceTokenListener:))
 
 #pragma - 通知回调
 // 远程通知事件 notificationEventType：分为notificationArrived和notificationOpened两种
@@ -229,6 +230,13 @@ UNI_EXPORT_METHOD(@selector(addCustomMessageListener:))
 - (void)addCustomMessageListener:(UniModuleKeepAliveCallback)callback {
     [self logger:@"addCustomNotificationReceiveListener" log:nil];
     [JPushStore shared].receiveCustomNotiCallback = callback;
+}
+
+
+// 监听devicetoken的状态
+- (void)addDeviceTokenListener:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"addDeviceTokenListener" log:nil];
+    [JPushStore shared].devicetokenEventCallback = callback;
 }
 
 

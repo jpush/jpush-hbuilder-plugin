@@ -38,6 +38,22 @@
 						duration: 3000
 					})
 				})
+				
+				// 监听deviToken的状态
+				jpushModule.addDeviceTokenListener(result=>{
+					let code = result.code
+					if (code == 0) {
+						let deviceToken = result.deviceToken
+						uni.showToast({
+							icon: 'none',
+							title: deviceToken,
+							duration: 3000
+						})
+						console.log("deviceToken:", deviceToken)
+					}else {
+						let error = result.msg
+					}
+				})
 			
 			}
 			
