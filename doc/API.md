@@ -161,10 +161,13 @@ jpushModule.addCustomMessageListener(result=>{
 
 |参数名称|参数类型|参数说明|
 |:-----:|:----:|:-----:|
-|eventType|string|show - 应用内消息展示 disappear - 应用内消息已消失 click - 应用内消息点击|
-|messageType|string|消息类型, eventType 不为 disappear时返回, inMessageNoti - 通知类型的inMessage|
-|content|dictionary|应用内消息内容, eventType 不为 disappear 时返回|
-
+|messageID|string|唯一标识应用内消息的ID|
+|eventType|string|show - 应用内消息展示  click - 应用内消息点击|
+|title|string|应用内消息标题|
+|content|string|应用内消息内容|
+|inAppClickAction|string|当前应用内消息点击跳转的URL地址|
+|inAppExtras|string|应用内消息携带的额外字段|
+|inAppShowTarget|string|应用内消息展示的目标页面|
 #### 示例
 ```javascript
 jpushModule.addInMessageListener(result=>{
