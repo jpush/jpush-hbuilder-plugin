@@ -9,7 +9,7 @@
  * Copyright (c) 2011 ~ 2017 Shenzhen HXHG. All rights reserved.
  */
 
-#define JPUSH_VERSION_NUMBER 4.8.1
+#define JPUSH_VERSION_NUMBER 5.0.0
 
 #import <Foundation/Foundation.h>
 
@@ -24,11 +24,13 @@
 @protocol JPUSHRegisterDelegate;
 @protocol JPUSHGeofenceDelegate;
 @protocol JPUSHNotiInMessageDelegate;
+@protocol JPUSHInAppMessageDelegate;
 
 typedef void (^JPUSHTagsOperationCompletion)(NSInteger iResCode, NSSet *iTags, NSInteger seq);
 typedef void (^JPUSHTagValidOperationCompletion)(NSInteger iResCode, NSSet *iTags, NSInteger seq, BOOL isBind);
 typedef void (^JPUSHAliasOperationCompletion)(NSInteger iResCode, NSString *iAlias, NSInteger seq);
 typedef void (^JPUSHPropertiesOperationCompletion)(NSInteger iResCode, NSDictionary *properties, NSInteger seq);
+typedef void (^JPUSHLiveActivityTokenCompletion)(NSInteger iResCode, NSString *iLiveActivityId, NSData *pushToken, NSInteger seq);
 
 extern NSString *const kJPFNetworkIsConnectingNotification; // 正在连接中
 extern NSString *const kJPFNetworkDidSetupNotification;     // 建立连接
@@ -124,6 +126,8 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
 @property (nonatomic, assign) NSUInteger interruptionLevel NS_AVAILABLE_IOS(15.0);
 // Relevance score determines the sorting for the notification across app notifications. The expected range is between 0.0f and 1.0f.
 @property (nonatomic, assign) double relevanceScore NS_AVAILABLE_IOS(15.0);
+// iOS16以上的新增属性
+@property (nonatomic, copy) NSString *filterCriteria NS_AVAILABLE_IOS(16.0); // default nil
 
 @end
 
@@ -151,6 +155,21 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
 @property (nonatomic, copy) JPushNotificationContent *content; // 设置推送的具体内容
 @property (nonatomic, copy) JPushNotificationTrigger *trigger; // 设置推送的触发方式
 @property (nonatomic, copy) void (^completionHandler)(id result); // 注册或更新推送成功回调，iOS10以上成功则result为UNNotificationRequest对象，失败则result为nil;iOS10以下成功result为UILocalNotification对象，失败则result为nil
+
+@end
+
+
+/*!
+ * 应用内消息内容实体
+ */
+@interface JPushInAppMessage : NSObject
+
+@property (nonatomic, copy)   NSString *mesageId;    // 消息id
+@property (nonatomic, copy)   NSString *title;       // 标题
+@property (nonatomic, copy)   NSString *content;     // 内容
+@property (nonatomic, strong) NSArray  *target;      // 目标页面
+@property (nonatomic, copy)   NSString *clickAction; // 跳转地址
+@property (nonatomic, strong) NSDictionary *extras;  // 附加字段
 
 @end
 
@@ -226,6 +245,21 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
 
 
 + (void)registerDeviceToken:(NSData *)deviceToken;
+
+/*!
+ * @abstract 注册liveActivity并上报其pushToken
+ * 在pushToken有变化的时候同步调用该接口。
+ * 在liveActivity结束的时候，请同步调用该接口，pushToken传nil
+ *
+ * @param liveActivityId 标识某一个liveActivity
+ * @param pushToken 对应该liveActivity的pushToken，如有更新，请及时调用该方法更新pushToken
+ * @param completion 响应回调
+ * @param seq  请求序列号
+ */
++ (void)registerLiveActivity:(NSString *)liveActivityId
+                   pushToken:(NSData  * _Nullable)pushToken
+                  completion:(JPUSHLiveActivityTokenCompletion _Nullable )completion
+                         seq:(NSInteger)seq;
 
 /*!
  * @abstract 处理收到的 APNs 消息
@@ -405,6 +439,42 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  */
 + (void)cleanProperties:(JPUSHPropertiesOperationCompletion)completion
                     seq:(NSInteger)seq;
+
+
+/*!
+ * 应用内消息接口
+ * 使用应用内消息需要配置以下两个接口。请在进入页面和离开页面的时候相应地配置。以下两个接口请配套调用。
+ */
+
+/**
+ 进入页面
+ 
+ 请与 + (void)pageLeave:(NSString *)pageName; 方法配套使用
+ 
+ @param pageName 页面名
+ @discussion 使用应用内消息功能，需要配置pageEnterTo:和pageLeave:函数。
+ */
++ (void)pageEnterTo:(NSString *)pageName;
+
+
+/**
+ 离开页面
+ 
+ 请与 + (void)pageEnterTo:(NSString *)pageName;方法配套使用
+ 
+ @param pageName 页面名
+ @discussion 使用应用内消息功能，需要配置pageEnterTo:和pageLeave:函数。
+ */
++ (void)pageLeave:(NSString *)pageName;
+
+
+/*!
+* @abstract 设置应用内消息的代理
+*
+* @discussion 遵守JPUSHInAppMessageDelegate的代理对象
+*
+*/
++ (void)setInAppMessageDelegate:(id<JPUSHInAppMessageDelegate>)inAppMessageDelegate;
 
 
 ///----------------------------------------------------
@@ -699,6 +769,14 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  */
 + (void)setLocationEanable:(BOOL)isEanble;
 
+/*!
+ * @abstract 设置PUSH开关
+ *
+ * @discussion 关闭PUSH之后，将接收不到极光通知推送、自定义消息推送、liveActivity消息推送，默认是开启。
+ *
+ */
++ (void)setPushEnable:(BOOL)isEnable completion:(void (^)(NSInteger iResCode))completion;
+
 
 /*!
 * @abstract 设置应用内提醒消息的代理
@@ -707,6 +785,7 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
 *
 */
 + (void)setNotiInMessageDelegate:(id<JPUSHNotiInMessageDelegate>)notiInMessageDelegate;
+
 
 
 ///----------------------------------------------------
@@ -836,3 +915,25 @@ callbackSelector:(SEL)cbSelector
 - (void)jPushNotiInMessageDidClickWithContent:(NSDictionary *)content;
 
 @end
+
+
+@protocol JPUSHInAppMessageDelegate <NSObject>
+
+/**
+ 应用内消息展示的回调
+ 
+ @param inAppMessage 应用内消息的内容
+
+ */
+- (void)jPushInAppMessageDidShow:(JPushInAppMessage *)inAppMessage;
+
+/**
+ 应用内消息点击的回调
+ 
+ @param inAppMessage 应用内消息的内容
+
+ */
+- (void)jPushInAppMessageDidClick:(JPushInAppMessage *)inAppMessage;
+
+@end
+

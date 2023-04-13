@@ -62,10 +62,10 @@
 		24BD5AF21C994A1700B05AA2 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BD5AF11C994A1700B05AA2 /* libicucore.tbd */; };
 		24BD5AF61C994BB200B05AA2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BD5AF51C994BB200B05AA2 /* libc++.tbd */; };
 		24F990131DFBDA3300848C2B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F990121DFBDA3300848C2B /* CoreData.framework */; };
+		2A64971D29E7AEDF00535242 /* jpush-ios-5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A64971C29E7AEDF00535242 /* jpush-ios-5.0.0.a */; };
+		2A64971F29E7AFB000535242 /* jcore-ios-4.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A64971E29E7AFB000535242 /* jcore-ios-4.2.0.a */; };
 		2A7C531729D17F1600FD4B89 /* UniPluginJCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7C530C29D17EC900FD4B89 /* UniPluginJCore.framework */; };
 		2A7C531829D17F1A00FD4B89 /* UniPluginJPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7C531229D17ED200FD4B89 /* UniPluginJPush.framework */; };
-		2A7C532129D1801600FD4B89 /* jcore-ios-3.2.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7C532029D1801500FD4B89 /* jcore-ios-3.2.5.a */; };
-		2A7C532329D1801C00FD4B89 /* jpush-ios-4.8.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7C532229D1801C00FD4B89 /* jpush-ios-4.8.1.a */; };
 		2F0BA3F9215B48A700F67004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA3F8215B48A700F67004 /* Images.xcassets */; };
 		2F0BA410215B784100F67004 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA40F215B784000F67004 /* Contacts.framework */; };
 		2F0BA412215B814100F67004 /* liblibVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA411215B814000F67004 /* liblibVideo.a */; };
@@ -288,11 +288,11 @@
 		24BD5AF11C994A1700B05AA2 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		24BD5AF51C994BB200B05AA2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		24F990121DFBDA3300848C2B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2A64971C29E7AEDF00535242 /* jpush-ios-5.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jpush-ios-5.0.0.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JPush/ios/jpush-ios-5.0.0.a"; sourceTree = "<group>"; };
+		2A64971E29E7AFB000535242 /* jcore-ios-4.2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jcore-ios-4.2.0.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JCore/ios/jcore-ios-4.2.0.a"; sourceTree = "<group>"; };
 		2A7C530729D17EC900FD4B89 /* UniPluginJCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniPluginJCore.xcodeproj; path = UniPluginJCore/UniPluginJCore.xcodeproj; sourceTree = "<group>"; };
 		2A7C530D29D17ED200FD4B89 /* UniPluginJPush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniPluginJPush.xcodeproj; path = UniPluginJPush/UniPluginJPush.xcodeproj; sourceTree = "<group>"; };
 		2A7C531B29D17F7000FD4B89 /* HBuilder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HBuilder.entitlements; path = HBuilder/HBuilder.entitlements; sourceTree = "<group>"; };
-		2A7C532029D1801500FD4B89 /* jcore-ios-3.2.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jcore-ios-3.2.5.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JCore/ios/jcore-ios-3.2.5.a"; sourceTree = "<group>"; };
-		2A7C532229D1801C00FD4B89 /* jpush-ios-4.8.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jpush-ios-4.8.1.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JPush/ios/jpush-ios-4.8.1.a"; sourceTree = "<group>"; };
 		2F0BA3F8215B48A700F67004 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../HBuilder/Images.xcassets; sourceTree = "<group>"; };
 		2F0BA3FD215B4A4100F67004 /* PDRCommonString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRCommonString.h; sourceTree = "<group>"; };
 		2F0BA3FE215B4A4100F67004 /* PDRCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRCore.h; sourceTree = "<group>"; };
@@ -700,7 +700,6 @@
 				24AFD84C1CB50C4000C0F062 /* liblibAccelerometer.a in Frameworks */,
 				67AB0B4121EEEACA0029B229 /* MAMapKit.framework in Frameworks */,
 				97D33A5D24750907004DDFB5 /* liblibPDRCore.a in Frameworks */,
-				2A7C532129D1801600FD4B89 /* jcore-ios-3.2.5.a in Frameworks */,
 				97D33A5E24750907004DDFB5 /* liblibWeex.a in Frameworks */,
 				24AFD84D1CB50C4000C0F062 /* liblibBarcode.a in Frameworks */,
 				67566B1F2251DC3A00BDF218 /* liblibSqlite.a in Frameworks */,
@@ -724,6 +723,7 @@
 				24AFD85F1CB50C4000C0F062 /* liblibPGProximity.a in Frameworks */,
 				24AFD8601CB50C4000C0F062 /* liblibPush.a in Frameworks */,
 				24AFD8611CB50C4000C0F062 /* liblibShare.a in Frameworks */,
+				2A64971F29E7AFB000535242 /* jcore-ios-4.2.0.a in Frameworks */,
 				67D6390921C12945005D1E8F /* libBaiduSpeechSDK.a in Frameworks */,
 				24AFD8621CB50C4000C0F062 /* liblibSpeech.a in Frameworks */,
 				24AFD8631CB50C4000C0F062 /* liblibStatistic.a in Frameworks */,
@@ -745,6 +745,7 @@
 				24AFD87B1CB50C4000C0F062 /* libWXOauth.a in Frameworks */,
 				24AFD87C1CB50C4000C0F062 /* libwxpay.a in Frameworks */,
 				2F5FAE6F2865DB9800430AFA /* KSCrash.framework in Frameworks */,
+				2A64971D29E7AEDF00535242 /* jpush-ios-5.0.0.a in Frameworks */,
 				24AFD7FF1CB50C3200C0F062 /* AlipaySDK.framework in Frameworks */,
 				24AFD8021CB50C3200C0F062 /* TencentOpenAPI.framework in Frameworks */,
 				24BD5AF21C994A1700B05AA2 /* libicucore.tbd in Frameworks */,
@@ -753,7 +754,6 @@
 				67D6390A21C12945005D1E8F /* libbaiduSpeech.a in Frameworks */,
 				2F0BA412215B814100F67004 /* liblibVideo.a in Frameworks */,
 				95DA22F0276A0B1E00071681 /* UMAPM.framework in Frameworks */,
-				2A7C532329D1801C00FD4B89 /* jpush-ios-4.8.1.a in Frameworks */,
 				24BD5AEA1C99492A00B05AA2 /* libiconv.2.tbd in Frameworks */,
 				24BD5AE81C99491D00B05AA2 /* libsqlite3.0.tbd in Frameworks */,
 				2430A7021E11603E00D3D42D /* libssl.a in Frameworks */,
@@ -1101,8 +1101,8 @@
 		8EED629A198A1D13000A4449 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2A7C532029D1801500FD4B89 /* jcore-ios-3.2.5.a */,
-				2A7C532229D1801C00FD4B89 /* jpush-ios-4.8.1.a */,
+				2A64971E29E7AFB000535242 /* jcore-ios-4.2.0.a */,
+				2A64971C29E7AEDF00535242 /* jpush-ios-5.0.0.a */,
 				2FDE6A52297147E1004C7701 /* GTSDK.xcframework */,
 				2F4864C6293E121C00142360 /* DCUniRecord.framework */,
 				2F5FAE6C2865DB9800430AFA /* BMKLocationKit.framework */,

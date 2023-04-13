@@ -49,6 +49,8 @@
     [self setupWithOption:launchOptions];
     // 监听透传消息
     [self addCustomMessageObserver];
+    // 监听自定义消息
+    [self addInappMessageObserve];
 }
 
 #pragma mark - 初始化
@@ -162,6 +164,11 @@
                         object:nil];
 }
 
+#pragma mark - 自定义消息
+- (void)addInappMessageObserve {
+    [JPUSHService setInAppMessageDelegate:self];
+}
+
 // 收到透传消息
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
     NSDictionary * userInfo = [notification userInfo];
@@ -272,6 +279,20 @@
     }
 }
 
+#pragma mark - JPUSHInAppMessageDelegate
+- (void)jPushInAppMessageDidShow:(JPushInAppMessage *)inAppMessage {
+    if ([JPushStore shared].inAppMessageCallback) {
+        NSDictionary *result = [self convertInappMsg:inAppMessage isShow:YES];
+        [JPushStore shared].inAppMessageCallback(result, YES);
+    }
+}
+
+- (void)jPushInAppMessageDidClick:(JPushInAppMessage *)inAppMessage {
+    if ([JPushStore shared].inAppMessageCallback) {
+        NSDictionary *result = [self convertInappMsg:inAppMessage isShow:NO];
+        [JPushStore shared].inAppMessageCallback(result, YES);
+    }
+}
 
 #pragma mark - voip
 - (void)initVoipService{
@@ -413,6 +434,59 @@
     }
 }
 
+- (NSDictionary *)convertInappMsg:(JPushInAppMessage *)inAppMessage isShow:(BOOL)isShow {
+    
+    NSString *target = @"";
+    if (inAppMessage.target && [inAppMessage.target isKindOfClass:[NSArray class]] && inAppMessage.target.count > 0) {
+        target = [inAppMessage.target objectAtIndex:0];
+    }
+    
+    NSString *extras = @"";
+    if (inAppMessage.extras && [inAppMessage.extras isKindOfClass:[NSDictionary class]]) {
+        NSError *error;
+       NSData *data = [NSJSONSerialization dataWithJSONObject:inAppMessage.extras options:0 error:&error];
+        if (!error) {
+            extras = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        }
+    }
+    
+    NSDictionary *result = @{
+        @"eventType": isShow? @"show": @"click",
+        @"messageID": inAppMessage.mesageId?:@"", // 消息id
+        @"title": inAppMessage.title?:@"",       // 标题
+        @"content": inAppMessage.content?:@"",   // 内容
+        @"inAppShowTarget": target?:@"",     // 目标页面
+        @"inAppClickAction": inAppMessage.clickAction?:@"",  // 跳转地址
+        @"inAppExtras": inAppMessage.extras?:@"", // 附加字段
+    };
+    return result;
+}
+
+// devicetoken
+- (void)handleDeviceTokenSuccess:(NSData *)deviceToken {
+    const unsigned int *tokenBytes = [deviceToken bytes];
+    NSString *tokenString = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    NSDictionary *resultDic = @{
+        @"code": @(0),
+        @"deviceToken": tokenString?:@""
+    };
+    if ([JPushStore shared].devicetokenEventCallback) {
+        [JPushStore shared].devicetokenEventCallback(resultDic, YES);
+    }
+}
+
+- (void)handleDeviceTokenFail:(NSError *)err {
+    NSDictionary *resultDic = @{
+        @"code": @(-1),
+        @"msg": err.localizedDescription?:@""
+    };
+    if ([JPushStore shared].devicetokenEventCallback) {
+        [JPushStore shared].devicetokenEventCallback(resultDic, YES);
+    }
+}
 
 #pragma mark - 地理位置权限
 // 请求定位权限

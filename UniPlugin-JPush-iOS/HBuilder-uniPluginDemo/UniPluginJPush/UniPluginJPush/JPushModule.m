@@ -199,6 +199,8 @@ UNI_EXPORT_METHOD(@selector(addConnectEventListener:))
 
 UNI_EXPORT_METHOD(@selector(addNotificationListener:))
 UNI_EXPORT_METHOD(@selector(addCustomMessageListener:))
+UNI_EXPORT_METHOD(@selector(addDeviceTokenListener:))
+UNI_EXPORT_METHOD(@selector(addInMessageListener:))
 
 #pragma - 通知回调
 // 远程通知事件 notificationEventType：分为notificationArrived和notificationOpened两种
@@ -231,6 +233,30 @@ UNI_EXPORT_METHOD(@selector(addCustomMessageListener:))
     [JPushStore shared].receiveCustomNotiCallback = callback;
 }
 
+
+// 监听devicetoken的状态
+- (void)addDeviceTokenListener:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"addDeviceTokenListener" log:nil];
+    [JPushStore shared].devicetokenEventCallback = callback;
+}
+
+// 监听inapp消息
+- (void)addInMessageListener:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"addInMessageListener" log:nil];
+    [JPushStore shared].inAppMessageCallback = callback;
+}
+
+UNI_EXPORT_METHOD(@selector(pageEnterTo:))
+UNI_EXPORT_METHOD(@selector(pageLeave:))
+
+// 应用内消息需要配置以下两个接口
+- (void)pageEnterTo:(NSString *)pageName{
+    [JPUSHService pageEnterTo:pageName];
+}
+
+- (void)pageLeave:(NSString *)pageName{
+    [JPUSHService pageLeave:pageName];
+}
 
 UNI_EXPORT_METHOD(@selector(addTagAliasListener:))
 UNI_EXPORT_METHOD(@selector(addTags:))
