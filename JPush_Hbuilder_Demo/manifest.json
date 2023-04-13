@@ -60,12 +60,13 @@
             }
         },
         "nativePlugins" : {
-            "JG-JCoreGoogle" : {
+            "JG-JCore" : {
+                "JPUSH_APPKEY_ANDROID" : "",
                 "JPUSH_APPKEY_IOS" : "",
                 "JPUSH_CHANNEL_IOS" : "",
                 "JPUSH_CHANNEL_ANDROID" : "",
                 "__plugin_info__" : {
-                    "name" : "JG-JCoreGoogle",
+                    "name" : "JG-JCore",
                     "description" : "极光推送JCore插件",
                     "platforms" : "Android,iOS",
                     "url" : "",
@@ -98,7 +99,7 @@
                     }
                 }
             },
-            "JG-JPushGoogle" : {
+            "JG-JPush" : {
                 "JPUSH_XIAOMI_APPKEY" : "",
                 "JPUSH_MEIZU_APPID" : "",
                 "JPUSH_OPPO_APPSECRET" : "",
@@ -119,7 +120,7 @@
                 "JPUSH_GOOGLE_PROJECT_ID" : "",
                 "JPUSH_GOOGLE_STORAGE_BUCKET" : "",
                 "__plugin_info__" : {
-                    "name" : "JG-JPushGoogle",
+                    "name" : "JG-JPush",
                     "description" : "极光推送Hbuilder插件",
                     "platforms" : "Android,iOS",
                     "url" : "",
@@ -200,27 +201,27 @@
                             "value" : ""
                         },
                         "JPUSH_GOOGLE_API_KEY" : {
-                            "des" : "厂商google api_key,示例:g-12345678",
+                            "des" : "厂商google api_key,示例:asxa1232",
                             "key" : "google_api_key",
                             "value" : ""
                         },
                         "JPUSH_GOOGLE_APP_ID" : {
-                            "des" : "厂商google mobilesdk_app_id,示例：g-12346578",
+                            "des" : "厂商google mobilesdk_app_id,示例：12346578",
                             "key" : "google_app_id",
                             "value" : ""
                         },
                         "JPUSH_GOOGLE_PROJECT_NUMBER" : {
-                            "des" : "厂商google project_number,示例：g-12346578",
+                            "des" : "厂商google project_number,示例：12346578",
                             "key" : "gcm_defaultSenderId",
                             "value" : ""
                         },
                         "JPUSH_GOOGLE_PROJECT_ID" : {
-                            "des" : "厂商google project_id ,示例：g-12346578",
+                            "des" : "厂商google project_id ,示例：12346578",
                             "key" : "project_id",
                             "value" : ""
                         },
                         "JPUSH_GOOGLE_STORAGE_BUCKET" : {
-                            "des" : "厂商google storage_bucket,示例：g-12346578",
+                            "des" : "厂商google storage_bucket,示例：12346578",
                             "key" : "google_storage_bucket",
                             "value" : ""
                         }
