@@ -216,7 +216,10 @@
             <category android:name="${applicationId}" />
         </intent-filter>
     </receiver>
-
+        <provider
+            android:exported="false"
+            android:authorities="${applicationId}.jiguang.InitProvider"
+            android:name="cn.jpush.android.service.InitProvider"></provider>
 
     <!--(jpush|jmessage)_config_end-->
 

@@ -61,7 +61,13 @@
 					duration: 3000
 				})
 			});
-			
+			jpushModule.addInMessageListener(result=>{
+				uni.showToast({
+					icon:'none',
+					title: JSON.stringify(result),
+					duration: 3000
+				})
+			})
 			jpushModule.addCustomMessageListener(result=>{
 				let type = result.type
 				let messageType = result.messageType
