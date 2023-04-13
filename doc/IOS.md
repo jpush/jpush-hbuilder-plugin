@@ -66,6 +66,34 @@ jpushModule.requestLocationAuthorization((result)=>{
 				})
 ```
 
+## DeviceToken信息回调
+
+###  API - addDeviceTokenListener(CALLBACK)
+DeviceToken回调监听
+
+#### 参数说明
+
+- CALLBACK
+
+|参数名称|参数类型|参数说明|
+|:-----:|:----:|:-----:|
+|code|string|状态码 0 - 成功|
+|msg|string|状态码不为0时返回的错误信息|
+|deviceToken|string|状态码为0时返回的deviceToken|
+
+#### 示例
+```javascript
+jpushModule.addDeviceTokenListener(result=>{
+					let code = result.code
+					if (code == 0) {
+						let deviceToken = result.deviceToken
+					}else {
+						let error = result.msg
+					}
+				})
+```
+
+
 ## 地理围栏事件回调
 
 ###  API - addGeofenceListener(CALLBACK)

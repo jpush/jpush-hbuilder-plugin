@@ -55,6 +55,11 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"UniPluginProtocol Func: %@,%s",self,__func__);
     [JPUSHService registerDeviceToken:deviceToken];
+    [[JPushStore shared] handleDeviceTokenSuccess:deviceToken];
+}
+
+- (void)didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+    [[JPushStore shared] handleDeviceTokenFail:err];
 }
 
 // 推送唤醒会走这里
