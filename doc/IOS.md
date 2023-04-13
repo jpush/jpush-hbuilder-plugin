@@ -189,4 +189,32 @@ jpushModule.setLocation({
 jpushModule.setLocationEanable(true)
 ```
 
+## 进入页面
+
+### API - pageEnterTo(String)
+进入页面，使用应用内消息功能，需要配置该函数，与pageLeave函数配套使用
+
+#### 参数说明
+
+- String ： 页面名
+
+#### 示例
+```javascript
+jpushModule.pageEnterTo("页面名称")
+```
+
+## 离开页面
+
+### API - pageLeave(String)
+离开页面，使用应用内消息功能，需要配置该函数，与pageEnterTo函数配套使用
+
+#### 参数说明
+
+- String ： 页面名
+
+#### 示例
+```javascript
+jpushModule.pageLeave("页面名称")
+```
+
 

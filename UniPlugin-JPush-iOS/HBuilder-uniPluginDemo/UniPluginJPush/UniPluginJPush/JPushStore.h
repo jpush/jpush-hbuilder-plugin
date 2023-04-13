@@ -31,13 +31,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JPushStore : NSObject <JPUSHRegisterDelegate, JPUSHGeofenceDelegate,PKPushRegistryDelegate>
+@interface JPushStore : NSObject <JPUSHRegisterDelegate, JPUSHGeofenceDelegate,PKPushRegistryDelegate,JPUSHInAppMessageDelegate>
 
 @property (nonatomic, copy) UniModuleKeepAliveCallback connectEventCallback; // 连接状态
 @property (nonatomic, copy) UniModuleKeepAliveCallback pushNotiCallback; // apns推送消息
 @property (nonatomic, copy) UniModuleKeepAliveCallback receiveCustomNotiCallback; //自定义消息
 @property (nonatomic, copy) UniModuleKeepAliveCallback localNotiCallback; // 本地通知
 @property (nonatomic, copy) UniModuleKeepAliveCallback devicetokenEventCallback; // deviceToken监听
+@property (nonatomic, copy) UniModuleKeepAliveCallback inAppMessageCallback; // 应用内消息
 
 @property (nonatomic, copy) UniModuleKeepAliveCallback geofenceCallback;
 @property (nonatomic, copy) UniModuleKeepAliveCallback voipCallback;

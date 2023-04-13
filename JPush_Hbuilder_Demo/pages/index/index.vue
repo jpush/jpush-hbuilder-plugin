@@ -34,6 +34,19 @@
 			}
 		},
 		
+		onShow() {
+			if(uni.getSystemInfoSync().platform == "ios"){
+				// iOS端使用应用内消息需要在页面进入和离开的时候配置pageEnterTo和pageLeave
+				jpushModule.pageEnterTo("HomePage");
+			}
+		},
+		
+		onHide() {
+			if(uni.getSystemInfoSync().platform == "ios"){
+				jpushModule.pageLeave("HomePage");
+			}
+		},
+		
 		onLoad() {
 			console.log('开始监听连接状态')
 			uni.$on('connectStatusChange',(connectStatus)=>{  
