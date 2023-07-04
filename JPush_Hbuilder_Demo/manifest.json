@@ -201,27 +201,27 @@
                             "value" : ""
                         },
                         "JPUSH_GOOGLE_API_KEY" : {
-                            "des" : "厂商google api_key,示例:asxa1232",
+                            "des" : "厂商google api_key,示例:g-12346578",
                             "key" : "google_api_key",
                             "value" : ""
                         },
                         "JPUSH_GOOGLE_APP_ID" : {
-                            "des" : "厂商google mobilesdk_app_id,示例：12346578",
+                            "des" : "厂商google mobilesdk_app_id,示例：g-12346578",
                             "key" : "google_app_id",
                             "value" : ""
                         },
                         "JPUSH_GOOGLE_PROJECT_NUMBER" : {
-                            "des" : "厂商google project_number,示例：12346578",
+                            "des" : "厂商google project_number,示例：g-12346578",
                             "key" : "gcm_defaultSenderId",
                             "value" : ""
                         },
                         "JPUSH_GOOGLE_PROJECT_ID" : {
-                            "des" : "厂商google project_id ,示例：12346578",
+                            "des" : "厂商google project_id ,示例：g-12346578",
                             "key" : "project_id",
                             "value" : ""
                         },
                         "JPUSH_GOOGLE_STORAGE_BUCKET" : {
-                            "des" : "厂商google storage_bucket,示例：12346578",
+                            "des" : "厂商google storage_bucket,示例：g-12346578",
                             "key" : "google_storage_bucket",
                             "value" : ""
                         }
