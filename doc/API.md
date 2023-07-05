@@ -217,6 +217,7 @@ jpushModule.addLocalNotificationListener(result=>{
 |messageID|string|唯一标识通知消息的ID|
 |title|string|对应“通知标题”字段|
 |content|string|对应“通知内容”字段|
+|sound|string|对应"自定义声音"字段，暂只支持iOS，关于如何在uniapp中添加声音资源，请参考https://zh.uniapp.dcloud.io/tutorial/app-nativeresource-ios.html中添加资源文件部分教程|
 |extras|dictionary|对应“附加内容”字段|
 
 #### 示例
