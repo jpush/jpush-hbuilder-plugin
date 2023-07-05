@@ -31,7 +31,8 @@
 					extras:{
 						name: 'Cindy',
 						age: '16'
-					}
+					},
+					sound:"sound.caf"
 				})
 			},
 			

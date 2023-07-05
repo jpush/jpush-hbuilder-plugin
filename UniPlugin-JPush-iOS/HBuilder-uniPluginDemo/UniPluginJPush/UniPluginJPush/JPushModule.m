@@ -510,6 +510,7 @@ UNI_EXPORT_METHOD(@selector(clearLocalNotifications))
     }else{
         content.userInfo = @{MESSAGE_ID:messageID,TITLE:notificationTitle,CONTENT:notificationContent};
     }
+    content.sound = params[@"sound"];
     JPushNotificationTrigger *trigger = [[JPushNotificationTrigger alloc] init];
     NSDateComponents *components = [[NSDateComponents alloc] init];
     NSDate *now = [NSDate date];
