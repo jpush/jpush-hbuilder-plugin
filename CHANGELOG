@@ -40,3 +40,7 @@ v1.1.7
 修改推送唤醒通知，送达回调两次的问题
 v1.1.8
 更新Android： JPush 500+JCore 420
+v1.1.9
+更新Android： JPush 504+JCore 424
+              华为SDK：6.9.0.300
+              FCM：23.1.2
