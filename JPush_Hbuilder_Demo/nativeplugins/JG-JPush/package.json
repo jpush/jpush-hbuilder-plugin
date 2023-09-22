@@ -1,11 +1,15 @@
 {
     "name": "JG-JPush",
     "id": "JG-JPush",
-    "version": "1.1.4",
+    "version": "1.1.9",
     "description": "极光推送Hbuilder插件",
     "_dp_type":"nativeplugin",
     "_dp_nativeplugin":{
         "ios": {
+			"deploymentTarget": "11.0",	
+			"validArchitectures": [    
+				"arm64"
+			],
             "plugins": [{
                 "type": "module",
                 "name": "JG-JPush",
@@ -13,7 +17,6 @@
             }],
             "hooksClass": "JPushProxy",
             "integrateType": "framework",
-            "deploymentTarget": "9.0",
             "frameworks": [
                 "CFNetwork.framework",
                 "CoreFoundation.framework",
@@ -71,26 +74,22 @@
             "minSdkVersion": "19",
             "permissions": [
                 "${applicationId}.permission.JPUSH_MESSAGE",
-                "android.permission.RECEIVE_USER_PRESENT",
                 "android.permission.INTERNET",
-                "android.permission.READ_PHONE_STATE",
-                "android.permission.WRITE_EXTERNAL_STORAGE",
-                "android.permission.READ_EXTERNAL_STORAGE",
-                "android.permission.WRITE_SETTINGS",
-                "android.permission.MOUNT_UNMOUNT_FILESYSTEMS",
                 "android.permission.ACCESS_NETWORK_STATE",
-                "android.permission.ACCESS_WIFI_STATE",
+                "android.permission.POST_NOTIFICATIONS",
                 "com.huawei.android.launcher.permission.CHANGE_BADGE",
+                "com.vivo.notification.permission.BADGE_ICON",
+                "com.hihonor.android.launcher.permission.CHANGE_BADGE",
                 "android.permission.VIBRATE",
-                "android.permission.SYSTEM_ALERT_WINDOW",
                 "android.permission.ACCESS_COARSE_LOCATION",
-                "android.permission.CHANGE_WIFI_STATE",
                 "android.permission.ACCESS_FINE_LOCATION",
                 "android.permission.ACCESS_BACKGROUND_LOCATION",
-                "android.permission.ACCESS_LOCATION_EXTRA_COMMANDS",
-                "android.permission.CHANGE_NETWORK_STATE",
-                "android.permission.GET_TASKS",
+                "android.permission.READ_PHONE_STATE",
                 "android.permission.QUERY_ALL_PACKAGES",
+                "android.permission.GET_TASKS",
+                "android.permission.ACCESS_WIFI_STATE",
+                "android.permission.WRITE_EXTERNAL_STORAGE",
+                "android.permission.READ_EXTERNAL_STORAGE",
                 "${applicationId}.permission.MIPUSH_RECEIVE",
                 "com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE",
                 "com.heytap.mcs.permission.RECIEVE_MCS_MESSAGE"

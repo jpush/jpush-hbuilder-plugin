@@ -67,7 +67,7 @@ const jv = uni.requireNativePlugin('JG-JPush');
 
 ## 参考资料
 
-[官方文档](https://docs.jiguang.cn/jpush/guideline/intro/)
+[官方文档](https://docs.jiguang.cn/jpush/intro/product_guide)
 
 ## Support
 - 集成前请先尝试 [demo 工程](https://github.com/jpush/jpush-hbuilder-plugin/tree/master/JPush_Hbuilder_Demo)跑通

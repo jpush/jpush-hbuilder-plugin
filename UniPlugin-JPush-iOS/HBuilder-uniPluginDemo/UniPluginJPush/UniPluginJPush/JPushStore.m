@@ -15,6 +15,8 @@
 
 @property (nonatomic, strong) CLLocationManager *currentManager;
 
+@property (nonatomic, strong) NSMutableArray *callBackShowNotisArr; // apns展示型通知已经回调过的
+
 @end
 
 @implementation JPushStore
@@ -28,6 +30,15 @@
     return store;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _callBackShowNotisArr = [NSMutableArray array];
+    }
+    return self;
+}
+
 // jpush初始化
 - (void)initJPushService:(NSDictionary *)launchOptions {
     
@@ -38,6 +49,8 @@
     [self setupWithOption:launchOptions];
     // 监听透传消息
     [self addCustomMessageObserver];
+    // 监听自定义消息
+    [self addInappMessageObserve];
 }
 
 #pragma mark - 初始化
@@ -83,6 +96,12 @@
     } else {
         entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
     }
+    
+    if (@available(iOS 10.0, *)) {
+        UNNotificationCategory *sumFormatCategory = [UNNotificationCategory categoryWithIdentifier:@"jpush_noti_dismissAction_callback_category" actions:@[] intentIdentifiers:@[] options:UNNotificationCategoryOptionCustomDismissAction];
+        entity.categories = [NSSet setWithObject:sumFormatCategory];
+    }
+    
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:[JPushStore shared]];
     
 }
@@ -145,6 +164,11 @@
                         object:nil];
 }
 
+#pragma mark - 自定义消息
+- (void)addInappMessageObserve {
+    [JPUSHService setInAppMessageDelegate:self];
+}
+
 // 收到透传消息
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
     NSDictionary * userInfo = [notification userInfo];
@@ -182,11 +206,20 @@
 // 点击通知会触发
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
     NSDictionary * userInfo = response.notification.request.content.userInfo;
+    
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [self handeleApnsCallback:userInfo type:NOTIFICATION_OPENED];
+        if ([response.actionIdentifier isEqualToString:UNNotificationDismissActionIdentifier]){
+            [self handeleApnsCallback:userInfo type:NOTIFICATION_DISMISSED];
+        }else {
+            [self handeleApnsCallback:userInfo type:NOTIFICATION_OPENED];
+        }
     }
     else {
-        [self handlerLocalNotiCallback:userInfo type:NOTIFICATION_OPENED];
+        if ([response.actionIdentifier isEqualToString:UNNotificationDismissActionIdentifier]){
+            [self handlerLocalNotiCallback:userInfo type:NOTIFICATION_DISMISSED];
+        }else {
+            [self handlerLocalNotiCallback:userInfo type:NOTIFICATION_OPENED];
+        }
     }
     completionHandler();
 }
@@ -246,6 +279,20 @@
     }
 }
 
+#pragma mark - JPUSHInAppMessageDelegate
+- (void)jPushInAppMessageDidShow:(JPushInAppMessage *)inAppMessage {
+    if ([JPushStore shared].inAppMessageCallback) {
+        NSDictionary *result = [self convertInappMsg:inAppMessage isShow:YES];
+        [JPushStore shared].inAppMessageCallback(result, YES);
+    }
+}
+
+- (void)jPushInAppMessageDidClick:(JPushInAppMessage *)inAppMessage {
+    if ([JPushStore shared].inAppMessageCallback) {
+        NSDictionary *result = [self convertInappMsg:inAppMessage isShow:NO];
+        [JPushStore shared].inAppMessageCallback(result, YES);
+    }
+}
 
 #pragma mark - voip
 - (void)initVoipService{
@@ -291,7 +338,37 @@
 #pragma mark -
 // 处理远程通知回调
 - (void)handeleApnsCallback:(NSDictionary *)userInfo type:(NSString *)type {
+    if (!userInfo || ![userInfo isKindOfClass:[NSDictionary class]]) {
+        return;
+    }
+    
     [JPUSHService handleRemoteNotification:userInfo];
+    
+    // 处理带有content-available 推送唤醒通知送达时会回调两次的问题
+    NSNumber *notiId = userInfo[@"_j_msgid"];
+    for (NSDictionary *info in [self.callBackShowNotisArr mutableCopy]) {
+        if ([info isKindOfClass:[NSDictionary class]]) {
+            NSNumber *messageID = info[@"_j_msgid"];
+            if (notiId && [notiId isKindOfClass:[NSNumber class]] && messageID && [messageID isKindOfClass:[NSNumber class]] && [[notiId stringValue] isEqualToString:[messageID stringValue]]) {
+                NSLog(@"already callback");
+                [self.callBackShowNotisArr removeAllObjects];
+                return;
+            }
+        }
+    }
+    if ([type isEqualToString:NOTIFICATION_ARRIVED]) {
+        NSDictionary *aps = userInfo[@"aps"];
+        if (aps && [aps isKindOfClass:[NSDictionary class]]) {
+            if([aps.allKeys containsObject:@"content-available"]){
+                NSNumber *contentavailable = aps[@"content-available"];
+                if (contentavailable && [contentavailable isKindOfClass:[NSNumber class]] && [contentavailable boolValue]) {
+                    [self.callBackShowNotisArr addObject:userInfo];
+                }
+            }
+        }
+    }
+    
+    // 
     NSDictionary *result = [self convertApnsMessage:userInfo type:type];
     if ([JPushStore shared].pushNotiCallback) {
         [JPushStore shared].pushNotiCallback(result, YES);
@@ -357,6 +434,59 @@
     }
 }
 
+- (NSDictionary *)convertInappMsg:(JPushInAppMessage *)inAppMessage isShow:(BOOL)isShow {
+    
+    NSString *target = @"";
+    if (inAppMessage.target && [inAppMessage.target isKindOfClass:[NSArray class]] && inAppMessage.target.count > 0) {
+        target = [inAppMessage.target objectAtIndex:0];
+    }
+    
+    NSString *extras = @"";
+    if (inAppMessage.extras && [inAppMessage.extras isKindOfClass:[NSDictionary class]]) {
+        NSError *error;
+       NSData *data = [NSJSONSerialization dataWithJSONObject:inAppMessage.extras options:0 error:&error];
+        if (!error) {
+            extras = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        }
+    }
+    
+    NSDictionary *result = @{
+        @"eventType": isShow? @"show": @"click",
+        @"messageID": inAppMessage.mesageId?:@"", // 消息id
+        @"title": inAppMessage.title?:@"",       // 标题
+        @"content": inAppMessage.content?:@"",   // 内容
+        @"inAppShowTarget": target?:@"",     // 目标页面
+        @"inAppClickAction": inAppMessage.clickAction?:@"",  // 跳转地址
+        @"inAppExtras": inAppMessage.extras?:@"", // 附加字段
+    };
+    return result;
+}
+
+// devicetoken
+- (void)handleDeviceTokenSuccess:(NSData *)deviceToken {
+    const unsigned int *tokenBytes = [deviceToken bytes];
+    NSString *tokenString = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    NSDictionary *resultDic = @{
+        @"code": @(0),
+        @"deviceToken": tokenString?:@""
+    };
+    if ([JPushStore shared].devicetokenEventCallback) {
+        [JPushStore shared].devicetokenEventCallback(resultDic, YES);
+    }
+}
+
+- (void)handleDeviceTokenFail:(NSError *)err {
+    NSDictionary *resultDic = @{
+        @"code": @(-1),
+        @"msg": err.localizedDescription?:@""
+    };
+    if ([JPushStore shared].devicetokenEventCallback) {
+        [JPushStore shared].devicetokenEventCallback(resultDic, YES);
+    }
+}
 
 #pragma mark - 地理位置权限
 // 请求定位权限

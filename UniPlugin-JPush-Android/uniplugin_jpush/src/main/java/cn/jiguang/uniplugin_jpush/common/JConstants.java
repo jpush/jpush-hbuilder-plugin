@@ -31,12 +31,16 @@ public class JConstants {
     public static final String PLATFORM = "platform";
     public static final String EXTRAS = "extras";
     public static final String ANDROID = "android";//透传所有消息字段
+    public static final String INAPPCLICKACTION = "inAppClickAction";
+    public static final String INAPPEXTRAS = "inAppExtras";
+    public static final String INAPPSHOWTARGET = "inAppShowTarget";
+
     //消息事件类型
     public static final String NOTIFICATION_ARRIVED = "notificationArrived";
     public static final String NOTIFICATION_OPENED = "notificationOpened";
     public static final String NOTIFICATION_DISMISSED = "notificationDismissed";
     //应用内消息事件类型
-    public static final String INAPP_MESSAGE_ARRIVED = "show";
+    public static final String INAPP_MESSAGE_SHOW = "show";
     public static final String INAPP_MESSAGE_OPENED = "click";
     public static final String INAPP_MESSAGE_DISMISSED = "disappear";
     public static final String INAPP_MESSAGE_EVENT_TYPE = "eventType";

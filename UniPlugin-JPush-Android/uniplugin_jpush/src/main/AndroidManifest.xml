@@ -135,10 +135,6 @@
         android:exported="false"
         android:process=":pushcore" />
     <!-- since 3.1.0 Required SDK 核心功能 -->
-    <provider
-        android:name="cn.jpush.android.service.DownloadProvider"
-        android:authorities="${applicationId}.DownloadProvider"
-        android:exported="true" />
 
     <!-- since 3.3.0 Required SDK核心功能 -->
     <activity
@@ -186,29 +182,9 @@
 
         <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
     <!-- 若不启用该功能可删除该组件，或把 enabled 设置成 false ；App 不会被其他 App 拉起，但会拉起其他的 App。 -->
-    <service
-        android:name="cn.jpush.android.service.DaemonService"
-        android:enabled="true"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="cn.jpush.android.intent.DaemonService" />
 
-            <category android:name="${applicationId}" />
-        </intent-filter>
-    </service>
     <!-- 可选，如果使用静态Activity方式拉起，该组件必须声明 -->
-    <activity
-        android:name="cn.jpush.android.service.DActivity"
-        android:enabled="true"
-        android:exported="true"
-        android:taskAffinity=""
-        android:theme="@android:style/Theme.Translucent.NoTitleBar">
-        <intent-filter>
-            <action android:name="cn.jpush.android.intent.DActivity" />
 
-            <category android:name="${applicationId}" />
-        </intent-filter>
-    </activity>
 
     <!-- Required SDK核心功能 -->
     <receiver
@@ -219,22 +195,12 @@
             <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" /> <!-- Required  显示通知栏 -->
             <category android:name="${applicationId}" />
         </intent-filter>
-        <intent-filter>
-            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-        </intent-filter>
-        <!-- Optional -->
-        <intent-filter>
-            <action android:name="android.intent.action.PACKAGE_ADDED" />
-            <action android:name="android.intent.action.PACKAGE_REMOVED" />
-
-            <data android:scheme="package" />
-        </intent-filter>
     </receiver>
+        <provider
+            android:exported="false"
+            android:authorities="${applicationId}.jiguang.InitProvider"
+            android:name="cn.jpush.android.service.InitProvider"></provider>
 
-    <!-- Required SDK核心功能 -->
-    <receiver
-        android:name="cn.jpush.android.service.AlarmReceiver"
-        android:exported="false" />
     <!--(jpush|jmessage)_config_end-->
 
 
@@ -278,7 +244,9 @@
     <service
         android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
         android:enabled="true"
-        android:exported="true" />
+        android:exported="true"
+        android:permission="com.xiaomi.xmsf.permission.MIPUSH_RECEIVE"
+        />
     <service
         android:name="com.xiaomi.mipush.sdk.MessageHandleService"
         android:enabled="true" />
@@ -322,12 +290,6 @@
             android:exported="true"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-            <intent-filter>
-
-                <!-- 为更好的兼容后期Android版本更新，预注册一个Action，暂时无用 -->
-                <action android:name="com.xiaomi.mipush.sdk.NotificationClickedActivity" />
-            </intent-filter>
-
             <meta-data
                 android:name="supportStyle"
                 android:value="scene|voip" />

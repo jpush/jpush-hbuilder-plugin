@@ -5,17 +5,9 @@
 		<label style="margin-right: 50rpx;">网络状态:</label>
 		<label>{{connectStatus}}</label>
 		</br>
-		<label style="margin-right: 50rpx;">DeviceToken:</label>
-		<label v-model="deviceToken">未获得</label>
-		</br>
-		<label style="margin-right: 50rpx;">UDID:</label>
-		<label v-model="udid">未获得</label>
-		</br>
 		<label style="margin-right: 50rpx;">RegistrationID:</label>
 		<label>{{registrationID}}</label>
 		</br>
-		<label style="margin-right: 50rpx;">appkey:</label>
-		<label v-model="appkey">未获得</label>
 		</br>
 		
 		<label>---------------------------------</label>
@@ -38,10 +30,20 @@
 		data() {
 			return {
 				connectStatus: '未链接',
-				deviceToken: '',
-				udid: '',
 				registrationID: '未获得',
-				appkey: '',
+			}
+		},
+		
+		onShow() {
+			if(uni.getSystemInfoSync().platform == "ios"){
+				// iOS端使用应用内消息需要在页面进入和离开的时候配置pageEnterTo和pageLeave
+				jpushModule.pageEnterTo("HomePage");
+			}
+		},
+		
+		onHide() {
+			if(uni.getSystemInfoSync().platform == "ios"){
+				jpushModule.pageLeave("HomePage");
 			}
 		},
 		

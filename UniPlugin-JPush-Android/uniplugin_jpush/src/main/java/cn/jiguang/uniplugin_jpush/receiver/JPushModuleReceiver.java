@@ -110,9 +110,9 @@ public class JPushModuleReceiver extends JPushMessageReceiver {
     }
 
     @Override
-    public void onInAppMessageArrived(Context context, NotificationMessage notificationMessage) {
-        JLogger.d("onInAppMessageArrived:" + notificationMessage.toString());
-        JSONObject jsonObject = JPushHelper.convertInAppMessageToMap(JConstants.INAPP_MESSAGE_ARRIVED, notificationMessage);
+    public void onInAppMessageShow(Context context, NotificationMessage notificationMessage) {
+        JLogger.d("onInAppMessageShow:" + notificationMessage.toString());
+        JSONObject jsonObject = JPushHelper.convertInAppMessageToMap(JConstants.INAPP_MESSAGE_SHOW, notificationMessage);
         JPushHelper.sendEvent(JConstants.INAPP_MESSAGE_EVENT, jsonObject);
     }
 
@@ -123,10 +123,5 @@ public class JPushModuleReceiver extends JPushMessageReceiver {
         JPushHelper.sendEvent(JConstants.INAPP_MESSAGE_EVENT, jsonObject);
     }
 
-    @Override
-    public void onInAppMessageDismiss(Context context, NotificationMessage notificationMessage) {
-        JLogger.d("onInAppMessageDismiss:" + notificationMessage.toString());
-        JSONObject jsonObject = JPushHelper.convertInAppMessageToMap(JConstants.INAPP_MESSAGE_DISMISSED, notificationMessage);
-        JPushHelper.sendEvent(JConstants.INAPP_MESSAGE_EVENT, jsonObject);
-    }
+
 }

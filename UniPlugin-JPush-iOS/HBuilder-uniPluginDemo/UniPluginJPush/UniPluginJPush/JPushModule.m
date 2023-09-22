@@ -199,6 +199,8 @@ UNI_EXPORT_METHOD(@selector(addConnectEventListener:))
 
 UNI_EXPORT_METHOD(@selector(addNotificationListener:))
 UNI_EXPORT_METHOD(@selector(addCustomMessageListener:))
+UNI_EXPORT_METHOD(@selector(addDeviceTokenListener:))
+UNI_EXPORT_METHOD(@selector(addInMessageListener:))
 
 #pragma - 通知回调
 // 远程通知事件 notificationEventType：分为notificationArrived和notificationOpened两种
@@ -231,6 +233,30 @@ UNI_EXPORT_METHOD(@selector(addCustomMessageListener:))
     [JPushStore shared].receiveCustomNotiCallback = callback;
 }
 
+
+// 监听devicetoken的状态
+- (void)addDeviceTokenListener:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"addDeviceTokenListener" log:nil];
+    [JPushStore shared].devicetokenEventCallback = callback;
+}
+
+// 监听inapp消息
+- (void)addInMessageListener:(UniModuleKeepAliveCallback)callback {
+    [self logger:@"addInMessageListener" log:nil];
+    [JPushStore shared].inAppMessageCallback = callback;
+}
+
+UNI_EXPORT_METHOD(@selector(pageEnterTo:))
+UNI_EXPORT_METHOD(@selector(pageLeave:))
+
+// 应用内消息需要配置以下两个接口
+- (void)pageEnterTo:(NSString *)pageName{
+    [JPUSHService pageEnterTo:pageName];
+}
+
+- (void)pageLeave:(NSString *)pageName{
+    [JPUSHService pageLeave:pageName];
+}
 
 UNI_EXPORT_METHOD(@selector(addTagAliasListener:))
 UNI_EXPORT_METHOD(@selector(addTags:))
@@ -478,11 +504,13 @@ UNI_EXPORT_METHOD(@selector(clearLocalNotifications))
     NSString *notificationContent = params[CONTENT]?params[CONTENT]:@"";
     content.title = notificationTitle;
     content.body = notificationContent;
+    content.categoryIdentifier = @"jpush_noti_dismissAction_callback_category";
     if(params[EXTRAS]){
         content.userInfo = @{MESSAGE_ID:messageID,TITLE:notificationTitle,CONTENT:notificationContent,EXTRAS:params[EXTRAS]};
     }else{
         content.userInfo = @{MESSAGE_ID:messageID,TITLE:notificationTitle,CONTENT:notificationContent};
     }
+    content.sound = params[@"sound"];
     JPushNotificationTrigger *trigger = [[JPushNotificationTrigger alloc] init];
     NSDateComponents *components = [[NSDateComponents alloc] init];
     NSDate *now = [NSDate date];
@@ -495,6 +523,10 @@ UNI_EXPORT_METHOD(@selector(clearLocalNotifications))
         trigger.dateComponents = components;
     } else {
         trigger.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    }
+    if (@available(iOS 15.0, *)) {
+      content.interruptionLevel = UNNotificationInterruptionLevelTimeSensitive;
+      content.relevanceScore = 1;
     }
     JPushNotificationRequest *request = [[JPushNotificationRequest alloc] init];
     request.requestIdentifier = messageID;

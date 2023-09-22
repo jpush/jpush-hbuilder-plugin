@@ -13,7 +13,7 @@
 					jpushModule.requestLocationAuthorization((result)=>{
 						console.log('定位权限',result.status)
 					})
-				}
+				};
 				
 				
 				jpushModule.requestNotificationAuthorization((result)=>{
@@ -25,7 +25,7 @@
 							duration: 3000
 						})
 					}
-				})
+				});
 
 				jpushModule.addGeofenceListener(result=>{
 					let code = result.code
@@ -37,9 +37,25 @@
 						title: '触发地理围栏',
 						duration: 3000
 					})
+				});
+				
+				// 监听deviToken的状态
+				jpushModule.addDeviceTokenListener(result=>{
+					let code = result.code
+					if (code == 0) {
+						let deviceToken = result.deviceToken
+						uni.showToast({
+							icon: 'none',
+							title: deviceToken,
+							duration: 3000
+						})
+						console.log("deviceToken:", deviceToken)
+					}else {
+						let error = result.msg
+					}
 				})
 			
-			}
+			};
 			
 			jpushModule.initJPushService();
 			jpushModule.setLoggerEnable(true);
@@ -71,8 +87,14 @@
 					title: JSON.stringify(result),
 					duration: 3000
 				})
-			})
-			
+			});
+			 jpushModule.addInMessageListener(result=>{
+            				uni.showToast({
+            					icon:'none',
+            					title: JSON.stringify(result),
+            					duration: 3000
+            				})
+            			});
 			jpushModule.addLocalNotificationListener(result=>{
 				let messageID = result.messageID
 				let title = result.title
@@ -84,7 +106,6 @@
 					duration: 3000
 				})
 			})
-			
 			
 		},
 		onShow: function() {

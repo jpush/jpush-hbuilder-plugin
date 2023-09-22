@@ -13,17 +13,8 @@
 #import "PDRCoreApp.h"
 #import "PDRCoreAppManager.h"
 
-#define ENABLEAD
 
-#if defined(ENABLEAD)
-#import "DCADManager.h"
-#endif
-
-@interface AppDelegate()<PDRCoreDelegate
-#if defined(ENABLEAD)
-,DCADManagerDelgate
-#endif
->
+@interface AppDelegate()<PDRCoreDelegate>
 @property (strong, nonatomic) ViewController *h5ViewContoller;
 @end
 
@@ -40,12 +31,7 @@
 {
     BOOL ret = [PDRCore initEngineWihtOptions:launchOptions
                                   withRunMode:PDRCoreRunModeNormal withDelegate:self];
-    UIViewController* adViewController = nil;
-#if defined(ENABLEAD)
-    DCADManager *adManager = [DCADManager adManager];
-    adManager.delegate = self;
-    adViewController = [adManager getADViewController];
-#endif
+
     UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window = window;
     
@@ -55,9 +41,7 @@
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     self.rootViewController = navigationController;
     navigationController.navigationBarHidden = YES;
-    if ( adViewController ) {
-        [navigationController pushViewController:adViewController animated:NO];
-    } else {
+    {
         [self startMainApp];
         self.h5ViewContoller.showLoadingView = YES;
     }
@@ -65,20 +49,6 @@
     [self.window makeKeyAndVisible];
     return ret;
 }
-
-
-#pragma mark - core delegate
-- (BOOL)interruptCloseSplash {
-#if defined(ENABLEAD)
-    return [[DCADManager adManager] interruptCloseSplash];//self.isAdInterruptCloseLoadingPage;
-#endif
-    return NO;
-}
-#if defined(ENABLEAD)
-- (void)settingLoadEnd {
-    [DCADManager adManager];
-}
-#endif
 
 -(BOOL)getStatusBarHidden {
     return [self.h5ViewContoller getStatusBarHidden];
@@ -102,21 +72,6 @@
         [[PDRCore Instance] start];
     });
 }
-
-#if defined(ENABLEAD)
-- (void)adManager:(DCADManager*)adManager dispalyADViewController:(UIViewController*)viewController {
-    [self.rootViewController pushViewController:viewController animated:NO];
-}
-
-- (void)adManager:(DCADManager*)adManager needCloseADViewController:(UIViewController*)viewController {
-    self.h5ViewContoller.showLoadingView = NO;
-    [self.rootViewController popToRootViewControllerAnimated:NO];
-}
-
-- (void)adManager:(DCADManager*)adManager adIsShow:(DCADLaunch*)ad {
-    [self startMainApp];
-}
-#endif
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem
   completionHandler:(void(^)(BOOL succeeded))completionHandler{

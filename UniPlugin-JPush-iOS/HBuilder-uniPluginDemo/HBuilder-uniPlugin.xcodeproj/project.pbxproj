@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,18 +15,14 @@
 		2447371B1D0830BB00D0F08F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2447371A1D0830BB00D0F08F /* WebKit.framework */; };
 		24A7515F1D9CCCC600C8B0F9 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A7515E1D9CCCC600C8B0F9 /* QuickLook.framework */; };
 		24AFD7FF1CB50C3200C0F062 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD7FB1CB50C3200C0F062 /* AlipaySDK.framework */; };
-		24AFD8011CB50C3200C0F062 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD7FD1CB50C3200C0F062 /* iflyMSC.framework */; };
 		24AFD8021CB50C3200C0F062 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD7FE1CB50C3200C0F062 /* TencentOpenAPI.framework */; };
 		24AFD8401CB50C4000C0F062 /* libalixpayment.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8031CB50C3F00C0F062 /* libalixpayment.a */; };
 		24AFD8431CB50C4000C0F062 /* libBaiduMobStatForSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8061CB50C3F00C0F062 /* libBaiduMobStatForSDK.a */; };
 		24AFD8461CB50C4000C0F062 /* libcoreSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8091CB50C3F00C0F062 /* libcoreSupport.a */; };
-		24AFD8471CB50C4000C0F062 /* libGeTuiPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD80A1CB50C3F00C0F062 /* libGeTuiPush.a */; };
 		24AFD8491CB50C4000C0F062 /* libIAPPay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD80C1CB50C3F00C0F062 /* libIAPPay.a */; };
-		24AFD84A1CB50C4000C0F062 /* libiflySpeech.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD80D1CB50C3F00C0F062 /* libiflySpeech.a */; };
 		24AFD84C1CB50C4000C0F062 /* liblibAccelerometer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD80F1CB50C3F00C0F062 /* liblibAccelerometer.a */; };
 		24AFD84D1CB50C4000C0F062 /* liblibBarcode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8101CB50C3F00C0F062 /* liblibBarcode.a */; };
 		24AFD84E1CB50C4000C0F062 /* liblibCache.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8111CB50C3F00C0F062 /* liblibCache.a */; };
-		24AFD84F1CB50C4000C0F062 /* liblibCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8121CB50C3F00C0F062 /* liblibCamera.a */; };
 		24AFD8501CB50C4000C0F062 /* liblibContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8131CB50C3F00C0F062 /* liblibContacts.a */; };
 		24AFD8521CB50C4000C0F062 /* liblibIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8151CB50C4000C0F062 /* liblibIO.a */; };
 		24AFD8531CB50C4000C0F062 /* liblibLog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8161CB50C4000C0F062 /* liblibLog.a */; };
@@ -47,7 +43,6 @@
 		24AFD8631CB50C4000C0F062 /* liblibStatistic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8261CB50C4000C0F062 /* liblibStatistic.a */; };
 		24AFD8641CB50C4000C0F062 /* liblibStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8271CB50C4000C0F062 /* liblibStorage.a */; };
 		24AFD8651CB50C4000C0F062 /* liblibUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8281CB50C4000C0F062 /* liblibUI.a */; };
-		24AFD8661CB50C4000C0F062 /* liblibWebNavi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8291CB50C4000C0F062 /* liblibWebNavi.a */; };
 		24AFD8681CB50C4000C0F062 /* liblibXHR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD82B1CB50C4000C0F062 /* liblibXHR.a */; };
 		24AFD8691CB50C4000C0F062 /* liblibZip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD82C1CB50C4000C0F062 /* liblibZip.a */; };
 		24AFD86B1CB50C4000C0F062 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD82E1CB50C4000C0F062 /* libopencore-amrnb.a */; };
@@ -67,26 +62,10 @@
 		24BD5AF21C994A1700B05AA2 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BD5AF11C994A1700B05AA2 /* libicucore.tbd */; };
 		24BD5AF61C994BB200B05AA2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BD5AF51C994BB200B05AA2 /* libc++.tbd */; };
 		24F990131DFBDA3300848C2B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F990121DFBDA3300848C2B /* CoreData.framework */; };
-		2A08189B28C5D6B00092B2E2 /* jpush-ios-4.8.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A08189A28C5D6B00092B2E2 /* jpush-ios-4.8.1.a */; };
-		2A08189D28C5D6B80092B2E2 /* jcore-ios-3.2.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A08189C28C5D6B80092B2E2 /* jcore-ios-3.2.5.a */; };
-		2A21732D25ADE1D10084EBAE /* UniPluginJPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21732925ADE1A50084EBAE /* UniPluginJPush.framework */; };
-		2A21733225ADE4590084EBAE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACF69AA19FF899A007C64F1 /* CFNetwork.framework */; };
-		2A21733425ADE4640084EBAE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21733325ADE4630084EBAE /* CoreFoundation.framework */; };
-		2A21733525ADE46D0084EBAE /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED641D198A265F000A4449 /* CoreTelephony.framework */; };
-		2A21733625ADE4810084EBAE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED641B198A2654000A4449 /* SystemConfiguration.framework */; };
-		2A21733725ADE4890084EBAE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED629D198A1D13000A4449 /* CoreGraphics.framework */; };
-		2A21733825ADE4920084EBAE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED629B198A1D13000A4449 /* Foundation.framework */; };
-		2A21733925ADE49C0084EBAE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACF69AC19FF89B1007C64F1 /* Security.framework */; };
-		2A21733A25ADE4A10084EBAE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED629F198A1D13000A4449 /* UIKit.framework */; };
-		2A21733B25ADE4AF0084EBAE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BD5AEF1C99494A00B05AA2 /* libz.tbd */; };
-		2A21733E25ADE4B70084EBAE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21733D25ADE4B70084EBAE /* AdSupport.framework */; };
-		2A21734025ADE4C30084EBAE /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21733F25ADE4C30084EBAE /* UserNotifications.framework */; };
-		2A21734125ADE4CF0084EBAE /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6731F3A3232F5B7A007838BC /* libresolv.tbd */; };
-		2A21734225ADE4E10084EBAE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2447371A1D0830BB00D0F08F /* WebKit.framework */; };
-		2A21734425ADE4ED0084EBAE /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21734325ADE4ED0084EBAE /* AppTrackingTransparency.framework */; };
-		2A21734625ADE4F70084EBAE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A21734525ADE4F70084EBAE /* StoreKit.framework */; };
-		2AC5D66525B822E800EA873C /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC5D66425B822E800EA873C /* PushKit.framework */; };
-		2AC5D68825B90F5900EA873C /* UniPluginJCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC5D68425B90EE300EA873C /* UniPluginJCore.framework */; };
+		2A64971D29E7AEDF00535242 /* jpush-ios-5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A64971C29E7AEDF00535242 /* jpush-ios-5.0.0.a */; };
+		2A64971F29E7AFB000535242 /* jcore-ios-4.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A64971E29E7AFB000535242 /* jcore-ios-4.2.0.a */; };
+		2A7C531729D17F1600FD4B89 /* UniPluginJCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7C530C29D17EC900FD4B89 /* UniPluginJCore.framework */; };
+		2A7C531829D17F1A00FD4B89 /* UniPluginJPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7C531229D17ED200FD4B89 /* UniPluginJPush.framework */; };
 		2F0BA3F9215B48A700F67004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA3F8215B48A700F67004 /* Images.xcassets */; };
 		2F0BA410215B784100F67004 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA40F215B784000F67004 /* Contacts.framework */; };
 		2F0BA412215B814100F67004 /* liblibVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA411215B814000F67004 /* liblibVideo.a */; };
@@ -97,12 +76,19 @@
 		2F0BA497215B955300F67004 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA46C215B955300F67004 /* mapapi.bundle */; };
 		2F0BA499215B955300F67004 /* PandoraApi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA46E215B955300F67004 /* PandoraApi.bundle */; };
 		2F0BA49B215B955300F67004 /* qucsdkResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA470215B955300F67004 /* qucsdkResources.bundle */; };
-		2F0BA49C215B955300F67004 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA471215B955300F67004 /* SVProgressHUD.bundle */; };
-		2F0BA49E215B955300F67004 /* TZImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA473215B955300F67004 /* TZImagePickerController.bundle */; };
+		2F0BA49C215B955300F67004 /* DCSVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA471215B955300F67004 /* DCSVProgressHUD.bundle */; };
+		2F0BA49E215B955300F67004 /* DCTZImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA473215B955300F67004 /* DCTZImagePickerController.bundle */; };
 		2F0BA49F215B955300F67004 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA474215B955300F67004 /* WeiboSDK.bundle */; };
 		2F0BA4DC215BA12300F67004 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA4DB215BA12300F67004 /* LaunchScreen.storyboard */; };
+		2F4864C7293E121C00142360 /* DCUniRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4864C6293E121C00142360 /* DCUniRecord.framework */; };
+		2F5FAE6E2865DB9800430AFA /* BMKLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5FAE6C2865DB9800430AFA /* BMKLocationKit.framework */; };
+		2F5FAE6F2865DB9800430AFA /* KSCrash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5FAE6D2865DB9800430AFA /* KSCrash.framework */; };
 		2FD11BBB215C79C5000A23AD /* liblibAdSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD11BBA215C79C5000A23AD /* liblibAdSupport.a */; };
+		2FDE6A53297147E1004C7701 /* GTSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDE6A52297147E1004C7701 /* GTSDK.xcframework */; };
+		2FDE6A56297147F2004C7701 /* DCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE6A55297147F2004C7701 /* DCloud.swift */; };
+		4FA53F7C26E5D14400BAD6A0 /* uni-jsframework-vue3.js in Resources */ = {isa = PBXBuildFile; fileRef = 4FA53F7B26E5D14400BAD6A0 /* uni-jsframework-vue3.js */; };
 		4FE3666A254FE5FC00DCD173 /* libuchardet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE36669254FE5FB00DCD173 /* libuchardet.a */; };
+		6289FAB82A55579E00E65DD9 /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6289FAB72A55579E00E65DD9 /* sound.caf */; };
 		67065F3A2243868400DC71CA /* Default-896h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67065F1E2243868300DC71CA /* Default-896h@2x.png */; };
 		67065F3B2243868400DC71CA /* Default-Landscape-812h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67065F1F2243868300DC71CA /* Default-Landscape-812h@3x.png */; };
 		67065F3C2243868400DC71CA /* Default-Landscape-896h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67065F202243868300DC71CA /* Default-Landscape-896h@3x.png */; };
@@ -135,7 +121,6 @@
 		67229AD1230171AE0093F29A /* libDCUniAmap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67229AC9230171AE0093F29A /* libDCUniAmap.a */; };
 		67229AD2230171AE0093F29A /* libDCUniVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67229ACA230171AE0093F29A /* libDCUniVideo.a */; };
 		67229AD3230171AE0093F29A /* libDCUniBarcode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67229ACB230171AE0093F29A /* libDCUniBarcode.a */; };
-		67229AD4230171AE0093F29A /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67229ACC230171AE0093F29A /* IJKMediaFramework.framework */; };
 		67229AD6230171AE0093F29A /* libDCUniGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67229ACE230171AE0093F29A /* libDCUniGPUImage.a */; };
 		67229AD8230171AE0093F29A /* libDCUniMap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67229AD0230171AE0093F29A /* libDCUniMap.a */; };
 		6729047123547917004DE4EB /* weexUniJs.js in Resources */ = {isa = PBXBuildFile; fileRef = 6729047023547917004DE4EB /* weexUniJs.js */; };
@@ -143,7 +128,6 @@
 		672CE2B522DC916C005A0D88 /* libDCUniZXing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 672CE2B422DC916C005A0D88 /* libDCUniZXing.a */; };
 		6731F3A4232F5B7A007838BC /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6731F3A3232F5B7A007838BC /* libresolv.tbd */; };
 		6731F3A7232F5B87007838BC /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6731F3A5232F5B87007838BC /* UMCommon.framework */; };
-		6731F3A8232F5B87007838BC /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6731F3A6232F5B87007838BC /* UMAnalytics.framework */; };
 		6731F3AA232F5B97007838BC /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6731F3A9232F5B97007838BC /* Photos.framework */; };
 		673E6E7321E44ABF00C021FE /* liblibFingerprint.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 673E6E7221E44ABF00C021FE /* liblibFingerprint.a */; };
 		67414FA024333E320093CD65 /* uni-jsframework.js in Resources */ = {isa = PBXBuildFile; fileRef = 67414F9F24333E320093CD65 /* uni-jsframework.js */; };
@@ -158,12 +142,10 @@
 		67AB0B4321EEEAE50029B229 /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB0B4221EEEAE50029B229 /* AMapFoundationKit.framework */; };
 		67AB0B9721EF10E70029B229 /* liblibGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB0B9621EF10E60029B229 /* liblibGeolocation.a */; };
 		67AB0B9921EF10FE0029B229 /* libBaiduKeyVerify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB0B9821EF10FE0029B229 /* libBaiduKeyVerify.a */; };
-		67AB0BA021EF111D0029B229 /* BaiduMapAPI_Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB0B9A21EF111C0029B229 /* BaiduMapAPI_Cloud.framework */; };
 		67AB0BA121EF111D0029B229 /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB0B9B21EF111D0029B229 /* BaiduMapAPI_Search.framework */; };
 		67AB0BA221EF111D0029B229 /* BaiduMapAPI_Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB0B9C21EF111D0029B229 /* BaiduMapAPI_Utils.framework */; };
 		67AB0BA321EF111D0029B229 /* BaiduMapAPI_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB0B9D21EF111D0029B229 /* BaiduMapAPI_Map.framework */; };
 		67AB0BA421EF111D0029B229 /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB0B9E21EF111D0029B229 /* BaiduMapAPI_Base.framework */; };
-		67AB0BA521EF111D0029B229 /* BaiduMapAPI_Location.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB0B9F21EF111D0029B229 /* BaiduMapAPI_Location.framework */; };
 		67B7CAA221DCE8180083E96A /* control.xml in Resources */ = {isa = PBXBuildFile; fileRef = 67B7CAA121DCE8180083E96A /* control.xml */; };
 		67B7CAD021DE1F160083E96A /* bds_license.dat in Resources */ = {isa = PBXBuildFile; fileRef = 67B7CAC821DE1F150083E96A /* bds_license.dat */; };
 		67B7CAD121DE1F160083E96A /* bds_easr_basic_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = 67B7CAC921DE1F150083E96A /* bds_easr_basic_model.dat */; };
@@ -176,7 +158,6 @@
 		67D6390921C12945005D1E8F /* libBaiduSpeechSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D6390721C12944005D1E8F /* libBaiduSpeechSDK.a */; };
 		67D6390A21C12945005D1E8F /* libbaiduSpeech.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D6390821C12944005D1E8F /* libbaiduSpeech.a */; };
 		67E9CDCF22968D2E0076E0FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 67E9CDCD22968D2E0076E0FB /* Localizable.strings */; };
-		7A1967C1212536C300B330A9 /* GTSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1967C0212536C300B330A9 /* GTSDK.framework */; };
 		7A1967C3212536EC00B330A9 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1967C2212536EC00B330A9 /* libmp3lame.a */; };
 		7A1967C52125371000B330A9 /* storage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1967C42125371000B330A9 /* storage.framework */; };
 		7A1967C721253B5F00B330A9 /* libWeChatSDK_pay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1967C621253B5F00B330A9 /* libWeChatSDK_pay.a */; };
@@ -210,38 +191,26 @@
 		8EED65A0198A5789000A4449 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED659F198A5789000A4449 /* Accounts.framework */; };
 		8EED65A6198A626B000A4449 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED65A5198A626B000A4449 /* MapKit.framework */; };
 		8EED65A8198A6273000A4449 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED65A7198A6273000A4449 /* OpenGLES.framework */; };
+		95DA22F0276A0B1E00071681 /* UMAPM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DA22EE276A0B1E00071681 /* UMAPM.framework */; };
+		95DA22F1276A0B1E00071681 /* UMDevice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DA22EF276A0B1E00071681 /* UMDevice.framework */; };
 		97D33A5D24750907004DDFB5 /* liblibPDRCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 247F85DA1FA32B2C006ECAC6 /* liblibPDRCore.a */; };
 		97D33A5E24750907004DDFB5 /* liblibWeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDE1569215F468000588710 /* liblibWeex.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2A21732825ADE1A50084EBAE /* PBXContainerItemProxy */ = {
+		2A7C530B29D17EC900FD4B89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2A21732425ADE1A50084EBAE /* UniPluginJPush.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2A21731725ADE1380084EBAE;
-			remoteInfo = UniPluginJPush;
-		};
-		2A21732B25ADE1BC0084EBAE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A21732425ADE1A50084EBAE /* UniPluginJPush.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 2A21731625ADE1380084EBAE;
-			remoteInfo = UniPluginJPush;
-		};
-		2AC5D68325B90EE300EA873C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2AC5D67F25B90EE300EA873C /* UniPluginJCore.xcodeproj */;
+			containerPortal = 2A7C530729D17EC900FD4B89 /* UniPluginJCore.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 2AC5D67025B83B9A00EA873C;
 			remoteInfo = UniPluginJCore;
 		};
-		2AC5D68625B90F3D00EA873C /* PBXContainerItemProxy */ = {
+		2A7C531129D17ED200FD4B89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2AC5D67F25B90EE300EA873C /* UniPluginJCore.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 2AC5D66F25B83B9A00EA873C;
-			remoteInfo = UniPluginJCore;
+			containerPortal = 2A7C530D29D17ED200FD4B89 /* UniPluginJPush.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A21731725ADE1380084EBAE;
+			remoteInfo = UniPluginJPush;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -300,7 +269,6 @@
 		24AFD8261CB50C4000C0F062 /* liblibStatistic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibStatistic.a; path = ../SDK/Libs/liblibStatistic.a; sourceTree = "<group>"; };
 		24AFD8271CB50C4000C0F062 /* liblibStorage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibStorage.a; path = ../SDK/Libs/liblibStorage.a; sourceTree = "<group>"; };
 		24AFD8281CB50C4000C0F062 /* liblibUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibUI.a; path = ../SDK/Libs/liblibUI.a; sourceTree = "<group>"; };
-		24AFD8291CB50C4000C0F062 /* liblibWebNavi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibWebNavi.a; path = ../SDK/Libs/liblibWebNavi.a; sourceTree = "<group>"; };
 		24AFD82B1CB50C4000C0F062 /* liblibXHR.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibXHR.a; path = ../SDK/Libs/liblibXHR.a; sourceTree = "<group>"; };
 		24AFD82C1CB50C4000C0F062 /* liblibZip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibZip.a; path = ../SDK/Libs/liblibZip.a; sourceTree = "<group>"; };
 		24AFD82E1CB50C4000C0F062 /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libopencore-amrnb.a"; path = "../SDK/Libs/libopencore-amrnb.a"; sourceTree = "<group>"; };
@@ -321,19 +289,12 @@
 		24BD5AF11C994A1700B05AA2 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		24BD5AF51C994BB200B05AA2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		24F990121DFBDA3300848C2B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		2A08189A28C5D6B00092B2E2 /* jpush-ios-4.8.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jpush-ios-4.8.1.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JPush/ios/jpush-ios-4.8.1.a"; sourceTree = "<group>"; };
-		2A08189C28C5D6B80092B2E2 /* jcore-ios-3.2.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jcore-ios-3.2.5.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JCore/ios/jcore-ios-3.2.5.a"; sourceTree = "<group>"; };
-		2A21732425ADE1A50084EBAE /* UniPluginJPush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniPluginJPush.xcodeproj; path = UniPluginJPush/UniPluginJPush.xcodeproj; sourceTree = "<group>"; };
-		2A21733325ADE4630084EBAE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		2A21733D25ADE4B70084EBAE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		2A21733F25ADE4C30084EBAE /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
-		2A21734325ADE4ED0084EBAE /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
-		2A21734525ADE4F70084EBAE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		2AC5D66225B6807700EA873C /* UniPluginDemo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = UniPluginDemo.entitlements; sourceTree = "<group>"; };
-		2AC5D66425B822E800EA873C /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
-		2AC5D67F25B90EE300EA873C /* UniPluginJCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniPluginJCore.xcodeproj; path = UniPluginJCore/UniPluginJCore.xcodeproj; sourceTree = "<group>"; };
+		2A64971C29E7AEDF00535242 /* jpush-ios-5.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jpush-ios-5.0.0.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JPush/ios/jpush-ios-5.0.0.a"; sourceTree = "<group>"; };
+		2A64971E29E7AFB000535242 /* jcore-ios-4.2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jcore-ios-4.2.0.a"; path = "../../JPush_Hbuilder_Demo/nativeplugins/JG-JCore/ios/jcore-ios-4.2.0.a"; sourceTree = "<group>"; };
+		2A7C530729D17EC900FD4B89 /* UniPluginJCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniPluginJCore.xcodeproj; path = UniPluginJCore/UniPluginJCore.xcodeproj; sourceTree = "<group>"; };
+		2A7C530D29D17ED200FD4B89 /* UniPluginJPush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniPluginJPush.xcodeproj; path = UniPluginJPush/UniPluginJPush.xcodeproj; sourceTree = "<group>"; };
+		2A7C531B29D17F7000FD4B89 /* HBuilder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HBuilder.entitlements; path = HBuilder/HBuilder.entitlements; sourceTree = "<group>"; };
 		2F0BA3F8215B48A700F67004 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../HBuilder/Images.xcassets; sourceTree = "<group>"; };
-		2F0BA3FB215B4A4100F67004 /* DCADManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCADManager.h; sourceTree = "<group>"; };
 		2F0BA3FD215B4A4100F67004 /* PDRCommonString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRCommonString.h; sourceTree = "<group>"; };
 		2F0BA3FE215B4A4100F67004 /* PDRCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRCore.h; sourceTree = "<group>"; };
 		2F0BA3FF215B4A4100F67004 /* PDRCoreApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRCoreApp.h; sourceTree = "<group>"; };
@@ -360,12 +321,19 @@
 		2F0BA46C215B955300F67004 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 		2F0BA46E215B955300F67004 /* PandoraApi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PandoraApi.bundle; sourceTree = "<group>"; };
 		2F0BA470215B955300F67004 /* qucsdkResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = qucsdkResources.bundle; sourceTree = "<group>"; };
-		2F0BA471215B955300F67004 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		2F0BA473215B955300F67004 /* TZImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TZImagePickerController.bundle; sourceTree = "<group>"; };
+		2F0BA471215B955300F67004 /* DCSVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DCSVProgressHUD.bundle; sourceTree = "<group>"; };
+		2F0BA473215B955300F67004 /* DCTZImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DCTZImagePickerController.bundle; sourceTree = "<group>"; };
 		2F0BA474215B955300F67004 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		2F0BA4DB215BA12300F67004 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2F4864C6293E121C00142360 /* DCUniRecord.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DCUniRecord.framework; path = ../SDK/Libs/DCUniRecord.framework; sourceTree = "<group>"; };
+		2F5FAE6C2865DB9800430AFA /* BMKLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BMKLocationKit.framework; path = ../SDK/Libs/BMKLocationKit.framework; sourceTree = "<group>"; };
+		2F5FAE6D2865DB9800430AFA /* KSCrash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KSCrash.framework; path = ../SDK/Libs/KSCrash.framework; sourceTree = "<group>"; };
 		2FD11BBA215C79C5000A23AD /* liblibAdSupport.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibAdSupport.a; path = ../SDK/Libs/liblibAdSupport.a; sourceTree = "<group>"; };
 		2FDE1569215F468000588710 /* liblibWeex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibWeex.a; path = ../SDK/Libs/liblibWeex.a; sourceTree = "<group>"; };
+		2FDE6A52297147E1004C7701 /* GTSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GTSDK.xcframework; path = ../SDK/Libs/GTSDK.xcframework; sourceTree = "<group>"; };
+		2FDE6A54297147F2004C7701 /* HBuilder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HBuilder-Bridging-Header.h"; sourceTree = "<group>"; };
+		2FDE6A55297147F2004C7701 /* DCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCloud.swift; sourceTree = "<group>"; };
+		4FA53F7B26E5D14400BAD6A0 /* uni-jsframework-vue3.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "uni-jsframework-vue3.js"; sourceTree = "<group>"; };
 		4FE36669254FE5FB00DCD173 /* libuchardet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libuchardet.a; path = ../SDK/Libs/libuchardet.a; sourceTree = "<group>"; };
 		4FF0AB46259062C700A54D59 /* UIImage+ExtendedCacheData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ExtendedCacheData.h"; sourceTree = "<group>"; };
 		4FF0AB47259062C700A54D59 /* SDAnimatedImageRep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAnimatedImageRep.h; sourceTree = "<group>"; };
@@ -488,6 +456,7 @@
 		4FF0ABC6259062C700A54D59 /* SDImageCachesManagerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCachesManagerOperation.h; sourceTree = "<group>"; };
 		4FF0ABC7259062C700A54D59 /* UIColor+SDHexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SDHexString.h"; sourceTree = "<group>"; };
 		4FF0ABC8259062C700A54D59 /* SDImageAssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageAssetManager.h; sourceTree = "<group>"; };
+		6289FAB72A55579E00E65DD9 /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
 		67065F1E2243868300DC71CA /* Default-896h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-896h@2x.png"; sourceTree = "<group>"; };
 		67065F1F2243868300DC71CA /* Default-Landscape-812h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-812h@3x.png"; sourceTree = "<group>"; };
 		67065F202243868300DC71CA /* Default-Landscape-896h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-896h@3x.png"; sourceTree = "<group>"; };
@@ -520,7 +489,6 @@
 		67229AC9230171AE0093F29A /* libDCUniAmap.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDCUniAmap.a; path = ../SDK/Libs/libDCUniAmap.a; sourceTree = "<group>"; };
 		67229ACA230171AE0093F29A /* libDCUniVideo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDCUniVideo.a; path = ../SDK/Libs/libDCUniVideo.a; sourceTree = "<group>"; };
 		67229ACB230171AE0093F29A /* libDCUniBarcode.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDCUniBarcode.a; path = ../SDK/Libs/libDCUniBarcode.a; sourceTree = "<group>"; };
-		67229ACC230171AE0093F29A /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IJKMediaFramework.framework; path = ../SDK/Libs/IJKMediaFramework.framework; sourceTree = "<group>"; };
 		67229ACD230171AE0093F29A /* libDCUniBMap.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDCUniBMap.a; path = ../SDK/Libs/libDCUniBMap.a; sourceTree = "<group>"; };
 		67229ACE230171AE0093F29A /* libDCUniGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDCUniGPUImage.a; path = ../SDK/Libs/libDCUniGPUImage.a; sourceTree = "<group>"; };
 		67229ACF230171AE0093F29A /* libDCUniLivePush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDCUniLivePush.a; path = ../SDK/Libs/libDCUniLivePush.a; sourceTree = "<group>"; };
@@ -530,7 +498,6 @@
 		672CE2B422DC916C005A0D88 /* libDCUniZXing.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDCUniZXing.a; path = ../SDK/Libs/libDCUniZXing.a; sourceTree = "<group>"; };
 		6731F3A3232F5B7A007838BC /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		6731F3A5232F5B87007838BC /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommon.framework; path = ../SDK/Libs/UMCommon.framework; sourceTree = "<group>"; };
-		6731F3A6232F5B87007838BC /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAnalytics.framework; path = ../SDK/Libs/UMAnalytics.framework; sourceTree = "<group>"; };
 		6731F3A9232F5B97007838BC /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		673E6E7221E44ABF00C021FE /* liblibFingerprint.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibFingerprint.a; path = ../SDK/Libs/liblibFingerprint.a; sourceTree = "<group>"; };
 		67414F9F24333E320093CD65 /* uni-jsframework.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "uni-jsframework.js"; sourceTree = "<group>"; };
@@ -544,12 +511,10 @@
 		67AB0B4221EEEAE50029B229 /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapFoundationKit.framework; path = ../SDK/Libs/AMapFoundationKit.framework; sourceTree = "<group>"; };
 		67AB0B9621EF10E60029B229 /* liblibGeolocation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibGeolocation.a; path = ../SDK/Libs/liblibGeolocation.a; sourceTree = "<group>"; };
 		67AB0B9821EF10FE0029B229 /* libBaiduKeyVerify.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBaiduKeyVerify.a; path = ../SDK/Libs/libBaiduKeyVerify.a; sourceTree = "<group>"; };
-		67AB0B9A21EF111C0029B229 /* BaiduMapAPI_Cloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Cloud.framework; path = ../SDK/Libs/BaiduMapAPI_Cloud.framework; sourceTree = "<group>"; };
 		67AB0B9B21EF111D0029B229 /* BaiduMapAPI_Search.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Search.framework; path = ../SDK/Libs/BaiduMapAPI_Search.framework; sourceTree = "<group>"; };
 		67AB0B9C21EF111D0029B229 /* BaiduMapAPI_Utils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Utils.framework; path = ../SDK/Libs/BaiduMapAPI_Utils.framework; sourceTree = "<group>"; };
 		67AB0B9D21EF111D0029B229 /* BaiduMapAPI_Map.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Map.framework; path = ../SDK/Libs/BaiduMapAPI_Map.framework; sourceTree = "<group>"; };
 		67AB0B9E21EF111D0029B229 /* BaiduMapAPI_Base.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Base.framework; path = ../SDK/Libs/BaiduMapAPI_Base.framework; sourceTree = "<group>"; };
-		67AB0B9F21EF111D0029B229 /* BaiduMapAPI_Location.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Location.framework; path = ../SDK/Libs/BaiduMapAPI_Location.framework; sourceTree = "<group>"; };
 		67B7CAA121DCE8180083E96A /* control.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = control.xml; sourceTree = "<group>"; };
 		67B7CAC821DE1F150083E96A /* bds_license.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_license.dat; sourceTree = "<group>"; };
 		67B7CAC921DE1F150083E96A /* bds_easr_basic_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_basic_model.dat; sourceTree = "<group>"; };
@@ -563,7 +528,6 @@
 		67D6390821C12944005D1E8F /* libbaiduSpeech.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaiduSpeech.a; path = ../SDK/Libs/libbaiduSpeech.a; sourceTree = "<group>"; };
 		67E9CDCE22968D2E0076E0FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		67E9CDD022968D350076E0FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		7A1967C0212536C300B330A9 /* GTSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTSDK.framework; path = ../SDK/Libs/GTSDK.framework; sourceTree = "<group>"; };
 		7A1967C2212536EC00B330A9 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmp3lame.a; path = ../SDK/Libs/libmp3lame.a; sourceTree = "<group>"; };
 		7A1967C42125371000B330A9 /* storage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = storage.framework; path = ../SDK/Libs/storage.framework; sourceTree = "<group>"; };
 		7A1967C621253B5F00B330A9 /* libWeChatSDK_pay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK_pay.a; path = ../SDK/Libs/libWeChatSDK_pay.a; sourceTree = "<group>"; };
@@ -678,6 +642,8 @@
 		95D879FB2583A6A800244F71 /* WXURLRewriteProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXURLRewriteProtocol.h; sourceTree = "<group>"; };
 		95D879FC2583A6A800244F71 /* WXAComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXAComponent.h; sourceTree = "<group>"; };
 		95D879FD2583A6A800244F71 /* WXBridgeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXBridgeProtocol.h; sourceTree = "<group>"; };
+		95DA22EE276A0B1E00071681 /* UMAPM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAPM.framework; path = ../SDK/Libs/UMAPM.framework; sourceTree = "<group>"; };
+		95DA22EF276A0B1E00071681 /* UMDevice.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMDevice.framework; path = ../SDK/Libs/UMDevice.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -685,32 +651,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AC5D68825B90F5900EA873C /* UniPluginJCore.framework in Frameworks */,
-				2AC5D66525B822E800EA873C /* PushKit.framework in Frameworks */,
-				2A21732D25ADE1D10084EBAE /* UniPluginJPush.framework in Frameworks */,
+				2A7C531829D17F1A00FD4B89 /* UniPluginJPush.framework in Frameworks */,
+				2A7C531729D17F1600FD4B89 /* UniPluginJCore.framework in Frameworks */,
+				2FDE6A53297147E1004C7701 /* GTSDK.xcframework in Frameworks */,
+				2F4864C7293E121C00142360 /* DCUniRecord.framework in Frameworks */,
 				4FE3666A254FE5FC00DCD173 /* libuchardet.a in Frameworks */,
 				67A9340323A8BAF6004A4DF4 /* libSDWebImage.a in Frameworks */,
 				6731F3AA232F5B97007838BC /* Photos.framework in Frameworks */,
 				6731F3A7232F5B87007838BC /* UMCommon.framework in Frameworks */,
-				6731F3A8232F5B87007838BC /* UMAnalytics.framework in Frameworks */,
 				6731F3A4232F5B7A007838BC /* libresolv.tbd in Frameworks */,
 				672CE2B322DC9118005A0D88 /* DCUniVideoPublic.framework in Frameworks */,
 				67229AD1230171AE0093F29A /* libDCUniAmap.a in Frameworks */,
-				2A21734225ADE4E10084EBAE /* WebKit.framework in Frameworks */,
 				67229AD2230171AE0093F29A /* libDCUniVideo.a in Frameworks */,
 				67229AD3230171AE0093F29A /* libDCUniBarcode.a in Frameworks */,
-				2A21734425ADE4ED0084EBAE /* AppTrackingTransparency.framework in Frameworks */,
-				67229AD4230171AE0093F29A /* IJKMediaFramework.framework in Frameworks */,
-				2A21734625ADE4F70084EBAE /* StoreKit.framework in Frameworks */,
 				67229AD6230171AE0093F29A /* libDCUniGPUImage.a in Frameworks */,
 				67229AD8230171AE0093F29A /* libDCUniMap.a in Frameworks */,
-				2A21733425ADE4640084EBAE /* CoreFoundation.framework in Frameworks */,
 				672CE2B522DC916C005A0D88 /* libDCUniZXing.a in Frameworks */,
 				24AFD8531CB50C4000C0F062 /* liblibLog.a in Frameworks */,
 				67AB0B4321EEEAE50029B229 /* AMapFoundationKit.framework in Frameworks */,
 				2F0BA418215B8B5C00F67004 /* libbz2.1.0.tbd in Frameworks */,
 				2FD11BBB215C79C5000A23AD /* liblibAdSupport.a in Frameworks */,
-				2A21734125ADE4CF0084EBAE /* libresolv.tbd in Frameworks */,
 				2F0BA416215B8B1400F67004 /* VideoToolbox.framework in Frameworks */,
 				24BD5AF61C994BB200B05AA2 /* libc++.tbd in Frameworks */,
 				2F0BA410215B784100F67004 /* Contacts.framework in Frameworks */,
@@ -721,7 +681,6 @@
 				67AB0B9921EF10FE0029B229 /* libBaiduKeyVerify.a in Frameworks */,
 				7A49810B2126B01200D20880 /* libiconv.tbd in Frameworks */,
 				24F990131DFBDA3300848C2B /* CoreData.framework in Frameworks */,
-				67AB0BA021EF111D0029B229 /* BaiduMapAPI_Cloud.framework in Frameworks */,
 				8EED629E198A1D13000A4449 /* CoreGraphics.framework in Frameworks */,
 				8EED629C198A1D13000A4449 /* Foundation.framework in Frameworks */,
 				8EED62A0198A1D13000A4449 /* UIKit.framework in Frameworks */,
@@ -729,8 +688,6 @@
 				242725CD1D26686700EBD79E /* CoreMotion.framework in Frameworks */,
 				7ACF69AB19FF899A007C64F1 /* CFNetwork.framework in Frameworks */,
 				7ACF69AD19FF89B1007C64F1 /* Security.framework in Frameworks */,
-				7A1967C1212536C300B330A9 /* GTSDK.framework in Frameworks */,
-				2A08189B28C5D6B00092B2E2 /* jpush-ios-4.8.1.a in Frameworks */,
 				67AB0BA221EF111D0029B229 /* BaiduMapAPI_Utils.framework in Frameworks */,
 				8EED641C198A2654000A4449 /* SystemConfiguration.framework in Frameworks */,
 				242725CB1D2666ED00EBD79E /* JavaScriptCore.framework in Frameworks */,
@@ -740,9 +697,7 @@
 				24AFD8431CB50C4000C0F062 /* libBaiduMobStatForSDK.a in Frameworks */,
 				7A1967C3212536EC00B330A9 /* libmp3lame.a in Frameworks */,
 				24AFD8461CB50C4000C0F062 /* libcoreSupport.a in Frameworks */,
-				24AFD8471CB50C4000C0F062 /* libGeTuiPush.a in Frameworks */,
 				24AFD8491CB50C4000C0F062 /* libIAPPay.a in Frameworks */,
-				24AFD84A1CB50C4000C0F062 /* libiflySpeech.a in Frameworks */,
 				67AB0BA421EF111D0029B229 /* BaiduMapAPI_Base.framework in Frameworks */,
 				24AFD84C1CB50C4000C0F062 /* liblibAccelerometer.a in Frameworks */,
 				67AB0B4121EEEACA0029B229 /* MAMapKit.framework in Frameworks */,
@@ -751,7 +706,6 @@
 				24AFD84D1CB50C4000C0F062 /* liblibBarcode.a in Frameworks */,
 				67566B1F2251DC3A00BDF218 /* liblibSqlite.a in Frameworks */,
 				24AFD84E1CB50C4000C0F062 /* liblibCache.a in Frameworks */,
-				24AFD84F1CB50C4000C0F062 /* liblibCamera.a in Frameworks */,
 				24AFD8501CB50C4000C0F062 /* liblibContacts.a in Frameworks */,
 				6756AB6821F58ACD00765F52 /* liblibBeacon.a in Frameworks */,
 				24AFD8521CB50C4000C0F062 /* liblibIO.a in Frameworks */,
@@ -767,64 +721,56 @@
 				24AFD85B1CB50C4000C0F062 /* liblibOrientation.a in Frameworks */,
 				7A1967C721253B5F00B330A9 /* libWeChatSDK_pay.a in Frameworks */,
 				24AFD85C1CB50C4000C0F062 /* liblibPayment.a in Frameworks */,
-				2A21733625ADE4810084EBAE /* SystemConfiguration.framework in Frameworks */,
 				24AFD85E1CB50C4000C0F062 /* liblibPGInvocation.a in Frameworks */,
 				24AFD85F1CB50C4000C0F062 /* liblibPGProximity.a in Frameworks */,
 				24AFD8601CB50C4000C0F062 /* liblibPush.a in Frameworks */,
-				2A21733B25ADE4AF0084EBAE /* libz.tbd in Frameworks */,
 				24AFD8611CB50C4000C0F062 /* liblibShare.a in Frameworks */,
+				2A64971F29E7AFB000535242 /* jcore-ios-4.2.0.a in Frameworks */,
 				67D6390921C12945005D1E8F /* libBaiduSpeechSDK.a in Frameworks */,
 				24AFD8621CB50C4000C0F062 /* liblibSpeech.a in Frameworks */,
 				24AFD8631CB50C4000C0F062 /* liblibStatistic.a in Frameworks */,
 				24AFD8641CB50C4000C0F062 /* liblibStorage.a in Frameworks */,
 				24AFD8651CB50C4000C0F062 /* liblibUI.a in Frameworks */,
-				24AFD8661CB50C4000C0F062 /* liblibWebNavi.a in Frameworks */,
-				2A21733A25ADE4A10084EBAE /* UIKit.framework in Frameworks */,
 				24AFD8681CB50C4000C0F062 /* liblibXHR.a in Frameworks */,
 				24AFD8691CB50C4000C0F062 /* liblibZip.a in Frameworks */,
 				24AFD86B1CB50C4000C0F062 /* libopencore-amrnb.a in Frameworks */,
-				67AB0BA521EF111D0029B229 /* BaiduMapAPI_Location.framework in Frameworks */,
 				67AB0BA321EF111D0029B229 /* BaiduMapAPI_Map.framework in Frameworks */,
 				673E6E7321E44ABF00C021FE /* liblibFingerprint.a in Frameworks */,
 				24AFD86F1CB50C4000C0F062 /* libQQOauth.a in Frameworks */,
-				2A21733925ADE49C0084EBAE /* Security.framework in Frameworks */,
 				24AFD8701CB50C4000C0F062 /* libQQShare.a in Frameworks */,
 				24AFD8721CB50C4000C0F062 /* libSinaShare.a in Frameworks */,
-				2A21733525ADE46D0084EBAE /* CoreTelephony.framework in Frameworks */,
 				7A1967C52125371000B330A9 /* storage.framework in Frameworks */,
-				2A21734025ADE4C30084EBAE /* UserNotifications.framework in Frameworks */,
-				2A21733E25ADE4B70084EBAE /* AdSupport.framework in Frameworks */,
 				24AFD8731CB50C4000C0F062 /* libSinaWBOauth.a in Frameworks */,
 				24AFD8761CB50C4000C0F062 /* libTouchJSON.a in Frameworks */,
-				2A21733725ADE4890084EBAE /* CoreGraphics.framework in Frameworks */,
 				24AFD8791CB50C4000C0F062 /* libWeiboSDK.a in Frameworks */,
 				24AFD87A1CB50C4000C0F062 /* libweixinShare.a in Frameworks */,
 				24AFD87B1CB50C4000C0F062 /* libWXOauth.a in Frameworks */,
 				24AFD87C1CB50C4000C0F062 /* libwxpay.a in Frameworks */,
+				2F5FAE6F2865DB9800430AFA /* KSCrash.framework in Frameworks */,
+				2A64971D29E7AEDF00535242 /* jpush-ios-5.0.0.a in Frameworks */,
 				24AFD7FF1CB50C3200C0F062 /* AlipaySDK.framework in Frameworks */,
-				24AFD8011CB50C3200C0F062 /* iflyMSC.framework in Frameworks */,
-				2A08189D28C5D6B80092B2E2 /* jcore-ios-3.2.5.a in Frameworks */,
 				24AFD8021CB50C3200C0F062 /* TencentOpenAPI.framework in Frameworks */,
 				24BD5AF21C994A1700B05AA2 /* libicucore.tbd in Frameworks */,
-				2A21733225ADE4590084EBAE /* CFNetwork.framework in Frameworks */,
 				24BD5AF01C99494A00B05AA2 /* libz.tbd in Frameworks */,
 				24BD5AEE1C99494200B05AA2 /* libxml2.tbd in Frameworks */,
 				67D6390A21C12945005D1E8F /* libbaiduSpeech.a in Frameworks */,
 				2F0BA412215B814100F67004 /* liblibVideo.a in Frameworks */,
+				95DA22F0276A0B1E00071681 /* UMAPM.framework in Frameworks */,
 				24BD5AEA1C99492A00B05AA2 /* libiconv.2.tbd in Frameworks */,
 				24BD5AE81C99491D00B05AA2 /* libsqlite3.0.tbd in Frameworks */,
 				2430A7021E11603E00D3D42D /* libssl.a in Frameworks */,
 				240905031C200AEF0070786F /* CoreBluetooth.framework in Frameworks */,
 				8E6E37AC1B0E1B580036EB48 /* ImageIO.framework in Frameworks */,
-				2A21733825ADE4920084EBAE /* Foundation.framework in Frameworks */,
 				8E163D021A8D208500308A8B /* AssetsLibrary.framework in Frameworks */,
 				8EED6596198A574C000A4449 /* CoreLocation.framework in Frameworks */,
 				8EED65A8198A6273000A4449 /* OpenGLES.framework in Frameworks */,
 				8EED65A6198A626B000A4449 /* MapKit.framework in Frameworks */,
 				8EED65A0198A5789000A4449 /* Accounts.framework in Frameworks */,
+				95DA22F1276A0B1E00071681 /* UMDevice.framework in Frameworks */,
 				8EED659E198A5782000A4449 /* Social.framework in Frameworks */,
 				8EED659C198A5773000A4449 /* AddressBookUI.framework in Frameworks */,
 				8EED6598198A5754000A4449 /* MessageUI.framework in Frameworks */,
+				2F5FAE6E2865DB9800430AFA /* BMKLocationKit.framework in Frameworks */,
 				67AB0B3D21EEEA6B0029B229 /* libAMapImp.a in Frameworks */,
 				8EED6592198A5737000A4449 /* AddressBook.framework in Frameworks */,
 				8EED6422198A2678000A4449 /* AudioToolbox.framework in Frameworks */,
@@ -839,18 +785,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2A21732525ADE1A50084EBAE /* Products */ = {
+		2A7C530829D17EC900FD4B89 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2A21732925ADE1A50084EBAE /* UniPluginJPush.framework */,
+				2A7C530C29D17EC900FD4B89 /* UniPluginJCore.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2AC5D68025B90EE300EA873C /* Products */ = {
+		2A7C530E29D17ED200FD4B89 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2AC5D68425B90EE300EA873C /* UniPluginJCore.framework */,
+				2A7C531229D17ED200FD4B89 /* UniPluginJPush.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -860,7 +806,6 @@
 			children = (
 				95D879B82583A6A700244F71 /* weexHeader */,
 				95D8780825832F7700244F71 /* DCUni */,
-				2F0BA3FB215B4A4100F67004 /* DCADManager.h */,
 				2F0BA3FD215B4A4100F67004 /* PDRCommonString.h */,
 				2F0BA3FE215B4A4100F67004 /* PDRCore.h */,
 				2F0BA3FF215B4A4100F67004 /* PDRCoreApp.h */,
@@ -888,6 +833,7 @@
 			children = (
 				6729047023547917004DE4EB /* weexUniJs.js */,
 				67414F9F24333E320093CD65 /* uni-jsframework.js */,
+				4FA53F7B26E5D14400BAD6A0 /* uni-jsframework-vue3.js */,
 				670948DD238D2D2B00E5C970 /* __uniappes6.js */,
 				67A3C8932276ED98004F2332 /* weex-polyfill.js */,
 				2F0BA443215B955200F67004 /* AlipaySDK.bundle */,
@@ -895,8 +841,8 @@
 				2F0BA46C215B955300F67004 /* mapapi.bundle */,
 				2F0BA46E215B955300F67004 /* PandoraApi.bundle */,
 				2F0BA470215B955300F67004 /* qucsdkResources.bundle */,
-				2F0BA471215B955300F67004 /* SVProgressHUD.bundle */,
-				2F0BA473215B955300F67004 /* TZImagePickerController.bundle */,
+				2F0BA471215B955300F67004 /* DCSVProgressHUD.bundle */,
+				2F0BA473215B955300F67004 /* DCTZImagePickerController.bundle */,
 				2F0BA474215B955300F67004 /* WeiboSDK.bundle */,
 			);
 			name = Bundles;
@@ -1137,9 +1083,9 @@
 		8EED628F198A1D13000A4449 = {
 			isa = PBXGroup;
 			children = (
-				2AC5D66225B6807700EA873C /* UniPluginDemo.entitlements */,
-				2AC5D67F25B90EE300EA873C /* UniPluginJCore.xcodeproj */,
-				2A21732425ADE1A50084EBAE /* UniPluginJPush.xcodeproj */,
+				2A7C531B29D17F7000FD4B89 /* HBuilder.entitlements */,
+				2A7C530D29D17ED200FD4B89 /* UniPluginJPush.xcodeproj */,
+				2A7C530729D17EC900FD4B89 /* UniPluginJCore.xcodeproj */,
 				8EED62A1198A1D13000A4449 /* HBuilder-Hello */,
 				8EED629A198A1D13000A4449 /* Frameworks */,
 				8EED6299198A1D13000A4449 /* Products */,
@@ -1157,20 +1103,18 @@
 		8EED629A198A1D13000A4449 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2A08189C28C5D6B80092B2E2 /* jcore-ios-3.2.5.a */,
-				2A08189A28C5D6B00092B2E2 /* jpush-ios-4.8.1.a */,
-				2AC5D66425B822E800EA873C /* PushKit.framework */,
-				2A21734525ADE4F70084EBAE /* StoreKit.framework */,
-				2A21734325ADE4ED0084EBAE /* AppTrackingTransparency.framework */,
-				2A21733F25ADE4C30084EBAE /* UserNotifications.framework */,
-				2A21733D25ADE4B70084EBAE /* AdSupport.framework */,
-				2A21733325ADE4630084EBAE /* CoreFoundation.framework */,
+				2A64971E29E7AFB000535242 /* jcore-ios-4.2.0.a */,
+				2A64971C29E7AEDF00535242 /* jpush-ios-5.0.0.a */,
+				2FDE6A52297147E1004C7701 /* GTSDK.xcframework */,
+				2F4864C6293E121C00142360 /* DCUniRecord.framework */,
+				2F5FAE6C2865DB9800430AFA /* BMKLocationKit.framework */,
+				2F5FAE6D2865DB9800430AFA /* KSCrash.framework */,
+				95DA22EE276A0B1E00071681 /* UMAPM.framework */,
+				95DA22EF276A0B1E00071681 /* UMDevice.framework */,
 				4FE36669254FE5FB00DCD173 /* libuchardet.a */,
 				6731F3A9232F5B97007838BC /* Photos.framework */,
-				6731F3A6232F5B87007838BC /* UMAnalytics.framework */,
 				6731F3A5232F5B87007838BC /* UMCommon.framework */,
 				6731F3A3232F5B7A007838BC /* libresolv.tbd */,
-				67229ACC230171AE0093F29A /* IJKMediaFramework.framework */,
 				67229AC9230171AE0093F29A /* libDCUniAmap.a */,
 				67229ACB230171AE0093F29A /* libDCUniBarcode.a */,
 				67229ACD230171AE0093F29A /* libDCUniBMap.a */,
@@ -1192,14 +1136,11 @@
 				2F0BA40F215B784000F67004 /* Contacts.framework */,
 				7A49810C2126B01900D20880 /* Accelerate.framework */,
 				7A49810A2126B01200D20880 /* libiconv.tbd */,
-				7A1967C0212536C300B330A9 /* GTSDK.framework */,
 				247F85DA1FA32B2C006ECAC6 /* liblibPDRCore.a */,
 				673E6E7221E44ABF00C021FE /* liblibFingerprint.a */,
 				67566B1E2251DC3A00BDF218 /* liblibSqlite.a */,
 				67AB0B9821EF10FE0029B229 /* libBaiduKeyVerify.a */,
 				67AB0B9E21EF111D0029B229 /* BaiduMapAPI_Base.framework */,
-				67AB0B9A21EF111C0029B229 /* BaiduMapAPI_Cloud.framework */,
-				67AB0B9F21EF111D0029B229 /* BaiduMapAPI_Location.framework */,
 				67AB0B9D21EF111D0029B229 /* BaiduMapAPI_Map.framework */,
 				67AB0B9B21EF111D0029B229 /* BaiduMapAPI_Search.framework */,
 				67AB0B9C21EF111D0029B229 /* BaiduMapAPI_Utils.framework */,
@@ -1247,7 +1188,6 @@
 				24AFD8261CB50C4000C0F062 /* liblibStatistic.a */,
 				24AFD8271CB50C4000C0F062 /* liblibStorage.a */,
 				24AFD8281CB50C4000C0F062 /* liblibUI.a */,
-				24AFD8291CB50C4000C0F062 /* liblibWebNavi.a */,
 				24AFD82B1CB50C4000C0F062 /* liblibXHR.a */,
 				24AFD82C1CB50C4000C0F062 /* liblibZip.a */,
 				24AFD82E1CB50C4000C0F062 /* libopencore-amrnb.a */,
@@ -1302,6 +1242,7 @@
 		8EED62A1198A1D13000A4449 /* HBuilder-Hello */ = {
 			isa = PBXGroup;
 			children = (
+				6289FAB72A55579E00E65DD9 /* sound.caf */,
 				2F0BA3FA215B4A4100F67004 /* inc */,
 				8EED62AA198A1D13000A4449 /* AppDelegate.h */,
 				8EED62AB198A1D13000A4449 /* AppDelegate.m */,
@@ -1310,6 +1251,8 @@
 				8EED62A2198A1D13000A4449 /* Supporting Files */,
 				8EED62B3198A1D14000A4449 /* ViewController.h */,
 				8EED62B4198A1D14000A4449 /* ViewController.m */,
+				2FDE6A55297147F2004C7701 /* DCloud.swift */,
+				2FDE6A54297147F2004C7701 /* HBuilder-Bridging-Header.h */,
 			);
 			path = "HBuilder-Hello";
 			sourceTree = "<group>";
@@ -1471,8 +1414,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				2AC5D68725B90F3D00EA873C /* PBXTargetDependency */,
-				2A21732C25ADE1BC0084EBAE /* PBXTargetDependency */,
 			);
 			name = HBuilder;
 			productName = "HBuilder-Hello";
@@ -1489,7 +1430,8 @@
 				ORGANIZATIONNAME = DCloud;
 				TargetAttributes = {
 					8EED6297198A1D13000A4449 = {
-						DevelopmentTeam = UT282795WK;
+						DevelopmentTeam = YQM5H857L5;
+						LastSwiftMigration = 1320;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -1509,12 +1451,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 2AC5D68025B90EE300EA873C /* Products */;
-					ProjectRef = 2AC5D67F25B90EE300EA873C /* UniPluginJCore.xcodeproj */;
+					ProductGroup = 2A7C530829D17EC900FD4B89 /* Products */;
+					ProjectRef = 2A7C530729D17EC900FD4B89 /* UniPluginJCore.xcodeproj */;
 				},
 				{
-					ProductGroup = 2A21732525ADE1A50084EBAE /* Products */;
-					ProjectRef = 2A21732425ADE1A50084EBAE /* UniPluginJPush.xcodeproj */;
+					ProductGroup = 2A7C530E29D17ED200FD4B89 /* Products */;
+					ProjectRef = 2A7C530D29D17ED200FD4B89 /* UniPluginJPush.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1525,18 +1467,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		2A21732925ADE1A50084EBAE /* UniPluginJPush.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = UniPluginJPush.framework;
-			remoteRef = 2A21732825ADE1A50084EBAE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2AC5D68425B90EE300EA873C /* UniPluginJCore.framework */ = {
+		2A7C530C29D17EC900FD4B89 /* UniPluginJCore.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = UniPluginJCore.framework;
-			remoteRef = 2AC5D68325B90EE300EA873C /* PBXContainerItemProxy */;
+			remoteRef = 2A7C530B29D17EC900FD4B89 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2A7C531229D17ED200FD4B89 /* UniPluginJPush.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = UniPluginJPush.framework;
+			remoteRef = 2A7C531129D17ED200FD4B89 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1561,8 +1503,9 @@
 				67065F402243868400DC71CA /* Default-Portrait7@2x~ipad.png in Resources */,
 				67065F512243868400DC71CA /* Default-Portrait7-1112h@2x~ipad.png in Resources */,
 				67B7CAD121DE1F160083E96A /* bds_easr_basic_model.dat in Resources */,
-				2F0BA49C215B955300F67004 /* SVProgressHUD.bundle in Resources */,
+				2F0BA49C215B955300F67004 /* DCSVProgressHUD.bundle in Resources */,
 				67414FA024333E320093CD65 /* uni-jsframework.js in Resources */,
+				4FA53F7C26E5D14400BAD6A0 /* uni-jsframework-vue3.js in Resources */,
 				67B7CAD221DE1F160083E96A /* bds_easr_mfe_cmvn.dat in Resources */,
 				67065F3F2243868400DC71CA /* Default-736h@3x.png in Resources */,
 				8EED62A6198A1D13000A4449 /* InfoPlist.strings in Resources */,
@@ -1579,6 +1522,7 @@
 				2F0BA475215B955300F67004 /* AlipaySDK.bundle in Resources */,
 				67B7CAD021DE1F160083E96A /* bds_license.dat in Resources */,
 				2F0BA499215B955300F67004 /* PandoraApi.bundle in Resources */,
+				6289FAB82A55579E00E65DD9 /* sound.caf in Resources */,
 				67A3C8942276ED98004F2332 /* weex-polyfill.js in Resources */,
 				67065F3A2243868400DC71CA /* Default-896h@2x.png in Resources */,
 				67065F3E2243868400DC71CA /* Default-667h@2x.png in Resources */,
@@ -1598,7 +1542,7 @@
 				67065F462243868400DC71CA /* Default-568h@2x.png in Resources */,
 				8EED6590198A3DF7000A4449 /* Pandora in Resources */,
 				67065F542243868400DC71CA /* Default-Landscape-896h@2x.png in Resources */,
-				2F0BA49E215B955300F67004 /* TZImagePickerController.bundle in Resources */,
+				2F0BA49E215B955300F67004 /* DCTZImagePickerController.bundle in Resources */,
 				67065F4F2243868400DC71CA /* Default-Landscape-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1612,24 +1556,12 @@
 			files = (
 				8EED62B5198A1D14000A4449 /* ViewController.m in Sources */,
 				8EED62AC198A1D13000A4449 /* AppDelegate.m in Sources */,
+				2FDE6A56297147F2004C7701 /* DCloud.swift in Sources */,
 				8EED62A8198A1D13000A4449 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2A21732C25ADE1BC0084EBAE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = UniPluginJPush;
-			targetProxy = 2A21732B25ADE1BC0084EBAE /* PBXContainerItemProxy */;
-		};
-		2AC5D68725B90F3D00EA873C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = UniPluginJCore;
-			targetProxy = 2AC5D68625B90F3D00EA873C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		67E9CDCD22968D2E0076E0FB /* Localizable.strings */ = {
@@ -1732,18 +1664,21 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = HBuilder/UniPluginDemoDebug.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				CODE_SIGN_ENTITLEMENTS = HBuilder/HBuilder.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 100;
-				DEVELOPMENT_TEAM = UT282795WK;
+				DEVELOPMENT_TEAM = YQM5H857L5;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = UT282795WK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(PROJECT_DIR)/../SDK/libs",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HBuilder-Hello/HBuilder-uniPlugin-Prefix.pch";
@@ -1758,17 +1693,26 @@
 					"$(SRCROOT)/../SDK/inc/**",
 				);
 				INFOPLIST_FILE = "HBuilder-Hello/HBuilder-uniPlugin-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				INFOPLIST_KEY_CFBundleDisplayName = JPush_Hbuilder_Demo;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../SDK/libs",
+					"$(SRCROOT)/../SDK/libs/**",
 					"$(PROJECT_DIR)",
 				);
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.jiguang.hxhg;
 				PRODUCT_NAME = UniPluginDemo;
-				PROVISIONING_PROFILE_SPECIFIER = cn.jiguang.hxhg;
+				PROVISIONING_PROFILE = "a7e03077-46db-4b91-b0c4-20fd613c1e14";
+				PROVISIONING_PROFILE_SPECIFIER = wildcard;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = cn.jiguang.hxhg;
+				SWIFT_OBJC_BRIDGING_HEADER = "HBuilder-Hello/HBuilder-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 i386 x86_64";
 				WRAPPER_EXTENSION = app;
@@ -1780,18 +1724,21 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = HBuilder/UniPluginDemo.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = HBuilder/HBuilder.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 100;
-				DEVELOPMENT_TEAM = 8X2A38Q9VD;
+				DEVELOPMENT_TEAM = YQM5H857L5;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = UT282795WK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(PROJECT_DIR)/../SDK/libs",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HBuilder-Hello/HBuilder-uniPlugin-Prefix.pch";
@@ -1806,17 +1753,25 @@
 					"$(SRCROOT)/../SDK/inc/**",
 				);
 				INFOPLIST_FILE = "HBuilder-Hello/HBuilder-uniPlugin-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				INFOPLIST_KEY_CFBundleDisplayName = JPush_Hbuilder_Demo;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../SDK/libs",
+					"$(SRCROOT)/../SDK/libs/**",
 					"$(PROJECT_DIR)",
 				);
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.push.sndemo;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.jiguang.hxhg;
 				PRODUCT_NAME = UniPluginDemo;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = wildcard;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = cn.jiguang.hxhg;
+				SWIFT_OBJC_BRIDGING_HEADER = "HBuilder-Hello/HBuilder-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 i386 x86_64";
 				WRAPPER_EXTENSION = app;
