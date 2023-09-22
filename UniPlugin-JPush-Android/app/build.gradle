@@ -29,6 +29,10 @@ android {
         ignoreAssetsPattern "!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~"
     }
     /*代码结束*/
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 repositories {
     flatDir {
