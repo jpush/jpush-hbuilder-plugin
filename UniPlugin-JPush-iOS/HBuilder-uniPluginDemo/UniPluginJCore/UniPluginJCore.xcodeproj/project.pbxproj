@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2AC5D68B25B90FB500EA873C /* JCoreModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AC5D68925B90FB500EA873C /* JCoreModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2AC5D68C25B90FB500EA873C /* JCoreModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC5D68A25B90FB500EA873C /* JCoreModule.m */; };
+		622928792AD25D8700B28E00 /* jcore-ios-4.4.0.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 622928782AD25D8700B28E00 /* jcore-ios-4.4.0.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +17,7 @@
 		2AC5D67425B83B9A00EA873C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AC5D68925B90FB500EA873C /* JCoreModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCoreModule.h; sourceTree = "<group>"; };
 		2AC5D68A25B90FB500EA873C /* JCoreModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCoreModule.m; sourceTree = "<group>"; };
+		622928782AD25D8700B28E00 /* jcore-ios-4.4.0.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "jcore-ios-4.4.0.xcframework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,6 +25,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				622928792AD25D8700B28E00 /* jcore-ios-4.4.0.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				2AC5D67425B83B9A00EA873C /* Info.plist */,
+				622928782AD25D8700B28E00 /* jcore-ios-4.4.0.xcframework */,
 				2AC5D68925B90FB500EA873C /* JCoreModule.h */,
 				2AC5D68A25B90FB500EA873C /* JCoreModule.m */,
 			);
