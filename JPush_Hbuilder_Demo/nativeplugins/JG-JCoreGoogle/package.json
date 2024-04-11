@@ -1,7 +1,7 @@
 {
     "name": "JG-JCoreGoogle",
     "id": "JG-JCoreGoogle",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "极光推送JCore插件",
     "_dp_type":"nativeplugin",
     "_dp_nativeplugin":{
