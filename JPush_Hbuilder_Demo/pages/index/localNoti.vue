@@ -33,6 +33,7 @@
 						age: '16'
 					}
 				})
+	
 			},
 			
 			removeLocalNotification() {
