@@ -34,6 +34,7 @@
 					},
 					sound:"sound.caf"
 				})
+	
 			},
 			
 			removeLocalNotification() {

@@ -51,6 +51,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSDictionary *launchOptions;
 
+@property (nonatomic, assign) BOOL logEnable;
+
 + (instancetype)shared;
 
 // 初始化jpush
@@ -74,6 +76,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (int)getLocationAuthorizationStatus;
 
 - (BOOL)locationServicesEnabled;
+
++ (void)logger:(NSObject *)tag log:(NSObject *)log;
 
 @end
 

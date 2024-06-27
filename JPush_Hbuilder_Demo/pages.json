@@ -27,6 +27,14 @@
 				"style": {
 						"navigationBarTitleText": "uni-app"
 					}
+				},
+				{
+					"path" : "pages/index/jump",
+					"style" : 
+					{
+						"navigationBarTitleText" : "",
+						"enablePullDownRefresh" : false
+					}
 				}
 			
 			],

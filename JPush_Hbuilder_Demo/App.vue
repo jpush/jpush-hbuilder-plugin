@@ -4,6 +4,7 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
+			
 			if(uni.getSystemInfoSync().platform == "ios"){
 				// 请求定位权限
 				let locationServicesEnabled = jpushModule.locationServicesEnabled()
@@ -70,12 +71,17 @@
 				let title = result.title
 				let content = result.content
 				let extras = result.extras
-				
+				console.log("addNotificationListener:", result)
 				uni.showToast({
 					icon: 'none',
 					title: JSON.stringify(result),
 					duration: 3000
 				})
+				if (notificationEventType == "notificationOpened") {
+					uni.navigateTo({
+						url:"/pages/index/jump"
+					})
+				}
 			});
 			
 			jpushModule.addCustomMessageListener(result=>{
