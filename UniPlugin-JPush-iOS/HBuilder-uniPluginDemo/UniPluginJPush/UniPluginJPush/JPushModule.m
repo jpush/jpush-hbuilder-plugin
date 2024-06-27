@@ -42,8 +42,6 @@
 
 @implementation JPushModule
 
-BOOL jpush_debugMode = NO;
-
 UNI_EXPORT_METHOD(@selector(setBadge:))
 UNI_EXPORT_METHOD(@selector(addMobileNumberListener:))
 UNI_EXPORT_METHOD(@selector(setMobileNumber:))
@@ -86,8 +84,8 @@ UNI_EXPORT_METHOD(@selector(getRegistrationID:))
 
 //设置调试模式，默认关闭状态
 - (void)setLoggerEnable:(BOOL)enable {
+    [JPushStore shared].logEnable = enable;
     [self logger:@"setLoggerEnable:" log:(enable?@"true":@"false")];
-    jpush_debugMode = enable;
     if (enable) {
         [JPUSHService setDebugMode];
     }else {
@@ -216,13 +214,24 @@ UNI_EXPORT_METHOD(@selector(addInMessageListener:))
      */
     static BOOL onceLaunchPushBack = NO;
     if (onceLaunchPushBack == YES) {
+        [self logger:@"addNotificationListener,onceLaunchPushBack,return" log:nil];
         return;
     }
     onceLaunchPushBack = YES;
     if ([JPushStore shared].launchOptions == nil || ![[JPushStore shared].launchOptions isKindOfClass:[NSDictionary class]]) {
+        [self logger:@"addNotificationListener,no launchOptions ,return" log:nil];
         return;
     }
     if ([[JPushStore shared].launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey] != nil) {
+        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+        NSDictionary *sceneDic = [infoDictionary valueForKey:@"UIApplicationSceneManifest"];
+        BOOL isScene = sceneDic?YES:NO;
+        [self logger:[NSString stringWithFormat:@"lauch NOTIFICATION_OPENED - %ld", (long)state] log:nil];
+        if (state == UIApplicationStateBackground && !isScene) {
+            [self logger:@"lauch UIApplicationStateBackground - may be content-available" log:nil];
+            return;
+        }
         [[JPushStore shared] handeleApnsCallback:[[JPushStore shared].launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey] type:NOTIFICATION_OPENED];
     }
 }
@@ -587,9 +596,7 @@ UNI_EXPORT_METHOD(@selector(addVoipPushIncomingListener:))
 // debug 打印控制
 - (void)logger:(NSObject *)tag log:(NSObject *)log
 {
-    if(jpush_debugMode){
-          NSLog(@"JPushModule--->%@ %@", tag,log);
-    }
+    [JPushStore logger:tag log:log];
 }
 
 @end

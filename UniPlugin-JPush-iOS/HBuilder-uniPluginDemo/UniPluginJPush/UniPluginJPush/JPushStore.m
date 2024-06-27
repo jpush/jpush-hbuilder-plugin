@@ -16,6 +16,11 @@
 @property (nonatomic, strong) CLLocationManager *currentManager;
 
 @property (nonatomic, strong) NSMutableArray *callBackShowNotisArr; // apns展示型通知已经回调过的
+@property (nonatomic, strong) NSMutableArray *callBackOpenNotisArr; // apns点击型通知已经回调过的
+
+//@property (nonatomic, strong) NSMutableString *loggerStr;
+
+//@property (nonatomic, strong) NSString *logFilePath;
 
 @end
 
@@ -35,9 +40,21 @@
     self = [super init];
     if (self) {
         _callBackShowNotisArr = [NSMutableArray array];
+        _callBackOpenNotisArr = [NSMutableArray array];
+        _logEnable = NO;
+//        _loggerStr = [NSMutableString string];
+//        [self creatLogFile];
     }
     return self;
 }
+
+//- (void)creatLogFile {
+//    NSString *filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSDate *now = [NSDate date];
+//    NSTimeInterval timestamp = [now timeIntervalSince1970];
+//    NSString *fileName = [NSString stringWithFormat:@"%f.txt",timestamp];
+//    _logFilePath = [filePath stringByAppendingPathComponent:fileName];
+//}
 
 // jpush初始化
 - (void)initJPushService:(NSDictionary *)launchOptions {
@@ -191,6 +208,7 @@
 
 // 应用在前台 推送消息过来 会触发 需要回调completionHandler才能显示
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+    [self logger:[NSString stringWithFormat:@"UniPluginProtocol Func: %@,%s",self,__func__] log:nil];
     NSDictionary * userInfo = notification.request.content.userInfo;
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         //远程推送
@@ -205,6 +223,7 @@
 
 // 点击通知会触发
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    [self logger:[NSString stringWithFormat:@"UniPluginProtocol Func: %@,%s",self,__func__] log:nil];
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
@@ -338,39 +357,53 @@
 #pragma mark -
 // 处理远程通知回调
 - (void)handeleApnsCallback:(NSDictionary *)userInfo type:(NSString *)type {
+    [self logger:[NSString stringWithFormat:@"Func: %@,%s",self,__func__] log:nil];
     if (!userInfo || ![userInfo isKindOfClass:[NSDictionary class]]) {
         return;
     }
     
     [JPUSHService handleRemoteNotification:userInfo];
     
+    if (![JPushStore shared].pushNotiCallback) {
+        [self logger:@"no pushNotiCallback, return" log:nil];
+        return;
+    }
+    
+    NSMutableArray *callArr = nil;
+    if ([type isEqualToString:NOTIFICATION_ARRIVED]) {
+        callArr = self.callBackShowNotisArr;
+    }else if ([type isEqualToString:NOTIFICATION_OPENED]) {
+        callArr = self.callBackOpenNotisArr;
+    }
+    
     // 处理带有content-available 推送唤醒通知送达时会回调两次的问题
     NSNumber *notiId = userInfo[@"_j_msgid"];
-    for (NSDictionary *info in [self.callBackShowNotisArr mutableCopy]) {
+    for (NSDictionary *info in [callArr mutableCopy]) {
         if ([info isKindOfClass:[NSDictionary class]]) {
             NSNumber *messageID = info[@"_j_msgid"];
             if (notiId && [notiId isKindOfClass:[NSNumber class]] && messageID && [messageID isKindOfClass:[NSNumber class]] && [[notiId stringValue] isEqualToString:[messageID stringValue]]) {
-                NSLog(@"already callback");
-                [self.callBackShowNotisArr removeAllObjects];
+                [self logger:@"already callback" log:nil];
+                [callArr removeAllObjects];
                 return;
             }
         }
     }
-    if ([type isEqualToString:NOTIFICATION_ARRIVED]) {
-        NSDictionary *aps = userInfo[@"aps"];
-        if (aps && [aps isKindOfClass:[NSDictionary class]]) {
-            if([aps.allKeys containsObject:@"content-available"]){
-                NSNumber *contentavailable = aps[@"content-available"];
-                if (contentavailable && [contentavailable isKindOfClass:[NSNumber class]] && [contentavailable boolValue]) {
-                    [self.callBackShowNotisArr addObject:userInfo];
-                }
+    
+    NSDictionary *aps = userInfo[@"aps"];
+    if (aps && [aps isKindOfClass:[NSDictionary class]]) {
+        if([aps.allKeys containsObject:@"content-available"]){
+            NSNumber *contentavailable = aps[@"content-available"];
+            if (contentavailable && [contentavailable isKindOfClass:[NSNumber class]] && [contentavailable boolValue]) {
+                [callArr addObject:userInfo];
             }
         }
     }
+   
     
     // 
     NSDictionary *result = [self convertApnsMessage:userInfo type:type];
     if ([JPushStore shared].pushNotiCallback) {
+        [self logger:[NSString stringWithFormat:@"callback %@",type] log:nil];
         [JPushStore shared].pushNotiCallback(result, YES);
     }
 }
@@ -524,5 +557,35 @@
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter removeObserver:self];
 }
+
+// debug 打印控制
++ (void)logger:(NSObject *)tag log:(NSObject *)log
+{
+    [[JPushStore shared] logger:tag log:log];
+}
+
+
+// debug 打印控制
+- (void)logger:(NSObject *)tag log:(NSObject *)log
+{
+//    NSString *a = [NSString stringWithFormat:@"JPushModule--->%@ %@ \n", tag,log];
+//    [_loggerStr appendString:a];
+//    [self writeToFile:_loggerStr];
+    if (self.logEnable) {
+        NSLog(@"JPushModule--->%@ %@", tag,log);
+    }
+    
+}
+
+//- (void)writeToFile:(NSString *)str {
+//   
+//    NSError *error = nil;
+//    BOOL success = [str writeToFile:_logFilePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+//    if (success) {
+//        NSLog(@"File created and content written successfully.");
+//    } else {
+//        NSLog(@"Error writing file: %@", error.localizedDescription);
+//    }
+//}
 
 @end
