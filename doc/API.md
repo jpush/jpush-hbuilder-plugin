@@ -576,7 +576,31 @@ jpushModule.addMobileNumberListener(result=>{
 		let code = result.code
 	})
 ```
+## 对外控制
+### API - setCollectControl(Object)
+对外控制数据采集接口
 
+#### 参数说明
+- Object
+
+|参数名称|参数类型|参数说明|
+|:-----:|:----:|:-----:|
+|imei|boolean|imei采集控制|
+|imsi|boolean|imsi采集控制|
+|mac|boolean|mac采集控制|
+|wifi|boolean|wifi采集控制|
+|bssid|boolean|bssid采集控制|
+|ssid|boolean|ssid采集控制|
+|cell|boolean|cell采集控制|
+
+
+#### 示例
+```javascript
+jpushModule.setCollectControl({
+					'imei':false,
+					'imsi': true
+				})
+```
 
 ## 错误码
 

@@ -25,6 +25,7 @@ import cn.jiguang.uniplugin_jpush.receiver.JPushBroadcastReceiver;
 import cn.jiguang.uniplugin_jpush.receiver.JPushModuleReceiver;
 import cn.jpush.android.api.BasicPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.data.JPushCollectControl;
 import cn.jpush.android.data.JPushLocalNotification;
 import io.dcloud.feature.uniapp.annotation.UniJSMethod;
 import io.dcloud.feature.uniapp.common.UniDestroyableModule;
@@ -48,10 +49,70 @@ public class JPushModule extends UniDestroyableModule {
     }
 
     @UniJSMethod(uiThread = true)
+    public void setLinkMergeEnable(boolean enable) {
+        updatePluginStatu();
+        JPushInterface.setLinkMergeEnable(uniContext, enable);
+    }
+
+    @UniJSMethod(uiThread = true)
+    public void setSmartPushEnable(boolean enable) {
+        updatePluginStatu();
+        JPushInterface.setSmartPushEnable(uniContext, enable);
+    }
+
+    @UniJSMethod(uiThread = true)
+    public void setGeofenceEnable(boolean enable) {
+        updatePluginStatu();
+        JPushInterface.setGeofenceEnable(uniContext, enable);
+    }
+
+    @UniJSMethod(uiThread = true)
+    public void setCollectControl(JSONObject readableMap) {
+        if (readableMap == null) {
+            JLogger.w(JConstants.PARAMS_NULL);
+            return;
+        }
+        updatePluginStatu();
+        boolean hadValue = false;
+        JPushCollectControl.Builder builder = new JPushCollectControl.Builder();
+        if (readableMap.containsKey(JConstants.IMEI)) {
+            hadValue = true;
+            builder.imei(readableMap.getBoolean(JConstants.IMEI));
+        }
+        if (readableMap.containsKey(JConstants.IMSI)) {
+            hadValue = true;
+            builder.imsi(readableMap.getBoolean(JConstants.IMSI));
+        }
+        if (readableMap.containsKey(JConstants.MAC)) {
+            hadValue = true;
+            builder.mac(readableMap.getBoolean(JConstants.MAC));
+        }
+        if (readableMap.containsKey(JConstants.WIFI)) {
+            hadValue = true;
+            builder.wifi(readableMap.getBoolean(JConstants.WIFI));
+        }
+        if (readableMap.containsKey(JConstants.BSSID)) {
+            hadValue = true;
+            builder.bssid(readableMap.getBoolean(JConstants.BSSID));
+        }
+        if (readableMap.containsKey(JConstants.SSID)) {
+            hadValue = true;
+            builder.ssid(readableMap.getBoolean(JConstants.SSID));
+        }
+        if (readableMap.containsKey(JConstants.CELL)) {
+            hadValue = true;
+            builder.cell(readableMap.getBoolean(JConstants.CELL));
+        }
+        if (hadValue) {
+            JPushInterface.setCollectControl(uniContext, builder.build());
+        }
+    }
+
+    @UniJSMethod(uiThread = true)
     public void initJPushService() {
         updatePluginStatu();
         JPushInterface.init(mWXSDKInstance.getContext());
-        JPushInterface.setNotificationCallBackEnable(mWXSDKInstance.getContext(),true);
+        JPushInterface.setNotificationCallBackEnable(mWXSDKInstance.getContext(), true);
         if (JPushBroadcastReceiver.NOTIFICATION_BUNDLE != null) {
             JSONObject jsonObject = JPushHelper.convertNotificationBundleToMap(JConstants.NOTIFICATION_OPENED, JPushBroadcastReceiver.NOTIFICATION_BUNDLE);
             JPushHelper.sendEvent(JConstants.NOTIFICATION_EVENT, jsonObject);
@@ -98,6 +159,7 @@ public class JPushModule extends UniDestroyableModule {
             JPushInterface.setChannel(mWXSDKInstance.getContext(), channel);
         }
     }
+
     @UniJSMethod(uiThread = true)
     public void setChannelAndSound(JSONObject readableMap) {
         updatePluginStatu();
@@ -109,20 +171,20 @@ public class JPushModule extends UniDestroyableModule {
         String channelId = readableMap.getString(JConstants.CHANNEL_ID);
         String sound = readableMap.getString(JConstants.SOUND);
         try {
-            NotificationManager manager= (NotificationManager) uniContext.getSystemService("notification");
-            if(Build.VERSION.SDK_INT<26){
+            NotificationManager manager = (NotificationManager) uniContext.getSystemService("notification");
+            if (Build.VERSION.SDK_INT < 26) {
                 return;
             }
-            if(TextUtils.isEmpty(channel)||TextUtils.isEmpty(channelId)){
+            if (TextUtils.isEmpty(channel) || TextUtils.isEmpty(channelId)) {
                 JLogger.w(JConstants.PARAMS_ILLEGAL_CHANNEL);
                 return;
             }
-            NotificationChannel channel1=new NotificationChannel(channelId,channel, NotificationManager.IMPORTANCE_HIGH);
-            if(!TextUtils.isEmpty(sound)){
-                channel1.setSound(Uri.parse("android.resource://"+uniContext.getPackageName()+"/raw/"+sound),null);
+            NotificationChannel channel1 = new NotificationChannel(channelId, channel, NotificationManager.IMPORTANCE_HIGH);
+            if (!TextUtils.isEmpty(sound)) {
+                channel1.setSound(Uri.parse("android.resource://" + uniContext.getPackageName() + "/raw/" + sound), null);
             }
             manager.createNotificationChannel(channel1);
-        }catch (Throwable throwable){
+        } catch (Throwable throwable) {
 
         }
     }
@@ -636,8 +698,6 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void setIsAllowedInMessagePop(boolean allowedInMessagePop) {
-        updatePluginStatu();
-        JPushModuleReceiver.IS_NEED_SHOW_INAPP_MESSAGE = allowedInMessagePop;
     }
 
     @UniJSMethod(uiThread = true)
