@@ -5,7 +5,13 @@ public class JConstants {
     public static final String DEBUG = "debug";
 
     public static final String REGISTRATION_ID = "registerID";
-
+    public static final String IMEI = "imei";
+    public static final String IMSI = "imsi";
+    public static final String MAC = "mac";
+    public static final String WIFI = "wifi";
+    public static final String BSSID = "bssid";
+    public static final String SSID = "ssid";
+    public static final String CELL = "cell";
     public static final String CODE = "code";
     public static final int CODE_SUCESS = 0;
     public static final String CHANNEL = "channel";
