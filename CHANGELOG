@@ -1,46 +1,76 @@
-v1.0.0
-jpush uni插件首次发布。
+v1.2.4
+开放：onNotifyMessageUnShow 方法。
 
-v1.0.1
-解决云端打包不能配置参数的问题。
+v1.2.3
+更新Android：JPush 550+JCore 440
 
-v1.0.2
-解决jpush和jverification uniapp插件同时集成打包失败的问题。
+v1.2.2
+更新Android：JPush 540+JCore 440
 
-v1.0.3
-解决当app在离线状态，点击app通知进入app，不会触发监听通知事件的问题。
-v1.0.4
-更新Jpush到440，并增加华为清单文件配置
-v1.0.5
-修复在某些机型不能初始化问题。
-v1.0.6
-更新Jpush到460。
-v1.0.7
-修复OPPO依赖报错问题
-v1.0.8
-修复：点击消息没有点击回调问题
-v1.0.9
-1、更新Jpush 4.7.2
-2、新增适配荣耀推送通道
-v1.1.1
-更新iOS 4.8.1
-v1.1.2
-修复GSON包重复问题
-v1.1.3
-更新Jpush 4.8.4 和JCore 3.3.6
-v1.1.4
-1、新增适配FCM推送通道
-2、新增API：setChannelAndSound
-v1.1.5
-更新Jpush 4.9.0 和JCore 4.1.0
-v1.1.6
-1、iOS新增通知删除回调
-2、适配xcode14, 插件最低支持版本为iOS11
-v1.1.7
-修改推送唤醒通知，送达回调两次的问题
-v1.1.8
-更新Android： JPush 500+JCore 420
+v1.2.1
+更新ios：JPush 530+JCore 462
+
+v1.2.0
+更新Android：JPush 520+JCore 440
+
 v1.1.9
 更新Android： JPush 504+JCore 424
               华为SDK：6.9.0.300
               FCM：23.1.2
+
+v1.1.8
+更新Android： JPush 500+JCore 420
+
+v1.1.7
+修改推送唤醒通知，送达回调两次的问题
+
+v1.1.6
+1、iOS新增通知删除回调
+2、适配xcode14, 插件最低支持版本为iOS11
+
+v1.1.5
+更新Jpush 4.9.0 和JCore 4.1.0
+
+v1.1.4
+1、新增适配FCM推送通道
+2、新增API：setChannelAndSound
+
+v1.1.3
+更新Jpush 4.8.4 和JCore 3.3.6
+
+v1.1.2
+修复GSON包重复问题
+
+v1.1.1
+更新iOS 4.8.1
+
+v1.0.9
+1、更新Jpush 4.7.2
+2、新增适配荣耀推送通道
+
+v1.0.8
+修复：点击消息没有点击回调问题
+
+v1.0.7
+修复OPPO依赖报错问题
+
+v1.0.6
+更新Jpush到460。
+
+v1.0.5
+修复在某些机型不能初始化问题。
+
+v1.0.4
+更新Jpush到440，并增加华为清单文件配置
+
+v1.0.3
+解决当app在离线状态，点击app通知进入app，不会触发监听通知事件的问题。
+
+v1.0.2
+解决jpush和jverification uniapp插件同时集成打包失败的问题。
+
+v1.0.1
+解决云端打包不能配置参数的问题。
+
+v1.0.0
+jpush uni插件首次发布。

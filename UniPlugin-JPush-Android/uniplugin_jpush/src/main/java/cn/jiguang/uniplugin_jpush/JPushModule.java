@@ -226,10 +226,6 @@ public class JPushModule extends UniDestroyableModule {
         int startMinute = readableMap.getIntValue(JConstants.SILENCE_TIME_START_MINUTE);
         int endHour = readableMap.getIntValue(JConstants.SILENCE_TIME_END_HOUR);
         int endMinute = readableMap.getIntValue(JConstants.SILENCE_TIME_END_MINUTE);
-        if (startHour == 0 || startMinute == 0 || endHour == 0 || endMinute == 0) {
-            JLogger.w(JConstants.PARAMS_NULL);
-            return;
-        }
         JPushInterface.setSilenceTime(mWXSDKInstance.getContext(), startHour, startMinute, endHour, endMinute);
     }
 

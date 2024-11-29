@@ -42,6 +42,13 @@ public class JPushModuleReceiver extends JPushMessageReceiver {
     }
 
     @Override
+    public void onNotifyMessageUnShow(Context context, NotificationMessage notificationMessage) {
+        JLogger.d("onNotifyMessageUnShow:" + notificationMessage.toString());
+        JSONObject jsonObject = JPushHelper.convertNotificationToMap(JConstants.NOTIFICATION_UNSHOW, notificationMessage);
+        JPushHelper.sendNotifactionEvent(jsonObject, notificationMessage.notificationType);
+    }
+
+    @Override
     public void onNotifyMessageDismiss(Context context, NotificationMessage notificationMessage) {
         JLogger.d("onNotifyMessageDismiss:" + notificationMessage.toString());
         JSONObject jsonObject = JPushHelper.convertNotificationToMap(JConstants.NOTIFICATION_DISMISSED, notificationMessage);

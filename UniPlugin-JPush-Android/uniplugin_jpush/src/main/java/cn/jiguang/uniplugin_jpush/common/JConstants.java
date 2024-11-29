@@ -46,6 +46,7 @@ public class JConstants {
     public static final String NOTIFICATION_ARRIVED = "notificationArrived";
     public static final String NOTIFICATION_OPENED = "notificationOpened";
     public static final String NOTIFICATION_DISMISSED = "notificationDismissed";
+    public static final String NOTIFICATION_UNSHOW = "notificationUnShow";
     //应用内消息事件类型
     public static final String INAPP_MESSAGE_SHOW = "show";
     public static final String INAPP_MESSAGE_OPENED = "click";
