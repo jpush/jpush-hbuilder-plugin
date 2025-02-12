@@ -1,7 +1,7 @@
 {
     "name": "JG-JPushGoogle",
     "id": "JG-JPushGoogle",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "description": "极光推送Google版本Hbuilder插件",
     "_dp_type":"nativeplugin",
     "_dp_nativeplugin":{
@@ -131,6 +131,10 @@
                 "JPUSH_HONOR_APPID" : {
                     "des" : "厂商HONOR-appId,示例：12346578",
                     "key" : "com.hihonor.push.app_id"
+                },
+                "JPUSH_HONOR_APPID" : {
+                    "des" : "厂商nio-appId,示例：12346578",
+                    "key" : "nio_push_app_id"
                 },
                 "JPUSH_GOOGLE_API_KEY" : {
                     "des" : "厂商google api_key,示例:g-12345678",

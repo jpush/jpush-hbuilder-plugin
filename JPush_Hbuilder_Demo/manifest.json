@@ -113,6 +113,7 @@
                 "JPUSH_XIAOMI_APPID" : "",
                 "JPUSH_HUAWEI_APPID" : "",
                 "JPUSH_HONOR_APPID" : "",
+                "JPUSH_NIO_APPID" : "",
                 "JPUSH_GOOGLE_API_KEY" : "",
                 "JPUSH_GOOGLE_APP_ID" : "",
                 "JPUSH_GOOGLE_PROJECT_NUMBER" : "",
@@ -197,6 +198,11 @@
                         "JPUSH_HONOR_APPID" : {
                             "des" : "厂商HONOR-appId,示例：12346578",
                             "key" : "com.hihonor.push.app_id",
+                            "value" : ""
+                        },
+                        "JPUSH_NIO_APPID" : {
+                            "des" : "厂商nio-appId,示例：12346578",
+                            "key" : "nio_push_app_id",
                             "value" : ""
                         },
                         "JPUSH_GOOGLE_API_KEY" : {
