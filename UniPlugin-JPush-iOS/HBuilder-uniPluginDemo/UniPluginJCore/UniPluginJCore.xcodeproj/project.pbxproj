@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		2AC5D68B25B90FB500EA873C /* JCoreModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AC5D68925B90FB500EA873C /* JCoreModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2AC5D68C25B90FB500EA873C /* JCoreModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC5D68A25B90FB500EA873C /* JCoreModule.m */; };
+		622CED0F2DB77D4F00C13A88 /* jcore-ios-5.0.1.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 622CED0E2DB77D4F00C13A88 /* jcore-ios-5.0.1.xcframework */; };
 		62685A272BC7F3E900A301C8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 62685A262BC7F3E900A301C8 /* PrivacyInfo.xcprivacy */; };
-		6283FF622D3F3E30003A8199 /* jcore-ios-4.9.0.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6283FF612D3F3E30003A8199 /* jcore-ios-4.9.0.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,8 +18,8 @@
 		2AC5D67425B83B9A00EA873C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AC5D68925B90FB500EA873C /* JCoreModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCoreModule.h; sourceTree = "<group>"; };
 		2AC5D68A25B90FB500EA873C /* JCoreModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCoreModule.m; sourceTree = "<group>"; };
+		622CED0E2DB77D4F00C13A88 /* jcore-ios-5.0.1.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "jcore-ios-5.0.1.xcframework"; sourceTree = "<group>"; };
 		62685A262BC7F3E900A301C8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		6283FF612D3F3E30003A8199 /* jcore-ios-4.9.0.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "jcore-ios-4.9.0.xcframework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,7 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6283FF622D3F3E30003A8199 /* jcore-ios-4.9.0.xcframework in Frameworks */,
+				622CED0F2DB77D4F00C13A88 /* jcore-ios-5.0.1.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +53,7 @@
 		2AC5D67225B83B9A00EA873C /* UniPluginJCore */ = {
 			isa = PBXGroup;
 			children = (
-				6283FF612D3F3E30003A8199 /* jcore-ios-4.9.0.xcframework */,
+				622CED0E2DB77D4F00C13A88 /* jcore-ios-5.0.1.xcframework */,
 				2AC5D67425B83B9A00EA873C /* Info.plist */,
 				62685A262BC7F3E900A301C8 /* PrivacyInfo.xcprivacy */,
 				2AC5D68925B90FB500EA873C /* JCoreModule.h */,
