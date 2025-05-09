@@ -61,6 +61,12 @@ public class JPushModule extends UniDestroyableModule {
     }
 
     @UniJSMethod(uiThread = true)
+    public void setDataInsightsEnable(boolean enable) {
+        updatePluginStatu();
+        JPushInterface.setDataInsightsEnable(uniContext, enable);
+    }
+
+    @UniJSMethod(uiThread = true)
     public void setGeofenceEnable(boolean enable) {
         updatePluginStatu();
         JPushInterface.setGeofenceEnable(uniContext, enable);
