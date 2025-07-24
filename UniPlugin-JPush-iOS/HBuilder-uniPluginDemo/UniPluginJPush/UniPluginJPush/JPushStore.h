@@ -77,6 +77,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)locationServicesEnabled;
 
+- (void)setNotiForegroundAuthTypes:(NSDictionary *)types;
+
 + (void)logger:(NSObject *)tag log:(NSObject *)log;
 
 @end

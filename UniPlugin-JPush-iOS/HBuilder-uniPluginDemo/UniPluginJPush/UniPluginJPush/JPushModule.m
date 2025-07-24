@@ -131,6 +131,7 @@ UNI_EXPORT_METHOD(@selector(setLocationEanable:))
 
 UNI_EXPORT_METHOD(@selector(requestNotificationAuthorization:))
 UNI_EXPORT_METHOD(@selector(openSettingsForNotification:))
+UNI_EXPORT_METHOD(@selector(setNotiForegroundPresentationOptions:))
 
 #pragma - 权限
 //请求通知权限
@@ -149,6 +150,11 @@ UNI_EXPORT_METHOD(@selector(openSettingsForNotification:))
         NSDictionary *result = [self convertResultWithCode:(success?0:1) content:nil];
         callback(result, NO);
     }];
+}
+
+// 设置通知前台的展示效果
+- (void)setNotiForegroundPresentationOptions:(NSDictionary *)options {
+    [[JPushStore shared] setNotiForegroundAuthTypes:options];
 }
 
 

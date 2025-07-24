@@ -217,4 +217,28 @@ jpushModule.pageEnterTo("页面名称")
 jpushModule.pageLeave("页面名称")
 ```
 
+## 设置通知前台展示样式
+
+### API - setNotiForegroundPresentationOptions(dictionary)
+设置通知前台展示样式
+
+#### 参数说明
+
+- Dictionary ： 
+可以填的值 有 sound， alert， badge
+{
+"sound": true,
+"alert": true,
+"badge": true
+}
+
+#### 示例
+```javascript
+jpushModule.setNotiForegroundPresentationOptions({
+"sound": true,
+"alert": true,
+"badge": true
+})
+```
+
 

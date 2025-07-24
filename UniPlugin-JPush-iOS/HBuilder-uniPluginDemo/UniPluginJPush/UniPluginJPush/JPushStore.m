@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSMutableArray *callBackShowNotisArr; // apns展示型通知已经回调过的
 @property (nonatomic, strong) NSMutableArray *callBackOpenNotisArr; // apns点击型通知已经回调过的
 
+@property (nonatomic, strong) NSDictionary *notiForegroundPresentationOptions;
+
 //@property (nonatomic, strong) NSMutableString *loggerStr;
 
 //@property (nonatomic, strong) NSString *logFilePath;
@@ -123,6 +125,10 @@
     
 }
 
+- (void)setNotiForegroundAuthTypes:(NSDictionary *)types {
+    self.notiForegroundPresentationOptions = types;
+}
+
 #pragma mark - 连接状态
 - (void)addConnectEventObserver {
     
@@ -218,7 +224,23 @@
         //本地通知
         [self handlerLocalNotiCallback:userInfo type:NOTIFICATION_ARRIVED];
     }
-    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert);
+    
+    UNNotificationPresentationOptions options = (UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert);
+    if (self.notiForegroundPresentationOptions) {
+        options = UNNotificationPresentationOptionNone;
+        if ([self.notiForegroundPresentationOptions[@"sound"] boolValue]) {
+            options |= UNNotificationPresentationOptionSound;
+        }
+        if ([self.notiForegroundPresentationOptions[@"alert"] boolValue]) {
+            options |= UNNotificationPresentationOptionAlert;
+        }
+        if ([self.notiForegroundPresentationOptions[@"badge"] boolValue]) {
+            options |= UNNotificationPresentationOptionBadge;
+        }
+    }
+    
+    completionHandler(options);
+    
 }
 
 // 点击通知会触发
