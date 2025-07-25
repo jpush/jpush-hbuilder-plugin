@@ -1,3 +1,8 @@
+v1.2.7
+1、更新iOS JPush SDK到5.7.0版本
+2、更新Android JPush SDK到5.8.0版本
+3、新增setNotiForegroundPresentationOptions方法，用于设置应用前台时通知的展示选项
+
 v1.2.4
 开放：onNotifyMessageUnShow 方法。
 

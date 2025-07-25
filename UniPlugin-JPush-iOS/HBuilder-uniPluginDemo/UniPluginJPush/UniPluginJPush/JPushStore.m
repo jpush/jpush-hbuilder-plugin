@@ -126,6 +126,7 @@
 }
 
 - (void)setNotiForegroundAuthTypes:(NSDictionary *)types {
+    [self logger:@"setNotiForegroundAuthTypes:" log:types];
     self.notiForegroundPresentationOptions = types;
 }
 
