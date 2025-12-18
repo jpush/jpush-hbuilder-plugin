@@ -37,12 +37,14 @@ public class JPushModule extends UniDestroyableModule {
     public static Context uniContext = null;
 
     public void updatePluginStatu() {
+        JLogger.d("updatePluginStatu");
         uniContext = mWXSDKInstance.getContext();
         JPushHelper.IS_DESTROY = false;
     }
 
     @UniJSMethod(uiThread = true)
     public void setLoggerEnable(boolean enable) {
+        JLogger.d("setLoggerEnable enable=" + enable);
         updatePluginStatu();
         JPushInterface.setDebugMode(enable);
         JLogger.setLoggerEnable(enable);
@@ -50,30 +52,35 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void setLinkMergeEnable(boolean enable) {
+        JLogger.d("setLinkMergeEnable enable=" + enable);
         updatePluginStatu();
         JPushInterface.setLinkMergeEnable(uniContext, enable);
     }
 
     @UniJSMethod(uiThread = true)
     public void setSmartPushEnable(boolean enable) {
+        JLogger.d("setSmartPushEnable enable=" + enable);
         updatePluginStatu();
         JPushInterface.setSmartPushEnable(uniContext, enable);
     }
 
     @UniJSMethod(uiThread = true)
     public void setDataInsightsEnable(boolean enable) {
+        JLogger.d("setDataInsightsEnable enable=" + enable);
         updatePluginStatu();
         JPushInterface.setDataInsightsEnable(uniContext, enable);
     }
 
     @UniJSMethod(uiThread = true)
     public void setGeofenceEnable(boolean enable) {
+        JLogger.d("setGeofenceEnable enable=" + enable);
         updatePluginStatu();
         JPushInterface.setGeofenceEnable(uniContext, enable);
     }
 
     @UniJSMethod(uiThread = true)
     public void setCollectControl(JSONObject readableMap) {
+        JLogger.d("setCollectControl readableMap=" + readableMap);
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
             return;
@@ -116,6 +123,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void initJPushService() {
+        JLogger.d("initJPushService");
         updatePluginStatu();
         JPushInterface.init(mWXSDKInstance.getContext());
         JPushInterface.setNotificationCallBackEnable(mWXSDKInstance.getContext(), true);
@@ -128,18 +136,21 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void stopPush() {
+        JLogger.d("stopPush");
         updatePluginStatu();
         JPushInterface.stopPush(mWXSDKInstance.getContext());
     }
 
     @UniJSMethod(uiThread = true)
     public void resumePush() {
+        JLogger.d("resumePush");
         updatePluginStatu();
         JPushInterface.resumePush(mWXSDKInstance.getContext());
     }
 
     @UniJSMethod(uiThread = true)
     public void isPushStopped(JSCallback callback) {
+        JLogger.d("isPushStopped callback=" + callback);
         updatePluginStatu();
         boolean isPushStopped = JPushInterface.isPushStopped(mWXSDKInstance.getContext());
         if (callback == null) {
@@ -153,6 +164,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void setChannel(JSONObject readableMap) {
+        JLogger.d("setChannel readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -168,6 +180,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void setChannelAndSound(JSONObject readableMap) {
+        JLogger.d("setChannelAndSound readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -191,12 +204,13 @@ public class JPushModule extends UniDestroyableModule {
             }
             manager.createNotificationChannel(channel1);
         } catch (Throwable throwable) {
-
+            JLogger.e("setChannelAndSound error:" + throwable.getMessage());
         }
     }
 
     @UniJSMethod(uiThread = true)
     public void setPushTime(JSONObject readableMap) {
+        JLogger.d("setPushTime readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -223,6 +237,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void setSilenceTime(JSONObject readableMap) {
+        JLogger.d("setSilenceTime readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -237,6 +252,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void getRegistrationID(JSCallback callback) {
+        JLogger.d("getRegistrationID callback=" + callback);
         updatePluginStatu();
         if (callback == null) {
             JLogger.w(JConstants.CALLBACK_NULL);
@@ -251,6 +267,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void getUdid(JSCallback callback) {
+        JLogger.d("getUdid callback=" + callback);
         updatePluginStatu();
         if (callback == null) {
             JLogger.w(JConstants.CALLBACK_NULL);
@@ -262,6 +279,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void setLatestNotificationNumber(JSONObject readableMap) {
+        JLogger.d("setLatestNotificationNumber readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -277,6 +295,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void setDefaultPushNotificationBuilder(JSONObject readableMap) {
+        JLogger.d("setDefaultPushNotificationBuilder readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -288,6 +307,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void filterValidTags(JSONObject readableMap, JSCallback callback) {
+        JLogger.d("filterValidTags readableMap=" + readableMap + " callback=" + callback);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -308,6 +328,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void updateTags(JSONObject readableMap) {
+        JLogger.d("updateTags readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -329,6 +350,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void addTags(JSONObject readableMap) {
+        JLogger.d("addTags readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -350,6 +372,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void deleteTags(JSONObject readableMap) {
+        JLogger.d("deleteTags readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -371,6 +394,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void cleanTags(JSONObject readableMap) {
+        JLogger.d("cleanTags readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -382,6 +406,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void queryTag(JSONObject readableMap) {
+        JLogger.d("queryTag readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -394,6 +419,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void getAllTags(JSONObject readableMap) {
+        JLogger.d("getAllTags readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -406,6 +432,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void setAlias(JSONObject readableMap) {
+        JLogger.d("setAlias readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -418,6 +445,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void deleteAlias(JSONObject readableMap) {
+        JLogger.d("deleteAlias readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -429,6 +457,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void queryAlias(JSONObject readableMap) {
+        JLogger.d("queryAlias readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -440,6 +469,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void setMobileNumber(JSONObject readableMap) {
+        JLogger.d("setMobileNumber readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -452,36 +482,42 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void onResume() {
+        JLogger.d("onResume");
         updatePluginStatu();
         JPushInterface.onResume(mWXSDKInstance.getContext());
     }
 
     @UniJSMethod(uiThread = true)
     public void onPause() {
+        JLogger.d("onPause");
         updatePluginStatu();
         JPushInterface.onPause(mWXSDKInstance.getContext());
     }
 
     @UniJSMethod(uiThread = true)
     public void onKillProcess() {
+        JLogger.d("onKillProcess");
         updatePluginStatu();
         JPushInterface.onKillProcess(mWXSDKInstance.getContext());
     }
 
     @UniJSMethod(uiThread = true)
     public void initCrashHandler() {
+        JLogger.d("initCrashHandler");
         updatePluginStatu();
         JPushInterface.initCrashHandler(mWXSDKInstance.getContext());
     }
 
     @UniJSMethod(uiThread = true)
     public void stopCrashHandler() {
+        JLogger.d("stopCrashHandler");
         updatePluginStatu();
         JPushInterface.stopCrashHandler(mWXSDKInstance.getContext());
     }
 
     @UniJSMethod(uiThread = true)
     public void addLocalNotification(JSONObject readableMap) {
+        JLogger.d("addLocalNotification readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -512,6 +548,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void removeLocalNotification(JSONObject readableMap) {
+        JLogger.d("removeLocalNotification readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -532,18 +569,21 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void clearLocalNotifications() {
+        JLogger.d("clearLocalNotifications");
         updatePluginStatu();
         JPushInterface.clearLocalNotifications(mWXSDKInstance.getContext());
     }
 
     @UniJSMethod(uiThread = true)
     public void requestPermission() {
+        JLogger.d("requestPermission");
         updatePluginStatu();
         JPushInterface.requestPermission(mWXSDKInstance.getContext());
     }
 
     @UniJSMethod(uiThread = true)
     public void setGeofenceInterval(JSONObject readableMap) {
+        JLogger.d("setGeofenceInterval readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -559,12 +599,14 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void setMaxGeofenceNumber(int maxNumber) {
+        JLogger.d("setMaxGeofenceNumber maxNumber=" + maxNumber);
         updatePluginStatu();
         JPushInterface.setMaxGeofenceNumber(mWXSDKInstance.getContext(), maxNumber);
     }
 
     @UniJSMethod(uiThread = true)
     public void deleteGeofence(String id) {
+        JLogger.d("deleteGeofence id=" + id);
         updatePluginStatu();
         if (!TextUtils.isEmpty(id)) {
             JPushInterface.deleteGeofence(mWXSDKInstance.getContext(), id);
@@ -575,18 +617,21 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void setBadge(int number) {
+        JLogger.d("setBadge number=" + number);
         updatePluginStatu();
         JPushInterface.setBadgeNumber(mWXSDKInstance.getContext(), number);
     }
 
     @UniJSMethod(uiThread = true)
     public void clearAllNotifications() {
+        JLogger.d("clearAllNotifications");
         updatePluginStatu();
         JPushInterface.clearAllNotifications(mWXSDKInstance.getContext());
     }
 
     @UniJSMethod(uiThread = true)
     public void clearNotificationById(JSONObject readableMap) {
+        JLogger.d("clearNotificationById readableMap=" + readableMap);
         updatePluginStatu();
         if (readableMap == null) {
             JLogger.w(JConstants.PARAMS_NULL);
@@ -602,12 +647,14 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void setPowerSaveMode(boolean bool) {
+        JLogger.d("setPowerSaveMode bool=" + bool);
         updatePluginStatu();
         JPushInterface.setPowerSaveMode(mWXSDKInstance.getContext(), bool);
     }
 
     @UniJSMethod(uiThread = true)
     public void isNotificationEnabled(JSCallback callback) {
+        JLogger.d("isNotificationEnabled callback=" + callback);
         updatePluginStatu();
         Integer isEnabled = JPushInterface.isNotificationEnabled(mWXSDKInstance.getContext());
         if (callback == null) {
@@ -621,6 +668,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void openSettingsForNotification(JSCallback callback) {
+        JLogger.d("openSettingsForNotification callback=" + callback);
         updatePluginStatu();
         JPushInterface.goToAppNotificationSettings(mWXSDKInstance.getContext());
         if (callback == null) {
@@ -634,86 +682,96 @@ public class JPushModule extends UniDestroyableModule {
 
     @UniJSMethod(uiThread = true)
     public void addConnectEventListener(JSCallback callback) {
+        JLogger.d("addConnectEventListener callback=" + callback);
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addConnectEventListener");
-            JPushHelper.eventCallback.put(JConstants.CONNECT_EVENT, callback);
+            JPushHelper.putEventCallback(JConstants.CONNECT_EVENT, callback);
         }
     }
 
 
     @UniJSMethod(uiThread = true)
     public void addNotificationListener(JSCallback callback) {
+        JLogger.d("addNotificationListener callback=" + callback);
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addNotificationListener");
-            JPushHelper.eventCallback.put(JConstants.NOTIFICATION_EVENT, callback);
+            JPushHelper.putEventCallback(JConstants.NOTIFICATION_EVENT, callback);
             JPushHelper.sendCacheOpenNotifiToUser(0);
         }
     }
 
     @UniJSMethod(uiThread = true)
     public void addCustomMessageListener(JSCallback callback) {
+        JLogger.d("addCustomMessageListener callback=" + callback);
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addCustomMessageListener");
-            JPushHelper.eventCallback.put(JConstants.CUSTOM_MESSAGE_EVENT, callback);
+            JPushHelper.putEventCallback(JConstants.CUSTOM_MESSAGE_EVENT, callback);
         }
     }
 
     @UniJSMethod(uiThread = true)
     public void addInMessageListener(JSCallback callback) {
+        JLogger.d("addInMessageListener callback=" + callback);
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addInMessageListener");
-            JPushHelper.eventCallback.put(JConstants.INAPP_MESSAGE_EVENT, callback);
+            JPushHelper.putEventCallback(JConstants.INAPP_MESSAGE_EVENT, callback);
         }
     }
 
     @UniJSMethod(uiThread = true)
     public void addLocalNotificationListener(JSCallback callback) {
+        JLogger.d("addLocalNotificationListener callback=" + callback);
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addCustomMessageListener");
-            JPushHelper.eventCallback.put(JConstants.LOCAL_NOTIFICATION_EVENT, callback);
+            JPushHelper.putEventCallback(JConstants.LOCAL_NOTIFICATION_EVENT, callback);
             JPushHelper.sendCacheOpenNotifiToUser(1);
         }
     }
 
     @UniJSMethod(uiThread = true)
     public void addMobileNumberListener(JSCallback callback) {
+        JLogger.d("addMobileNumberListener callback=" + callback);
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addMobileNumberListener");
-            JPushHelper.eventCallback.put(JConstants.MOBILE_NUMBER_EVENT, callback);
+            JPushHelper.putEventCallback(JConstants.MOBILE_NUMBER_EVENT, callback);
         }
     }
 
     @UniJSMethod(uiThread = true)
     public void addCommandListener(JSCallback callback) {
+        JLogger.d("addCommandListener callback=" + callback);
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addCommandListener");
-            JPushHelper.eventCallback.put(JConstants.COMMAND_EVENT, callback);
+            JPushHelper.putEventCallback(JConstants.COMMAND_EVENT, callback);
         }
     }
 
     @UniJSMethod(uiThread = true)
     public void setIsAllowedInMessagePop(boolean allowedInMessagePop) {
+        JLogger.d("setIsAllowedInMessagePop allowedInMessagePop=" + allowedInMessagePop);
     }
 
     @UniJSMethod(uiThread = true)
     public void addTagAliasListener(JSCallback callback) {
+        JLogger.d("addTagAliasListener callback=" + callback);
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addTagAliasListener");
-            JPushHelper.eventCallback.put(JConstants.TAG_ALIAS_EVENT, callback);
+            JPushHelper.putEventCallback(JConstants.TAG_ALIAS_EVENT, callback);
         }
     }
 
 
     //*****************************应用前后台状态监听*****************************
     public static void registerActivityLifecycle(Application application) {
+        JLogger.d("registerActivityLifecycle application=" + application);
         application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle bundle) {
@@ -759,6 +817,6 @@ public class JPushModule extends UniDestroyableModule {
     public void destroy() {
         JLogger.e("destroy");
         JPushHelper.IS_DESTROY = true;
-        JPushHelper.eventCallback = new HashMap<>();
+        JPushHelper.clearEventCallback();
     }
 }

@@ -47,6 +47,7 @@ public class OpenClickActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        JLogger.d(TAG + " onCreate");
         super.onCreate(savedInstanceState);
         handleOpenClick();
     }
@@ -58,6 +59,7 @@ public class OpenClickActivity extends Activity {
      * 方式启动，只需要在onCreat中调用此方法进行处理
      */
     private void handleOpenClick() {
+        JLogger.d(TAG + " handleOpenClick");
         JLogger.d(TAG + " user click notification");
         String data = null;
         //获取华为平台附带的jpush信息
@@ -127,6 +129,7 @@ public class OpenClickActivity extends Activity {
     }
 
     private String getPushSDKName(byte whichPushSDK) {
+        JLogger.d(TAG + " getPushSDKName whichPushSDK=" + whichPushSDK);
         String name;
         switch (whichPushSDK) {
             case 0:

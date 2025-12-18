@@ -20,14 +20,17 @@ public class JPushModuleReceiver extends JPushMessageReceiver {
     public void onMessage(Context context, CustomMessage customMessage) {
         JLogger.d("onMessage:" + customMessage.toString());
         JSONObject jsonObject = JPushHelper.convertCustomMessage(customMessage);
-        JPushHelper.sendEvent(JConstants.CUSTOM_MESSAGE_EVENT, jsonObject);
+        //JPushHelper.sendEvent(JConstants.CUSTOM_MESSAGE_EVENT, jsonObject);
+        JPushHelper.sendBroadcast(context, JConstants.CUSTOM_MESSAGE_EVENT, jsonObject);
     }
 
     @Override
     public void onNotifyMessageArrived(Context context, NotificationMessage notificationMessage) {
         JLogger.d("onNotifyMessageArrived:" + notificationMessage.toString());
         JSONObject jsonObject = JPushHelper.convertNotificationToMap(JConstants.NOTIFICATION_ARRIVED, notificationMessage);
-        JPushHelper.sendNotifactionEvent(jsonObject, notificationMessage.notificationType);
+        //JPushHelper.sendNotifactionEvent(jsonObject, notificationMessage.notificationType);
+        String eventName = notificationMessage.notificationType != 1 ? JConstants.NOTIFICATION_EVENT : JConstants.LOCAL_NOTIFICATION_EVENT;
+        JPushHelper.sendBroadcast(context, eventName, jsonObject);
     }
 
 
@@ -36,23 +39,28 @@ public class JPushModuleReceiver extends JPushMessageReceiver {
         JLogger.d("onNotifyMessageOpened:" + notificationMessage.toString());
         if (!JPushModule.isAppForeground) JPushHelper.launchApp(context);
         JSONObject jsonObject = JPushHelper.convertNotificationToMap(JConstants.NOTIFICATION_OPENED, notificationMessage);
-        JPushHelper.sendNotifactionEvent(jsonObject, notificationMessage.notificationType);
+        //JPushHelper.sendNotifactionEvent(jsonObject, notificationMessage.notificationType);
         JPushHelper.saveOpenNotifiData(jsonObject, notificationMessage.notificationType);
-
+        String eventName = notificationMessage.notificationType != 1 ? JConstants.NOTIFICATION_EVENT : JConstants.LOCAL_NOTIFICATION_EVENT;
+        JPushHelper.sendBroadcast(context, eventName, jsonObject);
     }
 
     @Override
     public void onNotifyMessageUnShow(Context context, NotificationMessage notificationMessage) {
         JLogger.d("onNotifyMessageUnShow:" + notificationMessage.toString());
         JSONObject jsonObject = JPushHelper.convertNotificationToMap(JConstants.NOTIFICATION_UNSHOW, notificationMessage);
-        JPushHelper.sendNotifactionEvent(jsonObject, notificationMessage.notificationType);
+        //JPushHelper.sendNotifactionEvent(jsonObject, notificationMessage.notificationType);
+        String eventName = notificationMessage.notificationType != 1 ? JConstants.NOTIFICATION_EVENT : JConstants.LOCAL_NOTIFICATION_EVENT;
+        JPushHelper.sendBroadcast(context, eventName, jsonObject);
     }
 
     @Override
     public void onNotifyMessageDismiss(Context context, NotificationMessage notificationMessage) {
         JLogger.d("onNotifyMessageDismiss:" + notificationMessage.toString());
         JSONObject jsonObject = JPushHelper.convertNotificationToMap(JConstants.NOTIFICATION_DISMISSED, notificationMessage);
-        JPushHelper.sendNotifactionEvent(jsonObject, notificationMessage.notificationType);
+        //JPushHelper.sendNotifactionEvent(jsonObject, notificationMessage.notificationType);
+        String eventName = notificationMessage.notificationType != 1 ? JConstants.NOTIFICATION_EVENT : JConstants.LOCAL_NOTIFICATION_EVENT;
+        JPushHelper.sendBroadcast(context, eventName, jsonObject);
     }
 
     @Override
@@ -65,7 +73,8 @@ public class JPushModuleReceiver extends JPushMessageReceiver {
         JLogger.d("onConnected state:" + state);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(JConstants.CONNECT_ENABLE, state);
-        JPushHelper.sendEvent(JConstants.CONNECT_EVENT, jsonObject);
+        //JPushHelper.sendEvent(JConstants.CONNECT_EVENT, jsonObject);
+        JPushHelper.sendBroadcast(context, JConstants.CONNECT_EVENT, jsonObject);
     }
 
     @Override
@@ -76,28 +85,32 @@ public class JPushModuleReceiver extends JPushMessageReceiver {
         jsonObject.put(JConstants.COMMAND_EXTRA, message.extra.toString());
         jsonObject.put(JConstants.COMMAND_MESSAGE, message.msg);
         jsonObject.put(JConstants.COMMAND_RESULT, message.errorCode);
-        JPushHelper.sendEvent(JConstants.COMMAND_EVENT, jsonObject);
+        //JPushHelper.sendEvent(JConstants.COMMAND_EVENT, jsonObject);
+        JPushHelper.sendBroadcast(context, JConstants.COMMAND_EVENT, jsonObject);
     }
 
     @Override
     public void onTagOperatorResult(Context context, JPushMessage jPushMessage) {
         JLogger.d("onTagOperatorResult:" + jPushMessage.toString());
         JSONObject jsonObject = JPushHelper.convertJPushMessageToMap(1, jPushMessage);
-        JPushHelper.sendEvent(JConstants.TAG_ALIAS_EVENT, jsonObject);
+        //JPushHelper.sendEvent(JConstants.TAG_ALIAS_EVENT, jsonObject);
+        JPushHelper.sendBroadcast(context, JConstants.TAG_ALIAS_EVENT, jsonObject);
     }
 
     @Override
     public void onCheckTagOperatorResult(Context context, JPushMessage jPushMessage) {
         JLogger.d("onCheckTagOperatorResult:" + jPushMessage.toString());
         JSONObject jsonObject = JPushHelper.convertJPushMessageToMap(2, jPushMessage);
-        JPushHelper.sendEvent(JConstants.TAG_ALIAS_EVENT, jsonObject);
+        //JPushHelper.sendEvent(JConstants.TAG_ALIAS_EVENT, jsonObject);
+        JPushHelper.sendBroadcast(context, JConstants.TAG_ALIAS_EVENT, jsonObject);
     }
 
     @Override
     public void onAliasOperatorResult(Context context, JPushMessage jPushMessage) {
         JLogger.d("onAliasOperatorResult:" + jPushMessage.toString());
         JSONObject jsonObject = JPushHelper.convertJPushMessageToMap(3, jPushMessage);
-        JPushHelper.sendEvent(JConstants.TAG_ALIAS_EVENT, jsonObject);
+        //JPushHelper.sendEvent(JConstants.TAG_ALIAS_EVENT, jsonObject);
+        JPushHelper.sendBroadcast(context, JConstants.TAG_ALIAS_EVENT, jsonObject);
     }
 
     @Override
@@ -106,7 +119,8 @@ public class JPushModuleReceiver extends JPushMessageReceiver {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(JConstants.CODE, jPushMessage.getErrorCode());
         jsonObject.put(JConstants.SEQUENCE, jPushMessage.getSequence());
-        JPushHelper.sendEvent(JConstants.MOBILE_NUMBER_EVENT, jsonObject);
+        //JPushHelper.sendEvent(JConstants.MOBILE_NUMBER_EVENT, jsonObject);
+        JPushHelper.sendBroadcast(context, JConstants.MOBILE_NUMBER_EVENT, jsonObject);
     }
 
 
@@ -114,14 +128,16 @@ public class JPushModuleReceiver extends JPushMessageReceiver {
     public void onInAppMessageShow(Context context, NotificationMessage notificationMessage) {
         JLogger.d("onInAppMessageShow:" + notificationMessage.toString());
         JSONObject jsonObject = JPushHelper.convertInAppMessageToMap(JConstants.INAPP_MESSAGE_SHOW, notificationMessage);
-        JPushHelper.sendEvent(JConstants.INAPP_MESSAGE_EVENT, jsonObject);
+        //JPushHelper.sendEvent(JConstants.INAPP_MESSAGE_EVENT, jsonObject);
+        JPushHelper.sendBroadcast(context, JConstants.INAPP_MESSAGE_EVENT, jsonObject);
     }
 
     @Override
     public void onInAppMessageClick(Context context, NotificationMessage notificationMessage) {
         JLogger.d("onInAppMessageClick:" + notificationMessage.toString());
         JSONObject jsonObject = JPushHelper.convertInAppMessageToMap(JConstants.INAPP_MESSAGE_OPENED, notificationMessage);
-        JPushHelper.sendEvent(JConstants.INAPP_MESSAGE_EVENT, jsonObject);
+        //JPushHelper.sendEvent(JConstants.INAPP_MESSAGE_EVENT, jsonObject);
+        JPushHelper.sendBroadcast(context, JConstants.INAPP_MESSAGE_EVENT, jsonObject);
     }
 
 

@@ -196,12 +196,12 @@
             <category android:name="${applicationId}" />
         </intent-filter>
     </receiver>
-        <provider
-            android:name="cn.jpush.android.service.InitProvider"
-            android:authorities="${applicationId}.jiguang.InitProvider"
-            android:exported="false"
-            android:readPermission="${applicationId}.permission.JPUSH_MESSAGE"
-            android:writePermission="${applicationId}.permission.JPUSH_MESSAGE" />
+<!--        <provider-->
+<!--            android:name="cn.jpush.android.service.InitProvider"-->
+<!--            android:authorities="${applicationId}.jiguang.InitProvider"-->
+<!--            android:exported="false"-->
+<!--            android:readPermission="${applicationId}.permission.JPUSH_MESSAGE"-->
+<!--            android:writePermission="${applicationId}.permission.JPUSH_MESSAGE" />-->
 
     <!--(jpush|jmessage)_config_end-->
 
@@ -222,6 +222,16 @@
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
                 <category android:name="${applicationId}" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receiver.JPushEventBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":unimp0">
+            <intent-filter>
+                <action android:name="cn.jiguang.uniplugin_jpush.EVENT_BROADCAST" />
+                <category android:name="${applicationId}"/>
             </intent-filter>
         </receiver>
         <service

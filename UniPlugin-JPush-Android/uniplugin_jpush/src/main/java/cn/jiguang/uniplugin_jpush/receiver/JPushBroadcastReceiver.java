@@ -15,6 +15,7 @@ public class JPushBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent data) {
+        JLogger.d("JPushBroadcastReceiver onReceive action=" + (data != null ? data.getAction() : "null"));
         if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(data.getAction())) {
             JLogger.d("JPushBroadcastReceiver ACTION_NOTIFICATION_OPENED");
             try {
