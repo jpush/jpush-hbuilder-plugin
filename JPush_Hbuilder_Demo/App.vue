@@ -74,8 +74,6 @@
 			
 			};
 			
-			jpushModule.initJPushService();
-			
 			jpushModule.addNotificationListener(result=>{
 				let notificationEventType = result.notificationEventType
 				let messageID = result.messageID
@@ -123,6 +121,14 @@
 					duration: 3000
 				})
 			})
+			jpushModule.addTagAliasListener(result => {
+				uni.showToast({ icon: 'none', title: JSON.stringify(result), duration: 3000 })
+			})
+			jpushModule.addMobileNumberListener(result => {
+				uni.showToast({ icon: 'none', title: JSON.stringify(result), duration: 3000 })
+			})
+			// Register every native event listener before starting the SDK.
+			jpushModule.initJPushService();
 			
 		},
 		onShow: function() {

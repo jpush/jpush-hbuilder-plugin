@@ -9,7 +9,8 @@ const script = name => fs.readFileSync(new URL(name, demo), 'utf8').match(/<scri
 let checks = 0
 
 for (const timing of ['register', 'init', 'after-page']) {
-  const bus = new Map(), calls = [], callbacks = {}
+  const bus = new Map(), calls = [], callbacks = {}, nativeListeners = new Set()
+  const expectedListeners = ['addConnectEventListener', 'addCommandListener', 'addNotificationListener', 'addCustomMessageListener', 'addInMessageListener', 'addLocalNotificationListener', 'addTagAliasListener', 'addMobileNumberListener']
   globalThis.uni = {
     $emit(name, value) { for (const handler of [...(bus.get(name) || [])]) handler(value) },
     $on(name, handler) { if (!bus.has(name)) bus.set(name, new Set()); bus.get(name).add(handler) },
@@ -20,15 +21,18 @@ for (const timing of ['register', 'init', 'after-page']) {
   const plugin = new Proxy({}, { get(_, key) {
     if (key === 'setLoggerEnable') return () => calls.push('logger')
     if (key === 'addConnectEventListener') return callback => {
+      nativeListeners.add(key)
       calls.push('listen'); callbacks.connection = callback
       if (timing === 'register') callback({ connectEnable: true })
     }
     if (key === 'initJPushService') return () => {
+      assert.deepEqual([...nativeListeners].sort(), [...expectedListeners].sort()); checks++
       calls.push('init')
       if (timing === 'init') callbacks.connection({ connectEnable: true })
     }
     if (key === 'getRegistrationID') return callback => callback({ registerID: 'test-rid', code: 0 })
-    if (key === 'addCommandListener') return callback => { callbacks.command = callback }
+    if (key === 'addCommandListener') return callback => { nativeListeners.add(key); callbacks.command = callback }
+    if (expectedListeners.includes(key)) return () => { nativeListeners.add(key) }
     return () => {}
   } })
   const state = await import('data:text/javascript;base64,' + Buffer.from(stateSource + '\n// ' + timing).toString('base64'))

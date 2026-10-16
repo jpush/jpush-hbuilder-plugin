@@ -14,14 +14,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.taobao.weex.bridge.JSCallback;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 import cn.jiguang.uniplugin_jpush.common.JConstants;
 import cn.jiguang.uniplugin_jpush.common.JLogger;
 import cn.jiguang.uniplugin_jpush.helper.JPushHelper;
-import cn.jiguang.uniplugin_jpush.receiver.JPushBroadcastReceiver;
 import cn.jiguang.uniplugin_jpush.receiver.JPushModuleReceiver;
 import cn.jpush.android.api.BasicPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
@@ -38,7 +36,6 @@ public class JPushModule extends UniDestroyableModule {
 
     public void updatePluginStatu() {
         uniContext = mWXSDKInstance.getContext();
-        JPushHelper.IS_DESTROY = false;
     }
 
     @UniJSMethod(uiThread = true)
@@ -119,11 +116,7 @@ public class JPushModule extends UniDestroyableModule {
         updatePluginStatu();
         JPushInterface.init(mWXSDKInstance.getContext());
         JPushInterface.setNotificationCallBackEnable(mWXSDKInstance.getContext(), true);
-        if (JPushBroadcastReceiver.NOTIFICATION_BUNDLE != null) {
-            JSONObject jsonObject = JPushHelper.convertNotificationBundleToMap(JConstants.NOTIFICATION_OPENED, JPushBroadcastReceiver.NOTIFICATION_BUNDLE);
-            JPushHelper.sendEvent(JConstants.NOTIFICATION_EVENT, jsonObject);
-            JPushBroadcastReceiver.NOTIFICATION_BUNDLE = null;
-        }
+        JPushHelper.requestInitialConnectionState(mWXSDKInstance.getContext());
     }
 
     @UniJSMethod(uiThread = true)
@@ -647,8 +640,7 @@ public class JPushModule extends UniDestroyableModule {
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addNotificationListener");
-            JPushHelper.eventCallback.put(JConstants.NOTIFICATION_EVENT, callback);
-            JPushHelper.sendCacheOpenNotifiToUser(0);
+            JPushHelper.addEventListener(JConstants.NOTIFICATION_EVENT, this, callback);
         }
     }
 
@@ -657,7 +649,7 @@ public class JPushModule extends UniDestroyableModule {
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addCustomMessageListener");
-            JPushHelper.eventCallback.put(JConstants.CUSTOM_MESSAGE_EVENT, callback);
+            JPushHelper.addEventListener(JConstants.CUSTOM_MESSAGE_EVENT, this, callback);
         }
     }
 
@@ -666,7 +658,7 @@ public class JPushModule extends UniDestroyableModule {
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addInMessageListener");
-            JPushHelper.eventCallback.put(JConstants.INAPP_MESSAGE_EVENT, callback);
+            JPushHelper.addEventListener(JConstants.INAPP_MESSAGE_EVENT, this, callback);
         }
     }
 
@@ -675,8 +667,7 @@ public class JPushModule extends UniDestroyableModule {
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addCustomMessageListener");
-            JPushHelper.eventCallback.put(JConstants.LOCAL_NOTIFICATION_EVENT, callback);
-            JPushHelper.sendCacheOpenNotifiToUser(1);
+            JPushHelper.addEventListener(JConstants.LOCAL_NOTIFICATION_EVENT, this, callback);
         }
     }
 
@@ -685,7 +676,7 @@ public class JPushModule extends UniDestroyableModule {
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addMobileNumberListener");
-            JPushHelper.eventCallback.put(JConstants.MOBILE_NUMBER_EVENT, callback);
+            JPushHelper.addEventListener(JConstants.MOBILE_NUMBER_EVENT, this, callback);
         }
     }
 
@@ -694,7 +685,7 @@ public class JPushModule extends UniDestroyableModule {
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addCommandListener");
-            JPushHelper.eventCallback.put(JConstants.COMMAND_EVENT, callback);
+            JPushHelper.addEventListener(JConstants.COMMAND_EVENT, this, callback);
         }
     }
 
@@ -707,7 +698,7 @@ public class JPushModule extends UniDestroyableModule {
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addTagAliasListener");
-            JPushHelper.eventCallback.put(JConstants.TAG_ALIAS_EVENT, callback);
+            JPushHelper.addEventListener(JConstants.TAG_ALIAS_EVENT, this, callback);
         }
     }
 
@@ -759,7 +750,6 @@ public class JPushModule extends UniDestroyableModule {
     public void destroy() {
         JLogger.e("destroy");
         JPushHelper.removeConnectEventListener(this);
-        JPushHelper.IS_DESTROY = true;
-        JPushHelper.eventCallback = new HashMap<>();
+        JPushHelper.removeEventListeners(this);
     }
 }

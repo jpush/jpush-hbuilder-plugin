@@ -61,6 +61,19 @@ const jv = uni.requireNativePlugin('JG-JPush');
 
 
 ## API
+
+### Android 原生事件监听与补发
+
+请在 `initJPushService()` 前登记业务需要的事件监听。连接状态保存当前进程最近一次真实状态，登记连接监听时会立即补发；普通通知、透传、应用内消息、本地通知、标签/别名、手机号及命令结果按事件类型分别缓存，登记对应监听后按顺序补发。
+
+初始化后若尚未收到任何连接状态，插件会查询 SDK 服务进程的初始状态，只采纳异步命令 2004 的结果，并忽略查询接口的同步返回值。查询结果仅填补未知状态，不能覆盖已到达的真实连接/断开回调。
+
+- 普通事件提交到 JS 桥接方法后从队列移除，重新登记不会重复消费；桥接调用抛异常时保留当前事件，等待后续事件或重新登记时再尝试。
+- 每种事件类型最多缓存 100 条。达到上限时记录警告并淘汰最早等待的事件；正在投递的事件不会被淘汰。缓存仅当前进程有效，不跨进程死亡保存。
+- 同一种事件仍只保留一个监听，后登记的监听替换前一个；模块销毁仅解除该实例登记的监听，尚未发送的事件继续等待新监听。
+- 标签/别名等操作结果保留原始 `sequence`，业务侧仍需按请求匹配。桥接调用返回不等于 JS 业务消费确认，插件不提供跨进程或全链路恰好一次投递保证。
+- 通知点击统一进入上述队列，普通通知与本地通知分别等待各自监听。
+
 - [公用 API](https://github.com/jpush/jpush-hbuilder-plugin/blob/master/doc/API.md)
 - [Android 独有API](https://github.com/jpush/jpush-hbuilder-plugin/blob/master/doc/ANDROID.md)
 - [iOS 独有API](https://github.com/jpush/jpush-hbuilder-plugin/blob/master/doc/IOS.md)

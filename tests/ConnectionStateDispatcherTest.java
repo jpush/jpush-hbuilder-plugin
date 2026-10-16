@@ -39,6 +39,17 @@ public class ConnectionStateDispatcherTest {
         new ConnectionStateDispatcher().register(first, late::add);
         expect(late, false); // Simulated new process has no cached online state.
 
+        ConnectionStateDispatcher snapshot = new ConnectionStateDispatcher();
+        List<Boolean> snapshots = new ArrayList<>();
+        snapshot.register(first, snapshots::add);
+        if (snapshot.hasState()) throw new AssertionError("Unknown state became known without SDK data");
+        expect(snapshots);
+        snapshot.initializeIfUnknown(true);
+        expect(snapshots, true);
+        snapshot.update(false);
+        snapshot.initializeIfUnknown(true);
+        expect(snapshots, true, false);
+
         for (int run = 0; run < 500; run++) {
             ConnectionStateDispatcher race = new ConnectionStateDispatcher();
             race.update(true);
@@ -58,6 +69,24 @@ public class ConnectionStateDispatcherTest {
                 throw new AssertionError("Stale replay after disconnect: " + received);
             }
         }
-        System.out.println("PASS: " + checks + " lifecycle/state checks; 500 registration/disconnect races");
+        for (int run = 0; run < 200; run++) {
+            ConnectionStateDispatcher race = new ConnectionStateDispatcher();
+            List<Boolean> received = new ArrayList<>();
+            race.register(first, received::add);
+            CountDownLatch start = new CountDownLatch(1);
+            Thread query = new Thread(() -> {
+                try { start.await(); } catch (InterruptedException e) { throw new RuntimeException(e); }
+                race.initializeIfUnknown(true);
+            });
+            Thread sdk = new Thread(() -> {
+                try { start.await(); } catch (InterruptedException e) { throw new RuntimeException(e); }
+                race.update(false);
+            });
+            query.start(); sdk.start(); start.countDown(); query.join(); sdk.join();
+            if (received.isEmpty() || received.get(received.size() - 1)) {
+                throw new AssertionError("Initial query overwrote SDK callback: " + received);
+            }
+        }
+        System.out.println("PASS: " + checks + " lifecycle/state checks; 500 registration/disconnect races; 200 initial-query/SDK-event races");
     }
 }

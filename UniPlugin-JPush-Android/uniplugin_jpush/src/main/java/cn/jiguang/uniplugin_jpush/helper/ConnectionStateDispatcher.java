@@ -24,6 +24,17 @@ public final class ConnectionStateDispatcher {
         if (listener != null) listener.onState(connected);
     }
 
+    public synchronized boolean hasState() {
+        return latestState != null;
+    }
+
+    // A delayed initial snapshot must never overwrite a newer SDK callback.
+    public synchronized boolean initializeIfUnknown(boolean connected) {
+        if (latestState != null) return false;
+        update(connected);
+        return true;
+    }
+
     public synchronized void unregister(Object owner) {
         if (this.owner == owner) {
             this.owner = null;

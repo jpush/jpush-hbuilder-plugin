@@ -37,7 +37,6 @@ public class JPushModuleReceiver extends JPushMessageReceiver {
         if (!JPushModule.isAppForeground) JPushHelper.launchApp(context);
         JSONObject jsonObject = JPushHelper.convertNotificationToMap(JConstants.NOTIFICATION_OPENED, notificationMessage);
         JPushHelper.sendNotifactionEvent(jsonObject, notificationMessage.notificationType);
-        JPushHelper.saveOpenNotifiData(jsonObject, notificationMessage.notificationType);
 
     }
 
@@ -69,6 +68,7 @@ public class JPushModuleReceiver extends JPushMessageReceiver {
     @Override
     public void onCommandResult(Context context, CmdMessage message) {
         JLogger.d("onCommandResult:" + message.toString());
+        JPushHelper.onConnectionStateQueryResult(message.cmd, message.errorCode);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(JConstants.COMMAND, message.cmd);
         jsonObject.put(JConstants.COMMAND_EXTRA, message.extra.toString());

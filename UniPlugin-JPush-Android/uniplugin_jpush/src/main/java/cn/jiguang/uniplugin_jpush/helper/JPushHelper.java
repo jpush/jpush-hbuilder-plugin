@@ -8,24 +8,44 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.taobao.weex.bridge.JSCallback;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 
-import cn.jiguang.uniplugin_jpush.JPushModule;
 import cn.jiguang.uniplugin_jpush.common.JConstants;
 import cn.jiguang.uniplugin_jpush.common.JLogger;
 import cn.jpush.android.api.CustomMessage;
 import cn.jpush.android.api.JPushMessage;
+import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.NotificationMessage;
 
 public class JPushHelper {
 
 
-    public static HashMap<String, JSCallback> eventCallback = new HashMap<>();
+    private static final int MAX_PENDING_EVENTS_PER_TYPE = 100;
+    private static final PendingEventDispatcher<JSONObject> events = new PendingEventDispatcher<>(
+            MAX_PENDING_EVENTS_PER_TYPE,
+            eventName -> JLogger.w("Pending event limit reached (" + MAX_PENDING_EVENTS_PER_TYPE
+                    + "), dropping a waiting event: " + eventName));
+
+    public static void addEventListener(String eventName, Object owner, final JSCallback callback) {
+        if (callback == null) return;
+        events.register(eventName, owner, params -> {
+            try {
+                callback.invokeAndKeepAlive(params);
+            } catch (Throwable throwable) {
+                JLogger.e("sendEvent retained for retry: " + eventName + ", " + throwable.getMessage());
+                return false;
+            }
+            JLogger.d("sendEvent :" + eventName + " accepted by bridge");
+            return true;
+        });
+    }
+
+    public static void removeEventListeners(Object owner) {
+        events.unregister(owner);
+    }
 
     private static final ConnectionStateDispatcher connectionStates = new ConnectionStateDispatcher();
 
@@ -50,6 +70,23 @@ public class JPushHelper {
         connectionStates.update(connected);
     }
 
+    @SuppressWarnings("deprecation")
+    public static void requestInitialConnectionState(Context context) {
+        if (!connectionStates.hasState()) {
+            JLogger.d("Request initial connection state from SDK");
+            // Ignore the synchronous value: the service process replies with cmd 2004.
+            JPushInterface.getConnectionState(context);
+        }
+    }
+
+    public static void onConnectionStateQueryResult(int command, int code) {
+        if (command == 2004 && (code == 0 || code == 1)) {
+            if (connectionStates.initializeIfUnknown(code == 0)) {
+                JLogger.d("Initial connection state supplied by SDK query:" + (code == 0));
+            }
+        }
+    }
+
     public static void sendNotifactionEvent(JSONObject params, int notificationType) {
         if (notificationType != 1) {
             JPushHelper.sendEvent(JConstants.NOTIFICATION_EVENT, params);
@@ -63,13 +100,9 @@ public class JPushHelper {
         try {
             if (!TextUtils.isEmpty(eventName) && params != null) {
                 JLogger.d("sendEvent :" + eventName + " params:" + params);
-                JSCallback jsCallback = eventCallback.get(eventName);
-                if (jsCallback != null) {
-                    jsCallback.invokeAndKeepAlive(params);
-                    JLogger.e("sendEvent :" + eventName + " success");
-                    return;
-                }
-                JLogger.e("sendEvent :" + eventName + " failed");
+                // Detach queued payloads from mutable objects owned by the caller.
+                events.publish(eventName, JSONObject.parseObject(
+                        JSONObject.toJSONString(params, SerializerFeature.WriteMapNullValue)));
             }
         } catch (Throwable throwable) {
             JLogger.e("sendEvent error:" + throwable.getMessage());
@@ -185,34 +218,6 @@ public class JPushHelper {
             context.startActivity(intent);
         } catch (Throwable throwable) {
             JLogger.e("");
-        }
-    }
-
-    public static JSONObject OPEN_NOTIFICATION_DATA = null;
-    public static int OPEN_NOTIFICATION_TYPE = 0;
-    public static boolean IS_DESTROY = true;// 标识当前插件是否被销毁
-
-    /**
-     * 缓存通知点击信息，再用户注册监听后返回给用户
-     *
-     * @param jsonObject
-     */
-    public static void saveOpenNotifiData(JSONObject jsonObject, int type) {
-        if (IS_DESTROY) {
-            JLogger.d("saveOpenNotifiData:" + jsonObject);
-            OPEN_NOTIFICATION_DATA = jsonObject;
-            OPEN_NOTIFICATION_TYPE = type;
-        }
-    }
-
-    public static void sendCacheOpenNotifiToUser(int type) {
-        if (type == 0 && OPEN_NOTIFICATION_TYPE == 1) {
-            return;
-        }
-        if (!IS_DESTROY && OPEN_NOTIFICATION_DATA != null) {
-            JLogger.d("sendCacheOpenNotifiToUser:" + OPEN_NOTIFICATION_DATA);
-            sendNotifactionEvent(OPEN_NOTIFICATION_DATA, OPEN_NOTIFICATION_TYPE);
-            OPEN_NOTIFICATION_DATA = null;
         }
     }
 
