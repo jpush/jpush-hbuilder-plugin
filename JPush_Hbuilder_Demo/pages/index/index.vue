@@ -23,6 +23,8 @@
 </template>
 
 <script>
+	import { getConnectionState } from '../../common/connection-state.js'
+	import { getCachedRegistrationID, updateRegistrationID } from '../../common/registration-state.js'
     // 首先需要通过 uni.requireNativePlugin("ModuleName") 获取 module 
     var jpushModule = uni.requireNativePlugin("JG-JPush")
     export default {
@@ -35,6 +37,9 @@
 		},
 		
 		onShow() {
+			this.applyConnectionState(getConnectionState())
+			this.applyRegistrationID(getCachedRegistrationID())
+			this.getRegistrationID()
 			if(uni.getSystemInfoSync().platform == "ios"){
 				// iOS端使用应用内消息需要在页面进入和离开的时候配置pageEnterTo和pageLeave
 				jpushModule.pageEnterTo("HomePage");
@@ -49,25 +54,30 @@
 		
 		onLoad() {
 			console.log('开始监听连接状态')
-			uni.$on('connectStatusChange',(connectStatus)=>{  
-				   var connectStr = ''
-				   if (connectStatus == true) {
-					   connectStr = '已连接'
-					   this.getRegistrationID()
-				   }else {
-					   connectStr = '未连接'
-				   }
-				   console.log('监听到了连接状态变化 --- ', connectStr) 
-				   this.connectStatus = connectStr
-			    })  
+			this.connectionListener = connected => this.applyConnectionState(connected)
+			uni.$on('connectStatusChange', this.connectionListener)
+			this.registrationListener = registrationID => this.applyRegistrationID(registrationID)
+			uni.$on('registrationIDChange', this.registrationListener)
+			this.applyConnectionState(getConnectionState())
+			this.applyRegistrationID(getCachedRegistrationID())
 		},
 		
 		onUnload() {  
 			// 移除监听事件  
-		    uni.$off('connectStatusChange')
+		    uni.$off('connectStatusChange', this.connectionListener)
+		    uni.$off('registrationIDChange', this.registrationListener)
 		},
 		
         methods: {
+			applyRegistrationID(registrationID) {
+				if (registrationID) this.registrationID = registrationID
+			},
+			applyConnectionState(connected) {
+				if (typeof connected !== 'boolean') return
+				this.connectStatus = connected ? '已连接' : '未连接'
+				console.log('页面同步连接状态', connected)
+				if (connected) this.getRegistrationID()
+			},
 			
 			openSettingsForNotification() {
 				jpushModule.openSettingsForNotification((result)=>{
@@ -87,7 +97,7 @@
 				jpushModule.getRegistrationID(result=>{
 					let registerID = result.registerID
 					console.log(registerID)
-					this.registrationID = registerID
+					updateRegistrationID(registerID)
 				})	
 			},
 			

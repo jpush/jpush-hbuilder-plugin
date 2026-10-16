@@ -63,9 +63,7 @@ public class JPushModuleReceiver extends JPushMessageReceiver {
     @Override
     public void onConnected(Context context, boolean state) {
         JLogger.d("onConnected state:" + state);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put(JConstants.CONNECT_ENABLE, state);
-        JPushHelper.sendEvent(JConstants.CONNECT_EVENT, jsonObject);
+        JPushHelper.sendConnectEvent(state);
     }
 
     @Override

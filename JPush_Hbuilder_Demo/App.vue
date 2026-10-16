@@ -1,9 +1,25 @@
 
 <script>
+	import { updateConnectionState } from './common/connection-state.js'
+	import { updateRegistrationID } from './common/registration-state.js'
 	var jpushModule = uni.requireNativePlugin("JG-JPush")
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
+			jpushModule.setLoggerEnable(true);
+			jpushModule.addConnectEventListener(result => {
+				console.log('JPush连接状态回调', result.connectEnable)
+				updateConnectionState(result.connectEnable)
+			});
+			// Android getRegistrationID can first return empty, then supply the RID
+			// through command 2005. Keep this listener ready before the first query.
+			if (uni.getSystemInfoSync().platform === 'android') {
+				jpushModule.addCommandListener(result => {
+					if (result.command === 2005 && result.commandResult === 0) {
+						updateRegistrationID(result.commandMessage)
+					}
+				});
+			}
 			
 			if(uni.getSystemInfoSync().platform == "ios"){
 				// 请求定位权限
@@ -59,11 +75,6 @@
 			};
 			
 			jpushModule.initJPushService();
-			jpushModule.setLoggerEnable(true);
-			jpushModule.addConnectEventListener(result=>{
-				let connectEnable = result.connectEnable
-				uni.$emit('connectStatusChange',connectEnable)
-			});
 			
 			jpushModule.addNotificationListener(result=>{
 				let notificationEventType = result.notificationEventType

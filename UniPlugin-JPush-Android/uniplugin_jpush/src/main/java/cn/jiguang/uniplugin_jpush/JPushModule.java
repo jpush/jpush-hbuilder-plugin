@@ -637,7 +637,7 @@ public class JPushModule extends UniDestroyableModule {
         updatePluginStatu();
         if (callback != null) {
             JLogger.w("addConnectEventListener");
-            JPushHelper.eventCallback.put(JConstants.CONNECT_EVENT, callback);
+            JPushHelper.addConnectEventListener(this, callback);
         }
     }
 
@@ -758,6 +758,7 @@ public class JPushModule extends UniDestroyableModule {
     @Override
     public void destroy() {
         JLogger.e("destroy");
+        JPushHelper.removeConnectEventListener(this);
         JPushHelper.IS_DESTROY = true;
         JPushHelper.eventCallback = new HashMap<>();
     }

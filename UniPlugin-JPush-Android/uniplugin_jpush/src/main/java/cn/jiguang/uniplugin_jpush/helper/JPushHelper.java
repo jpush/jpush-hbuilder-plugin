@@ -27,6 +27,29 @@ public class JPushHelper {
 
     public static HashMap<String, JSCallback> eventCallback = new HashMap<>();
 
+    private static final ConnectionStateDispatcher connectionStates = new ConnectionStateDispatcher();
+
+    public static void addConnectEventListener(Object owner, final JSCallback callback) {
+        connectionStates.register(owner, connected -> {
+            JSONObject params = new JSONObject();
+            params.put(JConstants.CONNECT_ENABLE, connected);
+            try {
+                callback.invokeAndKeepAlive(params);
+                JLogger.d("ConnectEvent delivered state:" + connected);
+            } catch (Throwable throwable) {
+                JLogger.e("ConnectEvent error:" + throwable.getMessage());
+            }
+        });
+    }
+
+    public static void removeConnectEventListener(Object owner) {
+        connectionStates.unregister(owner);
+    }
+
+    public static void sendConnectEvent(boolean connected) {
+        connectionStates.update(connected);
+    }
+
     public static void sendNotifactionEvent(JSONObject params, int notificationType) {
         if (notificationType != 1) {
             JPushHelper.sendEvent(JConstants.NOTIFICATION_EVENT, params);
