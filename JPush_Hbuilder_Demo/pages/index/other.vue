@@ -30,6 +30,14 @@
     // 首先需要通过 uni.requireNativePlugin("ModuleName") 获取 module 
     var jpushModule = uni.requireNativePlugin("JG-JPush")
 	
+	jpushModule.addMobileNumberListener(result=>{
+		let code = result.code
+		uni.showToast({
+			icon:'none',
+			title: JSON.stringify(result),
+			duration: 3000
+		})
+	})
 	
     export default {
 		

@@ -7,19 +7,6 @@
 		onLaunch: function() {
 			console.log('App Launch')
 			jpushModule.setLoggerEnable(true);
-			jpushModule.addConnectEventListener(result => {
-				console.log('JPush连接状态回调', result.connectEnable)
-				updateConnectionState(result.connectEnable)
-			});
-			// Android getRegistrationID can first return empty, then supply the RID
-			// through command 2005. Keep this listener ready before the first query.
-			if (uni.getSystemInfoSync().platform === 'android') {
-				jpushModule.addCommandListener(result => {
-					if (result.command === 2005 && result.commandResult === 0) {
-						updateRegistrationID(result.commandMessage)
-					}
-				});
-			}
 			
 			if(uni.getSystemInfoSync().platform == "ios"){
 				// 请求定位权限
@@ -74,6 +61,21 @@
 			
 			};
 			
+			jpushModule.initJPushService();
+			jpushModule.addConnectEventListener(result => {
+				console.log('JPush连接状态回调', result.connectEnable)
+				updateConnectionState(result.connectEnable)
+			});
+			// Android getRegistrationID can first return empty, then supply the RID
+			// through command 2005. Keep this listener ready before the first query.
+			if (uni.getSystemInfoSync().platform === 'android') {
+				jpushModule.addCommandListener(result => {
+					if (result.command === 2005 && result.commandResult === 0) {
+						updateRegistrationID(result.commandMessage)
+					}
+				});
+			}
+
 			jpushModule.addNotificationListener(result=>{
 				let notificationEventType = result.notificationEventType
 				let messageID = result.messageID
@@ -121,14 +123,6 @@
 					duration: 3000
 				})
 			})
-			jpushModule.addTagAliasListener(result => {
-				uni.showToast({ icon: 'none', title: JSON.stringify(result), duration: 3000 })
-			})
-			jpushModule.addMobileNumberListener(result => {
-				uni.showToast({ icon: 'none', title: JSON.stringify(result), duration: 3000 })
-			})
-			// Register every native event listener before starting the SDK.
-			jpushModule.initJPushService();
 			
 		},
 		onShow: function() {

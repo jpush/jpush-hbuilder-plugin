@@ -9,30 +9,54 @@ const script = name => fs.readFileSync(new URL(name, demo), 'utf8').match(/<scri
 let checks = 0
 
 for (const timing of ['register', 'init', 'after-page']) {
-  const bus = new Map(), calls = [], callbacks = {}, nativeListeners = new Set()
-  const expectedListeners = ['addConnectEventListener', 'addCommandListener', 'addNotificationListener', 'addCustomMessageListener', 'addInMessageListener', 'addLocalNotificationListener', 'addTagAliasListener', 'addMobileNumberListener']
+  const bus = new Map(), calls = [], callbacks = {}, pending = new Map(), toasts = []
+  const messageListeners = ['addNotificationListener', 'addCustomMessageListener', 'addInMessageListener', 'addLocalNotificationListener', 'addTagAliasListener', 'addMobileNumberListener']
+  let nativeConnection = timing === 'register' ? true : null
+  // Model the native bridge contract; the Java tests exercise the real dispatchers.
+  const publish = (method, value) => {
+    if (callbacks[method]) callbacks[method](value)
+    else {
+      if (!pending.has(method)) pending.set(method, [])
+      pending.get(method).push(value)
+    }
+  }
+  const register = (method, callback) => {
+    callbacks[method] = callback
+    for (const value of pending.get(method) || []) callback(value)
+    pending.delete(method)
+  }
   globalThis.uni = {
     $emit(name, value) { for (const handler of [...(bus.get(name) || [])]) handler(value) },
     $on(name, handler) { if (!bus.has(name)) bus.set(name, new Set()); bus.get(name).add(handler) },
     $off(name, handler) { bus.get(name)?.delete(handler) },
+    showToast: options => toasts.push(JSON.parse(options.title)),
     getSystemInfoSync: () => ({ platform: 'android' }),
     requireNativePlugin: () => plugin
   }
   const plugin = new Proxy({}, { get(_, key) {
     if (key === 'setLoggerEnable') return () => calls.push('logger')
     if (key === 'addConnectEventListener') return callback => {
-      nativeListeners.add(key)
       calls.push('listen'); callbacks.connection = callback
-      if (timing === 'register') callback({ connectEnable: true })
+      if (nativeConnection !== null) callback({ connectEnable: nativeConnection })
     }
     if (key === 'initJPushService') return () => {
-      assert.deepEqual([...nativeListeners].sort(), [...expectedListeners].sort()); checks++
       calls.push('init')
-      if (timing === 'init') callbacks.connection({ connectEnable: true })
+      if (timing === 'init') {
+        nativeConnection = true
+        callbacks.connection?.({ connectEnable: true })
+      }
+      publish('addCommandListener', { command: 2005, commandResult: 0, commandMessage: 'early-rid' })
+      for (const method of messageListeners) publish(method, { source: method, sequence: 7, code: 0 })
     }
-    if (key === 'getRegistrationID') return callback => callback({ registerID: 'test-rid', code: 0 })
-    if (key === 'addCommandListener') return callback => { nativeListeners.add(key); callbacks.command = callback }
-    if (expectedListeners.includes(key)) return () => { nativeListeners.add(key) }
+    if (key === 'getRegistrationID') return callback => {
+      assert.equal(typeof callbacks.command, 'function'); checks++
+      callback({ registerID: 'test-rid', code: 0 })
+    }
+    if (key === 'addCommandListener') return callback => {
+      callbacks.command = callback
+      register(key, callback)
+    }
+    if (messageListeners.includes(key)) return callback => register(key, callback)
     return () => {}
   } })
   const state = await import('data:text/javascript;base64,' + Buffer.from(stateSource + '\n// ' + timing).toString('base64'))
@@ -42,7 +66,16 @@ for (const timing of ['register', 'init', 'after-page']) {
     .replace(/^\s*import .*$/gm, '').replace('export default', 'result ='), { ...context, result: null })
   const app = load('App.vue')
   app.onLaunch()
-  assert.deepEqual(calls.slice(0, 3), ['logger', 'listen', 'init']); checks++
+  assert.ok(calls.indexOf('logger') < calls.indexOf('init')); checks++
+  assert.equal(registration.getCachedRegistrationID(), 'early-rid'); checks++
+  assert.deepEqual(toasts.map(value => value.source), messageListeners.slice(0, 4)); checks++
+  load('pages/index/tags.vue')
+  assert.deepEqual(toasts.at(-1), { source: 'addTagAliasListener', sequence: 7, code: 0 }); checks++
+  assert.equal(pending.get('addMobileNumberListener').length, 1); checks++
+  load('pages/index/other.vue')
+  assert.deepEqual(toasts.at(-1), { source: 'addMobileNumberListener', sequence: 7, code: 0 }); checks++
+  assert.deepEqual(toasts.map(value => value.source), messageListeners); checks++
+  assert.equal(pending.size, 0); checks++
   const page = load('pages/index/index.vue')
   const instance = { ...page.data() }
   for (const [key, method] of Object.entries(page.methods)) instance[key] = method.bind(instance)
