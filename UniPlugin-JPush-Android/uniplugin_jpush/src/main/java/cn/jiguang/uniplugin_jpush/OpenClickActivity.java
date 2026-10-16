@@ -100,7 +100,6 @@ public class OpenClickActivity extends Activity {
             String extras = jsonObject.getString(KEY_EXTRAS);
             JSONObject thirdOpenNotification = JPushHelper.convertThirdOpenNotificationToMap(msgId, title, content, extras, data);
             JPushHelper.sendNotifactionEvent(thirdOpenNotification, 0);
-            JPushHelper.saveOpenNotifiData(thirdOpenNotification, 0);
             //上报点击事件
             JPushInterface.reportNotificationOpened(this, msgId, whichPushSDK);
             if (!JPushModule.isAppForeground) JPushHelper.launchApp(this);
