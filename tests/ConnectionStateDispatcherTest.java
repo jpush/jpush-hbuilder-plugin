@@ -50,6 +50,17 @@ public class ConnectionStateDispatcherTest {
         snapshot.initializeIfUnknown(true);
         expect(snapshots, true, false);
 
+        ConnectionStateDispatcher brokenDiagnostics = new ConnectionStateDispatcher(message -> {
+            throw new IllegalStateException("diagnostic failure");
+        });
+        List<Boolean> unaffected = new ArrayList<>();
+        brokenDiagnostics.update(true);
+        brokenDiagnostics.register(first, unaffected::add);
+        brokenDiagnostics.initializeIfUnknown(false);
+        brokenDiagnostics.unregister(second);
+        brokenDiagnostics.update(false);
+        expect(unaffected, true, false); // Diagnostics must not alter replay or ownership.
+
         for (int run = 0; run < 500; run++) {
             ConnectionStateDispatcher race = new ConnectionStateDispatcher();
             race.update(true);

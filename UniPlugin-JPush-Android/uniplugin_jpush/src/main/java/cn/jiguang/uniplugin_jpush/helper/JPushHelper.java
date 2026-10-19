@@ -27,7 +27,8 @@ public class JPushHelper {
     private static final PendingEventDispatcher<JSONObject> events = new PendingEventDispatcher<>(
             MAX_PENDING_EVENTS_PER_TYPE,
             eventName -> JLogger.w("Pending event limit reached (" + MAX_PENDING_EVENTS_PER_TYPE
-                    + "), dropping a waiting event: " + eventName));
+                    + "), dropping a waiting event: " + eventName),
+            JLogger::d);
 
     public static void addEventListener(String eventName, Object owner, final JSCallback callback) {
         if (callback == null) return;
@@ -47,7 +48,7 @@ public class JPushHelper {
         events.unregister(owner);
     }
 
-    private static final ConnectionStateDispatcher connectionStates = new ConnectionStateDispatcher();
+    private static final ConnectionStateDispatcher connectionStates = new ConnectionStateDispatcher(JLogger::d);
 
     public static void addConnectEventListener(Object owner, final JSCallback callback) {
         connectionStates.register(owner, connected -> {
@@ -76,6 +77,8 @@ public class JPushHelper {
             JLogger.d("Request initial connection state from SDK");
             // Ignore the synchronous value: the service process replies with cmd 2004.
             JPushInterface.getConnectionState(context);
+        } else {
+            JLogger.d("Initial connection query skipped: state already known");
         }
     }
 
