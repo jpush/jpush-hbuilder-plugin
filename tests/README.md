@@ -5,6 +5,7 @@
 ```sh
 mkdir -p tests/build
 javac -d tests/build \
+  UniPlugin-JPush-Android/uniplugin_jpush/src/main/java/cn/jiguang/uniplugin_jpush/helper/EventTrace.java \
   UniPlugin-JPush-Android/uniplugin_jpush/src/main/java/cn/jiguang/uniplugin_jpush/helper/ConnectionStateDispatcher.java \
   UniPlugin-JPush-Android/uniplugin_jpush/src/main/java/cn/jiguang/uniplugin_jpush/helper/PendingEventDispatcher.java \
   tests/ConnectionStateDispatcherTest.java tests/PendingEventDispatcherTest.java

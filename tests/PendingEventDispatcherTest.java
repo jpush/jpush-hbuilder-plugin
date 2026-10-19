@@ -114,6 +114,16 @@ public class PendingEventDispatcherTest {
         });
         expect(nestedEvents, "in-flight", "new-waiting");
 
+        PendingEventDispatcher<String> brokenDiagnostics = new PendingEventDispatcher<>(100, null, message -> {
+            throw new IllegalStateException("diagnostic failure");
+        });
+        List<String> unaffected = new ArrayList<>();
+        brokenDiagnostics.publish("event", "before");
+        brokenDiagnostics.register("event", first, value -> { unaffected.add(value); return true; });
+        brokenDiagnostics.unregister(second);
+        brokenDiagnostics.publish("event", "after");
+        expect(unaffected, "before", "after");
+
         for (int round = 0; round < 200; round++) {
             PendingEventDispatcher<Integer> concurrent = new PendingEventDispatcher<>(100, null);
             List<Integer> values = new ArrayList<>();

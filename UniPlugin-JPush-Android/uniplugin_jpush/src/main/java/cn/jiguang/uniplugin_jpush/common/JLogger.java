@@ -6,12 +6,17 @@ import android.util.Log;
 public class JLogger {
 
     public static final String TAG = "Uniapp-JPush";
+    public static final String PLUGIN_VERSION = "1.2.8";
 
-    private static boolean isLoggerEnable = false;
+    private static volatile boolean isLoggerEnable = false;
 
     public static void setLoggerEnable(boolean loggerEnable) {
         Log.d(TAG, "setLoggerEnable:" + loggerEnable);
         isLoggerEnable = loggerEnable;
+        if (loggerEnable) {
+            Log.d(TAG, "JG-JPush native plugin version=" + PLUGIN_VERSION
+                    + ", eventCache=enabled, initialStateQuery=enabled");
+        }
     }
 
     public static void i(String msg) {

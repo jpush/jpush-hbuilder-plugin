@@ -1,3 +1,9 @@
+v1.2.8
+1、Android 修复连接监听晚登记导致初始状态漏接，补充未知连接状态查询。
+2、Android 普通事件按类型缓存补发，完善通知点击、监听销毁与重建处理。
+3、Android 增加插件版本、事件接收/缓存/补发/消费和监听生命周期日志，受日志开关控制。
+4、同步更新内置 uniplugin_jpush-release.aar；Android JPush SDK 保持 5.8.0，iOS 无功能变更。
+
 v1.2.7
 1、更新iOS JPush SDK到5.7.0版本
 2、更新Android JPush SDK到5.8.0版本

@@ -25,38 +25,56 @@ public final class PendingEventDispatcher<T> {
     private final Map<String, Channel<T>> channels = new HashMap<>();
     private final int limit;
     private final OverflowListener overflowListener;
+    private final EventTrace trace;
 
     public PendingEventDispatcher(int limit, OverflowListener overflowListener) {
+        this(limit, overflowListener, null);
+    }
+
+    public PendingEventDispatcher(int limit, OverflowListener overflowListener, EventTrace trace) {
         if (limit < 1) throw new IllegalArgumentException("limit must be positive");
         this.limit = limit;
         this.overflowListener = overflowListener;
+        this.trace = trace;
     }
 
     public synchronized void register(String eventName, Object owner, Listener<T> listener) {
         if (eventName == null || eventName.isEmpty() || owner == null || listener == null) return;
         Channel<T> channel = channel(eventName);
+        EventTrace.write(trace, "event register type=" + eventName + " owner=" + EventTrace.ownerId(owner)
+                + " pending=" + channel.pending.size() + " replaced=" + (channel.listener != null));
         channel.owner = owner;
         channel.listener = listener;
-        drain(channel);
+        drain(eventName, channel, "register");
     }
 
     public synchronized void publish(String eventName, T event) {
         if (eventName == null || eventName.isEmpty() || event == null) return;
         Channel<T> channel = channel(eventName);
+        EventTrace.write(trace, "event received type=" + eventName + " listener="
+                + (channel.listener != null) + " pendingBefore=" + channel.pending.size());
         if (channel.pending.size() >= limit) {
             // A reentrant publish must not evict the event currently being delivered.
             int oldestWaiting = channel.draining ? 1 : 0;
             if (overflowListener != null) overflowListener.onOverflow(eventName);
+            EventTrace.write(trace, "event overflow type=" + eventName + " pending="
+                    + channel.pending.size() + " inFlight=" + channel.draining);
             if (oldestWaiting >= channel.pending.size()) return;
             channel.pending.remove(oldestWaiting);
         }
         channel.pending.addLast(event);
-        drain(channel);
+        if (channel.listener == null) {
+            EventTrace.write(trace, "event cached type=" + eventName + " pending=" + channel.pending.size());
+        }
+        drain(eventName, channel, "event");
     }
 
     public synchronized void unregister(Object owner) {
-        for (Channel<T> channel : channels.values()) {
+        for (Map.Entry<String, Channel<T>> entry : channels.entrySet()) {
+            Channel<T> channel = entry.getValue();
             if (channel.owner == owner) {
+                EventTrace.write(trace, "event listener removed type=" + entry.getKey()
+                        + " owner=" + EventTrace.ownerId(owner) + " pending=" + channel.pending.size());
                 channel.owner = null;
                 channel.listener = null;
             }
@@ -74,13 +92,22 @@ public final class PendingEventDispatcher<T> {
 
     // Called under the dispatcher lock: registration, delivery and destruction
     // cannot interleave and replay an event twice. Reentrant events queue behind it.
-    private void drain(Channel<T> channel) {
-        if (channel.draining) return;
+    private void drain(String eventName, Channel<T> channel, String trigger) {
+        if (channel.draining) {
+            EventTrace.write(trace, "event drain deferred type=" + eventName + " reason=reentrant");
+            return;
+        }
         channel.draining = true;
         try {
             while (channel.listener != null && !channel.pending.isEmpty()) {
-                if (!channel.listener.onEvent(channel.pending.getFirst())) break;
+                EventTrace.write(trace, "event dispatch type=" + eventName + " trigger=" + trigger
+                        + " pending=" + channel.pending.size() + " owner=" + EventTrace.ownerId(channel.owner));
+                if (!channel.listener.onEvent(channel.pending.getFirst())) {
+                    EventTrace.write(trace, "event retained type=" + eventName + " pending=" + channel.pending.size());
+                    break;
+                }
                 channel.pending.removeFirst();
+                EventTrace.write(trace, "event consumed type=" + eventName + " remaining=" + channel.pending.size());
             }
         } finally {
             channel.draining = false;

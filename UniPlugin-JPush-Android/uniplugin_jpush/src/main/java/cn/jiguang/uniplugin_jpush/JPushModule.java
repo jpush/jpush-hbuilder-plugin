@@ -114,6 +114,8 @@ public class JPushModule extends UniDestroyableModule {
     @UniJSMethod(uiThread = true)
     public void initJPushService() {
         updatePluginStatu();
+        JLogger.d("initJPushService plugin=" + JLogger.PLUGIN_VERSION
+                + " owner=" + Integer.toHexString(System.identityHashCode(this)));
         JPushInterface.init(mWXSDKInstance.getContext());
         JPushInterface.setNotificationCallBackEnable(mWXSDKInstance.getContext(), true);
         JPushHelper.requestInitialConnectionState(mWXSDKInstance.getContext());
@@ -666,7 +668,7 @@ public class JPushModule extends UniDestroyableModule {
     public void addLocalNotificationListener(JSCallback callback) {
         updatePluginStatu();
         if (callback != null) {
-            JLogger.w("addCustomMessageListener");
+            JLogger.w("addLocalNotificationListener");
             JPushHelper.addEventListener(JConstants.LOCAL_NOTIFICATION_EVENT, this, callback);
         }
     }
@@ -748,7 +750,7 @@ public class JPushModule extends UniDestroyableModule {
 
     @Override
     public void destroy() {
-        JLogger.e("destroy");
+        JLogger.d("destroy owner=" + Integer.toHexString(System.identityHashCode(this)));
         JPushHelper.removeConnectEventListener(this);
         JPushHelper.removeEventListeners(this);
     }

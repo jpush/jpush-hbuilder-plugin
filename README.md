@@ -76,6 +76,24 @@ Demo 保留初始化后登记连接、通知等监听的顺序，标签/别名�
 - 标签/别名等操作结果保留原始 `sequence`，业务侧仍需按请求匹配。桥接调用返回不等于 JS 业务消费确认，插件不提供跨进程或全链路恰好一次投递保证。
 - 通知点击统一进入上述队列，普通通知与本地通知分别等待各自监听。
 
+### Android 诊断日志（1.2.8）
+
+调用 `setLoggerEnable(true)` 后，原生 Tag 为 `Uniapp-JPush`，首先输出 `JG-JPush native plugin version=1.2.8`，可用于核对实际打入 APK 的原生插件版本。日志不会强制开启。
+
+| 关键字 | 含义 |
+|---|---|
+| `connect register` / `connect replay` | 登记监听及补发已知连接状态；`cachedState=null` 表示未知 |
+| `connect state stored` | 保存连接状态，并标明是否已有监听 |
+| `connect query accepted` / `connect query ignored` | 初始查询补齐状态，或因已有状态而忽略迟到查询 |
+| `event received` / `event cached` | 收到事件，或因监听未登记而缓存 |
+| `event register` / `event dispatch` | 登记事件监听及开始投递；`trigger=register` 表示登记时补发 |
+| `event consumed` / `event retained` | 桥接调用正常返回后出队，或失败后保留 |
+| `listener removed` / `connect remove ignored` | 实例销毁解除监听，或忽略旧实例对新监听的清理 |
+
+新增队列日志只记录事件类型、队列长度、状态和实例标识，不额外复制消息正文。`owner` 是当前进程内的实例标识；桥接调用正常返回不等于 JS 业务消费确认。
+
+升级时需替换 `nativeplugins/JG-JPush/android/uniplugin_jpush-release.aar` 并重新制作自定义基座或打包 App，单独更新 Vue/WGT 不会替换 Java 实现。
+
 - [公用 API](https://github.com/jpush/jpush-hbuilder-plugin/blob/master/doc/API.md)
 - [Android 独有API](https://github.com/jpush/jpush-hbuilder-plugin/blob/master/doc/ANDROID.md)
 - [iOS 独有API](https://github.com/jpush/jpush-hbuilder-plugin/blob/master/doc/IOS.md)
